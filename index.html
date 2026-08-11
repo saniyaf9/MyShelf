@@ -1,0 +1,911 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MyShelf</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      background: #000;
+      color: #fff;
+
+      font-family: Arial, sans-serif;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 40px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .tagline {
+      color: #777;
+      font-size: 11px;
+      letter-spacing: 4px;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .main-button {
+      width: 130px;
+      padding: 13px;
+
+      border-radius: 8px;
+
+      font-size: 14px;
+      font-weight: bold;
+
+      cursor: pointer;
+    }
+
+    .login-button {
+      background: #000;
+      color: #fff;
+      border: 1px solid #444;
+    }
+
+    .signup-button {
+      background: #fff;
+      color: #000;
+      border: 1px solid #fff;
+    }
+
+    .popup {
+      display: none;
+
+      position: fixed;
+      inset: 0;
+
+      background: rgba(0, 0, 0, 0.9);
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      z-index: 100;
+    }
+
+    .popup.active {
+      display: flex;
+    }
+
+    .box {
+      position: relative;
+
+      width: 100%;
+      max-width: 380px;
+
+      padding: 35px;
+
+      background: #111;
+
+      border: 1px solid #333;
+      border-radius: 15px;
+
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .close {
+      position: absolute;
+
+      top: 10px;
+      right: 15px;
+
+      background: none;
+      border: none;
+
+      color: #777;
+
+      font-size: 27px;
+
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #fff;
+    }
+
+    h2 {
+      margin: 0 0 8px;
+    }
+
+    .subtitle {
+      color: #777;
+
+      font-size: 13px;
+
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+
+      padding: 13px;
+
+      margin-bottom: 12px;
+
+      background: #1a1a1a;
+
+      color: #fff;
+
+      border: 1px solid #333;
+
+      border-radius: 8px;
+
+      outline: none;
+
+      font-size: 14px;
+    }
+
+    input:focus {
+      border-color: #777;
+    }
+
+    input::placeholder {
+      color: #666;
+    }
+
+    .submit {
+      width: 100%;
+
+      padding: 13px;
+
+      background: #fff;
+
+      color: #000;
+
+      border: none;
+
+      border-radius: 8px;
+
+      font-size: 14px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+    }
+
+    .submit:hover {
+      opacity: 0.85;
+    }
+
+    .forgot {
+      margin-top: 15px;
+
+      color: #888;
+
+      font-size: 12px;
+
+      text-align: center;
+
+      cursor: pointer;
+    }
+
+    .forgot:hover {
+      color: #fff;
+    }
+
+    .switch {
+      margin-top: 20px;
+
+      color: #777;
+
+      font-size: 13px;
+
+      text-align: center;
+    }
+
+    .switch span {
+      color: #fff;
+
+      cursor: pointer;
+
+      font-weight: bold;
+    }
+
+    .message {
+      min-height: 18px;
+
+      margin-top: 15px;
+
+      color: #aaa;
+
+      font-size: 12px;
+
+      text-align: center;
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- MAIN PAGE -->
+
+  <div class="container">
+
+    <div class="logo">
+      MyShelf
+    </div>
+
+    <div class="tagline">
+      YOUR LITTLE LIBRARY
+    </div>
+
+    <div class="buttons">
+
+      <button
+        class="main-button login-button"
+        id="openLogin">
+
+        Log In
+
+      </button>
+
+
+      <button
+        class="main-button signup-button"
+        id="openSignup">
+
+        Sign Up
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- LOGIN POPUP -->
+
+  <div
+    class="popup"
+    id="loginPopup">
+
+    <div class="box">
+
+      <button
+        class="close"
+        id="closeLogin">
+
+        ×
+
+      </button>
+
+
+      <h2>
+        Welcome Back
+      </h2>
+
+
+      <div class="subtitle">
+        Log in to your MyShelf account
+      </div>
+
+
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="Email"
+        autocomplete="email">
+
+
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="Password"
+        autocomplete="current-password">
+
+
+      <button
+        class="submit"
+        id="loginButton">
+
+        Log In
+
+      </button>
+
+
+      <div
+        class="forgot"
+        id="forgotPassword">
+
+        Forgot password?
+
+      </div>
+
+
+      <div class="switch">
+
+        Don't have an account?
+
+        <span id="goSignup">
+          Sign Up
+        </span>
+
+      </div>
+
+
+      <div
+        class="message"
+        id="loginMessage">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- SIGNUP POPUP -->
+
+  <div
+    class="popup"
+    id="signupPopup">
+
+    <div class="box">
+
+      <button
+        class="close"
+        id="closeSignup">
+
+        ×
+
+      </button>
+
+
+      <h2>
+        Create Account
+      </h2>
+
+
+      <div class="subtitle">
+        Start your MyShelf library
+      </div>
+
+
+      <input
+        id="signupName"
+        type="text"
+        placeholder="Name"
+        autocomplete="name">
+
+
+      <input
+        id="signupEmail"
+        type="email"
+        placeholder="Email"
+        autocomplete="email">
+
+
+      <input
+        id="signupPassword"
+        type="password"
+        placeholder="Password"
+        autocomplete="new-password">
+
+
+      <input
+        id="signupConfirm"
+        type="password"
+        placeholder="Confirm password"
+        autocomplete="new-password">
+
+
+      <button
+        class="submit"
+        id="signupButton">
+
+        Create Account
+
+      </button>
+
+
+      <div class="switch">
+
+        Already have an account?
+
+        <span id="goLogin">
+          Log In
+        </span>
+
+      </div>
+
+
+      <div
+        class="message"
+        id="signupMessage">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- FIREBASE -->
+
+  <script type="module">
+
+    import {
+      initializeApp
+    }
+    from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      sendPasswordResetEmail,
+      updateProfile
+    }
+    from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+    /* FIREBASE CONFIG */
+
+    const firebaseConfig = {
+
+      apiKey:
+        "AIzaSyBl-5cfDXHTX0gHubxH9MZx2YwLDbRRKFs",
+
+      authDomain:
+        "myshelf-e3440.firebaseapp.com",
+
+      projectId:
+        "myshelf-e3440",
+
+      storageBucket:
+        "myshelf-e3440.firebasestorage.app",
+
+      messagingSenderId:
+        "820092826756",
+
+      appId:
+        "1:820092826756:web:0cab1578f5dfc3c74ebed1",
+
+      measurementId:
+        "G-LB8602RM3L"
+
+    };
+
+
+    const app =
+      initializeApp(firebaseConfig);
+
+
+    const auth =
+      getAuth(app);
+
+
+    /* YOUR GOOGLE SITES LIBRARY */
+
+    const MY_LIBRARY =
+      "https://sites.google.com/view/the-myshelf/my-library?authuser=0";
+
+
+    /* ELEMENTS */
+
+    const loginPopup =
+      document.getElementById("loginPopup");
+
+
+    const signupPopup =
+      document.getElementById("signupPopup");
+
+
+    const loginMessage =
+      document.getElementById("loginMessage");
+
+
+    const signupMessage =
+      document.getElementById("signupMessage");
+
+
+    /* OPEN LOGIN */
+
+    document
+      .getElementById("openLogin")
+      .onclick = function () {
+
+        loginMessage.textContent = "";
+
+        loginPopup.classList.add("active");
+
+      };
+
+
+    /* CLOSE LOGIN */
+
+    document
+      .getElementById("closeLogin")
+      .onclick = function () {
+
+        loginPopup.classList.remove("active");
+
+      };
+
+
+    /* OPEN SIGNUP */
+
+    document
+      .getElementById("openSignup")
+      .onclick = function () {
+
+        signupMessage.textContent = "";
+
+        signupPopup.classList.add("active");
+
+      };
+
+
+    /* CLOSE SIGNUP */
+
+    document
+      .getElementById("closeSignup")
+      .onclick = function () {
+
+        signupPopup.classList.remove("active");
+
+      };
+
+
+    /* LOGIN → SIGNUP */
+
+    document
+      .getElementById("goSignup")
+      .onclick = function () {
+
+        loginPopup.classList.remove("active");
+
+        signupPopup.classList.add("active");
+
+      };
+
+
+    /* SIGNUP → LOGIN */
+
+    document
+      .getElementById("goLogin")
+      .onclick = function () {
+
+        signupPopup.classList.remove("active");
+
+        loginPopup.classList.add("active");
+
+      };
+
+
+    /* SIGN UP */
+
+    document
+      .getElementById("signupButton")
+      .onclick = async function () {
+
+
+        const name =
+          document
+            .getElementById("signupName")
+            .value
+            .trim();
+
+
+        const email =
+          document
+            .getElementById("signupEmail")
+            .value
+            .trim();
+
+
+        const password =
+          document
+            .getElementById("signupPassword")
+            .value;
+
+
+        const confirm =
+          document
+            .getElementById("signupConfirm")
+            .value;
+
+
+        signupMessage.textContent = "";
+
+
+        if (
+          !name ||
+          !email ||
+          !password ||
+          !confirm
+        ) {
+
+          signupMessage.textContent =
+            "Please fill in every field.";
+
+          return;
+
+        }
+
+
+        if (
+          password !== confirm
+        ) {
+
+          signupMessage.textContent =
+            "Passwords do not match.";
+
+          return;
+
+        }
+
+
+        if (
+          password.length < 6
+        ) {
+
+          signupMessage.textContent =
+            "Password must be at least 6 characters.";
+
+          return;
+
+        }
+
+
+        try {
+
+
+          const result =
+            await createUserWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+
+
+          await updateProfile(
+            result.user,
+            {
+              displayName: name
+            }
+          );
+
+
+          signupMessage.textContent =
+            "Account created!";
+
+
+          setTimeout(
+            function () {
+
+              window.location.href =
+                MY_LIBRARY;
+
+            },
+            800
+          );
+
+
+        }
+
+        catch (error) {
+
+          console.error(error);
+
+          signupMessage.textContent =
+            getFriendlyError(error);
+
+        }
+
+      };
+
+
+    /* LOGIN */
+
+    document
+      .getElementById("loginButton")
+      .onclick = async function () {
+
+
+        const email =
+          document
+            .getElementById("loginEmail")
+            .value
+            .trim();
+
+
+        const password =
+          document
+            .getElementById("loginPassword")
+            .value;
+
+
+        loginMessage.textContent = "";
+
+
+        if (
+          !email ||
+          !password
+        ) {
+
+          loginMessage.textContent =
+            "Please enter your email and password.";
+
+          return;
+
+        }
+
+
+        try {
+
+
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+
+          loginMessage.textContent =
+            "Login successful!";
+
+
+          setTimeout(
+            function () {
+
+              window.location.href =
+                MY_LIBRARY;
+
+            },
+            800
+          );
+
+
+        }
+
+        catch (error) {
+
+          console.error(error);
+
+          loginMessage.textContent =
+            getFriendlyError(error);
+
+        }
+
+      };
+
+
+    /* FORGOT PASSWORD */
+
+    document
+      .getElementById("forgotPassword")
+      .onclick = async function () {
+
+
+        const email =
+          document
+            .getElementById("loginEmail")
+            .value
+            .trim();
+
+
+        loginMessage.textContent = "";
+
+
+        if (!email) {
+
+          loginMessage.textContent =
+            "Enter your email first.";
+
+          return;
+
+        }
+
+
+        try {
+
+
+          await sendPasswordResetEmail(
+            auth,
+            email
+          );
+
+
+          loginMessage.textContent =
+            "Password reset email sent.";
+
+
+        }
+
+        catch (error) {
+
+          console.error(error);
+
+          loginMessage.textContent =
+            getFriendlyError(error);
+
+        }
+
+      };
+
+
+    /* FRIENDLY FIREBASE ERRORS */
+
+    function getFriendlyError(error) {
+
+
+      switch (error.code) {
+
+
+        case "auth/email-already-in-use":
+
+          return "This email already has an account.";
+
+
+        case "auth/invalid-email":
+
+          return "Please enter a valid email.";
+
+
+        case "auth/invalid-credential":
+
+          return "Incorrect email or password.";
+
+
+        case "auth/user-not-found":
+
+          return "No account was found with this email.";
+
+
+        case "auth/wrong-password":
+
+          return "Incorrect email or password.";
+
+
+        case "auth/too-many-requests":
+
+          return "Too many attempts. Please try again later.";
+
+
+        default:
+
+          return error.message;
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
+```
