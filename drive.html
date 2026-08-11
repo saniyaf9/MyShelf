@@ -1,0 +1,414 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>MyShelf Drive</title>
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    body {
+
+      margin: 0;
+
+      min-height: 100vh;
+
+      background: #000;
+
+      color: #fff;
+
+      font-family: Arial, sans-serif;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+    }
+
+
+    .container {
+
+      width: 90%;
+
+      max-width: 420px;
+
+      text-align: center;
+
+    }
+
+
+    .logo {
+
+      font-size: 36px;
+
+      font-weight: bold;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .subtitle {
+
+      color: #777;
+
+      font-size: 13px;
+
+      margin-bottom: 30px;
+
+    }
+
+
+    #driveButton {
+
+      width: 100%;
+
+      padding: 14px;
+
+      background: #fff;
+
+      color: #000;
+
+      border: none;
+
+      border-radius: 8px;
+
+      font-size: 14px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+    }
+
+
+    #driveButton:hover {
+
+      opacity: .85;
+
+    }
+
+
+    #status {
+
+      margin-top: 18px;
+
+      color: #888;
+
+      font-size: 13px;
+
+      min-height: 20px;
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div class="container">
+
+
+    <div class="logo">
+      MyShelf
+    </div>
+
+
+    <div class="subtitle">
+      Choose a book from your Google Drive
+    </div>
+
+
+    <button id="driveButton">
+      Choose from Google Drive
+    </button>
+
+
+    <div id="status"></div>
+
+
+  </div>
+
+
+  <!-- GOOGLE API -->
+
+  <script src="https://apis.google.com/js/api.js"></script>
+
+
+  <!-- GOOGLE IDENTITY SERVICES -->
+
+  <script src="https://accounts.google.com/gsi/client"></script>
+
+
+  <script>
+
+
+    /*
+      YOUR GOOGLE CLOUD API KEY
+    */
+
+    const API_KEY =
+      "AIzaSyC4pGowo0fDjk8TJe-x-O7lCUlIj6JNgpU";
+
+
+    /*
+      YOUR GOOGLE OAUTH CLIENT ID
+    */
+
+    const CLIENT_ID =
+      "1074521299867-4s2f8vm53iru10r72il166l0h63lvt0c.apps.googleusercontent.com";
+
+
+    /*
+      YOUR GOOGLE CLOUD PROJECT NUMBER
+    */
+
+    const APP_ID =
+      "1074521299867";
+
+
+    /*
+      DRIVE READ-ONLY PERMISSION
+    */
+
+    const SCOPES =
+      "https://www.googleapis.com/auth/drive.readonly";
+
+
+    let pickerLoaded = false;
+
+    let tokenClient;
+
+    let accessToken = null;
+
+
+    const status =
+      document.getElementById("status");
+
+
+    function showStatus(text) {
+
+      status.textContent = text;
+
+    }
+
+
+    /*
+      LOAD GOOGLE PICKER
+    */
+
+    function loadPicker() {
+
+
+      gapi.load(
+        "picker",
+        function () {
+
+          pickerLoaded = true;
+
+          showStatus("Ready.");
+
+        }
+
+      );
+
+    }
+
+
+    /*
+      START GOOGLE LOGIN
+    */
+
+    function startGoogleLogin() {
+
+
+      showStatus(
+        "Connecting to Google..."
+      );
+
+
+      tokenClient =
+        google.accounts.oauth2.initTokenClient({
+
+          client_id: CLIENT_ID,
+
+          scope: SCOPES,
+
+          callback: function(response) {
+
+
+            if (response.error) {
+
+              console.error(response);
+
+              showStatus(
+                "Google authorization failed."
+              );
+
+              return;
+
+            }
+
+
+            accessToken =
+              response.access_token;
+
+
+            openPicker();
+
+          }
+
+        });
+
+
+      tokenClient.requestAccessToken({
+
+        prompt: "consent"
+
+      });
+
+    }
+
+
+    /*
+      OPEN DRIVE PICKER
+    */
+
+    function openPicker() {
+
+
+      if (!pickerLoaded) {
+
+        showStatus(
+          "Google Picker is still loading."
+        );
+
+        return;
+
+      }
+
+
+      const view =
+        new google.picker.DocsView(
+          google.picker.ViewId.DOCS
+        );
+
+
+      view.setIncludeFolders(false);
+
+
+      const picker =
+        new google.picker.PickerBuilder()
+
+          .setDeveloperKey(API_KEY)
+
+          .setAppId(APP_ID)
+
+          .setOAuthToken(accessToken)
+
+          .addView(view)
+
+          .setCallback(pickerCallback)
+
+          .build();
+
+
+      picker.setVisible(true);
+
+    }
+
+
+    /*
+      WHEN A FILE IS SELECTED
+    */
+
+    function pickerCallback(data) {
+
+
+      if (
+        data.action ===
+        google.picker.Action.PICKED
+      ) {
+
+
+        const file =
+          data.docs[0];
+
+
+        console.log(
+          "Selected file:",
+          file
+        );
+
+
+        showStatus(
+          "Selected: " + file.name
+        );
+
+
+        /*
+          For now we only select the file.
+
+          Later we can connect this to
+          your MyShelf book list.
+        */
+
+      }
+
+
+      if (
+        data.action ===
+        google.picker.Action.CANCEL
+      ) {
+
+        showStatus(
+          "Picker closed."
+        );
+
+      }
+
+    }
+
+
+    /*
+      BUTTON
+    */
+
+    document
+      .getElementById("driveButton")
+      .addEventListener(
+        "click",
+        startGoogleLogin
+      );
+
+
+    /*
+      LOAD PICKER
+    */
+
+    loadPicker();
+
+  </script>
+
+
+</body>
+
+</html>
