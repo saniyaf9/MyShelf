@@ -98,242 +98,289 @@
       Loading...
     </div>
   </div>
-  <script src="https://apis.google.com/js/api.js"></script>
-  <script src="https://accounts.google.com/gsi/client"></script>
+
+  <!-- NOTE: we will dynamically load Google scripts from the module script below so we can reliably know when they are ready -->
+
   <script type="module">
-    import {
-      initializeApp
-    } from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import {
-      getAuth,
-      onAuthStateChanged
-    } from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import {
-      getFirestore,
-      collection,
-      doc,
-      setDoc
-    } from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-    const firebaseConfig = {
-      apiKey:
-        "AIzaSyBl-5cfDXHTX0gHubxH9MZx2YwLDbRRKFs",
-      authDomain:
-        "myshelf-e3440.firebaseapp.com",
-      projectId:
-        "myshelf-e3440",
-      storageBucket:
-        "myshelf-e3440.firebasestorage.app",
-      messagingSenderId:
-        "820092826756",
-      appId:
-        "1:820092826756:web:0cab1578f5dfc3c74ebed1",
-      measurementId:
-        "G-LB8602RM3L"
+    // ---------------------- Configuration ----------------------
+    const FIREBASE_SDK = {
+      app: 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js',
+      auth: 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js',
+      firestore: 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js'
     };
-    const app =
-      initializeApp(firebaseConfig);
-  const auth =
-      getAuth(app);
-  const db =
-      getFirestore(app);
-    const API_KEY =
-      "AIzaSyC4pGowo0fDjk8TJe-x-O7lCUlIj6JNgpU";
-    const CLIENT_ID =
-      "1074521299867-4s2f8vm53iru10r72il166l0h63lvt0c.apps.googleusercontent.com";
-    const APP_ID =
-      "1074521299867";
-    const SCOPES =
-      "https://www.googleapis.com/auth/drive.readonly";
-    const MY_LIBRARY =
-      "https://sites.google.com/view/the-myshelf/my-library?authuser=0";
+
+    const GOOGLE_SCRIPTS = {
+      gapi: 'https://apis.google.com/js/api.js',
+      gis: 'https://accounts.google.com/gsi/client'
+    };
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBl-5cfDXHTX0gHubxH9MZx2YwLDbRRKFs",
+      authDomain: "myshelf-e3440.firebaseapp.com",
+      projectId: "myshelf-e3440",
+      storageBucket: "myshelf-e3440.firebasestorage.app",
+      messagingSenderId: "820092826756",
+      appId: "1:820092826756:web:0cab1578f5dfc3c74ebed1",
+      measurementId: "G-LB8602RM3L"
+    };
+
+    const API_KEY = "AIzaSyC4pGowo0fDjk8TJe-x-O7lCUlIj6JNgpU";
+    const CLIENT_ID = "1074521299867-4s2f8vm53iru10r72il166l0h63lvt0c.apps.googleusercontent.com";
+    const APP_ID = "1074521299867"; // typically the project number
+    const SCOPES = "https://www.googleapis.com/auth/drive.readonly";
+    const MY_LIBRARY = "https://sites.google.com/view/the-myshelf/my-library?authuser=0";
+
+    // ---------------------- State ----------------------
     let currentUser = null;
     let pickerLoaded = false;
     let accessToken = null;
-    const button =
-      document.getElementById("driveButton");
-    const status =
-      document.getElementById("status");
+    let tokenClient = null;
+
+    const button = document.getElementById('driveButton');
+    const status = document.getElementById('status');
+
     function showStatus(message) {
       status.textContent = message;
+      console.log('[drive] ' + message);
     }
-    onAuthStateChanged(
-      auth,
-      function(user) {
-        if (user) {
-          currentUser = user;
-          button.disabled = false;
-          showStatus(
-            "Ready to choose books."
-          );
-        } else {
-          currentUser = null;
-          button.disabled = true;
-          showStatus(
-            "Please log in to MyShelf first."
-          );
+
+    // ---------------------- Dynamic script loader ----------------------
+    function loadScript(src) {
+      return new Promise((resolve, reject) => {
+        // If already present, resolve immediately
+        const existing = Array.from(document.getElementsByTagName('script')).find(s => s.src && s.src.indexOf(src) !== -1);
+        if (existing) {
+          // Wait a tick to ensure it finished loading
+          setTimeout(() => resolve(), 50);
+          return;
         }
-      }
-    );
-    gapi.load(
-      "picker",
-      function() {
-        pickerLoaded = true;
-        if (currentUser) {
-          showStatus(
-            "Ready to choose books."
-          );
-        }
-      }
-    );
-    function startGoogleAuthorization() {
-      if (!currentUser) {
-        showStatus(
-          "Please log in to MyShelf first."
-        );
-        return;
-      }
-      if (!pickerLoaded) {
-        showStatus(
-          "Please wait for Google Picker to load."
-        );
-        return;
-      }
-      showStatus(
-        "Connecting to Google..."
-      );
-      const tokenClient =
-        google.accounts.oauth2.initTokenClient({
-          client_id: CLIENT_ID,
-          scope: SCOPES,
-          callback: async function(response) {
-            if (response.error) {
-              console.error(response);
-              showStatus(
-                "Google authorization failed."
-              );
-              return;
-            }
-            accessToken =
-              response.access_token;
-            openPicker();
-          }
-        });
-      tokenClient.requestAccessToken({
-        prompt: "consent"
+        const s = document.createElement('script');
+        s.src = src;
+        s.async = true;
+        s.onload = () => resolve();
+        s.onerror = (e) => reject(new Error('Failed to load script: ' + src));
+        document.head.appendChild(s);
       });
     }
-    function openPicker() {
-      const view =
-        new google.picker.DocsView(
-          google.picker.ViewId.DOCS
-        );
-      view.setIncludeFolders(false);
-      const picker =
-        new google.picker.PickerBuilder()
+
+    // ---------------------- Initialize Firebase (ES modules via dynamic import) ----------------------
+    async function initFirebase() {
+      try {
+        const [{ initializeApp }, { getAuth, onAuthStateChanged }, { getFirestore, collection, doc, setDoc }] = await Promise.all([
+          import(FIREBASE_SDK.app),
+          import(FIREBASE_SDK.auth),
+          import(FIREBASE_SDK.firestore)
+        ]);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        return { app, auth, db, onAuthStateChanged, collection, doc, setDoc };
+      } catch (err) {
+        console.error('Firebase init error', err);
+        showStatus('Failed to initialize Firebase: ' + err.message);
+        throw err;
+      }
+    }
+
+    // ---------------------- Main initialization ----------------------
+    (async function main() {
+      showStatus('Starting...');
+
+      // Load Google scripts first (GSI and gapi). GSI provides google.accounts, gapi provides picker.
+      try {
+        await loadScript(GOOGLE_SCRIPTS.gis);
+        await loadScript(GOOGLE_SCRIPTS.gapi);
+        console.log('Google scripts loaded');
+      } catch (err) {
+        console.error(err);
+        showStatus('Could not load Google scripts. Disable adblock/CSP and ensure network access.');
+        button.disabled = true;
+        return;
+      }
+
+      // Initialize Firebase SDKs
+      let firebase;
+      try {
+        firebase = await initFirebase();
+      } catch (err) {
+        button.disabled = true;
+        return;
+      }
+
+      // Auth state handling
+      const { auth, onAuthStateChanged, db, collection, doc, setDoc } = firebase;
+
+      onAuthStateChanged(
+        auth,
+        function (user) {
+          if (user) {
+            currentUser = user;
+            button.disabled = false;
+            showStatus('Ready to choose books.');
+          } else {
+            currentUser = null;
+            button.disabled = true;
+            showStatus('Please log in to MyShelf first.');
+          }
+        }
+      );
+
+      // Load Picker via gapi.load. gapi may not be fully ready immediately after loading the script tag.
+      try {
+        await new Promise((resolve, reject) => {
+          if (!window.gapi || typeof window.gapi.load !== 'function') {
+            reject(new Error('gapi not available'));
+            return;
+          }
+          // load the picker module
+          gapi.load('picker', {
+            callback: () => {
+              pickerLoaded = true;
+              console.log('gapi picker loaded');
+              resolve();
+            },
+            onerror: () => reject(new Error('gapi.load("picker") failed'))
+          });
+        });
+      } catch (err) {
+        console.error(err);
+        showStatus('Google Picker could not be loaded: ' + err.message);
+        // disable the button; Picker won't work without this
+        button.disabled = true;
+        return;
+      }
+
+      // sanity checks for global google/picker objects
+      if (!window.google || !google.accounts) {
+        showStatus('Google Identity Services (google.accounts) not available.');
+        button.disabled = true;
+        return;
+      }
+      if (!window.google.picker) {
+        showStatus('Google Picker API is not available on this page.');
+        button.disabled = true;
+        return;
+      }
+
+      // Token client is created lazily when user clicks (so user hasn't been prompted until click)
+
+      // Expose openPicker and pickerCallback that use Firebase db and currentUser
+      function openPicker() {
+        if (!accessToken) {
+          showStatus('No access token available. Please authorize first.');
+          return;
+        }
+        // Use DocsView to show Drive files (Docs/Drive viewer). We limit to common document/mime types if desired.
+        const view = new google.picker.DocsView(google.picker.ViewId.DOCS);
+        view.setIncludeFolders(false);
+
+        const picker = new google.picker.PickerBuilder()
           .setDeveloperKey(API_KEY)
           .setAppId(APP_ID)
           .setOAuthToken(accessToken)
           .addView(view)
-          .enableFeature(
-            google.picker.Feature.MULTISELECT_ENABLED
-          )
+          .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
           .setCallback(pickerCallback)
           .build();
-      picker.setVisible(true);
-    }
-    async function pickerCallback(data) {
-      if (
-        data.action ===
-        google.picker.Action.CANCEL
-      ) {
-        showStatus(
-          "Picker closed."
-        );
-        return;
+        picker.setVisible(true);
       }
-      if (
-        data.action !==
-        google.picker.Action.PICKED
-      ) {
-        return;
-      }
-      if (!currentUser) {
- showStatus(
-          "Your MyShelf login has expired."
-        );
-        return;
-      }
-      const files =
-        data.docs || [];
-      if (files.length === 0) {
-        showStatus(
-          "No books selected."
-        );
-        return;
-      }
-      button.disabled = true;
- showStatus(
-        "Saving " +
-        files.length +
-        " book(s)..."
-      );
-      try {
-        for (const file of files) {
-          const bookRef =
-            doc(
-              collection(
-                db,
-                "users",
-                currentUser.uid,
-                "books"
-              )
-            );
-          await setDoc(
-            bookRef,
-            {
-              name:
-                file.name || "Untitled",
-              fileId:
-                file.id || "",
-              mimeType:
-                file.mimeType || "",
-              url:
-                file.url || "",
-              iconUrl:
-                file.iconUrl || "",
-              createdAt:
-                new Date().toISOString()
-            }
-          );
+
+      async function pickerCallback(data) {
+        console.log('picker callback', data);
+        if (data.action === google.picker.Action.CANCEL) {
+          showStatus('Picker closed.');
+          return;
         }
-        showStatus(
-          files.length +
-          " book(s) saved! Returning to My Library..."
-        );
-        setTimeout(
-          function() {
-            window.location.href =
-              MY_LIBRARY;
-          },
-          1200
-        );
-      } catch (error) {
-        console.error(error);
-        showStatus(
-          "Could not save the books. " +
-          error.message
-        );
-        button.disabled = false;
+        if (data.action !== google.picker.Action.PICKED) {
+          return;
+        }
+        if (!currentUser) {
+          showStatus('Your MyShelf login has expired.');
+          return;
+        }
+        const files = data.docs || [];
+        if (files.length === 0) {
+          showStatus('No books selected.');
+          return;
+        }
+        button.disabled = true;
+        showStatus('Saving ' + files.length + ' book(s)...');
+
+        try {
+          for (const file of files) {
+            const bookRef = doc(collection(db, 'users', currentUser.uid, 'books'));
+            await setDoc(bookRef, {
+              name: file.name || 'Untitled',
+              fileId: file.id || '',
+              mimeType: file.mimeType || '',
+              url: file.url || '',
+              iconUrl: file.iconUrl || '',
+              createdAt: new Date().toISOString()
+            });
+          }
+          showStatus(files.length + ' book(s) saved! Returning to My Library...');
+          setTimeout(function () {
+            window.location.href = MY_LIBRARY;
+          }, 1200);
+        } catch (error) {
+          console.error(error);
+          showStatus('Could not save the books. ' + (error && error.message ? error.message : error));
+          button.disabled = false;
+        }
       }
-    }
-    button.addEventListener(
-      "click",
-      startGoogleAuthorization
-    );
+
+      // Called when the user clicks the button
+      function startGoogleAuthorization() {
+        if (!currentUser) {
+          showStatus('Please log in to MyShelf first.');
+          return;
+        }
+        if (!pickerLoaded) {
+          showStatus('Please wait for Google Picker to load.');
+          return;
+        }
+        showStatus('Connecting to Google...');
+
+        // initialize token client if needed
+        if (!tokenClient) {
+          try {
+            tokenClient = google.accounts.oauth2.initTokenClient({
+              client_id: CLIENT_ID,
+              scope: SCOPES,
+              callback: async function (response) {
+                if (response.error) {
+                  console.error('Token client response error', response);
+                  showStatus('Google authorization failed: ' + (response.error_description || response.error));
+                  return;
+                }
+                accessToken = response.access_token;
+                console.log('Access token received', accessToken ? 'yes' : 'no');
+                openPicker();
+              }
+            });
+          } catch (err) {
+            console.error('Failed to init token client', err);
+            showStatus('Failed to initialize Google authorization client.');
+            return;
+          }
+        }
+
+        // Request an access token. 'consent' will always prompt; for returning users you may omit prompt.
+        try {
+          tokenClient.requestAccessToken({ prompt: 'consent' });
+        } catch (err) {
+          console.error('requestAccessToken error', err);
+          showStatus('Error requesting Google access token: ' + err.message);
+        }
+      }
+
+      // Attach event listener
+      button.addEventListener('click', startGoogleAuthorization);
+
+      // Final ready status
+      showStatus(currentUser ? 'Ready to choose books.' : 'Please log in to MyShelf first.');
+    })();
+
   </script>
 </body>
 </html>
-
