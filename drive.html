@@ -3,306 +3,337 @@
 
 <head>
 
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-<title>MyShelf Drive</title>
+  <title>MyShelf - Add Books</title>
 
-<style>
+  <style>
 
-* {
-  box-sizing: border-box;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: #000;
-  color: white;
-  font-family: Arial, sans-serif;
+    body {
+      margin: 0;
+      min-height: 100vh;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+      background: #000;
+      color: #fff;
 
-.container {
-  width: 90%;
-  max-width: 420px;
-  text-align: center;
-}
+      font-family: Arial, sans-serif;
 
-.logo {
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.subtitle {
-  color: #777;
-  font-size: 13px;
-  margin-bottom: 30px;
-}
+    .container {
+      width: 90%;
+      max-width: 430px;
+      text-align: center;
+    }
 
-#driveButton {
-  width: 100%;
-  padding: 14px;
+    .logo {
+      font-size: 38px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
 
-  background: white;
-  color: black;
+    .subtitle {
+      color: #777;
+      font-size: 13px;
+      margin-bottom: 30px;
+    }
 
-  border: none;
-  border-radius: 8px;
+    button {
+      width: 100%;
+      padding: 14px;
 
-  font-size: 14px;
-  font-weight: bold;
+      border: none;
+      border-radius: 8px;
 
-  cursor: pointer;
-}
+      background: #fff;
+      color: #000;
 
-#driveButton:hover {
-  opacity: .85;
-}
+      font-size: 14px;
+      font-weight: bold;
 
-#status {
-  margin-top: 18px;
-  color: #888;
-  font-size: 13px;
-}
+      cursor: pointer;
+    }
 
-</style>
+    button:hover {
+      opacity: .85;
+    }
 
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    #status {
+      margin-top: 18px;
+      color: #888;
+      font-size: 13px;
+      min-height: 20px;
+    }
+  </style>
 </head>
 
-
 <body>
+  <div class="container">
 
-
-<div class="container">
-
-  <div class="logo">
-    MyShelf
+    <div class="logo">
+      MyShelf
+    </div>
+    <div class="subtitle">
+      Add books from your Google Drive
+    </div>
+    <button id="driveButton">
+      Choose Books from Google Drive
+    </button>
+    <div id="status">
+      Loading...
+    </div>
   </div>
-
-  <div class="subtitle">
-    Choose books from your Google Drive
-  </div>
-
-  <button id="driveButton">
-    Choose from Google Drive
-  </button>
-
-  <div id="status">
-    Loading...
-  </div>
-
-</div>
-
-
-<script src="https://apis.google.com/js/api.js"></script>
-
-<script src="https://accounts.google.com/gsi/client"></script>
-
-
-<script>
-
-const API_KEY =
-"AIzaSyC4pGowo0fDjk8TJe-x-O7lCUlIj6JNgpU";
-
-
-const CLIENT_ID =
-"1074521299867-4s2f8vm53iru10r72il166l0h63lvt0c.apps.googleusercontent.com";
-
-
-const APP_ID =
-"1074521299867";
-
-
-const SCOPES =
-"https://www.googleapis.com/auth/drive.readonly";
-
-
-let pickerLoaded = false;
-
-let accessToken = null;
-
-
-const status =
-document.getElementById("status");
-
-
-function showStatus(text) {
-
-  status.textContent = text;
-
-}
-
-
-/* LOAD PICKER */
-
-gapi.load(
-  "picker",
-  function() {
-
-    pickerLoaded = true;
-
-    showStatus("Ready.");
-
-  }
-);
-
-function startGoogleLogin() {
-
-  showStatus(
-    "Connecting to Google..."
-  );
-
-
-  const tokenClient =
-    google.accounts.oauth2.initTokenClient({
-
-      client_id: CLIENT_ID,
-
-      scope: SCOPES,
-
-      callback: function(response) {
-
-
-        if (response.error) {
-
-          console.error(response);
-
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script src="https://accounts.google.com/gsi/client"></script>
+  <script type="module">
+    import {
+      initializeApp
+    } from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getAuth,
+      onAuthStateChanged
+    } from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      getFirestore,
+      collection,
+      doc,
+      setDoc
+    } from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    const firebaseConfig = {
+      apiKey:
+        "AIzaSyBl-5cfDXHTX0gHubxH9MZx2YwLDbRRKFs",
+      authDomain:
+        "myshelf-e3440.firebaseapp.com",
+      projectId:
+        "myshelf-e3440",
+      storageBucket:
+        "myshelf-e3440.firebasestorage.app",
+      messagingSenderId:
+        "820092826756",
+      appId:
+        "1:820092826756:web:0cab1578f5dfc3c74ebed1",
+      measurementId:
+        "G-LB8602RM3L"
+    };
+    const app =
+      initializeApp(firebaseConfig);
+  const auth =
+      getAuth(app);
+  const db =
+      getFirestore(app);
+    const API_KEY =
+      "AIzaSyC4pGowo0fDjk8TJe-x-O7lCUlIj6JNgpU";
+    const CLIENT_ID =
+      "1074521299867-4s2f8vm53iru10r72il166l0h63lvt0c.apps.googleusercontent.com";
+    const APP_ID =
+      "1074521299867";
+    const SCOPES =
+      "https://www.googleapis.com/auth/drive.readonly";
+    const MY_LIBRARY =
+      "https://sites.google.com/view/the-myshelf/my-library?authuser=0";
+    let currentUser = null;
+    let pickerLoaded = false;
+    let accessToken = null;
+    const button =
+      document.getElementById("driveButton");
+    const status =
+      document.getElementById("status");
+    function showStatus(message) {
+      status.textContent = message;
+    }
+    onAuthStateChanged(
+      auth,
+      function(user) {
+        if (user) {
+          currentUser = user;
+          button.disabled = false;
           showStatus(
-            "Google authorization failed."
+            "Ready to choose books."
           );
-
-          return;
-
+        } else {
+          currentUser = null;
+          button.disabled = true;
+          showStatus(
+            "Please log in to MyShelf first."
+          );
         }
-
-
-        accessToken =
-          response.access_token;
-
-
-        openPicker();
-
       }
-
-    });
-
-
-  tokenClient.requestAccessToken({
-
-    prompt: "consent"
-
-  });
-
-}
-
-
-function openPicker() {
-
-
-  if (!pickerLoaded) {
-
-    showStatus(
-      "Please wait for Google Picker to load."
     );
-
-    return;
-
-  }
-
-
-  const view =
-    new google.picker.DocsView(
-      google.picker.ViewId.DOCS
+    gapi.load(
+      "picker",
+      function() {
+        pickerLoaded = true;
+        if (currentUser) {
+          showStatus(
+            "Ready to choose books."
+          );
+        }
+      }
     );
-
-
-  view.setIncludeFolders(false);
-
-
-  const picker =
-    new google.picker.PickerBuilder()
-
-      .setDeveloperKey(API_KEY)
-
-      .setAppId(APP_ID)
-
-      .setOAuthToken(accessToken)
-
-      .addView(view)
-
-      .enableFeature(
-        google.picker.Feature.MULTISELECT_ENABLED
-      )
-
-      .setCallback(pickerCallback)
-
-      .build();
-
-
-  picker.setVisible(true);
-
-}
-
-function pickerCallback(data) {
-
-
-  if (
-    data.action ===
-    google.picker.Action.PICKED
-  ) {
-
-
-    const files =
-      data.docs;
-
-
-    console.log(
-      "Selected files:",
-      files
+    function startGoogleAuthorization() {
+      if (!currentUser) {
+        showStatus(
+          "Please log in to MyShelf first."
+        );
+        return;
+      }
+      if (!pickerLoaded) {
+        showStatus(
+          "Please wait for Google Picker to load."
+        );
+        return;
+      }
+      showStatus(
+        "Connecting to Google..."
+      );
+      const tokenClient =
+        google.accounts.oauth2.initTokenClient({
+          client_id: CLIENT_ID,
+          scope: SCOPES,
+          callback: async function(response) {
+            if (response.error) {
+              console.error(response);
+              showStatus(
+                "Google authorization failed."
+              );
+              return;
+            }
+            accessToken =
+              response.access_token;
+            openPicker();
+          }
+        });
+      tokenClient.requestAccessToken({
+        prompt: "consent"
+      });
+    }
+    function openPicker() {
+      const view =
+        new google.picker.DocsView(
+          google.picker.ViewId.DOCS
+        );
+      view.setIncludeFolders(false);
+      const picker =
+        new google.picker.PickerBuilder()
+          .setDeveloperKey(API_KEY)
+          .setAppId(APP_ID)
+          .setOAuthToken(accessToken)
+          .addView(view)
+          .enableFeature(
+            google.picker.Feature.MULTISELECT_ENABLED
+          )
+          .setCallback(pickerCallback)
+          .build();
+      picker.setVisible(true);
+    }
+    async function pickerCallback(data) {
+      if (
+        data.action ===
+        google.picker.Action.CANCEL
+      ) {
+        showStatus(
+          "Picker closed."
+        );
+        return;
+      }
+      if (
+        data.action !==
+        google.picker.Action.PICKED
+      ) {
+        return;
+      }
+      if (!currentUser) {
+ showStatus(
+          "Your MyShelf login has expired."
+        );
+        return;
+      }
+      const files =
+        data.docs || [];
+      if (files.length === 0) {
+        showStatus(
+          "No books selected."
+        );
+        return;
+      }
+      button.disabled = true;
+ showStatus(
+        "Saving " +
+        files.length +
+        " book(s)..."
+      );
+      try {
+        for (const file of files) {
+          const bookRef =
+            doc(
+              collection(
+                db,
+                "users",
+                currentUser.uid,
+                "books"
+              )
+            );
+          await setDoc(
+            bookRef,
+            {
+              name:
+                file.name || "Untitled",
+              fileId:
+                file.id || "",
+              mimeType:
+                file.mimeType || "",
+              url:
+                file.url || "",
+              iconUrl:
+                file.iconUrl || "",
+              createdAt:
+                new Date().toISOString()
+            }
+          );
+        }
+        showStatus(
+          files.length +
+          " book(s) saved! Returning to My Library..."
+        );
+        setTimeout(
+          function() {
+            window.location.href =
+              MY_LIBRARY;
+          },
+          1200
+        );
+      } catch (error) {
+        console.error(error);
+        showStatus(
+          "Could not save the books. " +
+          error.message
+        );
+        button.disabled = false;
+      }
+    }
+    button.addEventListener(
+      "click",
+      startGoogleAuthorization
     );
-
-
-    showStatus(
-      files.length +
-      " file(s) selected."
-    );
-
-/
-
-  }
-
-
-  if (
-    data.action ===
-    google.picker.Action.CANCEL
-  ) {
-
-    showStatus(
-      "Picker closed."
-    );
-
-  }
-
-}
-
-document
-.getElementById("driveButton")
-.addEventListener(
-  "click",
-  startGoogleLogin
-);
-
-</script>
-
-
+  </script>
 </body>
-
 </html>
 
