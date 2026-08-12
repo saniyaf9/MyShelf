@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MyShelf - Login</title>
 
 <style>
@@ -112,6 +113,40 @@ input:focus {
     opacity: 0.9;
 }
 
+.google-btn {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #35434a;
+    border-radius: 9px;
+    background: #101a20;
+    color: #f9f9f9;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 14px;
+}
+
+.google-btn:hover {
+    background: #17232a;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    color: #718089;
+    font-size: 12px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #29373e;
+}
+
 .message {
     margin-top: 15px;
     text-align: center;
@@ -126,80 +161,217 @@ input:focus {
 <div class="auth-container">
 
     <div class="logo">MyShelf</div>
-    <div class="tagline">YOUR LITTLE LIBRARY</div>
 
-    <!-- SIGN UP FIRST -->
+    <div class="tagline">
+        YOUR LITTLE LIBRARY
+    </div>
+
+    <!-- TABS -->
     <div class="tabs">
-        <button class="tab active" onclick="showForm('signup', this)">
+
+        <button
+            class="tab active"
+            onclick="showForm('signup', this)"
+        >
             Sign Up
         </button>
 
-        <button class="tab" onclick="showForm('login', this)">
+        <button
+            class="tab"
+            onclick="showForm('login', this)"
+        >
             Log In
         </button>
+
     </div>
 
+
+    <!-- ========================= -->
     <!-- SIGN UP -->
+    <!-- ========================= -->
+
     <div id="signup" class="form active">
 
-        <label for="signupName">Name</label>
+        <label for="signupName">
+            Name
+        </label>
+
         <input
             type="text"
             id="signupName"
             placeholder="Enter your name"
         >
 
-        <label for="signupEmail">Email</label>
+
+        <label for="signupEmail">
+            Email
+        </label>
+
         <input
             type="email"
             id="signupEmail"
             placeholder="Enter your email"
         >
 
-        <label for="signupPassword">Password</label>
+
+        <label for="signupPassword">
+            Password
+        </label>
+
         <input
             type="password"
             id="signupPassword"
             placeholder="Create a password"
         >
 
-        <button class="submit-btn" onclick="signup()">
+
+        <button
+            class="submit-btn"
+            onclick="signup()"
+        >
             Create Account
         </button>
 
-        <div id="signupMessage" class="message"></div>
+
+        <div class="divider">
+            OR
+        </div>
+
+
+        <button
+            class="google-btn"
+            onclick="googleSignIn()"
+        >
+            Continue with Google
+        </button>
+
+
+        <div
+            id="signupMessage"
+            class="message"
+        ></div>
 
     </div>
 
+
+    <!-- ========================= -->
     <!-- LOGIN -->
+    <!-- ========================= -->
+
     <div id="login" class="form">
 
-        <label for="loginEmail">Email</label>
+        <label for="loginEmail">
+            Email
+        </label>
+
         <input
             type="email"
             id="loginEmail"
             placeholder="Enter your email"
         >
 
-        <label for="loginPassword">Password</label>
+
+        <label for="loginPassword">
+            Password
+        </label>
+
         <input
             type="password"
             id="loginPassword"
             placeholder="Enter your password"
         >
 
-        <button class="submit-btn" onclick="login()">
+
+        <button
+            class="submit-btn"
+            onclick="login()"
+        >
             Log In
         </button>
 
-        <div id="loginMessage" class="message"></div>
+
+        <div class="divider">
+            OR
+        </div>
+
+
+        <button
+            class="google-btn"
+            onclick="googleSignIn()"
+        >
+            Continue with Google
+        </button>
+
+
+        <div
+            id="loginMessage"
+            class="message"
+        ></div>
 
     </div>
 
 </div>
 
-<script>
-function showForm(formName, button) {
+
+<!-- ========================================= -->
+<!-- FIREBASE -->
+<!-- ========================================= -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
+    updateProfile
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+/* =========================================
+   YOUR FIREBASE CONFIG
+   ========================================= */
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyBl-5cfDXHTX0gHubxH9MZx2YwLDbRRKFs",
+
+    authDomain: "myshelf-e3440.firebaseapp.com",
+
+    projectId: "myshelf-e3440",
+
+    storageBucket: "myshelf-e3440.firebasestorage.app",
+
+    messagingSenderId: "820092826756",
+
+    appId: "1:820092826756:web:0cab1578f5dfc3c74ebed1",
+
+    measurementId: "G-LB8602RM3L"
+
+};
+
+
+/* =========================================
+   INITIALIZE FIREBASE
+   ========================================= */
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const googleProvider = new GoogleAuthProvider();
+
+
+/* =========================================
+   SWITCH BETWEEN SIGN UP AND LOGIN
+   ========================================= */
+
+window.showForm = function(formName, button) {
 
     document.querySelectorAll(".form").forEach(form => {
         form.classList.remove("active");
@@ -209,84 +381,264 @@ function showForm(formName, button) {
         tab.classList.remove("active");
     });
 
-    document.getElementById(formName).classList.add("active");
+    document
+        .getElementById(formName)
+        .classList.add("active");
+
     button.classList.add("active");
-}
+};
 
 
-/*
-   TEMPORARY LOCAL LOGIN SYSTEM
+/* =========================================
+   SIGN UP WITH EMAIL + PASSWORD
+   ========================================= */
 
-   This keeps the login page completely separate
-   from library.html.
+window.signup = async function() {
 
-   When Firebase Authentication is connected,
-   only signup() and login() need to be replaced.
-*/
+    const name =
+        document.getElementById("signupName")
+        .value
+        .trim();
 
-function signup() {
+    const email =
+        document.getElementById("signupEmail")
+        .value
+        .trim();
 
-    const name = document.getElementById("signupName").value.trim();
-    const email = document.getElementById("signupEmail").value.trim();
-    const password = document.getElementById("signupPassword").value;
+    const password =
+        document.getElementById("signupPassword")
+        .value;
 
-    const message = document.getElementById("signupMessage");
+    const message =
+        document.getElementById("signupMessage");
+
+
+    message.textContent = "";
+
 
     if (!name || !email || !password) {
-        message.textContent = "Please fill in all fields.";
+
+        message.textContent =
+            "Please fill in all fields.";
+
         return;
     }
 
-    localStorage.setItem("myshelf_user", JSON.stringify({
-        name: name,
-        email: email,
-        password: password
-    }));
 
-    message.textContent = "Account created!";
+    if (password.length < 6) {
 
-    setTimeout(() => {
-        showForm(
-            "login",
-            document.querySelectorAll(".tab")[1]
+        message.textContent =
+            "Password must be at least 6 characters.";
+
+        return;
+    }
+
+
+    try {
+
+        const userCredential =
+            await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+        await updateProfile(
+            userCredential.user,
+            {
+                displayName: name
+            }
         );
-    }, 700);
-}
 
 
-function login() {
+        message.textContent =
+            "Account created!";
 
-    const email = document.getElementById("loginEmail").value.trim();
-    const password = document.getElementById("loginPassword").value;
 
-    const message = document.getElementById("loginMessage");
+        setTimeout(() => {
 
-    const savedUser = JSON.parse(
-        localStorage.getItem("myshelf_user")
-    );
+            window.location.href =
+                "https://saniyaf9.github.io/MyShelf/library.html";
 
-    if (!savedUser) {
-        message.textContent = "No account found. Please sign up first.";
+        }, 700);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+            getFirebaseError(error);
+    }
+
+};
+
+
+/* =========================================
+   LOGIN WITH EMAIL + PASSWORD
+   ========================================= */
+
+window.login = async function() {
+
+    const email =
+        document.getElementById("loginEmail")
+        .value
+        .trim();
+
+    const password =
+        document.getElementById("loginPassword")
+        .value;
+
+    const message =
+        document.getElementById("loginMessage");
+
+
+    message.textContent = "";
+
+
+    if (!email || !password) {
+
+        message.textContent =
+            "Please enter your email and password.";
+
         return;
     }
 
-    if (
-        email !== savedUser.email ||
-        password !== savedUser.password
-    ) {
-        message.textContent = "Incorrect email or password.";
-        return;
+
+    try {
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+
+        message.textContent =
+            "Logging in...";
+
+
+        setTimeout(() => {
+
+            window.location.href =
+                "https://saniyaf9.github.io/MyShelf/library.html";
+
+        }, 500);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+            getFirebaseError(error);
     }
 
-    localStorage.setItem("myshelf_logged_in", "true");
+};
 
-    /*
-       IMPORTANT:
-       Change this filename only if your library
-       file has a different name.
-    */
-    window.location.href = "library.html";
+
+/* =========================================
+   GOOGLE SIGN IN
+   ========================================= */
+
+window.googleSignIn = async function() {
+
+    const signupMessage =
+        document.getElementById("signupMessage");
+
+    const loginMessage =
+        document.getElementById("loginMessage");
+
+
+    signupMessage.textContent = "";
+    loginMessage.textContent = "";
+
+
+    try {
+
+        const result =
+            await signInWithPopup(
+                auth,
+                googleProvider
+            );
+
+
+        console.log(
+            "Google account signed in:",
+            result.user
+        );
+
+
+        window.location.href =
+            "https://saniyaf9.github.io/MyShelf/library.html";
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        const activeMessage =
+            document.querySelector(
+                ".form.active .message"
+            );
+
+
+        if (activeMessage) {
+
+            activeMessage.textContent =
+                getFirebaseError(error);
+
+        }
+
+    }
+
+};
+
+
+/* =========================================
+   FIREBASE ERROR MESSAGES
+   ========================================= */
+
+function getFirebaseError(error) {
+
+    switch (error.code) {
+
+        case "auth/email-already-in-use":
+            return "This email already has an account.";
+
+        case "auth/invalid-email":
+            return "Please enter a valid email.";
+
+        case "auth/weak-password":
+            return "Password must be at least 6 characters.";
+
+        case "auth/invalid-credential":
+            return "Incorrect email or password.";
+
+        case "auth/user-not-found":
+            return "No account found with this email.";
+
+        case "auth/popup-closed-by-user":
+            return "Google sign-in was cancelled.";
+
+        case "auth/popup-blocked":
+            return "Your browser blocked the Google sign-in popup.";
+
+        case "auth/unauthorized-domain":
+            return "This website is not authorized in Firebase.";
+
+        case "auth/operation-not-allowed":
+            return "Google Sign-In is not enabled in Firebase.";
+
+        default:
+            return "Something went wrong. Please try again.";
+
+    }
+
 }
+
 </script>
 
 </body>
