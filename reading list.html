@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MyShelf — Reading List</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: #080f13;
+  color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+}
+
+button {
+  font-family: Arial, sans-serif;
+}
+
+header {
+  height: 78px;
+  padding: 0 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #263238;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(8,15,19,.97);
+  backdrop-filter: blur(10px);
+}
+
+.logo {
+  font-family: Georgia, serif;
+  font-size: 29px;
+}
+
+.library-link {
+  border: 1px solid #35434a;
+  background: transparent;
+  color: white;
+  padding: 10px 17px;
+  border-radius: 22px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.library-link:hover {
+  background: #17242a;
+}
+
+main {
+  width: min(1100px, 88%);
+  margin: auto;
+  padding: 60px 0 100px;
+}
+
+.eyebrow {
+  color: #7f8c91;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+h1 {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: clamp(45px, 7vw, 75px);
+  font-weight: 400;
+  letter-spacing: -3px;
+}
+
+.description {
+  max-width: 570px;
+  margin-top: 18px;
+  color: #7f8c91;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* =========================
+   TABS
+========================= */
+
+.tabs {
+  display: flex;
+  gap: 5px;
+  margin-top: 60px;
+  border-bottom: 1px solid #263238;
+}
+
+.tab {
+  border: none;
+  background: transparent;
+  color: #68767b;
+  padding: 14px 18px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.tab:hover {
+  color: white;
+}
+
+.tab.active {
+  color: white;
+  border-bottom-color: white;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section {
+  margin-top: 42px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.section-title {
+  font-family: Georgia, serif;
+  font-size: 29px;
+}
+
+.section-count {
+  margin-top: 5px;
+  color: #68767b;
+  font-size: 11px;
+}
+
+/* =========================
+   SERIES CARD
+========================= */
+
+.series-reading-card {
+  border: 1px solid #29373d;
+  border-radius: 16px;
+  background: #0d171c;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.series-reading-header {
+  padding: 18px 20px 16px;
+  border-bottom: 1px solid #26343a;
+}
+
+.series-reading-name {
+  font-family: Georgia, serif;
+  font-size: 22px;
+}
+
+.series-reading-meta {
+  color: #718087;
+  font-size: 11px;
+  margin-top: 6px;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-area {
+  margin-top: 14px;
+}
+
+.progress-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.progress-label {
+  color: #8d999d;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.progress-percent {
+  font-size: 11px;
+  color: #dce1e3;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 7px;
+  border-radius: 10px;
+  background: #1b282e;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #f9f9f9;
+  border-radius: 10px;
+  transition: width .3s ease;
+}
+
+/* =========================
+   BOOKS
+========================= */
+
+.reading-books {
+  display: flex;
+  flex-direction: column;
+}
+
+.reading-book {
+  min-height: 67px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  border-bottom: 1px solid #1f2c31;
+}
+
+.reading-book:last-child {
+  border-bottom: none;
+}
+
+.reading-book:hover {
+  background: #101b20;
+}
+
+.checkbox-wrap {
+  flex-shrink: 0;
+}
+
+.book-checkbox {
+  width: 21px;
+  height: 21px;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid #536168;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.book-checkbox:hover {
+  border-color: white;
+}
+
+.book-checkbox:checked {
+  background: white;
+  border-color: white;
+}
+
+.book-checkbox:checked::after {
+  content: "✓";
+  position: absolute;
+  color: #080f13;
+  font-size: 14px;
+  font-weight: bold;
+  left: 3px;
+  top: 0px;
+}
+
+.book-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.book-name {
+  font-family: Georgia, serif;
+  font-size: 16px;
+  word-break: break-word;
+}
+
+.book-name.completed {
+  text-decoration: line-through;
+  color: #68767b;
+}
+
+.book-number {
+  color: #68767b;
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+/* =========================
+   STANDALONE CARDS
+========================= */
+
+.standalone-card {
+  border: 1px solid #29373d;
+  border-radius: 16px;
+  background: #0d171c;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.standalone-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.standalone-name {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  word-break: break-word;
+}
+
+.standalone-name.completed {
+  text-decoration: line-through;
+  color: #68767b;
+}
+
+.standalone-progress {
+  margin-top: 11px;
+}
+
+.standalone-progress .progress-bar {
+  height: 5px;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty {
+  border: 1px dashed #2b3940;
+  border-radius: 18px;
+  padding: 55px 25px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 43px;
+  margin-bottom: 13px;
+}
+
+.empty h2 {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.empty p {
+  color: #718087;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 11px auto 0;
+  max-width: 400px;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading {
+  border: 1px solid #29373d;
+  border-radius: 18px;
+  padding: 45px;
+  text-align: center;
+  color: #718087;
+  font-size: 13px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+  header {
+    padding: 0 20px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  main {
+    width: 90%;
+    padding-top: 45px;
+  }
+
+  .tabs {
+    margin-top: 40px;
+  }
+
+  .tab {
+    padding: 13px 12px;
+  }
+
+  .series-reading-name {
+    font-size: 20px;
+  }
+
+  .reading-book {
+    padding: 12px 15px;
+  }
+
+  .standalone-card {
+    padding: 15px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    MyShelf
+  </div>
+
+  <a
+    href="library.html"
+    class="library-link"
+  >
+    ← My Library
+  </a>
+
+</header>
+
+
+<main>
+
+  <div class="eyebrow">
+    YOUR READING TRACKER
+  </div>
+
+  <h1>
+    Reading List
+  </h1>
+
+  <p class="description">
+    Keep track of what you've read.
+    Your reading progress is saved automatically.
+  </p>
+
+
+  <!-- =========================
+       TABS
+  ========================== -->
+
+  <div class="tabs">
+
+    <button
+      id="seriesTab"
+      class="tab active"
+      onclick="showSeries()"
+    >
+      📚 SERIES
+    </button>
+
+    <button
+      id="standaloneTab"
+      class="tab"
+      onclick="showStandalone()"
+    >
+      📖 STANDALONE
+    </button>
+
+  </div>
+
+
+  <!-- =========================
+       SERIES
+  ========================== -->
+
+  <div id="seriesContent">
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div>
+
+          <div class="section-title">
+            📚 Series
+          </div>
+
+          <div
+            id="seriesCount"
+            class="section-count"
+          >
+            0 series
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div id="seriesList">
+
+        <div class="loading">
+          Loading your reading list...
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- =========================
+       STANDALONE
+  ========================== -->
+
+  <div
+    id="standaloneContent"
+    style="display:none;"
+  >
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div>
+
+          <div class="section-title">
+            📖 Standalone Books
+          </div>
+
+          <div
+            id="standaloneCount"
+            class="section-count"
+          >
+            0 books
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div id="standaloneList">
+
+        <div class="loading">
+          Loading your reading list...
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<!-- =================================================
+     FIREBASE + FIRESTORE
+================================================= -->
+
+<script type="module">
+
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =================================================
+   FIREBASE CONFIG
+================================================= */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyBl-5cfDXHTX0gHubxH9MZx2YwLDbRRKFs",
+
+  authDomain:
+    "myshelf-e3440.firebaseapp.com",
+
+  projectId:
+    "myshelf-e3440",
+
+  storageBucket:
+    "myshelf-e3440.firebasestorage.app",
+
+  messagingSenderId:
+    "820092826756",
+
+  appId:
+    "1:820092826756:web:0cab1578f5dfc3c74ebed1",
+
+  measurementId:
+    "G-LB8602RM3L"
+
+};
+
+
+/* =================================================
+   INITIALIZE FIREBASE
+================================================= */
+
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+const db =
+  getFirestore(app);
+
+
+/* =================================================
+   VARIABLES
+================================================= */
+
+let currentUser = null;
+
+let library = {
+
+  series: [],
+
+  standalone: []
+
+};
+
+let readingProgress = {
+
+  books: {}
+
+};
+
+
+/* =================================================
+   FIRESTORE REFERENCES
+================================================= */
+
+function libraryRef() {
+
+  return doc(
+    db,
+    "libraries",
+    currentUser.uid
+  );
+
+}
+
+
+/* =================================================
+   LOAD EVERYTHING
+================================================= */
+
+async function loadReadingList(user) {
+
+  currentUser = user;
+
+  try {
+
+    const snapshot =
+      await getDoc(
+        libraryRef()
+      );
+
+
+    if (!snapshot.exists()) {
+
+      showError(
+        "Your library could not be found."
+      );
+
+      return;
+
+    }
+
+
+    const data =
+      snapshot.data();
+
+
+    library =
+      data.library || {
+        series: [],
+        standalone: []
+      };
+
+
+    readingProgress =
+      data.readingProgress || {
+        books: {}
+      };
+
+
+    if (
+      !readingProgress.books
+    ) {
+
+      readingProgress.books = {};
+
+    }
+
+
+    renderSeries();
+
+    renderStandalone();
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "Firestore loading error:",
+      error
+    );
+
+    showError(
+      "Could not load your reading list."
+    );
+
+  }
+
+}
+
+
+/* =================================================
+   SAVE READING PROGRESS
+================================================= */
+
+async function saveReadingProgress() {
+
+  if (!currentUser) {
+
+    return;
+
+  }
+
+
+  try {
+
+    await setDoc(
+
+      libraryRef(),
+
+      {
+
+        readingProgress:
+          readingProgress,
+
+        updatedAt:
+          new Date().toISOString()
+
+      },
+
+      {
+
+        merge: true
+
+      }
+
+    );
+
+    console.log(
+      "Reading progress saved."
+    );
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "Reading progress save error:",
+      error
+    );
+
+    alert(
+      "Your reading progress could not be saved."
+    );
+
+  }
+
+}
+
+
+/* =================================================
+   BOOK KEY
+================================================= */
+
+function getBookKey(book) {
+
+  return String(
+    book.id
+  );
+
+}
+
+
+/* =================================================
+   IS COMPLETED
+================================================= */
+
+function isCompleted(book) {
+
+  return Boolean(
+    readingProgress.books[
+      getBookKey(book)
+    ]
+  );
+
+}
+
+
+/* =================================================
+   TOGGLE BOOK
+================================================= */
+
+async function toggleBook(book) {
+
+  const key =
+    getBookKey(book);
+
+
+  readingProgress.books[key] =
+    !isCompleted(book);
+
+
+  updateBookAppearance(
+    book
+  );
+
+
+  updateAllProgress();
+
+
+  await saveReadingProgress();
+
+}
+
+
+/* =================================================
+   UPDATE BOOK APPEARANCE
+================================================= */
+
+function updateBookAppearance(book) {
+
+  const key =
+    getBookKey(book);
+
+
+  const checked =
+    Boolean(
+      readingProgress.books[key]
+    );
+
+
+  const checkbox =
+    document.querySelector(
+      `[data-book-id="${CSS.escape(key)}"]`
+    );
+
+
+  if (checkbox) {
+
+    checkbox.checked =
+      checked;
+
+  }
+
+
+  const title =
+    document.querySelector(
+      `[data-title-id="${CSS.escape(key)}"]`
+    );
+
+
+  if (title) {
+
+    title.classList.toggle(
+      "completed",
+      checked
+    );
+
+  }
+
+}
+
+
+/* =================================================
+   RENDER SERIES
+================================================= */
+
+function renderSeries() {
+
+  const container =
+    document.getElementById(
+      "seriesList"
+    );
+
+
+  container.innerHTML = "";
+
+
+  const series =
+    [...library.series].reverse();
+
+
+  document.getElementById(
+    "seriesCount"
+  ).textContent =
+    library.series.length +
+    (
+      library.series.length === 1
+        ? " series"
+        : " series"
+    );
+
+
+  if (
+    series.length === 0
+  ) {
+
+    container.innerHTML = `
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          📚
+        </div>
+
+        <h2>
+          No series yet
+        </h2>
+
+        <p>
+          Add a series from your library
+          and it will appear here automatically.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  series.forEach(
+    function(series) {
+
+      const card =
+        createSeriesCard(
+          series
+        );
+
+      container.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+/* =================================================
+   CREATE SERIES CARD
+================================================= */
+
+function createSeriesCard(series) {
+
+  const card =
+    document.createElement(
+      "div"
+    );
+
+
+  card.className =
+    "series-reading-card";
+
+
+  const books =
+    series.books || [];
+
+
+  let completed =
+    0;
+
+
+  books.forEach(
+    function(book) {
+
+      if (
+        isCompleted(book)
+      ) {
+
+        completed++;
+
+      }
+
+    }
+  );
+
+
+  const percentage =
+    books.length === 0
+      ? 0
+      : Math.round(
+          (completed / books.length) *
+          100
+        );
+
+
+  card.innerHTML = `
+
+    <div class="series-reading-header">
+
+      <div class="series-reading-name">
+        ${escapeHTML(series.name)}
+      </div>
+
+      <div class="series-reading-meta">
+        ${completed} of ${books.length} books completed
+      </div>
+
+      <div class="progress-area">
+
+        <div class="progress-top">
+
+          <div class="progress-label">
+            Progress
+          </div>
+
+          <div
+            class="progress-percent"
+            data-series-percent="${escapeHTML(series.id)}"
+          >
+            ${percentage}%
+          </div>
+
+        </div>
+
+        <div class="progress-bar">
+
+          <div
+            class="progress-fill"
+            data-series-progress="${escapeHTML(series.id)}"
+            style="width:${percentage}%"
+          ></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="reading-books"></div>
+
+  `;
+
+
+  const bookContainer =
+    card.querySelector(
+      ".reading-books"
+    );
+
+
+  if (
+    books.length === 0
+  ) {
+
+    bookContainer.innerHTML = `
+
+      <div
+        style="
+          padding:20px;
+          color:#68767b;
+          font-size:12px;
+        "
+      >
+        No books in this series yet.
+      </div>
+
+    `;
+
+    return card;
+
+  }
+
+
+  books.forEach(
+    function(book, index) {
+
+      bookContainer.appendChild(
+        createReadingBook(
+          book,
+          index
+        )
+      );
+
+    }
+  );
+
+
+  return card;
+
+}
+
+
+/* =================================================
+   CREATE READING BOOK
+================================================= */
+
+function createReadingBook(
+  book,
+  index
+) {
+
+  const row =
+    document.createElement(
+      "div"
+    );
+
+
+  row.className =
+    "reading-book";
+
+
+  const key =
+    getBookKey(book);
+
+
+  const checked =
+    isCompleted(book);
+
+
+  row.innerHTML = `
+
+    <div class="checkbox-wrap">
+
+      <input
+        type="checkbox"
+        class="book-checkbox"
+        data-book-id="${escapeHTML(key)}"
+        ${checked ? "checked" : ""}
+      >
+
+    </div>
+
+    <div class="book-details">
+
+      <div
+        class="book-name ${
+          checked ? "completed" : ""
+        }"
+        data-title-id="${escapeHTML(key)}"
+      >
+        ${escapeHTML(book.title)}
+      </div>
+
+      <div class="book-number">
+        Book ${index + 1}
+      </div>
+
+    </div>
+
+  `;
+
+
+  const checkbox =
+    row.querySelector(
+      ".book-checkbox"
+    );
+
+
+  checkbox.addEventListener(
+    "change",
+    function() {
+
+      toggleBook(book);
+
+    }
+  );
+
+
+  return row;
+
+}
+
+
+/* =================================================
+   RENDER STANDALONE
+================================================= */
+
+function renderStandalone() {
+
+  const container =
+    document.getElementById(
+      "standaloneList"
+    );
+
+
+  container.innerHTML = "";
+
+
+  const books =
+    [...library.standalone].reverse();
+
+
+  document.getElementById(
+    "standaloneCount"
+  ).textContent =
+    library.standalone.length +
+    (
+      library.standalone.length === 1
+        ? " book"
+        : " books"
+    );
+
+
+  if (
+    books.length === 0
+  ) {
+
+    container.innerHTML = `
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          📖
+        </div>
+
+        <h2>
+          No standalone books
+        </h2>
+
+        <p>
+          Add standalone books from your
+          library and they will appear here.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  books.forEach(
+    function(book) {
+
+      container.appendChild(
+        createStandaloneCard(
+          book
+        )
+      );
+
+    }
+  );
+
+}
+
+
+/* =================================================
+   CREATE STANDALONE CARD
+================================================= */
+
+function createStandaloneCard(book) {
+
+  const card =
+    document.createElement(
+      "div"
+    );
+
+
+  card.className =
+    "standalone-card";
+
+
+  const key =
+    getBookKey(book);
+
+
+  const checked =
+    isCompleted(book);
+
+
+  card.innerHTML = `
+
+    <div class="checkbox-wrap">
+
+      <input
+        type="checkbox"
+        class="book-checkbox"
+        data-book-id="${escapeHTML(key)}"
+        ${checked ? "checked" : ""}
+      >
+
+    </div>
+
+    <div class="standalone-info">
+
+      <div
+        class="standalone-name ${
+          checked ? "completed" : ""
+        }"
+        data-title-id="${escapeHTML(key)}"
+      >
+        ${escapeHTML(book.title)}
+      </div>
+
+      <div class="standalone-progress">
+
+        <div class="progress-bar">
+
+          <div
+            class="progress-fill"
+            data-standalone-progress="${escapeHTML(key)}"
+            style="
+              width:${checked ? 100 : 0}%
+            "
+          ></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div
+      class="progress-percent"
+      data-standalone-percent="${escapeHTML(key)}"
+    >
+      ${checked ? 100 : 0}%
+    </div>
+
+  `;
+
+
+  const checkbox =
+    card.querySelector(
+      ".book-checkbox"
+    );
+
+
+  checkbox.addEventListener(
+    "change",
+    function() {
+
+      toggleBook(book);
+
+    }
+  );
+
+
+  return card;
+
+}
+
+
+/* =================================================
+   UPDATE ALL PROGRESS
+================================================= */
+
+function updateAllProgress() {
+
+  library.series.forEach(
+    function(series) {
+
+      const books =
+        series.books || [];
+
+
+      let completed = 0;
+
+
+      books.forEach(
+        function(book) {
+
+          if (
+            isCompleted(book)
+          ) {
+
+            completed++;
+
+          }
+
+        }
+      );
+
+
+      const percentage =
+        books.length === 0
+          ? 0
+          : Math.round(
+              (completed / books.length) *
+              100
+            );
+
+
+      const fill =
+        document.querySelector(
+          `[data-series-progress="${CSS.escape(
+            String(series.id)
+          )}"]`
+        );
+
+
+      const percent =
+        document.querySelector(
+          `[data-series-percent="${CSS.escape(
+            String(series.id)
+          )}"]`
+        );
+
+
+      if (fill) {
+
+        fill.style.width =
+          percentage + "%";
+
+      }
+
+
+      if (percent) {
+
+        percent.textContent =
+          percentage + "%";
+
+      }
+
+    }
+  );
+
+
+  library.standalone.forEach(
+    function(book) {
+
+      const key =
+        getBookKey(book);
+
+
+      const percentage =
+        isCompleted(book)
+          ? 100
+          : 0;
+
+
+      const fill =
+        document.querySelector(
+          `[data-standalone-progress="${CSS.escape(key)}"]`
+        );
+
+
+      const percent =
+        document.querySelector(
+          `[data-standalone-percent="${CSS.escape(key)}"]`
+        );
+
+
+      if (fill) {
+
+        fill.style.width =
+          percentage + "%";
+
+      }
+
+
+      if (percent) {
+
+        percent.textContent =
+          percentage + "%";
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =================================================
+   TABS
+================================================= */
+
+window.showSeries =
+function() {
+
+  document.getElementById(
+    "seriesContent"
+  ).style.display =
+    "block";
+
+
+  document.getElementById(
+    "standaloneContent"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "seriesTab"
+  ).classList.add(
+    "active"
+  );
+
+
+  document.getElementById(
+    "standaloneTab"
+  ).classList.remove(
+    "active"
+  );
+
+};
+
+
+window.showStandalone =
+function() {
+
+  document.getElementById(
+    "seriesContent"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "standaloneContent"
+  ).style.display =
+    "block";
+
+
+  document.getElementById(
+    "seriesTab"
+  ).classList.remove(
+    "active"
+  );
+
+
+  document.getElementById(
+    "standaloneTab"
+  ).classList.add(
+    "active"
+  );
+
+};
+
+
+/* =================================================
+   ESCAPE HTML
+================================================= */
+
+function escapeHTML(text) {
+
+  return String(text)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =================================================
+   ERROR
+================================================= */
+
+function showError(message) {
+
+  document.getElementById(
+    "seriesList"
+  ).innerHTML = `
+
+    <div class="empty">
+
+      <div class="empty-icon">
+        ⚠️
+      </div>
+
+      <h2>
+        Something went wrong
+      </h2>
+
+      <p>
+        ${escapeHTML(message)}
+      </p>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =================================================
+   FIREBASE AUTH STATE
+================================================= */
+
+onAuthStateChanged(
+  auth,
+  function(user) {
+
+    if (!user) {
+
+      document.getElementById(
+        "seriesList"
+      ).innerHTML = `
+
+        <div class="empty">
+
+          <div class="empty-icon">
+            🔐
+          </div>
+
+          <h2>
+            Please log in
+          </h2>
+
+          <p>
+            Log in to MyShelf to see your reading list.
+          </p>
+
+        </div>
+
+      `;
+
+      document.getElementById(
+        "standaloneList"
+      ).innerHTML = `
+
+        <div class="empty">
+
+          <div class="empty-icon">
+            🔐
+          </div>
+
+          <h2>
+            Please log in
+          </h2>
+
+          <p>
+            Log in to MyShelf to see your reading list.
+          </p>
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    loadReadingList(
+      user
+    );
+
+  }
+);
+
+</script>
+
+</body>
+</html>
