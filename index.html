@@ -1,23 +1,23 @@
-\<!DOCTYPE html>
-\<html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-\<head>
+<head>
 
-\<meta charset="UTF-8">
+<meta charset="UTF-8">
 
-\<meta name="viewport"
+<meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-\<!-- GOOGLE PICKER -->
+<!-- GOOGLE PICKER -->
 
-\<script src="[https://apis.google.com/js/api.js](https://apis.google.com/js/api.js)">\</script>
+<script src="https://apis.google.com/js/api.js"></script>
 
-\<script src="[https://accounts.google.com/gsi/client](https://accounts.google.com/gsi/client)">\</script>
+<script src="https://accounts.google.com/gsi/client"></script>
 
 
-\<style>
+<style>
 
-\* {
+* {
   box-sizing: border-box;
 }
 
@@ -41,9 +41,9 @@ input {
 }
 
 
-/\* =====================================================
+/* =====================================================
    HEADER
-\===================================================== \*/
+===================================================== */
 
 header {
   height: 78px;
@@ -65,9 +65,9 @@ header {
 }
 
 
-/\* =====================================================
+/* =====================================================
    MAIN
-\===================================================== \*/
+===================================================== */
 
 main {
   width: min(1100px, 88%);
@@ -100,9 +100,9 @@ h1 {
 }
 
 
-/\* =====================================================
+/* =====================================================
    TOP BUTTONS
-\===================================================== \*/
+===================================================== */
 
 .top-actions {
   display: flex;
@@ -122,7 +122,7 @@ h1 {
   transition: all .2s ease;
 }
 
-.primary\:hover {
+.primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 7px 20px rgba(255,255,255,.16);
 }
@@ -139,7 +139,7 @@ h1 {
   transition: all .2s ease;
 }
 
-.secondary\:hover {
+.secondary:hover {
   background: #223139;
   border-color: #ffffff;
   transform: translateY(-2px);
@@ -147,9 +147,9 @@ h1 {
 }
 
 
-/\* =====================================================
+/* =====================================================
    TABS
-\===================================================== \*/
+===================================================== */
 
 .tabs {
   display: flex;
@@ -168,7 +168,7 @@ h1 {
   font-size: 12px;
 }
 
-.tab\:hover {
+.tab:hover {
   color: white;
 }
 
@@ -178,9 +178,9 @@ h1 {
 }
 
 
-/\* =====================================================
+/* =====================================================
    SECTION
-\===================================================== \*/
+===================================================== */
 
 .section {
   margin-top: 42px;
@@ -217,9 +217,9 @@ h1 {
 }
 
 
-/\* =====================================================
+/* =====================================================
    THREE COLUMN GRIDS
-\===================================================== \*/
+===================================================== */
 
 .series-grid {
   display: grid;
@@ -240,9 +240,9 @@ h1 {
 }
 
 
-/\* =====================================================
+/* =====================================================
    SERIES TILE
-\===================================================== \*/
+===================================================== */
 
 .series-card {
   position: relative;
@@ -268,12 +268,12 @@ h1 {
   pointer-events: none;
 }
 
-.series-card > \* {
+.series-card > * {
   position: relative;
   z-index: 1;
 }
 
-.series-card\:hover {
+.series-card:hover {
   border-color: #536168;
   transform: translateY(-2px);
 }
@@ -300,9 +300,9 @@ h1 {
 }
 
 
-/\* =====================================================
+/* =====================================================
    THREE DOT MENU
-\===================================================== \*/
+===================================================== */
 
 .menu-wrapper {
   position: absolute;
@@ -323,7 +323,7 @@ h1 {
   cursor: pointer;
 }
 
-.menu-button\:hover {
+.menu-button:hover {
   color: white;
   border-color: #68767b;
 }
@@ -357,7 +357,7 @@ h1 {
   cursor: pointer;
 }
 
-.menu-item\:hover {
+.menu-item:hover {
   background: #1b292f;
 }
 
@@ -366,9 +366,9 @@ h1 {
 }
 
 
-/\* =====================================================
+/* =====================================================
    STANDALONE BOOK TILES
-\===================================================== \*/
+===================================================== */
 
 .book-tile {
   position: relative;
@@ -384,7 +384,7 @@ h1 {
   cursor: pointer;
 }
 
-.book-tile\:hover {
+.book-tile:hover {
   border-color: #536168;
   transform: translateY(-2px);
 }
@@ -468,15 +468,15 @@ h1 {
   align-self: flex-start;
 }
 
-.book-tile-open\:hover {
+.book-tile-open:hover {
   background: #17242a;
 }
 
 
-/\* =====================================================
+/* =====================================================
    FAVORITE TILES
    SAME STYLE AS STANDALONE BOOK TILES
-\===================================================== \*/
+===================================================== */
 
 .favorite-tile {
   position: relative;
@@ -492,7 +492,7 @@ h1 {
   cursor: pointer;
 }
 
-.favorite-tile\:hover {
+.favorite-tile:hover {
   border-color: #536168;
   transform: translateY(-2px);
 }
@@ -563,10 +563,10 @@ h1 {
 }
 
 
-/\* =====================================================
+/* =====================================================
    BOOK LIST
    USED INSIDE A SERIES
-\===================================================== \*/
+===================================================== */
 
 .book-list {
   display: flex;
@@ -616,9 +616,9 @@ h1 {
 }
 
 
-/\* =====================================================
+/* =====================================================
    FAVORITE HEART
-\===================================================== \*/
+===================================================== */
 
 .favorite-button {
   width: 48px;
@@ -637,7 +637,7 @@ h1 {
   transition: .18s;
 }
 
-.favorite-button\:hover {
+.favorite-button:hover {
   border-color: white;
   color: white;
   transform: scale(1.08);
@@ -648,14 +648,14 @@ h1 {
   border-color: white;
 }
 
-.favorite-button.active\:hover {
+.favorite-button.active:hover {
   background: #17242a;
 }
 
 
-/\* =====================================================
+/* =====================================================
    BOOK THREE DOTS
-\===================================================== \*/
+===================================================== */
 
 .book-menu-wrapper {
   position: relative;
@@ -673,15 +673,15 @@ h1 {
   cursor: pointer;
 }
 
-.book-menu-button\:hover {
+.book-menu-button:hover {
   color: white;
   background: #17242a;
 }
 
 
-/\* =====================================================
+/* =====================================================
    OPEN BOOK BUTTON
-\===================================================== \*/
+===================================================== */
 
 .open-book {
   border: 1px solid #35434a;
@@ -693,14 +693,14 @@ h1 {
   font-size: 11px;
 }
 
-.open-book\:hover {
+.open-book:hover {
   background: #17242a;
 }
 
 
-/\* =====================================================
+/* =====================================================
    EMPTY
-\===================================================== \*/
+===================================================== */
 
 .empty {
   border: 1px dashed #2b3940;
@@ -730,11 +730,11 @@ h1 {
 }
 
 
-/\* =====================================================
+/* =====================================================
    SERIES PAGE
-\===================================================== \*/
+===================================================== */
 
-\#seriesPage {
+#seriesPage {
   display: none;
 }
 
@@ -747,7 +747,7 @@ h1 {
   margin-bottom: 28px;
 }
 
-.back\:hover {
+.back:hover {
   color: white;
 }
 
@@ -779,9 +779,9 @@ h1 {
 }
 
 
-/\* =====================================================
+/* =====================================================
    MODAL
-\===================================================== \*/
+===================================================== */
 
 .modal {
   display: none;
@@ -838,14 +838,14 @@ h1 {
   outline: none;
 }
 
-.field input\:focus {
+.field input:focus {
   border-color: #68767b;
 }
 
 
-/\* =====================================================
+/* =====================================================
    DRIVE PICKER BUTTON
-\===================================================== \*/
+===================================================== */
 
 .drive-picker-button {
   width: 100%;
@@ -859,7 +859,7 @@ h1 {
   font-weight: 600;
 }
 
-.drive-picker-button\:hover {
+.drive-picker-button:hover {
   background: #17242a;
   border-color: #68767b;
 }
@@ -872,9 +872,9 @@ h1 {
 }
 
 
-/\* =====================================================
+/* =====================================================
    MODAL BUTTONS
-\===================================================== \*/
+===================================================== */
 
 .modal-actions {
   display: flex;
@@ -903,9 +903,9 @@ h1 {
 }
 
 
-/\* =====================================================
+/* =====================================================
    MOBILE
-\===================================================== \*/
+===================================================== */
 
 @media (max-width: 650px) {
 
@@ -958,9 +958,9 @@ h1 {
 }
 
 
-/\* =====================================================
+/* =====================================================
    ADD BUTTON POP ANIMATION
-\===================================================== \*/
+===================================================== */
 
 @keyframes addButtonPop {
 
@@ -986,403 +986,403 @@ h1 {
   animation: addButtonPop 0.45s ease;
 }
 
-\</style>
+</style>
 
-\</head>
-
-
-\<body>
-
-\<main>
+</head>
 
 
-\<!-- =================================================
+<body>
+
+<main>
+
+
+<!-- =================================================
      HOME PAGE
-\================================================= -->
+================================================= -->
 
-\<div id="homePage">
+<div id="homePage">
 
 
-  \<h1>
+  <h1>
     My Library
-  \</h1>
+  </h1>
 
 
-  \<p class="description">
+  <p class="description">
 
     Every series gets a shelf.
     Every standalone gets its own place.
     Keep your favorites close and build
     your collection your way.
 
-  \</p>
+  </p>
 
 
-  \<!-- =================================================
+  <!-- =================================================
        TABS
-  \================================================== -->
+  ================================================== -->
 
-  \<div class="tabs">
+  <div class="tabs">
 
-    \<button
+    <button
       id="seriesTab"
       class="tab active"
       onclick="showSeries()">
 
       📚 SERIES
 
-    \</button>
+    </button>
 
 
-    \<button
+    <button
       id="booksTab"
       class="tab"
       onclick="showBooks()">
 
       📖 BOOKS
 
-    \</button>
+    </button>
 
 
-    \<button
+    <button
       id="favoritesTab"
       class="tab"
       onclick="showFavorites()">
 
       ♥ FAVORITES
 
-    \</button>
+    </button>
 
-  \</div>
+  </div>
 
 
-  \<!-- =================================================
+  <!-- =================================================
        SERIES TAB
-  \================================================= -->
+  ================================================= -->
 
-  \<div id="seriesContent">
+  <div id="seriesContent">
 
-    \<section class="section">
+    <section class="section">
 
-      \<div class="section-header">
+      <div class="section-header">
 
-        \<div class="section-heading">
+        <div class="section-heading">
 
-          \<div class="section-title">
+          <div class="section-title">
             📚 Series
-          \</div>
+          </div>
 
-          \<div
+          <div
             id="seriesCount"
             class="section-count">
 
             0 series
 
-          \</div>
+          </div>
 
-        \</div>
+        </div>
 
-        \<button
+        <button
           class="secondary section-add"
           onclick="openSeriesModal()">
 
           ＋ Add Series
 
-        \</button>
+        </button>
 
-      \</div>
+      </div>
 
 
-      \<div
+      <div
         id="seriesGrid"
         class="series-grid">
 
-      \</div>
+      </div>
 
-    \</section>
+    </section>
 
-  \</div>
+  </div>
 
 
-  \<!-- =================================================
+  <!-- =================================================
        BOOKS TAB
-  \================================================== -->
+  ================================================== -->
 
-  \<div
+  <div
     id="booksContent"
-    style="display\:none;">
+    style="display:none;">
 
-    \<section class="section">
+    <section class="section">
 
-      \<div class="section-header">
+      <div class="section-header">
 
-        \<div class="section-heading">
+        <div class="section-heading">
 
-          \<div class="section-title">
+          <div class="section-title">
             📖 Standalone Books
-          \</div>
+          </div>
 
-          \<div
+          <div
             id="standaloneCount"
             class="section-count">
 
             0 books
 
-          \</div>
+          </div>
 
-        \</div>
+        </div>
 
-        \<button
+        <button
           class="secondary section-add"
           onclick="openStandaloneModal()">
 
           ＋ Add Standalone Book
 
-        \</button>
+        </button>
 
-      \</div>
+      </div>
 
 
-      \<div
+      <div
         id="standaloneList"
         class="book-tile-grid">
 
-      \</div>
+      </div>
 
-    \</section>
+    </section>
 
-  \</div>
+  </div>
 
 
-  \<!-- =================================================
+  <!-- =================================================
        FAVORITES TAB
-  \================================================== -->
+  ================================================== -->
 
-  \<div
+  <div
     id="favoritesContent"
-    style="display\:none;">
+    style="display:none;">
 
-    \<section class="section">
+    <section class="section">
 
-      \<div class="section-header">
+      <div class="section-header">
 
-        \<div class="section-heading">
+        <div class="section-heading">
 
-          \<div class="section-title">
+          <div class="section-title">
             ♥ Favorite Books
-          \</div>
+          </div>
 
-          \<div
+          <div
             id="favoritesCount"
             class="section-count">
 
             0 favorites
 
-          \</div>
+          </div>
 
-        \</div>
+        </div>
 
-      \</div>
+      </div>
 
 
-      \<div
+      <div
         id="favoritesList"
         class="favorite-tile-grid">
 
-      \</div>
+      </div>
 
-    \</section>
+    </section>
 
-  \</div>
-
-
-\</div>
+  </div>
 
 
-\<!-- =================================================
+</div>
+
+
+<!-- =================================================
      SERIES PAGE
-\================================================= -->
+================================================= -->
 
-\<div id="seriesPage">
+<div id="seriesPage">
 
 
-  \<button
+  <button
     class="back"
     onclick="goHome()">
 
     ← Back to My Library
 
-  \</button>
+  </button>
 
 
-  \<div class="series-page-header">
+  <div class="series-page-header">
 
-    \<div class="series-heading">
+    <div class="series-heading">
 
-      \<div>
+      <div>
 
-        \<h2 id="seriesPageName">
+        <h2 id="seriesPageName">
           Series
-        \</h2>
+        </h2>
 
-        \<p id="seriesPageCount">
+        <p id="seriesPageCount">
           0 books
-        \</p>
+        </p>
 
-      \</div>
+      </div>
 
-    \</div>
+    </div>
 
-  \</div>
+  </div>
 
 
-  \<div
+  <div
     id="seriesBookList"
     class="book-list">
 
-  \</div>
+  </div>
 
 
-\</div>
+</div>
 
-\</main>
+</main>
 
 
-\<!-- =================================================
+<!-- =================================================
      CREATE SERIES MODAL
-\================================================= -->
+================================================= -->
 
-\<div
+<div
   id="seriesModal"
   class="modal">
 
-  \<div class="modal-box">
+  <div class="modal-box">
 
-    \<h2>
+    <h2>
       Create a Series Shelf
-    \</h2>
+    </h2>
 
-    \<div class="field">
+    <div class="field">
 
-      \<label>
+      <label>
         Series name
-      \</label>
+      </label>
 
-      \<input
+      <input
         id="seriesName"
         type="text"
         placeholder="Example: Made Series"
         autocomplete="off">
 
-    \</div>
+    </div>
 
-    \<div class="modal-actions">
+    <div class="modal-actions">
 
-      \<button
+      <button
         class="cancel"
         onclick="closeSeriesModal()">
 
         Cancel
 
-      \</button>
+      </button>
 
-      \<button
+      <button
         class="create"
         onclick="createSeries()">
 
         Create Series
 
-      \</button>
+      </button>
 
-    \</div>
+    </div>
 
-  \</div>
+  </div>
 
-\</div>
+</div>
 
 
-\<!-- =================================================
+<!-- =================================================
      STANDALONE BOOK MODAL
-\================================================= -->
+================================================= -->
 
-\<div
+<div
   id="standaloneModal"
   class="modal">
 
-  \<div class="modal-box">
+  <div class="modal-box">
 
-    \<h2>
+    <h2>
       Add Standalone Book
-    \</h2>
+    </h2>
 
-    \<div class="field">
+    <div class="field">
 
-      \<label>
+      <label>
         Book title
-      \</label>
+      </label>
 
-      \<input
+      <input
         id="standaloneTitle"
         type="text"
         placeholder="Enter book title"
         autocomplete="off">
 
-    \</div>
+    </div>
 
-    \<button
+    <button
       type="button"
       class="drive-picker-button"
       onclick="pickStandaloneFromDrive()">
 
       📁 Pick from Google Drive
 
-    \</button>
+    </button>
 
-    \<div
+    <div
       id="standaloneDriveSelected"
       class="drive-selected">
 
-    \</div>
+    </div>
 
-    \<div class="modal-actions">
+    <div class="modal-actions">
 
-      \<button
+      <button
         class="cancel"
         onclick="closeStandaloneModal()">
 
         Cancel
 
-      \</button>
+      </button>
 
-      \<button
+      <button
         class="create"
         onclick="addStandaloneBook()">
 
         Add Book
 
-      \</button>
+      </button>
 
-    \</div>
+    </div>
 
-  \</div>
+  </div>
 
-\</div>
-
-
-\<script>
+</div>
 
 
-/\* =====================================================
+<script>
+
+
+/* =====================================================
    STORAGE
-\===================================================== \*/
+===================================================== */
 
-const STORAGE\_KEY =
-  "myshelf\_final\_library\_v1";
+const STORAGE_KEY =
+  "myshelf_final_library_v1";
 
 
 let library =
   JSON.parse(
-    localStorage.getItem(STORAGE\_KEY)
+    localStorage.getItem(STORAGE_KEY)
   ) || {
 
     series: [],
@@ -1404,20 +1404,20 @@ let drivePickerLoaded =
   false;
 
 
-const API\_KEY =
+const API_KEY =
   "AIzaSyC4pGowo0fDjk8TJe-x-O7lCUlIj6JNgpU";
 
 
-const CLIENT\_ID =
+const CLIENT_ID =
   "1074521299867-4s2f8vm53iru10r72il166l0h63lvt0c.apps.googleusercontent.com";
 
 
-const APP\_ID =
+const APP_ID =
   "820092826756";
 
 
-const DRIVE\_SCOPE =
-  "[https://www.googleapis.com/auth/drive.readonly](https://www.googleapis.com/auth/drive.readonly)";
+const DRIVE_SCOPE =
+  "https://www.googleapis.com/auth/drive.readonly";
 
 
 let tokenClient =
@@ -1428,9 +1428,9 @@ let accessToken =
   null;
 
 
-/\* =====================================================
+/* =====================================================
    DATA MIGRATION
-\===================================================== \*/
+===================================================== */
 
 library.series.forEach(
   function(series) {
@@ -1480,23 +1480,23 @@ library.standalone.forEach(
 );
 
 
-/\* =====================================================
+/* =====================================================
    SAVE
-\===================================================== \*/
+===================================================== */
 
 function save() {
 
   localStorage.setItem(
-    STORAGE\_KEY,
+    STORAGE_KEY,
     JSON.stringify(library)
   );
 
 }
 
 
-/\* =====================================================
+/* =====================================================
    SERIES MODAL
-\===================================================== \*/
+===================================================== */
 
 function openSeriesModal() {
 
@@ -1533,9 +1533,9 @@ function closeSeriesModal() {
 }
 
 
-/\* =====================================================
+/* =====================================================
    CREATE SERIES
-\===================================================== \*/
+===================================================== */
 
 function createSeries() {
 
@@ -1593,9 +1593,9 @@ function createSeries() {
 }
 
 
-/\* =====================================================
+/* =====================================================
    STANDALONE MODAL
-\===================================================== \*/
+===================================================== */
 
 function openStandaloneModal() {
 
@@ -1639,9 +1639,9 @@ function closeStandaloneModal() {
 }
 
 
-/\* =====================================================
+/* =====================================================
    DRIVE PICKER LOAD
-\===================================================== \*/
+===================================================== */
 
 function loadDrivePicker() {
 
@@ -1670,17 +1670,17 @@ function loadDrivePicker() {
 loadDrivePicker();
 
 
-/\* =====================================================
+/* =====================================================
    DRIVE AUTHORIZATION
-\===================================================== \*/
+===================================================== */
 
 function startDriveAuthorization(
   callback
 ) {
 
   if (
-    API\_KEY.includes("PASTE\_YOUR") ||
-    CLIENT\_ID.includes("PASTE\_YOUR")
+    API_KEY.includes("PASTE_YOUR") ||
+    CLIENT_ID.includes("PASTE_YOUR")
   ) {
 
     alert(
@@ -1709,11 +1709,11 @@ function startDriveAuthorization(
   tokenClient =
     google.accounts.oauth2.initTokenClient({
 
-      client\_id:
-        CLIENT\_ID,
+      client_id:
+        CLIENT_ID,
 
       scope:
-        DRIVE\_SCOPE,
+        DRIVE_SCOPE,
 
       callback:
         function(response) {
@@ -1736,7 +1736,7 @@ function startDriveAuthorization(
 
 
           accessToken =
-            response.access\_token;
+            response.access_token;
 
 
           callback();
@@ -1756,9 +1756,9 @@ function startDriveAuthorization(
 }
 
 
-/\* =====================================================
+/* =====================================================
    OPEN DRIVE PICKER
-\===================================================== \*/
+===================================================== */
 
 function openDrivePicker(
   callback
@@ -1802,12 +1802,12 @@ function openDrivePicker(
     );
 
 
-  view\.setIncludeFolders(
+  view.setIncludeFolders(
     false
   );
 
 
-  view\.setMimeTypes(
+  view.setMimeTypes(
     "application/pdf"
   );
 
@@ -1816,11 +1816,11 @@ function openDrivePicker(
     new google.picker.PickerBuilder()
 
       .setDeveloperKey(
-        API\_KEY
+        API_KEY
       )
 
       .setAppId(
-        APP\_ID
+        APP_ID
       )
 
       .setOAuthToken(
@@ -1861,9 +1861,9 @@ function openDrivePicker(
 }
 
 
-/\* =====================================================
+/* =====================================================
    PICK STANDALONE FROM DRIVE
-\===================================================== \*/
+===================================================== */
 
 function pickStandaloneFromDrive() {
 
@@ -1895,7 +1895,7 @@ function pickStandaloneFromDrive() {
 
         titleInput.value =
           file.name.replace(
-            /\\.pdf$/i,
+            /\.pdf$/i,
             ""
           );
 
@@ -1908,9 +1908,9 @@ function pickStandaloneFromDrive() {
 }
 
 
-/\* =====================================================
+/* =====================================================
    ADD STANDALONE BOOK
-\===================================================== \*/
+===================================================== */
 
 function addStandaloneBook() {
 
@@ -1983,9 +1983,9 @@ function addStandaloneBook() {
 }
 
 
-/\* =====================================================
+/* =====================================================
    ADD BOOK TO SERIES
-\===================================================== \*/
+===================================================== */
 
 function addBookToCurrentSeries() {
 
@@ -2024,7 +2024,7 @@ function addBookToCurrentSeries() {
 
       const title =
         file.name.replace(
-          /\\.pdf$/i,
+          /\.pdf$/i,
           ""
         );
 
@@ -2067,9 +2067,9 @@ function addBookToCurrentSeries() {
 }
 
 
-/\* =====================================================
+/* =====================================================
    OPEN SERIES
-\===================================================== \*/
+===================================================== */
 
 function openSeries(
   id
@@ -2115,9 +2115,9 @@ function openSeries(
 }
 
 
-/\* =====================================================
+/* =====================================================
    SERIES PAGE
-\===================================================== \*/
+===================================================== */
 
 function renderSeriesPage() {
 
@@ -2172,33 +2172,33 @@ function renderSeriesPage() {
     series.books.length === 0
   ) {
 
-    list.innerHTML = \`
+    list.innerHTML = `
 
-      \<div class="empty">
+      <div class="empty">
 
-        \<div class="empty-icon">
+        <div class="empty-icon">
           📖
-        \</div>
+        </div>
 
-        \<h2>
+        <h2>
           This shelf is empty
-        \</h2>
+        </h2>
 
-        \<p>
+        <p>
           Add a book from Google Drive.
-        \</p>
+        </p>
 
-        \<button
+        <button
           class="primary"
           onclick="addBookToCurrentSeries()">
 
           ＋ Add Book from Drive
 
-        \</button>
+        </button>
 
-      \</div>
+      </div>
 
-    \`;
+    `;
 
     return;
 
@@ -2223,9 +2223,9 @@ function renderSeriesPage() {
 }
 
 
-/\* =====================================================
+/* =====================================================
    GO HOME
-\===================================================== \*/
+===================================================== */
 
 function goHome() {
 
@@ -2250,9 +2250,9 @@ function goHome() {
 }
 
 
-/\* =====================================================
+/* =====================================================
    RENDER ALL
-\===================================================== \*/
+===================================================== */
 
 function renderAll() {
 
@@ -2265,9 +2265,9 @@ function renderAll() {
 }
 
 
-/\* =====================================================
+/* =====================================================
    RENDER SERIES
-\===================================================== \*/
+===================================================== */
 
 function renderSeries() {
 
@@ -2294,27 +2294,27 @@ function renderSeries() {
     library.series.length === 0
   ) {
 
-    grid.innerHTML = \`
+    grid.innerHTML = `
 
-      \<div
+      <div
         class="empty"
         style="grid-column:1/-1;">
 
-        \<div class="empty-icon">
+        <div class="empty-icon">
           📚
-        \</div>
+        </div>
 
-        \<h2>
+        <h2>
           No series yet
-        \</h2>
+        </h2>
 
-        \<p>
+        <p>
           Create your first series shelf.
-        \</p>
+        </p>
 
-      \</div>
+      </div>
 
-    \`;
+    `;
 
     return;
 
@@ -2362,7 +2362,7 @@ function renderSeries() {
         ) {
 
           card.style.backgroundImage =
-            \`url("${series.backgroundUrl}")\`;
+            `url("${series.backgroundUrl}")`;
 
           card.classList.add(
             "has-background"
@@ -2371,15 +2371,15 @@ function renderSeries() {
         }
 
 
-        card.innerHTML = \`
+        card.innerHTML = `
 
-          \<div class="series-card-content">
+          <div class="series-card-content">
 
-            \<div class="series-name">
+            <div class="series-name">
               ${escapeHTML(series.name)}
-            \</div>
+            </div>
 
-            \<div class="series-books">
+            <div class="series-books">
 
               ${series.books.length}
 
@@ -2389,14 +2389,14 @@ function renderSeries() {
                   : "books"
               }
 
-            \</div>
+            </div>
 
-          \</div>
+          </div>
 
 
-          \<div class="menu-wrapper">
+          <div class="menu-wrapper">
 
-            \<button
+            <button
               class="menu-button"
               onclick="toggleMenu(
                 event,
@@ -2405,14 +2405,14 @@ function renderSeries() {
 
               ⋯
 
-            \</button>
+            </button>
 
 
-            \<div
+            <div
               id="series-menu-${series.id}"
               class="menu">
 
-              \<button
+              <button
                 class="menu-item"
                 onclick="changeSeriesBackground(
                   '${series.id}'
@@ -2420,10 +2420,10 @@ function renderSeries() {
 
                 Change Background
 
-              \</button>
+              </button>
 
 
-              \<button
+              <button
                 class="menu-item"
                 onclick="removeSeriesBackground(
                   '${series.id}'
@@ -2431,10 +2431,10 @@ function renderSeries() {
 
                 Remove Background
 
-              \</button>
+              </button>
 
 
-              \<button
+              <button
                 class="menu-item"
                 onclick="editSeries(
                   '${series.id}'
@@ -2442,10 +2442,10 @@ function renderSeries() {
 
                 Edit name
 
-              \</button>
+              </button>
 
 
-              \<button
+              <button
                 class="menu-item delete"
                 onclick="deleteSeries(
                   '${series.id}'
@@ -2453,13 +2453,13 @@ function renderSeries() {
 
                 Delete series
 
-              \</button>
+              </button>
 
-            \</div>
+            </div>
 
-          \</div>
+          </div>
 
-        \`;
+        `;
 
 
         grid.appendChild(
@@ -2472,9 +2472,9 @@ function renderSeries() {
 }
 
 
-/\* =====================================================
+/* =====================================================
    CHANGE SERIES BACKGROUND
-\===================================================== \*/
+===================================================== */
 
 function changeSeriesBackground(
   id
@@ -2526,9 +2526,9 @@ function changeSeriesBackground(
 }
 
 
-/\* =====================================================
+/* =====================================================
    REMOVE SERIES BACKGROUND
-\===================================================== \*/
+===================================================== */
 
 function removeSeriesBackground(
   id
@@ -2564,9 +2564,9 @@ function removeSeriesBackground(
 }
 
 
-/\* =====================================================
+/* =====================================================
    RENDER STANDALONE
-\===================================================== \*/
+===================================================== */
 
 function renderStandalone() {
 
@@ -2597,28 +2597,28 @@ function renderStandalone() {
     library.standalone.length === 0
   ) {
 
-    list.innerHTML = \`
+    list.innerHTML = `
 
-      \<div
+      <div
         class="empty"
         style="grid-column:1/-1;">
 
-        \<div class="empty-icon">
+        <div class="empty-icon">
           📖
-        \</div>
+        </div>
 
-        \<h2>
+        <h2>
           No standalone books
-        \</h2>
+        </h2>
 
-        \<p>
+        <p>
           Add a standalone book from
           Google Drive.
-        \</p>
+        </p>
 
-      \</div>
+      </div>
 
-    \`;
+    `;
 
     return;
 
@@ -2640,10 +2640,10 @@ function renderStandalone() {
         "book-tile";
 
 
-      /\*
+      /*
          CHANGE #7:
          WHOLE STANDALONE TILE OPENS BOOK
-      \*/
+      */
 
       card.style.cursor =
         "pointer";
@@ -2652,11 +2652,11 @@ function renderStandalone() {
       card.onclick =
         function(event) {
 
-          /\*
+          /*
              Do NOT open the book when
              clicking the heart, menu,
              menu item, or Open button.
-          \*/
+          */
 
           if (
             event.target.closest(
@@ -2687,7 +2687,7 @@ function renderStandalone() {
       ) {
 
         card.style.backgroundImage =
-          \`url("${book.backgroundUrl}")\`;
+          `url("${book.backgroundUrl}")`;
 
       }
 
@@ -2698,9 +2698,9 @@ function renderStandalone() {
 
       const driveButton =
         book.driveUrl
-          ? \`
+          ? `
 
-              \<button
+              <button
                 class="book-tile-open"
                 onclick="openBook(
                   '${book.id}'
@@ -2708,17 +2708,17 @@ function renderStandalone() {
 
                 Open
 
-              \</button>
+              </button>
 
-            \`
+            `
           : "";
 
 
-      card.innerHTML = \`
+      card.innerHTML = `
 
-        \<div class="book-tile-actions">
+        <div class="book-tile-actions">
 
-          \<button
+          <button
             class="favorite-button ${
               book.favorite
                 ? "active"
@@ -2736,12 +2736,12 @@ function renderStandalone() {
                 : "♡"
             }
 
-          \</button>
+          </button>
 
 
-          \<div class="book-menu-wrapper">
+          <div class="book-menu-wrapper">
 
-            \<button
+            <button
               class="book-menu-button"
               onclick="toggleMenu(
                 event,
@@ -2750,14 +2750,14 @@ function renderStandalone() {
 
               ⋯
 
-            \</button>
+            </button>
 
 
-            \<div
+            <div
               id="standalone-menu-${book.id}"
               class="menu">
 
-              \<button
+              <button
                 class="menu-item"
                 onclick="editBook(
                   '',
@@ -2766,10 +2766,10 @@ function renderStandalone() {
 
                 Edit title
 
-              \</button>
+              </button>
 
 
-              \<button
+              <button
                 class="menu-item"
                 onclick="changeStandaloneBackground(
                   '${book.id}'
@@ -2777,10 +2777,10 @@ function renderStandalone() {
 
                 Change Background
 
-              \</button>
+              </button>
 
 
-              \<button
+              <button
                 class="menu-item"
                 onclick="removeStandaloneBackground(
                   '${book.id}'
@@ -2788,10 +2788,10 @@ function renderStandalone() {
 
                 Remove Background
 
-              \</button>
+              </button>
 
 
-              \<button
+              <button
                 class="menu-item delete"
                 onclick="deleteBook(
                   '',
@@ -2800,30 +2800,30 @@ function renderStandalone() {
 
                 Delete book
 
-              \</button>
+              </button>
 
-            \</div>
+            </div>
 
-          \</div>
+          </div>
 
-        \</div>
+        </div>
 
 
-        \<div class="book-tile-content">
+        <div class="book-tile-content">
 
-          \<div class="book-tile-title">
+          <div class="book-tile-title">
             ${safeTitle}
-          \</div>
+          </div>
 
-          \<div class="book-tile-meta">
+          <div class="book-tile-meta">
             Standalone book
-          \</div>
+          </div>
 
           ${driveButton}
 
-        \</div>
+        </div>
 
-      \`;
+      `;
 
 
       list.appendChild(
@@ -2836,9 +2836,9 @@ function renderStandalone() {
 }
 
 
-/\* =====================================================
+/* =====================================================
    STANDALONE BACKGROUND
-\===================================================== \*/
+===================================================== */
 
 function changeStandaloneBackground(
   bookId
@@ -2924,9 +2924,9 @@ function removeStandaloneBackground(
 }
 
 
-/\* =====================================================
+/* =====================================================
    CREATE BOOK ELEMENT
-\===================================================== \*/
+===================================================== */
 
 function createBookElement(
   book,
@@ -2939,7 +2939,7 @@ function createBookElement(
     );
 
 
-  row\.className =
+  row.className =
     "book";
 
 
@@ -2951,9 +2951,9 @@ function createBookElement(
 
   const driveButton =
     book.driveUrl
-      ? \`
+      ? `
 
-        \<button
+        <button
           class="open-book"
           onclick="openBook(
             '${book.id}'
@@ -2961,33 +2961,33 @@ function createBookElement(
 
           Open
 
-        \</button>
+        </button>
 
-      \`
+      `
       : "";
 
 
-  row\.innerHTML = \`
+  row.innerHTML = `
 
-    \<div class="book-cover">
+    <div class="book-cover">
       📖
-    \</div>
+    </div>
 
 
-    \<div class="book-info">
+    <div class="book-info">
 
-      \<div class="book-title">
+      <div class="book-title">
         ${escapeHTML(book.title)}
-      \</div>
+      </div>
 
-      \<div class="book-meta">
+      <div class="book-meta">
         ${escapeHTML(seriesName)}
-      \</div>
+      </div>
 
-    \</div>
+    </div>
 
 
-    \<button
+    <button
       class="favorite-button ${
         book.favorite
           ? "active"
@@ -3005,15 +3005,15 @@ function createBookElement(
           : "♡"
       }
 
-    \</button>
+    </button>
 
 
     ${driveButton}
 
 
-    \<div class="book-menu-wrapper">
+    <div class="book-menu-wrapper">
 
-      \<button
+      <button
         class="book-menu-button"
         onclick="toggleMenu(
           event,
@@ -3022,14 +3022,14 @@ function createBookElement(
 
         ⋯
 
-      \</button>
+      </button>
 
 
-      \<div
+      <div
         id="book-menu-${book.id}"
         class="menu">
 
-        \<button
+        <button
           class="menu-item"
           onclick="editBook(
             '${series ? series.id : ""}',
@@ -3038,10 +3038,10 @@ function createBookElement(
 
           Edit title
 
-        \</button>
+        </button>
 
 
-        \<button
+        <button
           class="menu-item"
           onclick="changeBookBackground(
             '${series ? series.id : ""}',
@@ -3050,10 +3050,10 @@ function createBookElement(
 
           Change Background
 
-        \</button>
+        </button>
 
 
-        \<button
+        <button
           class="menu-item"
           onclick="removeBookBackground(
             '${series ? series.id : ""}',
@@ -3062,10 +3062,10 @@ function createBookElement(
 
           Remove Background
 
-        \</button>
+        </button>
 
 
-        \<button
+        <button
           class="menu-item delete"
           onclick="deleteBook(
             '${series ? series.id : ""}',
@@ -3074,13 +3074,13 @@ function createBookElement(
 
           Delete book
 
-        \</button>
+        </button>
 
-      \</div>
+      </div>
 
-    \</div>
+    </div>
 
-  \`;
+  `;
 
 
   return row;
@@ -3088,9 +3088,9 @@ function createBookElement(
 }
 
 
-/\* =====================================================
+/* =====================================================
    BOOK BACKGROUND
-\===================================================== \*/
+===================================================== */
 
 function findBook(
   seriesId,
@@ -3220,9 +3220,9 @@ function removeBookBackground(
 }
 
 
-/\* =====================================================
+/* =====================================================
    FAVORITE
-\===================================================== \*/
+===================================================== */
 
 function toggleFavorite(
   seriesId,
@@ -3265,9 +3265,9 @@ function toggleFavorite(
 }
 
 
-/\* =====================================================
+/* =====================================================
    FAVORITES TABS
-\===================================================== \*/
+===================================================== */
 
 function showSeries() {
 
@@ -3399,9 +3399,9 @@ function showAll() {
 }
 
 
-/\* =====================================================
+/* =====================================================
    RENDER FAVORITES
-\===================================================== \*/
+===================================================== */
 
 function renderFavorites() {
 
@@ -3494,38 +3494,38 @@ function renderFavorites() {
     count === 0
   ) {
 
-    list.innerHTML = \`
+    list.innerHTML = `
 
-      \<div
+      <div
         class="empty"
         style="grid-column:1/-1;">
 
-        \<div class="empty-icon">
+        <div class="empty-icon">
           ♡
-        \</div>
+        </div>
 
-        \<h2>
+        <h2>
           No favorites yet
-        \</h2>
+        </h2>
 
-        \<p>
+        <p>
           Click the heart beside a book
           to add it here.
-        \</p>
+        </p>
 
-      \</div>
+      </div>
 
-    \`;
+    `;
 
   }
 
 }
 
 
-/\* =====================================================
+/* =====================================================
    CREATE FAVORITE TILE
    SAME AS STANDALONE TILE
-\===================================================== \*/
+===================================================== */
 
 function createFavoriteTile(
   book,
@@ -3542,11 +3542,11 @@ function createFavoriteTile(
     "favorite-tile";
 
 
-  /\*
+  /*
      CHANGE #7:
      CLICKING THE WHOLE FAVORITE TILE
      OPENS THE BOOK
-  \*/
+  */
 
   card.style.cursor =
     "pointer";
@@ -3555,13 +3555,13 @@ function createFavoriteTile(
   card.onclick =
     function(event) {
 
-      /\*
+      /*
          Ignore clicks on:
          ♥
          ⋯
          menu items
          Open button
-      \*/
+      */
 
       if (
         event.target.closest(
@@ -3587,18 +3587,18 @@ function createFavoriteTile(
     };
 
 
-  /\*
+  /*
      CHANGE #1:
      FAVORITES USE THE BOOK'S
      EXISTING BACKGROUND IMAGE
-  \*/
+  */
 
   if (
     book.backgroundUrl
   ) {
 
     card.style.backgroundImage =
-      \`url("${book.backgroundUrl}")\`;
+      `url("${book.backgroundUrl}")`;
 
   }
 
@@ -3609,15 +3609,15 @@ function createFavoriteTile(
       : "Standalone book";
 
 
-  /\*
+  /*
      SAME OPEN BUTTON
-  \*/
+  */
 
   const driveButton =
     book.driveUrl
-      ? \`
+      ? `
 
-          \<button
+          <button
             class="book-tile-open"
             onclick="openBook(
               '${book.id}'
@@ -3625,19 +3625,19 @@ function createFavoriteTile(
 
             Open
 
-          \</button>
+          </button>
 
-        \`
+        `
       : "";
 
 
-  card.innerHTML = \`
+  card.innerHTML = `
 
-    \<div class="favorite-tile-actions">
+    <div class="favorite-tile-actions">
 
-      \<!-- SAME HEART BUTTON -->
+      <!-- SAME HEART BUTTON -->
 
-      \<button
+      <button
         class="favorite-button active"
         onclick="toggleFavorite(
           '${series ? series.id : ""}',
@@ -3647,14 +3647,14 @@ function createFavoriteTile(
 
         ♥
 
-      \</button>
+      </button>
 
 
-      \<!-- SAME THREE DOT MENU -->
+      <!-- SAME THREE DOT MENU -->
 
-      \<div class="book-menu-wrapper">
+      <div class="book-menu-wrapper">
 
-        \<button
+        <button
           class="book-menu-button"
           onclick="toggleMenu(
             event,
@@ -3663,14 +3663,14 @@ function createFavoriteTile(
 
           ⋯
 
-        \</button>
+        </button>
 
 
-        \<div
+        <div
           id="favorite-menu-${book.id}"
           class="menu">
 
-          \<button
+          <button
             class="menu-item"
             onclick="editBook(
               '${series ? series.id : ""}',
@@ -3679,10 +3679,10 @@ function createFavoriteTile(
 
             Edit title
 
-          \</button>
+          </button>
 
 
-          \<button
+          <button
             class="menu-item"
             onclick="changeBookBackground(
               '${series ? series.id : ""}',
@@ -3691,10 +3691,10 @@ function createFavoriteTile(
 
             Change Background
 
-          \</button>
+          </button>
 
 
-          \<button
+          <button
             class="menu-item"
             onclick="removeBookBackground(
               '${series ? series.id : ""}',
@@ -3703,10 +3703,10 @@ function createFavoriteTile(
 
             Remove Background
 
-          \</button>
+          </button>
 
 
-          \<button
+          <button
             class="menu-item delete"
             onclick="deleteBook(
               '${series ? series.id : ""}',
@@ -3715,36 +3715,36 @@ function createFavoriteTile(
 
             Delete book
 
-          \</button>
+          </button>
 
-        \</div>
+        </div>
 
-      \</div>
+      </div>
 
-    \</div>
+    </div>
 
 
-    \<div class="favorite-tile-content">
+    <div class="favorite-tile-content">
 
-      \<div class="favorite-tile-title">
+      <div class="favorite-tile-title">
 
         ${escapeHTML(book.title)}
 
-      \</div>
+      </div>
 
 
-      \<div class="favorite-tile-meta">
+      <div class="favorite-tile-meta">
 
         ${escapeHTML(seriesName)}
 
-      \</div>
+      </div>
 
 
       ${driveButton}
 
-    \</div>
+    </div>
 
-  \`;
+  `;
 
 
   return card;
@@ -3752,9 +3752,9 @@ function createFavoriteTile(
 }
 
 
-/\* =====================================================
+/* =====================================================
    EDIT SERIES
-\===================================================== \*/
+===================================================== */
 
 function editSeries(
   id
@@ -3813,9 +3813,9 @@ function editSeries(
 }
 
 
-/\* =====================================================
+/* =====================================================
    DELETE SERIES
-\===================================================== \*/
+===================================================== */
 
 function deleteSeries(
   id
@@ -3885,9 +3885,9 @@ function deleteSeries(
 }
 
 
-/\* =====================================================
+/* =====================================================
    EDIT BOOK
-\===================================================== \*/
+===================================================== */
 
 function editBook(
   seriesId,
@@ -3942,9 +3942,9 @@ function editBook(
 }
 
 
-/\* =====================================================
+/* =====================================================
    DELETE BOOK
-\===================================================== \*/
+===================================================== */
 
 function deleteBook(
   seriesId,
@@ -4028,9 +4028,9 @@ function deleteBook(
 }
 
 
-/\* =====================================================
+/* =====================================================
    OPEN DRIVE BOOK
-\===================================================== \*/
+===================================================== */
 
 function openBook(
   bookId
@@ -4083,9 +4083,9 @@ function openBook(
     book.driveUrl
   ) {
 
-    window\.open(
+    window.open(
       book.driveUrl,
-      "\_blank"
+      "_blank"
     );
 
   }
@@ -4093,9 +4093,9 @@ function openBook(
 }
 
 
-/\* =====================================================
+/* =====================================================
    THREE DOT MENU
-\===================================================== \*/
+===================================================== */
 
 function toggleMenu(
   event,
@@ -4203,9 +4203,9 @@ function toggleMenu(
 }
 
 
-/\* =====================================================
+/* =====================================================
    CLOSE MENUS WHEN CLICKING OUTSIDE
-\===================================================== \*/
+===================================================== */
 
 document.addEventListener(
   "click",
@@ -4255,9 +4255,9 @@ document.addEventListener(
 );
 
 
-/\* =====================================================
+/* =====================================================
    ESCAPE CLOSES MENUS
-\===================================================== \*/
+===================================================== */
 
 document.addEventListener(
   "keydown",
@@ -4303,9 +4303,9 @@ document.addEventListener(
 );
 
 
-/\* =====================================================
+/* =====================================================
    ESCAPE HTML
-\===================================================== \*/
+===================================================== */
 
 function escapeHTML(
   text
@@ -4319,7 +4319,7 @@ function escapeHTML(
     )
 
     .replace(
-      /\</g,
+      /</g,
       "&lt;"
     )
 
@@ -4341,9 +4341,9 @@ function escapeHTML(
 }
 
 
-/\* =====================================================
+/* =====================================================
    ENTER KEY
-\===================================================== \*/
+===================================================== */
 
 document
   .getElementById(
@@ -4391,9 +4391,9 @@ document
   );
 
 
-/\* =====================================================
+/* =====================================================
    ESCAPE CLOSES MODALS
-\===================================================== \*/
+===================================================== */
 
 document.addEventListener(
   "keydown",
@@ -4414,9 +4414,9 @@ document.addEventListener(
 );
 
 
-/\* =====================================================
+/* =====================================================
    CLICK OUTSIDE MODALS
-\===================================================== \*/
+===================================================== */
 
 document
   .getElementById(
@@ -4458,9 +4458,9 @@ document
   );
 
 
-/\* =====================================================
+/* =====================================================
    ADD BUTTON POP
-\===================================================== \*/
+===================================================== */
 
 function popAddButton(
   button
@@ -4498,13 +4498,13 @@ function popAddButton(
 }
 
 
-/\* =====================================================
+/* =====================================================
    INITIAL LOAD
-\===================================================== \*/
+===================================================== */
 
 renderAll();
 
-\</script>
+</script>
 
-\</body>
-\</html>
+</body>
+</html>
