@@ -236,7 +236,7 @@
             type="button"
             class="eye-button"
             onclick="togglePassword('loginPassword', this)">
-            👁
+            🙈
           </button>
 
         </div>
@@ -256,6 +256,22 @@
     <!-- SIGN UP -->
 
     <form id="signupForm">
+
+      <!-- NAME -->
+
+      <div class="field">
+
+        <label>Name</label>
+
+        <input
+          id="signupName"
+          type="text"
+          placeholder="Enter your name"
+          autocomplete="name"
+          required>
+
+      </div>
+
 
       <div class="field">
 
@@ -288,7 +304,7 @@
             type="button"
             class="eye-button"
             onclick="togglePassword('signupPassword', this)">
-            👁
+            🙉
           </button>
 
         </div>
@@ -313,7 +329,7 @@
             type="button"
             class="eye-button"
             onclick="togglePassword('signupConfirmPassword', this)">
-            👁
+            🙉
           </button>
 
         </div>
@@ -440,6 +456,10 @@
     }
 
 
+    /*
+      SHOW / HIDE PASSWORD
+    */
+
     function togglePassword(
       inputId,
       button
@@ -454,7 +474,7 @@
 
         input.type = "text";
 
-        button.textContent = "🙈";
+        button.textContent = "🙉";
 
       }
 
@@ -462,7 +482,7 @@
 
         input.type = "password";
 
-        button.textContent = "👁";
+        button.textContent = "🙈";
 
       }
 
@@ -554,22 +574,51 @@
 
           event.preventDefault();
 
+
+          const name =
+            document
+              .getElementById("signupName")
+              .value
+              .trim();
+
+
           const email =
             document
               .getElementById("signupEmail")
               .value
               .trim();
 
+
           const password =
             document
               .getElementById("signupPassword")
               .value;
+
 
           const confirmPassword =
             document
               .getElementById("signupConfirmPassword")
               .value;
 
+
+          /*
+            Check the name
+          */
+
+          if (name === "") {
+
+            showMessage(
+              "Please enter your name."
+            );
+
+            return;
+
+          }
+
+
+          /*
+            Check passwords
+          */
 
           if (
             password !== confirmPassword
@@ -589,11 +638,31 @@
           );
 
 
+          /*
+            CREATE FIREBASE ACCOUNT
+          */
+
           auth
             .createUserWithEmailAndPassword(
               email,
               password
             )
+
+            .then(function(userCredential) {
+
+              /*
+                Save the name to the
+                Firebase user's profile.
+              */
+
+              return userCredential.user
+                .updateProfile({
+
+                  displayName: name
+
+                });
+
+            })
 
             .then(function() {
 
@@ -617,9 +686,6 @@
       );
 
 
-    /*
-      FRIENDLIER FIREBASE ERRORS
-    */
 
     function getFirebaseError(error) {
 
@@ -653,14 +719,8 @@
 
     }
 
-
-    /*
-      ENTER KEY WORKS
-      FOR BOTH FORMS BECAUSE THEY ARE
-      REAL HTML FORMS.
-    */
-
   </script>
 
 </body>
 </html>
+
