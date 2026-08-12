@@ -7,6 +7,7 @@
 <title>MyShelf - Login</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -81,6 +82,8 @@ label {
     font-size: 14px;
 }
 
+/* NORMAL INPUTS */
+
 input {
     width: 100%;
     padding: 13px;
@@ -90,11 +93,59 @@ input {
     background: #0b1318;
     color: white;
     outline: none;
+    font-size: 14px;
 }
 
 input:focus {
     border-color: #718089;
 }
+
+/* PASSWORD FIELD */
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+.password-wrapper input {
+    margin-bottom: 0;
+    padding-right: 50px;
+}
+
+/* MONKEY / EYE BUTTON */
+
+.password-toggle {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+    background: transparent;
+
+    font-size: 20px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.password-toggle:hover {
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+}
+
+/* BUTTONS */
 
 .submit-btn {
     width: 100%;
@@ -153,23 +204,30 @@ input:focus {
     font-size: 13px;
     min-height: 18px;
 }
+
 </style>
 </head>
+
 
 <body>
 
 <div class="auth-container">
 
-    <div class="logo">MyShelf</div>
+    <div class="logo">
+        MyShelf
+    </div>
 
     <div class="tagline">
         YOUR LITTLE LIBRARY
     </div>
 
+
     <!-- TABS -->
+
     <div class="tabs">
 
         <button
+            type="button"
             class="tab active"
             onclick="showForm('signup', this)"
         >
@@ -177,6 +235,7 @@ input:focus {
         </button>
 
         <button
+            type="button"
             class="tab"
             onclick="showForm('login', this)"
         >
@@ -186,9 +245,9 @@ input:focus {
     </div>
 
 
-    <!-- ========================= -->
+    <!-- ================================= -->
     <!-- SIGN UP -->
-    <!-- ========================= -->
+    <!-- ================================= -->
 
     <div id="signup" class="form active">
 
@@ -218,14 +277,30 @@ input:focus {
             Password
         </label>
 
-        <input
-            type="password"
-            id="signupPassword"
-            placeholder="Create a password"
-        >
+        <!-- PASSWORD WITH TOGGLE -->
+
+        <div class="password-wrapper">
+
+            <input
+                type="password"
+                id="signupPassword"
+                placeholder="Create a password"
+            >
+
+            <button
+                type="button"
+                class="password-toggle"
+                onclick="togglePassword('signupPassword', this)"
+                aria-label="Show password"
+            >
+                🙈
+            </button>
+
+        </div>
 
 
         <button
+            type="button"
             class="submit-btn"
             onclick="signup()"
         >
@@ -239,6 +314,7 @@ input:focus {
 
 
         <button
+            type="button"
             class="google-btn"
             onclick="googleSignIn()"
         >
@@ -254,9 +330,9 @@ input:focus {
     </div>
 
 
-    <!-- ========================= -->
+    <!-- ================================= -->
     <!-- LOGIN -->
-    <!-- ========================= -->
+    <!-- ================================= -->
 
     <div id="login" class="form">
 
@@ -275,14 +351,30 @@ input:focus {
             Password
         </label>
 
-        <input
-            type="password"
-            id="loginPassword"
-            placeholder="Enter your password"
-        >
+        <!-- PASSWORD WITH TOGGLE -->
+
+        <div class="password-wrapper">
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+            >
+
+            <button
+                type="button"
+                class="password-toggle"
+                onclick="togglePassword('loginPassword', this)"
+                aria-label="Show password"
+            >
+                🙈
+            </button>
+
+        </div>
 
 
         <button
+            type="button"
             class="submit-btn"
             onclick="login()"
         >
@@ -296,6 +388,7 @@ input:focus {
 
 
         <button
+            type="button"
             class="google-btn"
             onclick="googleSignIn()"
         >
@@ -334,7 +427,7 @@ from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
 /* =========================================
-   YOUR FIREBASE CONFIG
+   FIREBASE CONFIG
    ========================================= */
 
 const firebaseConfig = {
@@ -368,45 +461,90 @@ const googleProvider = new GoogleAuthProvider();
 
 
 /* =========================================
-   SWITCH BETWEEN SIGN UP AND LOGIN
+   SHOW SIGN UP / LOGIN
    ========================================= */
 
 window.showForm = function(formName, button) {
 
-    document.querySelectorAll(".form").forEach(form => {
-        form.classList.remove("active");
-    });
+    document
+        .querySelectorAll(".form")
+        .forEach(form => {
+            form.classList.remove("active");
+        });
 
-    document.querySelectorAll(".tab").forEach(tab => {
-        tab.classList.remove("active");
-    });
+    document
+        .querySelectorAll(".tab")
+        .forEach(tab => {
+            tab.classList.remove("active");
+        });
 
     document
         .getElementById(formName)
         .classList.add("active");
 
     button.classList.add("active");
+
 };
 
 
 /* =========================================
-   SIGN UP WITH EMAIL + PASSWORD
+   PASSWORD SHOW / HIDE
+   ========================================= */
+
+window.togglePassword = function(inputId, button) {
+
+    const passwordInput =
+        document.getElementById(inputId);
+
+
+    if (passwordInput.type === "password") {
+
+        passwordInput.type = "text";
+
+        button.textContent = "👁️";
+
+        button.setAttribute(
+            "aria-label",
+            "Hide password"
+        );
+
+    } else {
+
+        passwordInput.type = "password";
+
+        button.textContent = "🙈";
+
+        button.setAttribute(
+            "aria-label",
+            "Show password"
+        );
+
+    }
+
+};
+
+
+/* =========================================
+   SIGN UP
    ========================================= */
 
 window.signup = async function() {
 
     const name =
-        document.getElementById("signupName")
+        document
+        .getElementById("signupName")
         .value
         .trim();
 
     const email =
-        document.getElementById("signupEmail")
+        document
+        .getElementById("signupEmail")
         .value
         .trim();
 
     const password =
-        document.getElementById("signupPassword")
+        document
+        .getElementById("signupPassword")
         .value;
 
     const message =
@@ -470,24 +608,27 @@ window.signup = async function() {
 
         message.textContent =
             getFirebaseError(error);
+
     }
 
 };
 
 
 /* =========================================
-   LOGIN WITH EMAIL + PASSWORD
+   LOGIN
    ========================================= */
 
 window.login = async function() {
 
     const email =
-        document.getElementById("loginEmail")
+        document
+        .getElementById("loginEmail")
         .value
         .trim();
 
     const password =
-        document.getElementById("loginPassword")
+        document
+        .getElementById("loginPassword")
         .value;
 
     const message =
@@ -533,6 +674,7 @@ window.login = async function() {
 
         message.textContent =
             getFirebaseError(error);
+
     }
 
 };
@@ -552,6 +694,7 @@ window.googleSignIn = async function() {
 
 
     signupMessage.textContent = "";
+
     loginMessage.textContent = "";
 
 
@@ -565,7 +708,7 @@ window.googleSignIn = async function() {
 
 
         console.log(
-            "Google account signed in:",
+            "Google account:",
             result.user
         );
 
