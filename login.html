@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   <meta charset="UTF-8">
@@ -16,10 +17,8 @@
     body {
       margin: 0;
       min-height: 100vh;
-
       background: #000;
       color: #fff;
-
       font-family: Arial, sans-serif;
 
       display: flex;
@@ -170,6 +169,46 @@
       color: #666;
     }
 
+    /* PASSWORD FIELD */
+
+    .password-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .password-wrapper input {
+      padding-right: 45px;
+    }
+
+    .eye-button {
+      position: absolute;
+
+      right: 8px;
+      top: 0;
+
+      width: 36px;
+      height: 42px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: none;
+      border: none;
+
+      color: #777;
+
+      cursor: pointer;
+
+      font-size: 18px;
+
+      padding: 0;
+    }
+
+    .eye-button:hover {
+      color: #fff;
+    }
+
     .submit {
       width: 100%;
 
@@ -263,6 +302,7 @@
     <div class="buttons">
 
       <button
+        type="button"
         class="main-button login-button"
         id="openLogin">
 
@@ -272,6 +312,7 @@
 
 
       <button
+        type="button"
         class="main-button signup-button"
         id="openSignup">
 
@@ -293,6 +334,7 @@
     <div class="box">
 
       <button
+        type="button"
         class="close"
         id="closeLogin">
 
@@ -311,27 +353,51 @@
       </div>
 
 
-      <input
-        id="loginEmail"
-        type="email"
-        placeholder="Email"
-        autocomplete="email">
+      <!-- LOGIN FORM -->
+
+      <form id="loginForm">
+
+        <input
+          id="loginEmail"
+          type="email"
+          placeholder="Email"
+          autocomplete="email"
+          required>
 
 
-      <input
-        id="loginPassword"
-        type="password"
-        placeholder="Password"
-        autocomplete="current-password">
+        <!-- LOGIN PASSWORD -->
+
+        <div class="password-wrapper">
+
+          <input
+            id="loginPassword"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+            required>
+
+          <button
+            type="button"
+            class="eye-button"
+            id="loginEye"
+            aria-label="Show password">
+
+            👁
+
+          </button>
+
+        </div>
 
 
-      <button
-        class="submit"
-        id="loginButton">
+        <button
+          type="submit"
+          class="submit">
 
-        Log In
+          Log In
 
-      </button>
+        </button>
+
+      </form>
 
 
       <div
@@ -373,6 +439,7 @@
     <div class="box">
 
       <button
+        type="button"
         class="close"
         id="closeSignup">
 
@@ -391,41 +458,83 @@
       </div>
 
 
-      <input
-        id="signupName"
-        type="text"
-        placeholder="Name"
-        autocomplete="name">
+      <!-- SIGNUP FORM -->
+
+      <form id="signupForm">
+
+        <input
+          id="signupName"
+          type="text"
+          placeholder="Name"
+          autocomplete="name"
+          required>
 
 
-      <input
-        id="signupEmail"
-        type="email"
-        placeholder="Email"
-        autocomplete="email">
+        <input
+          id="signupEmail"
+          type="email"
+          placeholder="Email"
+          autocomplete="email"
+          required>
 
 
-      <input
-        id="signupPassword"
-        type="password"
-        placeholder="Password"
-        autocomplete="new-password">
+        <!-- SIGNUP PASSWORD -->
+
+        <div class="password-wrapper">
+
+          <input
+            id="signupPassword"
+            type="password"
+            placeholder="Password"
+            autocomplete="new-password"
+            required>
+
+          <button
+            type="button"
+            class="eye-button"
+            id="signupEye"
+            aria-label="Show password">
+
+            👁
+
+          </button>
+
+        </div>
 
 
-      <input
-        id="signupConfirm"
-        type="password"
-        placeholder="Confirm password"
-        autocomplete="new-password">
+        <!-- CONFIRM PASSWORD -->
+
+        <div class="password-wrapper">
+
+          <input
+            id="signupConfirm"
+            type="password"
+            placeholder="Confirm password"
+            autocomplete="new-password"
+            required>
+
+          <button
+            type="button"
+            class="eye-button"
+            id="confirmEye"
+            aria-label="Show password">
+
+            👁
+
+          </button>
+
+        </div>
 
 
-      <button
-        class="submit"
-        id="signupButton">
+        <button
+          type="submit"
+          class="submit">
 
-        Create Account
+          Create Account
 
-      </button>
+        </button>
+
+      </form>
 
 
       <div class="switch">
@@ -507,7 +616,7 @@
       getAuth(app);
 
 
-    /* YOUR GOOGLE SITES LIBRARY */
+    /* GOOGLE SITES LIBRARY */
 
     const MY_LIBRARY =
       "https://sites.google.com/view/the-myshelf/my-library?authuser=0";
@@ -518,20 +627,25 @@
     const loginPopup =
       document.getElementById("loginPopup");
 
-
     const signupPopup =
       document.getElementById("signupPopup");
-
 
     const loginMessage =
       document.getElementById("loginMessage");
 
-
     const signupMessage =
       document.getElementById("signupMessage");
 
+    const loginForm =
+      document.getElementById("loginForm");
 
-    /* OPEN LOGIN */
+    const signupForm =
+      document.getElementById("signupForm");
+
+
+    /* =========================================
+       OPEN LOGIN
+       ========================================= */
 
     document
       .getElementById("openLogin")
@@ -541,10 +655,20 @@
 
         loginPopup.classList.add("active");
 
+        setTimeout(function () {
+
+          document
+            .getElementById("loginEmail")
+            .focus();
+
+        }, 100);
+
       };
 
 
-    /* CLOSE LOGIN */
+    /* =========================================
+       CLOSE LOGIN
+       ========================================= */
 
     document
       .getElementById("closeLogin")
@@ -555,7 +679,9 @@
       };
 
 
-    /* OPEN SIGNUP */
+    /* =========================================
+       OPEN SIGNUP
+       ========================================= */
 
     document
       .getElementById("openSignup")
@@ -565,10 +691,20 @@
 
         signupPopup.classList.add("active");
 
+        setTimeout(function () {
+
+          document
+            .getElementById("signupName")
+            .focus();
+
+        }, 100);
+
       };
 
 
-    /* CLOSE SIGNUP */
+    /* =========================================
+       CLOSE SIGNUP
+       ========================================= */
 
     document
       .getElementById("closeSignup")
@@ -579,7 +715,9 @@
       };
 
 
-    /* LOGIN → SIGNUP */
+    /* =========================================
+       LOGIN → SIGNUP
+       ========================================= */
 
     document
       .getElementById("goSignup")
@@ -589,10 +727,16 @@
 
         signupPopup.classList.add("active");
 
+        document
+          .getElementById("signupName")
+          .focus();
+
       };
 
 
-    /* SIGNUP → LOGIN */
+    /* =========================================
+       SIGNUP → LOGIN
+       ========================================= */
 
     document
       .getElementById("goLogin")
@@ -602,14 +746,172 @@
 
         loginPopup.classList.add("active");
 
+        document
+          .getElementById("loginEmail")
+          .focus();
+
       };
 
 
-    /* SIGN UP */
+    /* =========================================
+       SHOW / HIDE PASSWORD
+       ========================================= */
 
-    document
-      .getElementById("signupButton")
-      .onclick = async function () {
+    function setupEyeButton(
+      inputId,
+      buttonId
+    ) {
+
+      const input =
+        document.getElementById(inputId);
+
+      const button =
+        document.getElementById(buttonId);
+
+
+      button.addEventListener(
+        "click",
+        function () {
+
+          if (input.type === "password") {
+
+            input.type = "text";
+
+            button.textContent = "🙈";
+
+            button.setAttribute(
+              "aria-label",
+              "Hide password"
+            );
+
+          }
+
+          else {
+
+            input.type = "password";
+
+            button.textContent = "👁";
+
+            button.setAttribute(
+              "aria-label",
+              "Show password"
+            );
+
+          }
+
+          input.focus();
+
+        }
+      );
+
+    }
+
+
+    setupEyeButton(
+      "loginPassword",
+      "loginEye"
+    );
+
+
+    setupEyeButton(
+      "signupPassword",
+      "signupEye"
+    );
+
+
+    setupEyeButton(
+      "signupConfirm",
+      "confirmEye"
+    );
+
+
+    /* =========================================
+       LOGIN FORM
+       ENTER KEY SUBMITS
+       ========================================= */
+
+    loginForm.addEventListener(
+      "submit",
+      async function (event) {
+
+        event.preventDefault();
+
+
+        const email =
+          document
+            .getElementById("loginEmail")
+            .value
+            .trim();
+
+
+        const password =
+          document
+            .getElementById("loginPassword")
+            .value;
+
+
+        loginMessage.textContent = "";
+
+
+        if (!email || !password) {
+
+          loginMessage.textContent =
+            "Please enter your email and password.";
+
+          return;
+
+        }
+
+
+        try {
+
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+
+          loginMessage.textContent =
+            "Login successful!";
+
+
+          setTimeout(
+            function () {
+
+              window.location.href =
+                MY_LIBRARY;
+
+            },
+            800
+          );
+
+        }
+
+
+        catch (error) {
+
+          console.error(error);
+
+          loginMessage.textContent =
+            getFriendlyError(error);
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       SIGNUP FORM
+       ENTER KEY SUBMITS
+       ========================================= */
+
+    signupForm.addEventListener(
+      "submit",
+      async function (event) {
+
+        event.preventDefault();
 
 
         const name =
@@ -656,9 +958,7 @@
         }
 
 
-        if (
-          password !== confirm
-        ) {
+        if (password !== confirm) {
 
           signupMessage.textContent =
             "Passwords do not match.";
@@ -668,9 +968,7 @@
         }
 
 
-        if (
-          password.length < 6
-        ) {
+        if (password.length < 6) {
 
           signupMessage.textContent =
             "Password must be at least 6 characters.";
@@ -681,7 +979,6 @@
 
 
         try {
-
 
           const result =
             await createUserWithEmailAndPassword(
@@ -713,8 +1010,8 @@
             800
           );
 
-
         }
+
 
         catch (error) {
 
@@ -725,90 +1022,17 @@
 
         }
 
-      };
+      }
+    );
 
 
-    /* LOGIN */
-
-    document
-      .getElementById("loginButton")
-      .onclick = async function () {
-
-
-        const email =
-          document
-            .getElementById("loginEmail")
-            .value
-            .trim();
-
-
-        const password =
-          document
-            .getElementById("loginPassword")
-            .value;
-
-
-        loginMessage.textContent = "";
-
-
-        if (
-          !email ||
-          !password
-        ) {
-
-          loginMessage.textContent =
-            "Please enter your email and password.";
-
-          return;
-
-        }
-
-
-        try {
-
-
-          await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-          );
-
-
-          loginMessage.textContent =
-            "Login successful!";
-
-
-          setTimeout(
-            function () {
-
-              window.location.href =
-                MY_LIBRARY;
-
-            },
-            800
-          );
-
-
-        }
-
-        catch (error) {
-
-          console.error(error);
-
-          loginMessage.textContent =
-            getFriendlyError(error);
-
-        }
-
-      };
-
-
-    /* FORGOT PASSWORD */
+    /* =========================================
+       FORGOT PASSWORD
+       ========================================= */
 
     document
       .getElementById("forgotPassword")
       .onclick = async function () {
-
 
         const email =
           document
@@ -832,7 +1056,6 @@
 
         try {
 
-
           await sendPasswordResetEmail(
             auth,
             email
@@ -842,8 +1065,8 @@
           loginMessage.textContent =
             "Password reset email sent.";
 
-
         }
+
 
         catch (error) {
 
@@ -857,13 +1080,13 @@
       };
 
 
-    /* FRIENDLY FIREBASE ERRORS */
+    /* =========================================
+       FRIENDLY FIREBASE ERRORS
+       ========================================= */
 
     function getFriendlyError(error) {
 
-
       switch (error.code) {
-
 
         case "auth/email-already-in-use":
 
@@ -906,4 +1129,5 @@
   </script>
 
 </body>
+
 </html>
