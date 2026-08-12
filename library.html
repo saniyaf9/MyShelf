@@ -1364,6 +1364,99 @@ h1 {
 
 </div>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+  import {
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+  import {
+    getAuth,
+    onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBl-5cfDXHTX0gHubxH9MZx2YwLDbRRKFs",
+    authDomain: "myshelf-e3440.firebaseapp.com",
+    projectId: "myshelf-e3440",
+    storageBucket: "myshelf-e3440.firebasestorage.app",
+    messagingSenderId: "820092826756",
+    appId: "1:820092826756:web:0cab1578f5dfc3c74ebed1",
+    measurementId: "G-LB8602RM3L"
+  };
+
+  const firebaseApp = initializeApp(firebaseConfig);
+
+  window.db = getFirestore(firebaseApp);
+  window.firebaseAuth = getAuth(firebaseApp);
+
+  window.firestoreDoc = doc;
+  window.firestoreGetDoc = getDoc;
+  window.firestoreSetDoc = setDoc;
+
+  onAuthStateChanged(window.firebaseAuth, async (user) => {
+
+    if (!user) {
+      console.log("No Firebase user is signed in.");
+      return;
+    }
+
+    console.log("Firebase user:", user.uid);
+
+    window.currentFirebaseUser = user;
+
+    const libraryRef = doc(
+      window.db,
+      "libraries",
+      user.uid
+    );
+
+    try {
+      const snapshot = await getDoc(libraryRef);
+
+      if (snapshot.exists()) {
+
+        window.libraryLoadedFromFirestore =
+          snapshot.data().library || {
+            series: [],
+            standalone: []
+          };
+
+        library = window.libraryLoadedFromFirestore;
+
+        renderAll();
+
+        console.log("Library loaded from Firestore.");
+
+      } else {
+
+        await setDoc(libraryRef, {
+          library: library,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        });
+
+        console.log("New library created in Firestore.");
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Firestore loading error:",
+        error
+      );
+
+      alert(
+        "Could not load your library from Firebase. Check your Firestore rules."
+      );
+
+    }
+
+  });
+</script>
 
 <script>
 
@@ -1480,15 +1573,50 @@ library.standalone.forEach(
    SAVE
 ===================================================== */
 
-function save() {
+async function save() {
 
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(library)
-  );
+  if (!window.currentFirebaseUser) {
+    console.warn(
+      "Cannot save: no Firebase user is signed in."
+    );
+    return;
+  }
+
+  try {
+
+    const libraryRef = window.firestoreDoc(
+      window.db,
+      "libraries",
+      window.currentFirebaseUser.uid
+    );
+
+    await window.firestoreSetDoc(
+      libraryRef,
+      {
+        library: library,
+        updatedAt: new Date().toISOString()
+      },
+      {
+        merge: true
+      }
+    );
+
+    console.log("Library saved to Firestore.");
+
+  } catch (error) {
+
+    console.error(
+      "Firestore save error:",
+      error
+    );
+
+    alert(
+      "Your library could not be saved to Firebase."
+    );
+
+  }
 
 }
-
 
 /* =====================================================
    SERIES MODAL
