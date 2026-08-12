@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +9,17 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<!-- GOOGLE PICKER -->
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+
+<!-- =====================================================
+     GOOGLE PICKER
+===================================================== -->
 
 <script src="https://apis.google.com/js/api.js"></script>
 
@@ -17,9 +28,9 @@
 
 <style>
 
-* {
-  box-sizing: border-box;
-}
+/* =====================================================
+   LOGIN PROTECTION
+===================================================== */
 
 html,
 body {
@@ -29,6 +40,24 @@ body {
   background: #080f13;
   color: #f9f9f9;
   font-family: Arial, sans-serif;
+}
+
+/*
+   Keep the library hidden until Firebase confirms
+   that the user is signed in.
+*/
+
+#libraryApp {
+  display: none;
+}
+
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -142,6 +171,7 @@ h1 {
 .secondary:hover {
   background: #223139;
   border-color: #ffffff;
+  color: white;
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(255,255,255,.08);
 }
@@ -475,7 +505,6 @@ h1 {
 
 /* =====================================================
    FAVORITE TILES
-   SAME STYLE AS STANDALONE BOOK TILES
 ===================================================== */
 
 .favorite-tile {
@@ -565,7 +594,6 @@ h1 {
 
 /* =====================================================
    BOOK LIST
-   USED INSIDE A SERIES
 ===================================================== */
 
 .book-list {
@@ -680,7 +708,7 @@ h1 {
 
 
 /* =====================================================
-   OPEN BOOK BUTTON
+   OPEN BOOK
 ===================================================== */
 
 .open-book {
@@ -844,7 +872,7 @@ h1 {
 
 
 /* =====================================================
-   DRIVE PICKER BUTTON
+   DRIVE PICKER
 ===================================================== */
 
 .drive-picker-button {
@@ -959,7 +987,7 @@ h1 {
 
 
 /* =====================================================
-   ADD BUTTON POP ANIMATION
+   ADD BUTTON POP
 ===================================================== */
 
 @keyframes addButtonPop {
@@ -993,6 +1021,13 @@ h1 {
 
 <body>
 
+
+<!-- =====================================================
+     EVERYTHING INSIDE HERE IS PROTECTED
+===================================================== -->
+
+<div id="libraryApp">
+
 <main>
 
 
@@ -1002,25 +1037,19 @@ h1 {
 
 <div id="homePage">
 
-
   <h1>
     My Library
   </h1>
 
-
   <p class="description">
-
     Every series gets a shelf.
     Every standalone gets its own place.
     Keep your favorites close and build
     your collection your way.
-
   </p>
 
 
-  <!-- =================================================
-       TABS
-  ================================================== -->
+  <!-- TABS -->
 
   <div class="tabs">
 
@@ -1033,7 +1062,6 @@ h1 {
 
     </button>
 
-
     <button
       id="booksTab"
       class="tab"
@@ -1042,7 +1070,6 @@ h1 {
       📖 BOOKS
 
     </button>
-
 
     <button
       id="favoritesTab"
@@ -1056,9 +1083,7 @@ h1 {
   </div>
 
 
-  <!-- =================================================
-       SERIES TAB
-  ================================================= -->
+  <!-- SERIES -->
 
   <div id="seriesContent">
 
@@ -1092,7 +1117,6 @@ h1 {
 
       </div>
 
-
       <div
         id="seriesGrid"
         class="series-grid">
@@ -1104,9 +1128,7 @@ h1 {
   </div>
 
 
-  <!-- =================================================
-       BOOKS TAB
-  ================================================== -->
+  <!-- BOOKS -->
 
   <div
     id="booksContent"
@@ -1142,7 +1164,6 @@ h1 {
 
       </div>
 
-
       <div
         id="standaloneList"
         class="book-tile-grid">
@@ -1154,9 +1175,7 @@ h1 {
   </div>
 
 
-  <!-- =================================================
-       FAVORITES TAB
-  ================================================== -->
+  <!-- FAVORITES -->
 
   <div
     id="favoritesContent"
@@ -1184,7 +1203,6 @@ h1 {
 
       </div>
 
-
       <div
         id="favoritesList"
         class="favorite-tile-grid">
@@ -1195,7 +1213,6 @@ h1 {
 
   </div>
 
-
 </div>
 
 
@@ -1205,7 +1222,6 @@ h1 {
 
 <div id="seriesPage">
 
-
   <button
     class="back"
     onclick="goHome()">
@@ -1213,7 +1229,6 @@ h1 {
     ← Back to My Library
 
   </button>
-
 
   <div class="series-page-header">
 
@@ -1235,13 +1250,11 @@ h1 {
 
   </div>
 
-
   <div
     id="seriesBookList"
     class="book-list">
 
   </div>
-
 
 </div>
 
@@ -1368,8 +1381,122 @@ h1 {
 
 </div>
 
+</div>
+
 
 <script>
+
+/* =====================================================
+   FIREBASE CONFIGURATION
+===================================================== */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyBl-5cfDXHTX0gHubxH9MZx2YwLDbRRKFs",
+
+  authDomain:
+    "myshelf-e3440.firebaseapp.com",
+
+  projectId:
+    "myshelf-e3440",
+
+  storageBucket:
+    "myshelf-e3440.firebasestorage.app",
+
+  messagingSenderId:
+    "820092826756",
+
+  appId:
+    "1:820092826756:web:0cab1578f5dfc3c74ebed1",
+
+  measurementId:
+    "G-LB8602RM3L"
+
+};
+
+
+/* =====================================================
+   INITIALIZE FIREBASE
+===================================================== */
+
+firebase.initializeApp(
+  firebaseConfig
+);
+
+const auth =
+  firebase.auth();
+
+
+/* =====================================================
+   LOGIN PAGE
+===================================================== */
+
+const LOGIN_PAGE =
+  "https://saniyaf9.github.io/MyShelf/login.html";
+
+
+/* =====================================================
+   FIREBASE LOGIN PROTECTION
+===================================================== */
+
+/*
+   Firebase checks the user's actual authentication
+   state.
+
+   If the user IS signed in:
+      → show MyShelf
+
+   If the user is NOT signed in:
+      → send them to login.html
+*/
+
+auth.onAuthStateChanged(
+  function(user) {
+
+    if (user) {
+
+      /*
+         USER IS SIGNED IN
+      */
+
+      document
+        .getElementById("libraryApp")
+        .style.display = "block";
+
+
+      /*
+         Now that authentication has been confirmed,
+         load the library.
+      */
+
+      renderAll();
+
+    }
+
+    else {
+
+      /*
+         USER IS NOT SIGNED IN
+      */
+
+      document
+        .getElementById("libraryApp")
+        .style.display = "none";
+
+
+      /*
+         Send them to your login page.
+      */
+
+      window.location.replace(
+        LOGIN_PAGE
+      );
+
+    }
+
+  }
+);
 
 
 /* =====================================================
@@ -1443,7 +1570,6 @@ library.series.forEach(
       series.backgroundUrl = "";
 
     }
-
 
     series.books.forEach(
       function(book) {
@@ -1557,7 +1683,6 @@ function createSeries() {
 
   }
 
-
   library.series.push({
 
     id:
@@ -1573,7 +1698,6 @@ function createSeries() {
       ""
 
   });
-
 
   save();
 
@@ -1691,7 +1815,6 @@ function startDriveAuthorization(
 
   }
 
-
   if (
     typeof google ===
     "undefined"
@@ -1704,7 +1827,6 @@ function startDriveAuthorization(
     return;
 
   }
-
 
   tokenClient =
     google.accounts.oauth2.initTokenClient({
@@ -1734,17 +1856,14 @@ function startDriveAuthorization(
 
           }
 
-
           accessToken =
             response.access_token;
-
 
           callback();
 
         }
 
     });
-
 
   tokenClient.requestAccessToken({
 
@@ -1776,7 +1895,6 @@ function openDrivePicker(
 
   }
 
-
   if (
     !accessToken
   ) {
@@ -1795,22 +1913,18 @@ function openDrivePicker(
 
   }
 
-
   const view =
     new google.picker.DocsView(
       google.picker.ViewId.DOCS
     );
 
-
   view.setIncludeFolders(
     false
   );
 
-
   view.setMimeTypes(
     "application/pdf"
   );
-
 
   const picker =
     new google.picker.PickerBuilder()
@@ -1853,7 +1967,6 @@ function openDrivePicker(
 
       .build();
 
-
   picker.setVisible(
     true
   );
@@ -1882,12 +1995,10 @@ function pickStandaloneFromDrive() {
           "Selected: " +
           file.name;
 
-
       const titleInput =
         document.getElementById(
           "standaloneTitle"
         );
-
 
       if (
         !titleInput.value.trim()
@@ -1922,7 +2033,6 @@ function addStandaloneBook() {
       .value
       .trim();
 
-
   if (!title) {
 
     alert(
@@ -1932,7 +2042,6 @@ function addStandaloneBook() {
     return;
 
   }
-
 
   library.standalone.push({
 
@@ -1963,7 +2072,6 @@ function addStandaloneBook() {
       ""
 
   });
-
 
   save();
 
@@ -1997,7 +2105,6 @@ function addBookToCurrentSeries() {
 
   }
 
-
   openDrivePicker(
 
     function(file) {
@@ -2014,20 +2121,17 @@ function addBookToCurrentSeries() {
           }
         );
 
-
       if (!series) {
 
         return;
 
       }
 
-
       const title =
         file.name.replace(
           /\.pdf$/i,
           ""
         );
-
 
       series.books.push({
 
@@ -2052,7 +2156,6 @@ function addBookToCurrentSeries() {
           ""
 
       });
-
 
       save();
 
@@ -2086,29 +2189,24 @@ function openSeries(
       }
     );
 
-
   if (!series) {
 
     return;
 
   }
 
-
   currentSeriesId =
     id;
-
 
   document
     .getElementById("homePage")
     .style.display =
       "none";
 
-
   document
     .getElementById("seriesPage")
     .style.display =
       "block";
-
 
   renderSeriesPage();
 
@@ -2133,19 +2231,16 @@ function renderSeriesPage() {
       }
     );
 
-
   if (!series) {
 
     return;
 
   }
 
-
   document
     .getElementById("seriesPageName")
     .textContent =
       series.name;
-
 
   document
     .getElementById("seriesPageCount")
@@ -2157,16 +2252,13 @@ function renderSeriesPage() {
           : " books"
       );
 
-
   const list =
     document.getElementById(
       "seriesBookList"
     );
 
-
   list.innerHTML =
     "";
-
 
   if (
     series.books.length === 0
@@ -2204,7 +2296,6 @@ function renderSeriesPage() {
 
   }
 
-
   [
     ...series.books
   ].reverse().forEach(
@@ -2232,18 +2323,15 @@ function goHome() {
   currentSeriesId =
     null;
 
-
   document
     .getElementById("seriesPage")
     .style.display =
       "none";
 
-
   document
     .getElementById("homePage")
     .style.display =
       "block";
-
 
   showSeries();
 
@@ -2276,10 +2364,8 @@ function renderSeries() {
       "seriesGrid"
     );
 
-
   grid.innerHTML =
     "";
-
 
   document
     .getElementById(
@@ -2288,7 +2374,6 @@ function renderSeries() {
     .textContent =
       library.series.length +
       " series";
-
 
   if (
     library.series.length === 0
@@ -2320,7 +2405,6 @@ function renderSeries() {
 
   }
 
-
   library.series
     .slice()
     .reverse()
@@ -2332,10 +2416,8 @@ function renderSeries() {
             "div"
           );
 
-
         card.className =
           "series-card";
-
 
         card.onclick =
           function(event) {
@@ -2356,7 +2438,6 @@ function renderSeries() {
 
           };
 
-
         if (
           series.backgroundUrl
         ) {
@@ -2369,7 +2450,6 @@ function renderSeries() {
           );
 
         }
-
 
         card.innerHTML = `
 
@@ -2393,7 +2473,6 @@ function renderSeries() {
 
           </div>
 
-
           <div class="menu-wrapper">
 
             <button
@@ -2406,7 +2485,6 @@ function renderSeries() {
               ⋯
 
             </button>
-
 
             <div
               id="series-menu-${series.id}"
@@ -2422,7 +2500,6 @@ function renderSeries() {
 
               </button>
 
-
               <button
                 class="menu-item"
                 onclick="removeSeriesBackground(
@@ -2433,7 +2510,6 @@ function renderSeries() {
 
               </button>
 
-
               <button
                 class="menu-item"
                 onclick="editSeries(
@@ -2443,7 +2519,6 @@ function renderSeries() {
                 Edit name
 
               </button>
-
 
               <button
                 class="menu-item delete"
@@ -2460,7 +2535,6 @@ function renderSeries() {
           </div>
 
         `;
-
 
         grid.appendChild(
           card
@@ -2491,20 +2565,17 @@ function changeSeriesBackground(
       }
     );
 
-
   if (!series) {
 
     return;
 
   }
 
-
   const newUrl =
     prompt(
       "Paste the image URL for this series background:",
       series.backgroundUrl || ""
     );
-
 
   if (
     newUrl === null
@@ -2514,10 +2585,8 @@ function changeSeriesBackground(
 
   }
 
-
   series.backgroundUrl =
     newUrl.trim();
-
 
   save();
 
@@ -2545,17 +2614,14 @@ function removeSeriesBackground(
       }
     );
 
-
   if (!series) {
 
     return;
 
   }
 
-
   series.backgroundUrl =
     "";
-
 
   save();
 
@@ -2575,10 +2641,8 @@ function renderStandalone() {
       "standaloneList"
     );
 
-
   list.innerHTML =
     "";
-
 
   document
     .getElementById(
@@ -2591,7 +2655,6 @@ function renderStandalone() {
           ? " book"
           : " books"
       );
-
 
   if (
     library.standalone.length === 0
@@ -2624,7 +2687,6 @@ function renderStandalone() {
 
   }
 
-
   [
     ...library.standalone
   ].reverse().forEach(
@@ -2635,28 +2697,14 @@ function renderStandalone() {
           "div"
         );
 
-
       card.className =
         "book-tile";
-
-
-      /*
-         CHANGE #7:
-         WHOLE STANDALONE TILE OPENS BOOK
-      */
 
       card.style.cursor =
         "pointer";
 
-
       card.onclick =
         function(event) {
-
-          /*
-             Do NOT open the book when
-             clicking the heart, menu,
-             menu item, or Open button.
-          */
 
           if (
             event.target.closest(
@@ -2674,13 +2722,11 @@ function renderStandalone() {
 
           }
 
-
           openBook(
             book.id
           );
 
         };
-
 
       if (
         book.backgroundUrl
@@ -2691,10 +2737,8 @@ function renderStandalone() {
 
       }
 
-
       const safeTitle =
         escapeHTML(book.title);
-
 
       const driveButton =
         book.driveUrl
@@ -2712,7 +2756,6 @@ function renderStandalone() {
 
             `
           : "";
-
 
       card.innerHTML = `
 
@@ -2738,7 +2781,6 @@ function renderStandalone() {
 
           </button>
 
-
           <div class="book-menu-wrapper">
 
             <button
@@ -2751,7 +2793,6 @@ function renderStandalone() {
               ⋯
 
             </button>
-
 
             <div
               id="standalone-menu-${book.id}"
@@ -2768,7 +2809,6 @@ function renderStandalone() {
 
               </button>
 
-
               <button
                 class="menu-item"
                 onclick="changeStandaloneBackground(
@@ -2779,7 +2819,6 @@ function renderStandalone() {
 
               </button>
 
-
               <button
                 class="menu-item"
                 onclick="removeStandaloneBackground(
@@ -2789,7 +2828,6 @@ function renderStandalone() {
                 Remove Background
 
               </button>
-
 
               <button
                 class="menu-item delete"
@@ -2808,7 +2846,6 @@ function renderStandalone() {
 
         </div>
 
-
         <div class="book-tile-content">
 
           <div class="book-tile-title">
@@ -2824,7 +2861,6 @@ function renderStandalone() {
         </div>
 
       `;
-
 
       list.appendChild(
         card
@@ -2855,20 +2891,17 @@ function changeStandaloneBackground(
       }
     );
 
-
   if (!book) {
 
     return;
 
   }
 
-
   const newUrl =
     prompt(
       "Enter the image URL for this book background:",
       book.backgroundUrl || ""
     );
-
 
   if (
     newUrl === null
@@ -2878,10 +2911,8 @@ function changeStandaloneBackground(
 
   }
 
-
   book.backgroundUrl =
     newUrl.trim();
-
 
   save();
 
@@ -2905,17 +2936,14 @@ function removeStandaloneBackground(
       }
     );
 
-
   if (!book) {
 
     return;
 
   }
 
-
   book.backgroundUrl =
     "";
-
 
   save();
 
@@ -2938,16 +2966,13 @@ function createBookElement(
       "div"
     );
 
-
   row.className =
     "book";
-
 
   const seriesName =
     series
       ? series.name
       : "Standalone book";
-
 
   const driveButton =
     book.driveUrl
@@ -2966,13 +2991,11 @@ function createBookElement(
       `
       : "";
 
-
   row.innerHTML = `
 
     <div class="book-cover">
       📖
     </div>
-
 
     <div class="book-info">
 
@@ -2985,7 +3008,6 @@ function createBookElement(
       </div>
 
     </div>
-
 
     <button
       class="favorite-button ${
@@ -3007,9 +3029,7 @@ function createBookElement(
 
     </button>
 
-
     ${driveButton}
-
 
     <div class="book-menu-wrapper">
 
@@ -3023,7 +3043,6 @@ function createBookElement(
         ⋯
 
       </button>
-
 
       <div
         id="book-menu-${book.id}"
@@ -3040,7 +3059,6 @@ function createBookElement(
 
         </button>
 
-
         <button
           class="menu-item"
           onclick="changeBookBackground(
@@ -3052,7 +3070,6 @@ function createBookElement(
 
         </button>
 
-
         <button
           class="menu-item"
           onclick="removeBookBackground(
@@ -3063,7 +3080,6 @@ function createBookElement(
           Remove Background
 
         </button>
-
 
         <button
           class="menu-item delete"
@@ -3082,14 +3098,13 @@ function createBookElement(
 
   `;
 
-
   return row;
 
 }
 
 
 /* =====================================================
-   BOOK BACKGROUND
+   FIND BOOK
 ===================================================== */
 
 function findBook(
@@ -3102,37 +3117,46 @@ function findBook(
     const series =
       library.series.find(
         function(s) {
+
           return s.id === seriesId;
+
         }
       );
 
-
     if (!series) {
-      return null;
-    }
 
+      return null;
+
+    }
 
     return (
       series.books.find(
         function(b) {
+
           return b.id === bookId;
+
         }
       ) || null
     );
 
   }
 
-
   return (
     library.standalone.find(
       function(b) {
+
         return b.id === bookId;
+
       }
     ) || null
   );
 
 }
 
+
+/* =====================================================
+   BOOK BACKGROUND
+===================================================== */
 
 function changeBookBackground(
   seriesId,
@@ -3145,18 +3169,17 @@ function changeBookBackground(
       bookId
     );
 
-
   if (!book) {
-    return;
-  }
 
+    return;
+
+  }
 
   const newUrl =
     prompt(
       "Enter the image URL for this book background:",
       book.backgroundUrl || ""
     );
-
 
   if (
     newUrl === null
@@ -3166,15 +3189,12 @@ function changeBookBackground(
 
   }
 
-
   book.backgroundUrl =
     newUrl.trim();
-
 
   save();
 
   renderAll();
-
 
   if (currentSeriesId) {
 
@@ -3196,20 +3216,18 @@ function removeBookBackground(
       bookId
     );
 
-
   if (!book) {
-    return;
-  }
 
+    return;
+
+  }
 
   book.backgroundUrl =
     "";
 
-
   save();
 
   renderAll();
-
 
   if (currentSeriesId) {
 
@@ -3235,24 +3253,20 @@ function toggleFavorite(
       bookId
     );
 
-
   if (!book) {
 
     return;
 
   }
 
-
   book.favorite =
     !Boolean(
       book.favorite
     );
 
-
   save();
 
   renderAll();
-
 
   if (
     currentSeriesId
@@ -3266,7 +3280,7 @@ function toggleFavorite(
 
 
 /* =====================================================
-   FAVORITES TABS
+   TABS
 ===================================================== */
 
 function showSeries() {
@@ -3276,30 +3290,25 @@ function showSeries() {
     .style.display =
       "block";
 
-
   document
     .getElementById("booksContent")
     .style.display =
       "none";
-
 
   document
     .getElementById("favoritesContent")
     .style.display =
       "none";
 
-
   document
     .getElementById("seriesTab")
     .classList
     .add("active");
 
-
   document
     .getElementById("booksTab")
     .classList
     .remove("active");
-
 
   document
     .getElementById("favoritesTab")
@@ -3316,30 +3325,25 @@ function showBooks() {
     .style.display =
       "none";
 
-
   document
     .getElementById("booksContent")
     .style.display =
       "block";
-
 
   document
     .getElementById("favoritesContent")
     .style.display =
       "none";
 
-
   document
     .getElementById("seriesTab")
     .classList
     .remove("active");
 
-
   document
     .getElementById("booksTab")
     .classList
     .add("active");
-
 
   document
     .getElementById("favoritesTab")
@@ -3356,36 +3360,30 @@ function showFavorites() {
     .style.display =
       "none";
 
-
   document
     .getElementById("booksContent")
     .style.display =
       "none";
-
 
   document
     .getElementById("favoritesContent")
     .style.display =
       "block";
 
-
   document
     .getElementById("seriesTab")
     .classList
     .remove("active");
-
 
   document
     .getElementById("booksTab")
     .classList
     .remove("active");
 
-
   document
     .getElementById("favoritesTab")
     .classList
     .add("active");
-
 
   renderFavorites();
 
@@ -3410,14 +3408,11 @@ function renderFavorites() {
       "favoritesList"
     );
 
-
   list.innerHTML =
     "";
 
-
   let count =
     0;
-
 
   library.series.forEach(
     function(series) {
@@ -3433,9 +3428,7 @@ function renderFavorites() {
 
           }
 
-
           count++;
-
 
           list.appendChild(
             createFavoriteTile(
@@ -3450,7 +3443,6 @@ function renderFavorites() {
     }
   );
 
-
   library.standalone.forEach(
     function(book) {
 
@@ -3462,9 +3454,7 @@ function renderFavorites() {
 
       }
 
-
       count++;
-
 
       list.appendChild(
         createFavoriteTile(
@@ -3475,7 +3465,6 @@ function renderFavorites() {
 
     }
   );
-
 
   document
     .getElementById(
@@ -3488,7 +3477,6 @@ function renderFavorites() {
           ? " favorite"
           : " favorites"
       );
-
 
   if (
     count === 0
@@ -3524,7 +3512,6 @@ function renderFavorites() {
 
 /* =====================================================
    CREATE FAVORITE TILE
-   SAME AS STANDALONE TILE
 ===================================================== */
 
 function createFavoriteTile(
@@ -3537,31 +3524,14 @@ function createFavoriteTile(
       "div"
     );
 
-
   card.className =
     "favorite-tile";
-
-
-  /*
-     CHANGE #7:
-     CLICKING THE WHOLE FAVORITE TILE
-     OPENS THE BOOK
-  */
 
   card.style.cursor =
     "pointer";
 
-
   card.onclick =
     function(event) {
-
-      /*
-         Ignore clicks on:
-         ♥
-         ⋯
-         menu items
-         Open button
-      */
 
       if (
         event.target.closest(
@@ -3579,19 +3549,11 @@ function createFavoriteTile(
 
       }
 
-
       openBook(
         book.id
       );
 
     };
-
-
-  /*
-     CHANGE #1:
-     FAVORITES USE THE BOOK'S
-     EXISTING BACKGROUND IMAGE
-  */
 
   if (
     book.backgroundUrl
@@ -3602,16 +3564,10 @@ function createFavoriteTile(
 
   }
 
-
   const seriesName =
     series
       ? series.name
       : "Standalone book";
-
-
-  /*
-     SAME OPEN BUTTON
-  */
 
   const driveButton =
     book.driveUrl
@@ -3630,12 +3586,9 @@ function createFavoriteTile(
         `
       : "";
 
-
   card.innerHTML = `
 
     <div class="favorite-tile-actions">
-
-      <!-- SAME HEART BUTTON -->
 
       <button
         class="favorite-button active"
@@ -3649,9 +3602,6 @@ function createFavoriteTile(
 
       </button>
 
-
-      <!-- SAME THREE DOT MENU -->
-
       <div class="book-menu-wrapper">
 
         <button
@@ -3664,7 +3614,6 @@ function createFavoriteTile(
           ⋯
 
         </button>
-
 
         <div
           id="favorite-menu-${book.id}"
@@ -3681,7 +3630,6 @@ function createFavoriteTile(
 
           </button>
 
-
           <button
             class="menu-item"
             onclick="changeBookBackground(
@@ -3693,7 +3641,6 @@ function createFavoriteTile(
 
           </button>
 
-
           <button
             class="menu-item"
             onclick="removeBookBackground(
@@ -3704,7 +3651,6 @@ function createFavoriteTile(
             Remove Background
 
           </button>
-
 
           <button
             class="menu-item delete"
@@ -3723,7 +3669,6 @@ function createFavoriteTile(
 
     </div>
 
-
     <div class="favorite-tile-content">
 
       <div class="favorite-tile-title">
@@ -3732,20 +3677,17 @@ function createFavoriteTile(
 
       </div>
 
-
       <div class="favorite-tile-meta">
 
         ${escapeHTML(seriesName)}
 
       </div>
 
-
       ${driveButton}
 
     </div>
 
   `;
-
 
   return card;
 
@@ -3771,20 +3713,17 @@ function editSeries(
       }
     );
 
-
   if (!series) {
 
     return;
 
   }
 
-
   const newName =
     prompt(
       "Edit series name:",
       series.name
     );
-
 
   if (
     newName !== null &&
@@ -3794,11 +3733,9 @@ function editSeries(
     series.name =
       newName.trim();
 
-
     save();
 
     renderAll();
-
 
     if (
       currentSeriesId === id
@@ -3832,21 +3769,16 @@ function deleteSeries(
       }
     );
 
-
   if (!series) {
 
     return;
 
   }
 
-
   const message =
     series.books.length > 0
-
       ? "Delete this series and all books inside it?"
-
       : "Delete this series?";
-
 
   if (
     !confirm(message)
@@ -3855,7 +3787,6 @@ function deleteSeries(
     return;
 
   }
-
 
   library.series =
     library.series.filter(
@@ -3868,11 +3799,9 @@ function deleteSeries(
       }
     );
 
-
   save();
 
   renderAll();
-
 
   if (
     currentSeriesId === id
@@ -3900,20 +3829,17 @@ function editBook(
       bookId
     );
 
-
   if (!book) {
 
     return;
 
   }
 
-
   const newTitle =
     prompt(
       "Edit book title:",
       book.title
     );
-
 
   if (
     newTitle !== null &&
@@ -3923,11 +3849,9 @@ function editBook(
     book.title =
       newTitle.trim();
 
-
     save();
 
     renderAll();
-
 
     if (
       currentSeriesId
@@ -3961,7 +3885,6 @@ function deleteBook(
 
   }
 
-
   if (seriesId) {
 
     const series =
@@ -3975,7 +3898,6 @@ function deleteBook(
 
         }
       );
-
 
     if (series) {
 
@@ -4011,11 +3933,9 @@ function deleteBook(
 
   }
 
-
   save();
 
   renderAll();
-
 
   if (
     currentSeriesId
@@ -4039,7 +3959,6 @@ function openBook(
   let book =
     null;
 
-
   library.standalone.forEach(
     function(item) {
 
@@ -4054,7 +3973,6 @@ function openBook(
 
     }
   );
-
 
   library.series.forEach(
     function(series) {
@@ -4076,7 +3994,6 @@ function openBook(
 
     }
   );
-
 
   if (
     book &&
@@ -4104,7 +4021,6 @@ function toggleMenu(
 
   event.stopPropagation();
 
-
   document
     .querySelectorAll(
       ".menu.show"
@@ -4120,12 +4036,10 @@ function toggleMenu(
             "show"
           );
 
-
           const oldCard =
             menu.closest(
               ".series-card, .book-tile, .favorite-tile"
             );
-
 
           if (oldCard) {
 
@@ -4140,12 +4054,10 @@ function toggleMenu(
       }
     );
 
-
   const menu =
     document.getElementById(
       menuId
     );
-
 
   if (!menu) {
 
@@ -4153,25 +4065,21 @@ function toggleMenu(
 
   }
 
-
   const card =
     menu.closest(
       ".series-card, .book-tile, .favorite-tile"
     );
-
 
   const isOpen =
     menu.classList.contains(
       "show"
     );
 
-
   if (isOpen) {
 
     menu.classList.remove(
       "show"
     );
-
 
     if (card) {
 
@@ -4189,7 +4097,6 @@ function toggleMenu(
       "show"
     );
 
-
     if (card) {
 
       card.classList.add(
@@ -4204,7 +4111,7 @@ function toggleMenu(
 
 
 /* =====================================================
-   CLOSE MENUS WHEN CLICKING OUTSIDE
+   CLOSE MENUS
 ===================================================== */
 
 document.addEventListener(
@@ -4221,7 +4128,6 @@ document.addEventListener(
 
     }
 
-
     document
       .querySelectorAll(
         ".menu.show"
@@ -4233,12 +4139,10 @@ document.addEventListener(
             "show"
           );
 
-
           const card =
             menu.closest(
               ".series-card, .book-tile, .favorite-tile"
             );
-
 
           if (card) {
 
@@ -4256,7 +4160,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   ESCAPE CLOSES MENUS
+   ESCAPE
 ===================================================== */
 
 document.addEventListener(
@@ -4279,12 +4183,10 @@ document.addEventListener(
               "show"
             );
 
-
             const card =
               menu.closest(
                 ".series-card, .book-tile, .favorite-tile"
               );
-
 
             if (card) {
 
@@ -4467,22 +4369,20 @@ function popAddButton(
 ) {
 
   if (!button) {
-    return;
-  }
 
+    return;
+
+  }
 
   button.classList.remove(
     "add-button-pop"
   );
 
-
   void button.offsetWidth;
-
 
   button.classList.add(
     "add-button-pop"
   );
-
 
   setTimeout(
     function() {
@@ -4497,14 +4397,8 @@ function popAddButton(
 
 }
 
-
-/* =====================================================
-   INITIAL LOAD
-===================================================== */
-
-renderAll();
-
 </script>
 
 </body>
 </html>
+
