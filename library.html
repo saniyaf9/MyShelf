@@ -6,20 +6,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MyShelf — My Library</title>
+<title>MyShelf</title>
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
+html,
 body {
   margin: 0;
+  padding: 0;
+  min-height: 100%;
   background: #080f13;
   color: #f9f9f9;
   font-family: Arial, sans-serif;
@@ -28,76 +31,265 @@ body {
 button,
 input,
 select {
-  font-family: Arial, sans-serif;
+  font: inherit;
 }
 
-header {
-  height: 78px;
-  padding: 0 6%;
+button {
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+#loginPage {
+  min-height: 100vh;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
-  border-bottom: 1px solid #263238;
+  background: #080f13;
+}
 
-  position: sticky;
-  top: 0;
+.login-box {
+  width: 90%;
+  max-width: 390px;
 
-  z-index: 50;
+  padding: 42px;
 
-  background: rgba(8,15,19,.96);
+  background: #10191e;
 
-  backdrop-filter: blur(10px);
+  border: 1px solid #2d3b41;
+  border-radius: 16px;
+
+  text-align: center;
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.55);
+}
+
+.login-logo {
+  margin-bottom: 8px;
+
+  font-family: Georgia, serif;
+  font-size: 38px;
+}
+
+.login-subtitle {
+  margin-bottom: 32px;
+
+  color: #89959a;
+
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.google-login {
+  width: 100%;
+
+  padding: 14px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: white;
+  color: #080f13;
+
+  font-weight: bold;
+}
+
+.google-login:hover {
+  opacity: .88;
+}
+
+.login-status {
+  min-height: 20px;
+
+  margin-top: 16px;
+
+  color: #89959a;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   LIBRARY
+========================================================= */
+
+#libraryPage {
+  display: none;
+
+  min-height: 100vh;
+}
+
+.library {
+  display: flex;
+
+  min-height: 100vh;
+
+  background: #080f13;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+  width: 270px;
+
+  min-height: 100vh;
+
+  padding: 30px 20px;
+
+  border-right: 1px solid #263238;
+
+  flex-shrink: 0;
 }
 
 .logo {
+  margin-left: 12px;
+
   font-family: Georgia, serif;
-  font-size: 28px;
+
+  font-size: 34px;
+
+  letter-spacing: -1px;
 }
 
-.add-books {
-  background: #f9f9f9;
-  color: #080f13;
+.tagline {
+  margin: 7px 12px 35px;
 
-  border: none;
-
-  padding: 12px 20px;
-
-  border-radius: 25px;
-
-  font-size: 12px;
-
-  font-weight: 600;
-
-  text-decoration: none;
-}
-
-.add-books:hover {
-  opacity: .8;
-}
-
-main {
-  width: min(1100px, 88%);
-  margin: auto;
-  padding: 70px 0 100px;
-}
-
-
-/* =====================================================
-   INTRO
-===================================================== */
-
-.eyebrow {
-  color: #7f8c91;
+  color: #89959a;
 
   font-size: 10px;
 
-  letter-spacing: 4px;
+  letter-spacing: 3px;
+}
+
+
+/* =========================================================
+   SIDEBAR NAV
+========================================================= */
+
+.nav-item {
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 0 13px;
+
+  margin-bottom: 6px;
+
+  border-radius: 12px;
+
+  color: #f9f9f9;
+
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background: #101a1f;
+}
+
+.nav-item.active {
+  background: #162228;
+}
+
+.nav-icon {
+  width: 25px;
+
+  text-align: center;
+
+  font-size: 17px;
+}
+
+.nav-name {
+  flex: 1;
+
+  font-size: 14px;
+}
+
+.nav-count {
+  color: #879399;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   SIDEBAR DIVIDER
+========================================================= */
+
+.sidebar-divider {
+  height: 1px;
+
+  margin: 28px 12px;
+
+  background: #263238;
+}
+
+
+/* =========================================================
+   SIDEBAR SECTION TITLE
+========================================================= */
+
+.sidebar-section-title {
+  margin: 0 13px 12px;
+
+  color: #89959a;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
 
   text-transform: uppercase;
+}
 
-  margin-bottom: 12px;
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main {
+  flex: 1;
+
+  min-width: 0;
+
+  padding: 40px;
+}
+
+
+/* =========================================================
+   TOP
+========================================================= */
+
+.top {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 25px;
+}
+
+.eyebrow {
+  margin-bottom: 8px;
+
+  color: #89959a;
+
+  font-size: 10px;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
 }
 
 h1 {
@@ -105,201 +297,142 @@ h1 {
 
   font-family: Georgia, serif;
 
-  font-size: clamp(45px, 7vw, 75px);
+  font-size: 48px;
 
   font-weight: 400;
 
-  letter-spacing: -3px;
+  letter-spacing: -1px;
 }
 
-.description {
-  max-width: 560px;
-
-  margin-top: 18px;
-
-  color: #7f8c91;
-
-  font-size: 14px;
-
-  line-height: 1.7;
-}
-
-
-/* =====================================================
-   TOP BUTTONS
-===================================================== */
-
-.actions {
+.top-actions {
   display: flex;
 
+  align-items: center;
+
   gap: 10px;
-
-  flex-wrap: wrap;
-
-  margin-top: 30px;
 }
 
-.primary {
+.add-button {
+  height: 42px;
+
+  padding: 0 19px;
+
   border: none;
+
+  border-radius: 22px;
 
   background: #f9f9f9;
 
   color: #080f13;
 
-  padding: 12px 20px;
-
-  border-radius: 25px;
-
-  font-weight: 600;
-
-  cursor: pointer;
+  font-weight: bold;
 }
 
-.primary:hover {
-  opacity: .8;
-}
-
-.secondary {
-  border: 1px solid #35434a;
-
-  background: transparent;
-
-  color: white;
-
-  padding: 11px 19px;
-
-  border-radius: 25px;
-
-  cursor: pointer;
+.add-button:hover {
+  opacity: .88;
 }
 
 
-/* =====================================================
-   TABS
-===================================================== */
+/* =========================================================
+   SERIES SECTION
+========================================================= */
 
-.tabs {
-  display: flex;
-
-  gap: 5px;
-
-  margin-top: 65px;
-
-  border-bottom: 1px solid #263238;
-}
-
-.tab {
-  border: none;
-
-  background: transparent;
-
-  color: #68767b;
-
-  padding: 14px 18px;
-
-  border-bottom: 2px solid transparent;
-
-  cursor: pointer;
-
-  font-size: 12px;
-}
-
-.tab:hover {
-  color: white;
-}
-
-.tab.active {
-  color: white;
-
-  border-bottom-color: white;
-}
-
-
-/* =====================================================
-   SECTION
-===================================================== */
-
-.section {
-  margin-top: 40px;
-}
-
-.section-header {
+.section-heading {
   display: flex;
 
   align-items: center;
 
   justify-content: space-between;
 
-  margin-bottom: 20px;
+  margin-top: 42px;
+
+  margin-bottom: 18px;
 }
 
-.section-title {
+.section-heading h2 {
+  margin: 0;
+
   font-family: Georgia, serif;
 
-  font-size: 29px;
+  font-size: 26px;
+
+  font-weight: 400;
 }
 
 .section-count {
-  color: #68767b;
+  color: #89959a;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   SERIES TILES
+========================================================= */
+
+.series-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 9px;
+
+  max-width: 850px;
+}
+
+.series-tile {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 54px;
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 0 15px 0 18px;
+
+  background: #10191e;
+
+  border: 1px solid #29383e;
+
+  border-radius: 8px;
+
+  transition: .15s;
+}
+
+.series-tile:hover {
+  background: #162228;
+
+  border-color: #45545b;
+}
+
+.series-name {
+  flex: 1;
+
+  font-family: Georgia, serif;
+
+  font-size: 17px;
+}
+
+.series-book-count {
+  margin-right: 14px;
+
+  color: #7f8b90;
 
   font-size: 11px;
 }
 
 
-/* =====================================================
-   SERIES GRID
-===================================================== */
+/* =========================================================
+   SERIES THREE DOT
+========================================================= */
 
-.series-grid {
-  display: grid;
+.series-more {
+  width: 36px;
 
-  grid-template-columns:
-    repeat(auto-fill, minmax(260px, 1fr));
-
-  gap: 18px;
-}
-
-
-/* =====================================================
-   SERIES CARD
-===================================================== */
-
-.series-card {
-  border: 1px solid #26343a;
-
-  background: #0d171c;
-
-  border-radius: 18px;
-
-  overflow: hidden;
-
-  transition: .2s;
-}
-
-.series-card:hover {
-  border-color: #536168;
-
-  transform: translateY(-2px);
-}
-
-.series-top {
-  padding: 25px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #17242a,
-      #0d171c
-    );
-}
-
-.series-icon {
-  width: 50px;
-  height: 50px;
-
-  border-radius: 13px;
-
-  background: #091115;
+  height: 36px;
 
   display: flex;
 
@@ -307,106 +440,133 @@ h1 {
 
   justify-content: center;
 
-  font-size: 24px;
-
-  margin-bottom: 20px;
-}
-
-.series-name {
-  font-family: Georgia, serif;
-
-  font-size: 22px;
-}
-
-.series-count {
-  margin-top: 7px;
-
-  color: #718087;
-
-  font-size: 11px;
-}
-
-.series-bottom {
-  padding: 16px 20px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-}
-
-.open-series {
   border: none;
-
-  background: transparent;
-
-  color: white;
-
-  padding: 0;
-
-  cursor: pointer;
-}
-
-.icon-button {
-  width: 31px;
-  height: 31px;
-
-  border: 1px solid #334148;
-
-  background: transparent;
-
-  color: #9aa5a9;
 
   border-radius: 8px;
 
-  cursor: pointer;
+  background: transparent;
+
+  color: #aeb8bc;
+
+  font-size: 23px;
 }
 
-.icon-button:hover {
-  background: #17242a;
+.series-more:hover {
+  background: #26343a;
 
   color: white;
 }
 
 
-/* =====================================================
+/* =========================================================
+   THREE DOT MENU
+========================================================= */
+
+.more-menu {
+  position: absolute;
+
+  right: 12px;
+
+  top: 48px;
+
+  width: 170px;
+
+  display: none;
+
+  padding: 6px;
+
+  background: #182328;
+
+  border: 1px solid #3b4b52;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.6);
+
+  z-index: 100;
+}
+
+.more-menu.show {
+  display: block;
+}
+
+.more-menu button {
+  width: 100%;
+
+  padding: 11px 12px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: white;
+
+  text-align: left;
+
+  font-size: 13px;
+}
+
+.more-menu button:hover {
+  background: #293940;
+}
+
+.more-menu .danger {
+  color: #ff9999;
+}
+
+
+/* =========================================================
    BOOK LIST
-===================================================== */
+========================================================= */
 
 .book-list {
   display: flex;
 
   flex-direction: column;
 
-  gap: 10px;
+  gap: 9px;
+
+  max-width: 850px;
+
+  margin-top: 24px;
 }
 
 .book {
-  min-height: 75px;
+  position: relative;
 
-  padding: 13px 17px;
-
-  border: 1px solid #26343a;
-
-  border-radius: 13px;
-
-  background: #0d171c;
+  min-height: 78px;
 
   display: flex;
 
   align-items: center;
 
   gap: 15px;
+
+  padding: 10px 12px;
+
+  background: #10191e;
+
+  border: 1px solid #29383e;
+
+  border-radius: 10px;
 }
 
+.book:hover {
+  border-color: #45545b;
+}
+
+
+/* =========================================================
+   BOOK COVER
+========================================================= */
+
 .book-cover {
-  width: 45px;
-  height: 55px;
+  width: 50px;
 
-  border-radius: 7px;
-
-  background: #17242a;
+  height: 58px;
 
   display: flex;
 
@@ -414,10 +574,29 @@ h1 {
 
   justify-content: center;
 
-  font-size: 20px;
-
   flex-shrink: 0;
+
+  overflow: hidden;
+
+  background: #162228;
+
+  border-radius: 6px;
+
+  font-size: 24px;
 }
+
+.book-cover img {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* =========================================================
+   BOOK INFO
+========================================================= */
 
 .book-info {
   flex: 1;
@@ -426,186 +605,174 @@ h1 {
 }
 
 .book-title {
+  color: #f9f9f9;
+
   font-family: Georgia, serif;
 
-  font-size: 17px;
+  font-size: 16px;
+
+  line-height: 1.35;
 
   word-break: break-word;
 }
 
 .book-meta {
-  color: #68767b;
-
-  font-size: 10px;
-
   margin-top: 5px;
+
+  color: #7f8b90;
+
+  font-size: 11px;
 }
 
 
-/* =====================================================
-   BIG CLICKABLE FAVORITE HEART
-===================================================== */
+/* =========================================================
+   BIG HEART
+========================================================= */
 
 .favorite {
-  width: 44px;
-  height: 44px;
+  width: 46px;
 
-  border: 1px solid #35434a;
-
-  border-radius: 50%;
-
-  background: transparent;
-
-  color: #7b888d;
-
-  font-size: 25px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  cursor: pointer;
+  height: 46px;
 
   flex-shrink: 0;
 
-  transition:
-    .2s ease;
+  border: none;
+
+  background: transparent;
+
+  color: #748087;
+
+  font-size: 30px;
+
+  line-height: 1;
 }
 
 .favorite:hover {
-  border-color: #f9f9f9;
-
-  color: #f9f9f9;
+  color: white;
 
   transform: scale(1.08);
 }
 
 .favorite.active {
-  color: #ffffff;
-
-  border-color: #ffffff;
-}
-
-.favorite.active:hover {
-  background: #17242a;
-
-  transform: scale(1.08);
-}
-
-
-/* =====================================================
-   BOOK BUTTONS
-===================================================== */
-
-.open-book {
-  border: 1px solid #35434a;
-
-  background: transparent;
-
   color: white;
+}
 
-  padding: 8px 12px;
+
+/* =========================================================
+   BOOK THREE DOT
+========================================================= */
+
+.book-more {
+  width: 40px;
+
+  height: 40px;
+
+  flex-shrink: 0;
+
+  border: none;
 
   border-radius: 8px;
 
-  font-size: 10px;
-
-  cursor: pointer;
-}
-
-.open-book:hover {
-  background: #17242a;
-}
-
-.delete-book {
-  border: none;
-
   background: transparent;
 
-  color: #59666b;
+  color: #aeb8bc;
 
-  font-size: 18px;
-
-  cursor: pointer;
+  font-size: 23px;
 }
 
-.delete-book:hover {
+.book-more:hover {
+  background: #26343a;
+
   color: white;
 }
 
 
-/* =====================================================
+/* =========================================================
    EMPTY
-===================================================== */
+========================================================= */
 
 .empty {
-  border: 1px dashed #2b3940;
+  min-height: 40vh;
 
-  border-radius: 18px;
+  display: flex;
 
-  padding: 65px 25px;
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
 
   text-align: center;
+
+  color: #89959a;
 }
 
 .empty-icon {
-  font-size: 45px;
+  margin-bottom: 12px;
 
-  margin-bottom: 15px;
+  font-size: 48px;
 }
 
 .empty h2 {
-  margin: 0;
+  margin: 0 0 8px;
+
+  color: #f9f9f9;
 
   font-family: Georgia, serif;
 
-  font-size: 30px;
+  font-size: 28px;
 
   font-weight: 400;
 }
 
 .empty p {
-  color: #718087;
+  margin: 0 0 20px;
 
   font-size: 13px;
+}
 
-  line-height: 1.6;
+.primary {
+  padding: 12px 18px;
 
-  margin: 12px auto 25px;
+  border: none;
 
-  max-width: 400px;
+  border-radius: 20px;
+
+  background: white;
+
+  color: #080f13;
+
+  font-weight: bold;
 }
 
 
-/* =====================================================
+/* =========================================================
    SERIES PAGE
-===================================================== */
+========================================================= */
 
 #seriesPage {
   display: none;
 }
 
-.back {
-  border: none;
+.back-button {
+  margin-bottom: 20px;
+
+  padding: 9px 14px;
+
+  border: 1px solid #34434a;
+
+  border-radius: 9px;
 
   background: transparent;
 
-  color: #718087;
-
-  padding: 0;
-
-  cursor: pointer;
-
-  margin-bottom: 25px;
+  color: #b7c0c4;
 }
 
-.back:hover {
-  color: white;
+.back-button:hover {
+  background: #162228;
 }
 
-.series-header {
+.series-page-top {
   display: flex;
 
   align-items: center;
@@ -613,74 +780,43 @@ h1 {
   justify-content: space-between;
 
   gap: 20px;
-
-  margin-bottom: 35px;
 }
 
-.series-heading {
-  display: flex;
-
-  align-items: center;
-
-  gap: 15px;
-}
-
-.series-heading-icon {
-  width: 60px;
-  height: 60px;
-
-  border-radius: 15px;
-
-  background: #17242a;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  font-size: 27px;
-}
-
-.series-heading h2 {
-  margin: 0;
-
+.series-page-name {
   font-family: Georgia, serif;
 
-  font-size: 34px;
-
-  font-weight: 400;
+  font-size: 42px;
 }
 
-.series-heading p {
-  margin: 5px 0 0;
+.series-page-count {
+  margin-top: 6px;
 
-  color: #718087;
+  color: #89959a;
 
-  font-size: 11px;
+  font-size: 12px;
 }
 
 
-/* =====================================================
-   MODAL
-===================================================== */
+/* =========================================================
+   MODALS
+========================================================= */
 
 .modal {
-  display: none;
-
   position: fixed;
 
   inset: 0;
 
-  z-index: 200;
-
-  background: rgba(0,0,0,.82);
+  display: none;
 
   align-items: center;
 
   justify-content: center;
 
   padding: 20px;
+
+  background: rgba(0,0,0,.78);
+
+  z-index: 1000;
 }
 
 .modal.show {
@@ -690,19 +826,22 @@ h1 {
 .modal-box {
   width: 100%;
 
-  max-width: 440px;
+  max-width: 430px;
 
   padding: 30px;
 
-  background: #0f191e;
+  background: #111b20;
 
-  border: 1px solid #35434a;
+  border: 1px solid #36454c;
 
-  border-radius: 18px;
+  border-radius: 16px;
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.65);
 }
 
 .modal-box h2 {
-  margin: 0 0 25px;
+  margin: 0 0 20px;
 
   font-family: Georgia, serif;
 
@@ -711,188 +850,118 @@ h1 {
   font-weight: 400;
 }
 
+.modal-input {
+  width: 100%;
 
-/* =====================================================
-   BOOK TYPE CHOICE
-===================================================== */
+  padding: 13px;
 
-.choice-row {
-  display: grid;
+  margin-bottom: 18px;
 
-  grid-template-columns: 1fr 1fr;
+  background: #080f13;
 
-  gap: 10px;
-
-  margin-bottom: 22px;
-}
-
-.choice {
-  padding: 18px 12px;
+  color: white;
 
   border: 1px solid #35434a;
 
-  border-radius: 12px;
-
-  background: #091115;
-
-  color: #89969b;
-
-  cursor: pointer;
-
-  text-align: center;
-}
-
-.choice:hover {
-  border-color: #718087;
-
-  color: white;
-}
-
-.choice.selected {
-  border-color: white;
-
-  color: white;
-
-  background: #17242a;
-}
-
-.choice-icon {
-  display: block;
-
-  font-size: 25px;
-
-  margin-bottom: 7px;
-}
-
-
-/* =====================================================
-   FORM
-===================================================== */
-
-.field {
-  margin-bottom: 16px;
-}
-
-.field label {
-  display: block;
-
-  color: #718087;
-
-  font-size: 10px;
-
-  text-transform: uppercase;
-
-  letter-spacing: 1px;
-
-  margin-bottom: 7px;
-}
-
-.field input,
-.field select {
-  width: 100%;
-
-  height: 45px;
-
-  padding: 0 12px;
-
-  border: 1px solid #303e44;
-
-  border-radius: 8px;
-
-  background: #091115;
-
-  color: white;
+  border-radius: 9px;
 
   outline: none;
 }
 
-.field input:focus,
-.field select:focus {
-  border-color: #68767b;
+.modal-input:focus {
+  border-color: #68777e;
 }
 
-
-/* =====================================================
-   MODAL BUTTONS
-===================================================== */
-
-.modal-actions {
+.modal-buttons {
   display: flex;
 
   gap: 10px;
-
-  margin-top: 22px;
 }
 
-.modal-actions button {
+.modal-buttons button {
   flex: 1;
 
-  height: 43px;
+  padding: 13px;
+
+  border: none;
 
   border-radius: 9px;
-
-  cursor: pointer;
 }
 
-.cancel {
-  border: 1px solid #35434a;
-
-  background: transparent;
+.cancel-button {
+  background: #26343a;
 
   color: white;
 }
 
-.create {
-  border: none;
-
+.save-button {
   background: white;
 
   color: #080f13;
 
-  font-weight: 600;
+  font-weight: bold;
 }
 
 
-/* =====================================================
-   MOBILE
-===================================================== */
+/* =========================================================
+   DRIVE PICKER STATUS
+========================================================= */
 
-@media (max-width: 650px) {
+.drive-status {
+  min-height: 20px;
 
-  header {
-    padding: 0 20px;
-  }
+  margin-top: 12px;
 
-  main {
-    width: 90%;
+  color: #89959a;
 
-    padding-top: 45px;
-  }
+  text-align: center;
 
-  .series-header {
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .library {
     display: block;
   }
 
-  .series-header .primary {
-    margin-top: 20px;
+  .sidebar {
+    width: 100%;
+
+    min-height: auto;
+
+    border-right: none;
+
+    border-bottom: 1px solid #263238;
   }
 
-  .open-book {
-    display: none;
+  .main {
+    padding: 25px 18px;
   }
 
-  .book {
-    gap: 9px;
+  .top {
+    align-items: flex-start;
+
+    flex-direction: column;
   }
 
-  .book-cover {
-    width: 38px;
-
-    height: 48px;
+  h1 {
+    font-size: 38px;
   }
 
-  .choice-row {
-    grid-template-columns: 1fr;
+  .series-page-top {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .series-page-name {
+    font-size: 34px;
   }
 
 }
@@ -904,180 +973,309 @@ h1 {
 
 <body>
 
-<main>
 
+<!-- =========================================================
+     LOGIN PAGE
+========================================================= -->
+
+<div id="loginPage">
+
+  <div class="login-box">
+
+    <div class="login-logo">
+      MyShelf
+    </div>
+
+    <div class="login-subtitle">
+      YOUR LITTLE LIBRARY
+    </div>
+
+    <button
+      class="google-login"
+      id="loginButton"
+    >
+      Continue with Google
+    </button>
+
+    <div
+      class="login-status"
+      id="loginStatus"
+    ></div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     LIBRARY PAGE
+========================================================= -->
+
+<div id="libraryPage">
+
+<div class="library">
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<aside class="sidebar">
+
+  <div class="logo">
+    MyShelf
+  </div>
+
+  <div class="tagline">
+    YOUR LITTLE LIBRARY
+  </div>
+
+
+  <!-- SERIES -->
+
+  <div
+    class="nav-item active"
+    id="seriesNav"
+  >
+
+    <div class="nav-icon">
+      📚
+    </div>
+
+    <div class="nav-name">
+      Series
+    </div>
+
+    <div
+      class="nav-count"
+      id="seriesCount"
+    >
+      0
+    </div>
+
+  </div>
+
+
+  <!-- STANDALONE -->
+
+  <div
+    class="nav-item"
+    id="standaloneNav"
+  >
+
+    <div class="nav-icon">
+      📖
+    </div>
+
+    <div class="nav-name">
+      Standalone
+    </div>
+
+    <div
+      class="nav-count"
+      id="standaloneCount"
+    >
+      0
+    </div>
+
+  </div>
+
+
+  <!-- FAVORITES -->
+
+  <div
+    class="nav-item"
+    id="favoritesNav"
+  >
+
+    <div class="nav-icon">
+      ♥
+    </div>
+
+    <div class="nav-name">
+      Favorites
+    </div>
+
+    <div
+      class="nav-count"
+      id="favoritesCount"
+    >
+      0
+    </div>
+
+  </div>
+
+
+  <div class="sidebar-divider"></div>
+
+
+  <div class="sidebar-section-title">
+    MY LIBRARY
+  </div>
+
+
+  <div
+    class="nav-item"
+    id="logoutButton"
+  >
+
+    <div class="nav-icon">
+      ↪
+    </div>
+
+    <div class="nav-name">
+      Log Out
+    </div>
+
+  </div>
+
+
+</aside>
+
+
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
+
+<main class="main">
+
+
+<!-- =========================================================
+     HOME
+========================================================= -->
 
 <div id="homePage">
 
-  <h1>
-    My Library
-  </h1>
+
+  <div class="top">
+
+    <div>
+
+      <div class="eyebrow">
+        YOUR PERSONAL LIBRARY
+      </div>
+
+      <h1 id="homeTitle">
+        Series
+      </h1>
+
+    </div>
 
 
-  <p class="description">
+    <div class="top-actions">
 
-    Every series gets a shelf.
-    Every standalone gets its own place.
-    Keep your favorites close and build
-    your collection your way.
+      <button
+        class="add-button"
+        id="mainAddButton"
+      >
+        ＋ Add Series
+      </button>
 
-  </p>
-
-
-  <div class="actions">
-
-    <button
-      class="primary"
-      onclick="openSeriesModal()">
-
-      ＋ Create Series
-
-    </button>
-
-
-    <button
-      class="secondary"
-      onclick="openBookModal()">
-
-      ＋ Add Book
-
-    </button>
+    </div>
 
   </div>
 
 
-  <!-- =================================================
-       TABS
-  ================================================== -->
+  <!-- =====================================================
+       SERIES CONTENT
+  ===================================================== -->
 
-  <div class="tabs">
+  <div id="seriesContent">
 
-    <button
-      id="allTab"
-      class="tab active"
-      onclick="showAll()">
+    <div class="section-heading">
 
-      ALL BOOKS
+      <h2>
+        My Series
+      </h2>
 
-    </button>
+      <span
+        class="section-count"
+        id="seriesHeadingCount"
+      >
+        0 series
+      </span>
 
-
-    <button
-      id="favoritesTab"
-      class="tab"
-      onclick="showFavorites()">
-
-      ♥ FAVORITES
-
-    </button>
-
-  </div>
+    </div>
 
 
-  <!-- =================================================
-       ALL CONTENT
-  ================================================== -->
-
-  <div id="allContent">
-
-
-    <!-- SERIES -->
-
-    <section class="section">
-
-      <div class="section-header">
-
-        <div class="section-title">
-          📚 Series
-        </div>
-
-        <div
-          id="seriesCount"
-          class="section-count">
-
-          0 series
-
-        </div>
-
-      </div>
-
-
-      <div
-        id="seriesGrid"
-        class="series-grid">
-
-      </div>
-
-    </section>
-
-
-    <!-- STANDALONE -->
-
-    <section class="section">
-
-      <div class="section-header">
-
-        <div class="section-title">
-          📖 Standalone Books
-        </div>
-
-        <div
-          id="standaloneCount"
-          class="section-count">
-
-          0 books
-
-        </div>
-
-      </div>
-
-
-      <div
-        id="standaloneList"
-        class="book-list">
-
-      </div>
-
-    </section>
-
+    <div
+      class="series-list"
+      id="seriesList"
+    ></div>
 
   </div>
 
 
-  <!-- =================================================
-       FAVORITES
-  ================================================== -->
+  <!-- =====================================================
+       STANDALONE CONTENT
+  ===================================================== -->
+
+  <div
+    id="standaloneContent"
+    style="display:none;"
+  >
+
+    <div class="section-heading">
+
+      <h2>
+        Standalone Books
+      </h2>
+
+      <span
+        class="section-count"
+        id="standaloneHeadingCount"
+      >
+        0 books
+      </span>
+
+    </div>
+
+
+    <button
+      class="add-button"
+      id="addStandaloneButton"
+    >
+      ＋ Add Books from Google Drive
+    </button>
+
+
+    <div
+      class="book-list"
+      id="standaloneList"
+    ></div>
+
+  </div>
+
+
+  <!-- =====================================================
+       FAVORITES CONTENT
+  ===================================================== -->
 
   <div
     id="favoritesContent"
-    style="display:none;">
+    style="display:none;"
+  >
 
-    <section class="section">
+    <div class="section-heading">
 
-      <div class="section-header">
+      <h2>
+        Favorites
+      </h2>
 
-        <div class="section-title">
-          ♥ Favorite Books
-        </div>
+      <span
+        class="section-count"
+        id="favoritesHeadingCount"
+      >
+        0 favorites
+      </span>
 
-        <div
-          id="favoritesCount"
-          class="section-count">
-
-          0 favorites
-
-        </div>
-
-      </div>
+    </div>
 
 
-      <div
-        id="favoritesList"
-        class="book-list">
-
-      </div>
-
-    </section>
+    <div
+      class="book-list"
+      id="favoritesList"
+    ></div>
 
   </div>
 
@@ -1085,791 +1283,838 @@ h1 {
 </div>
 
 
-<!-- =====================================================
+<!-- =========================================================
      SERIES PAGE
-===================================================== -->
+========================================================= -->
 
 <div id="seriesPage">
 
-
   <button
-    class="back"
-    onclick="goHome()">
-
-    ← Back to My Library
-
+    class="back-button"
+    id="backButton"
+  >
+    ← Back
   </button>
 
 
-  <div class="series-header">
+  <div class="series-page-top">
 
-
-    <div class="series-heading">
+    <div>
 
       <div
-        id="seriesPageIcon"
-        class="series-heading-icon">
-
-        📚
-
+        class="series-page-name"
+        id="seriesPageName"
+      >
       </div>
 
-
-      <div>
-
-        <h2 id="seriesPageName">
-          Series
-        </h2>
-
-        <p id="seriesPageCount">
-          0 books
-        </p>
-
+      <div
+        class="series-page-count"
+        id="seriesPageCount"
+      >
+        0 books
       </div>
 
     </div>
 
 
     <button
-      class="primary"
-      onclick="openBookModalForSeries()">
-
-      ＋ Add Book
-
+      class="add-button"
+      id="seriesAddBookButton"
+    >
+      ＋ Add Books from Google Drive
     </button>
-
 
   </div>
 
 
   <div
+    class="book-list"
     id="seriesBookList"
-    class="book-list">
-
-  </div>
-
+  ></div>
 
 </div>
 
 
 </main>
 
+</div>
 
-<!-- =====================================================
-     CREATE SERIES MODAL
-===================================================== -->
+</div>
+
+
+<!-- =========================================================
+     ADD SERIES MODAL
+========================================================= -->
 
 <div
+  class="modal"
   id="seriesModal"
-  class="modal">
-
+>
 
   <div class="modal-box">
 
-
     <h2>
-      Create a Series Shelf
+      Add Series
     </h2>
 
-
-    <div class="field">
-
-      <label>
-        Series name
-      </label>
-
-      <input
-        id="seriesName"
-        type="text"
-        placeholder="Example: Made Series">
-
-    </div>
+    <input
+      class="modal-input"
+      id="seriesNameInput"
+      type="text"
+      placeholder="Series name"
+      autocomplete="off"
+    >
 
 
-    <div class="field">
-
-      <label>
-        Shelf icon
-      </label>
-
-      <select id="seriesIcon">
-
-        <option value="📚">
-          📚 Books
-        </option>
-
-        <option value="🌸">
-          🌸 Romance
-        </option>
-
-        <option value="🌙">
-          🌙 Night Reads
-        </option>
-
-        <option value="✨">
-          ✨ Stories
-        </option>
-
-        <option value="🔥">
-          🔥 Favorites
-        </option>
-
-        <option value="🖤">
-          🖤 Dark Reads
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <div class="modal-actions">
+    <div class="modal-buttons">
 
       <button
-        class="cancel"
-        onclick="closeSeriesModal()">
-
+        class="cancel-button"
+        id="cancelSeries"
+      >
         Cancel
-
       </button>
 
-
       <button
-        class="create"
-        onclick="createSeries()">
-
-        Create Shelf
-
+        class="save-button"
+        id="saveSeries"
+      >
+        Add Series
       </button>
 
     </div>
-
 
   </div>
 
 </div>
 
 
-<!-- =====================================================
-     ADD BOOK MODAL
-===================================================== -->
+<!-- =========================================================
+     EDIT SERIES MODAL
+========================================================= -->
 
 <div
-  id="bookModal"
-  class="modal">
-
+  class="modal"
+  id="editSeriesModal"
+>
 
   <div class="modal-box">
 
-
     <h2>
-      Add a Book
+      Edit Series
     </h2>
 
+    <input
+      class="modal-input"
+      id="editSeriesNameInput"
+      type="text"
+      placeholder="Series name"
+      autocomplete="off"
+    >
 
-    <div class="choice-row">
 
-
-      <button
-        id="seriesChoice"
-        class="choice selected"
-        onclick="selectBookType('series')">
-
-        <span class="choice-icon">
-          📚
-        </span>
-
-        Series Book
-
-      </button>
-
+    <div class="modal-buttons">
 
       <button
-        id="standaloneChoice"
-        class="choice"
-        onclick="selectBookType('standalone')">
-
-        <span class="choice-icon">
-          📖
-        </span>
-
-        Standalone
-
+        class="cancel-button"
+        id="cancelEditSeries"
+      >
+        Cancel
       </button>
 
+      <button
+        class="save-button"
+        id="saveEditSeries"
+      >
+        Save
+      </button>
 
     </div>
 
+  </div>
 
-    <!-- SERIES SELECT -->
+</div>
+
+
+<!-- =========================================================
+     EDIT BOOK MODAL
+========================================================= -->
+
+<div
+  class="modal"
+  id="editBookModal"
+>
+
+  <div class="modal-box">
+
+    <h2>
+      Edit Book
+    </h2>
+
+    <input
+      class="modal-input"
+      id="editBookNameInput"
+      type="text"
+      placeholder="Book name"
+      autocomplete="off"
+    >
+
+
+    <div class="modal-buttons">
+
+      <button
+        class="cancel-button"
+        id="cancelEditBook"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="save-button"
+        id="saveEditBook"
+      >
+        Save
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     MOVE BOOK MODAL
+========================================================= -->
+
+<div
+  class="modal"
+  id="moveBookModal"
+>
+
+  <div class="modal-box">
+
+    <h2>
+      Move Book
+    </h2>
+
+    <select
+      class="modal-input"
+      id="moveBookSelect"
+    ></select>
+
+
+    <div class="modal-buttons">
+
+      <button
+        class="cancel-button"
+        id="cancelMoveBook"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="save-button"
+        id="saveMoveBook"
+      >
+        Move
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     DRIVE STATUS
+========================================================= -->
+
+<div
+  class="modal"
+  id="driveModal"
+>
+
+  <div class="modal-box">
+
+    <h2>
+      Google Drive
+    </h2>
+
+    <p
+      style="
+        color:#89959a;
+        font-size:13px;
+        line-height:1.6;
+      "
+    >
+      Connecting to Google Drive...
+    </p>
 
     <div
-      id="seriesField"
-      class="field">
-
-      <label>
-        Choose series
-      </label>
-
-      <select id="bookSeries">
-
-      </select>
-
-    </div>
-
-
-    <!-- TITLE -->
-
-    <div class="field">
-
-      <label>
-        Book title
-      </label>
-
-      <input
-        id="bookTitle"
-        type="text"
-        placeholder="Example: The Sweetest Oblivion">
-
-    </div>
-
-
-    <!-- LINK -->
-
-    <div class="field">
-
-      <label>
-        PDF / Drive link — optional
-      </label>
-
-      <input
-        id="bookLink"
-        type="url"
-        placeholder="Paste your book link">
-
-    </div>
-
-
-    <div class="modal-actions">
-
-      <button
-        class="cancel"
-        onclick="closeBookModal()">
-
-        Cancel
-
-      </button>
-
-
-      <button
-        class="create"
-        onclick="addBook()">
-
-        Add Book
-
-      </button>
-
-    </div>
-
+      class="drive-status"
+      id="driveStatus"
+    ></div>
 
   </div>
 
 </div>
 
 
-<script>
+<!-- =========================================================
+     GOOGLE APIS
+========================================================= -->
 
-/* =====================================================
-   DATA
-===================================================== */
+<script src="https://apis.google.com/js/api.js"></script>
 
-const STORAGE_KEY =
-  "myshelf_library_v2";
-
-
-let library =
-  JSON.parse(
-    localStorage.getItem(STORAGE_KEY)
-  ) || {
-
-    series: [],
-
-    standalone: []
-
-  };
+<script src="https://accounts.google.com/gsi/client"></script>
 
 
-let currentSeriesId = null;
+<!-- =========================================================
+     FIREBASE
+========================================================= -->
 
-let selectedBookType = "series";
+<script type="module">
+
+import {
+  initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 
-/* =====================================================
-   SAVE
-===================================================== */
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  deleteDoc,
+  doc,
+  updateDoc,
+  onSnapshot,
+  serverTimestamp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-function save() {
 
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(library)
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut,
+  GoogleAuthProvider
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyBl-5cfDXHTX0gHubxH9MZx2YwLDbRRKFs",
+
+  authDomain:
+    "myshelf-e3440.firebaseapp.com",
+
+  projectId:
+    "myshelf-e3440",
+
+  storageBucket:
+    "myshelf-e3440.firebasestorage.app",
+
+  messagingSenderId:
+    "820092826756",
+
+  appId:
+    "1:820092826756:web:0cab1578f5dfc3c74ebed1",
+
+  measurementId:
+    "G-LB8602RM3L"
+
+};
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+
+const db =
+  getFirestore(app);
+
+
+const auth =
+  getAuth(app);
+
+
+/* =========================================================
+   GOOGLE DRIVE
+========================================================= */
+
+const GOOGLE_API_KEY =
+  "AIzaSyC4pGowo0fDjk8TJe-x-O7lCUlIj6JNgpU";
+
+
+const GOOGLE_CLIENT_ID =
+  "1074521299867-4s2f8vm53iru10r72il166l0h63lvt0c.apps.googleusercontent.com";
+
+
+const GOOGLE_APP_ID =
+  "1074521299867";
+
+
+const DRIVE_SCOPE =
+  "https://www.googleapis.com/auth/drive.readonly";
+
+
+let pickerReady =
+  false;
+
+let driveAccessToken =
+  null;
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let currentUser =
+  null;
+
+let series =
+  [];
+
+let standalone =
+  [];
+
+let currentSeriesId =
+  null;
+
+let currentView =
+  "series";
+
+let editingSeriesId =
+  null;
+
+let editingBookId =
+  null;
+
+let editingBookSeriesId =
+  null;
+
+let movingBookId =
+  null;
+
+let movingBookSeriesId =
+  null;
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const loginPage =
+  document.getElementById(
+    "loginPage"
+  );
+
+const libraryPage =
+  document.getElementById(
+    "libraryPage"
+  );
+
+const loginStatus =
+  document.getElementById(
+    "loginStatus"
+  );
+
+const seriesList =
+  document.getElementById(
+    "seriesList"
+  );
+
+const standaloneList =
+  document.getElementById(
+    "standaloneList"
+  );
+
+const favoritesList =
+  document.getElementById(
+    "favoritesList"
+  );
+
+const seriesModal =
+  document.getElementById(
+    "seriesModal"
+  );
+
+const editSeriesModal =
+  document.getElementById(
+    "editSeriesModal"
+  );
+
+const editBookModal =
+  document.getElementById(
+    "editBookModal"
+  );
+
+const moveBookModal =
+  document.getElementById(
+    "moveBookModal"
+  );
+
+
+/* =========================================================
+   LOAD GOOGLE PICKER
+========================================================= */
+
+function loadPicker() {
+
+  gapi.load(
+    "picker",
+    function() {
+
+      pickerReady =
+        true;
+
+    }
   );
 
 }
 
+loadPicker();
 
-/* =====================================================
-   SERIES MODAL
-===================================================== */
 
-function openSeriesModal() {
+/* =========================================================
+   LOGIN
+========================================================= */
 
-  document
-    .getElementById("seriesModal")
-    .classList.add("show");
+document
+  .getElementById(
+    "loginButton"
+  )
+  .addEventListener(
+    "click",
+    async function() {
 
-}
+      loginStatus.textContent =
+        "Signing in...";
 
 
-function closeSeriesModal() {
+      try {
 
-  document
-    .getElementById("seriesModal")
-    .classList.remove("show");
+        const provider =
+          new GoogleAuthProvider();
 
-}
 
-
-/* =====================================================
-   CREATE SERIES
-===================================================== */
-
-function createSeries() {
-
-  const name =
-    document
-      .getElementById("seriesName")
-      .value
-      .trim();
-
-
-  if (!name) {
-
-    alert(
-      "Please enter a series name."
-    );
-
-    return;
-
-  }
-
-
-  const icon =
-    document
-      .getElementById("seriesIcon")
-      .value;
-
-
-  library.series.push({
-
-    id:
-      Date.now().toString(),
-
-    name:
-      name,
-
-    icon:
-      icon,
-
-    books:
-      []
-
-  });
-
-
-  save();
-
-  document
-    .getElementById("seriesName")
-    .value = "";
-
-
-  closeSeriesModal();
-
-  renderAll();
-
-}
-
-
-/* =====================================================
-   BOOK MODAL
-===================================================== */
-
-function openBookModal() {
-
-  selectedBookType =
-    "series";
-
-  updateBookTypeUI();
-
-  populateSeriesSelect();
-
-  document
-    .getElementById("bookModal")
-    .classList.add("show");
-
-}
-
-
-function openBookModalForSeries() {
-
-  selectedBookType =
-    "series";
-
-  populateSeriesSelect();
-
-
-  const select =
-    document.getElementById(
-      "bookSeries"
-    );
-
-
-  if (currentSeriesId) {
-
-    select.value =
-      currentSeriesId;
-
-  }
-
-
-  updateBookTypeUI();
-
-
-  document
-    .getElementById("bookModal")
-    .classList.add("show");
-
-}
-
-
-function closeBookModal() {
-
-  document
-    .getElementById("bookModal")
-    .classList.remove("show");
-
-}
-
-
-/* =====================================================
-   BOOK TYPE
-===================================================== */
-
-function selectBookType(type) {
-
-  selectedBookType =
-    type;
-
-  updateBookTypeUI();
-
-}
-
-
-function updateBookTypeUI() {
-
-  const seriesChoice =
-    document.getElementById(
-      "seriesChoice"
-    );
-
-  const standaloneChoice =
-    document.getElementById(
-      "standaloneChoice"
-    );
-
-  const seriesField =
-    document.getElementById(
-      "seriesField"
-    );
-
-
-  if (
-    selectedBookType === "series"
-  ) {
-
-    seriesChoice
-      .classList
-      .add("selected");
-
-    standaloneChoice
-      .classList
-      .remove("selected");
-
-    seriesField.style.display =
-      "block";
-
-  }
-
-  else {
-
-    seriesChoice
-      .classList
-      .remove("selected");
-
-    standaloneChoice
-      .classList
-      .add("selected");
-
-    seriesField.style.display =
-      "none";
-
-  }
-
-}
-
-
-/* =====================================================
-   SERIES DROPDOWN
-===================================================== */
-
-function populateSeriesSelect() {
-
-  const select =
-    document.getElementById(
-      "bookSeries"
-    );
-
-
-  select.innerHTML = "";
-
-
-  if (
-    library.series.length === 0
-  ) {
-
-    select.innerHTML = `
-
-      <option value="">
-        No series created yet
-      </option>
-
-    `;
-
-    return;
-
-  }
-
-
-  library.series.forEach(
-    series => {
-
-      const option =
-        document.createElement(
-          "option"
+        await signInWithPopup(
+          auth,
+          provider
         );
 
 
-      option.value =
-        series.id;
+      }
+
+      catch(error) {
+
+        console.error(error);
+
+        loginStatus.textContent =
+          error.message;
+
+      }
+
+    }
+  );
 
 
-      option.textContent =
-        series.icon +
-        " " +
-        series.name;
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+onAuthStateChanged(
+  auth,
+  function(user) {
+
+    currentUser =
+      user;
 
 
-      select.appendChild(
-        option
+    if (user) {
+
+      loginPage.style.display =
+        "none";
+
+      libraryPage.style.display =
+        "block";
+
+
+      startListeners();
+
+    }
+
+    else {
+
+      loginPage.style.display =
+        "flex";
+
+      libraryPage.style.display =
+        "none";
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   FIRESTORE LISTENERS
+========================================================= */
+
+function startListeners() {
+
+  const userRef =
+    doc(
+      db,
+      "users",
+      currentUser.uid
+    );
+
+
+  const seriesRef =
+    collection(
+      userRef,
+      "series"
+    );
+
+
+  const standaloneRef =
+    collection(
+      userRef,
+      "standalone"
+    );
+
+
+  onSnapshot(
+    seriesRef,
+    function(snapshot) {
+
+      series = [];
+
+
+      snapshot.forEach(
+        function(item) {
+
+          series.push({
+
+            id:
+              item.id,
+
+            ...item.data(),
+
+            books:
+              item.data().books || []
+
+          });
+
+        }
+      );
+
+
+      renderSeries();
+
+      updateCounts();
+
+    },
+    function(error) {
+
+      console.error(
+        "Series error:",
+        error
       );
 
     }
   );
 
 
-  if (currentSeriesId) {
+  onSnapshot(
+    standaloneRef,
+    function(snapshot) {
 
-    select.value =
-      currentSeriesId;
-
-  }
-
-}
+      standalone = [];
 
 
-/* =====================================================
-   ADD BOOK
-===================================================== */
+      snapshot.forEach(
+        function(item) {
 
-function addBook() {
+          standalone.push({
 
-  const title =
-    document
-      .getElementById("bookTitle")
-      .value
-      .trim();
+            id:
+              item.id,
 
+            ...item.data()
 
-  const link =
-    document
-      .getElementById("bookLink")
-      .value
-      .trim();
+          });
 
-
-  if (!title) {
-
-    alert(
-      "Please enter the book title."
-    );
-
-    return;
-
-  }
-
-
-  const book = {
-
-    id:
-      Date.now().toString(),
-
-    title:
-      title,
-
-    link:
-      link,
-
-    favorite:
-      false
-
-  };
-
-
-  /* SERIES BOOK */
-
-  if (
-    selectedBookType === "series"
-  ) {
-
-    const seriesId =
-      document
-        .getElementById("bookSeries")
-        .value;
-
-
-    const series =
-      library.series.find(
-        s =>
-          s.id === seriesId
+        }
       );
 
 
-    if (!series) {
+      renderStandalone();
 
-      alert(
-        "Please create a series first."
+      renderFavorites();
+
+      updateCounts();
+
+    },
+    function(error) {
+
+      console.error(
+        "Standalone error:",
+        error
       );
-
-      return;
 
     }
-
-
-    series.books.push(
-      book
-    );
-
-  }
-
-
-  /* STANDALONE BOOK */
-
-  else {
-
-    library.standalone.push(
-      book
-    );
-
-  }
-
-
-  save();
-
-
-  document
-    .getElementById("bookTitle")
-    .value = "";
-
-
-  document
-    .getElementById("bookLink")
-    .value = "";
-
-
-  closeBookModal();
-
-  renderAll();
-
-
-  if (
-    currentSeriesId &&
-    selectedBookType === "series"
-  ) {
-
-    renderSeriesPage();
-
-  }
+  );
 
 }
 
 
-/* =====================================================
-   RENDER EVERYTHING
-===================================================== */
+/* =========================================================
+   COUNTS
+========================================================= */
 
-function renderAll() {
+function updateCounts() {
 
-  renderSeries();
+  let allBooks =
+    standalone.length;
 
-  renderStandalone();
 
-  renderFavorites();
+  series.forEach(
+    function(item) {
+
+      allBooks +=
+        (item.books || []).length;
+
+    }
+  );
+
+
+  let favorites =
+    0;
+
+
+  standalone.forEach(
+    function(book) {
+
+      if (book.favorite)
+        favorites++;
+
+    }
+  );
+
+
+  series.forEach(
+    function(item) {
+
+      (item.books || [])
+        .forEach(
+          function(book) {
+
+            if (book.favorite)
+              favorites++;
+
+          }
+        );
+
+    }
+  );
+
+
+  document
+    .getElementById(
+      "seriesCount"
+    )
+    .textContent =
+      series.length;
+
+
+  document
+    .getElementById(
+      "standaloneCount"
+    )
+    .textContent =
+      standalone.length;
+
+
+  document
+    .getElementById(
+      "favoritesCount"
+    )
+    .textContent =
+      favorites;
+
+
+  document
+    .getElementById(
+      "seriesHeadingCount"
+    )
+    .textContent =
+      series.length +
+      (
+        series.length === 1
+          ? " series"
+          : " series"
+      );
+
+
+  document
+    .getElementById(
+      "standaloneHeadingCount"
+    )
+    .textContent =
+      standalone.length +
+      (
+        standalone.length === 1
+          ? " book"
+          : " books"
+      );
+
+
+  document
+    .getElementById(
+      "favoritesHeadingCount"
+    )
+    .textContent =
+      favorites +
+      (
+        favorites === 1
+          ? " favorite"
+          : " favorites"
+      );
 
 }
 
 
-/* =====================================================
+/* =========================================================
    RENDER SERIES
-===================================================== */
+========================================================= */
 
 function renderSeries() {
 
-  const grid =
-    document.getElementById(
-      "seriesGrid"
-    );
+  seriesList.innerHTML =
+    "";
 
 
-  grid.innerHTML = "";
+  if (series.length === 0) {
 
+    seriesList.innerHTML = `
 
-  document
-    .getElementById("seriesCount")
-    .textContent =
-      library.series.length +
-      " series";
-
-
-  if (
-    library.series.length === 0
-  ) {
-
-    grid.innerHTML = `
-
-      <div
-        class="empty"
-        style="grid-column:1/-1;">
+      <div class="empty">
 
         <div class="empty-icon">
           📚
@@ -1880,16 +2125,14 @@ function renderSeries() {
         </h2>
 
         <p>
-          Create a series to turn it
-          into a shelf for your books.
+          Create your first book series.
         </p>
 
         <button
           class="primary"
-          onclick="openSeriesModal()">
-
-          ＋ Create Series
-
+          onclick="openSeriesModal()"
+        >
+          ＋ Add Series
         </button>
 
       </div>
@@ -1901,90 +2144,101 @@ function renderSeries() {
   }
 
 
-  library.series.forEach(
-    series => {
+  series.forEach(
+    function(item) {
 
-      const card =
+      const tile =
         document.createElement(
           "div"
         );
 
 
-      card.className =
-        "series-card";
+      tile.className =
+        "series-tile";
 
 
-      card.innerHTML = `
+      const count =
+        (item.books || []).length;
 
-        <div class="series-top">
 
-          <div class="series-icon">
-            ${escapeHTML(series.icon)}
-          </div>
+      tile.innerHTML = `
 
-          <div class="series-name">
-            ${escapeHTML(series.name)}
-          </div>
-
-          <div class="series-count">
-
-            ${series.books.length}
-            ${
-              series.books.length === 1
-                ? " book"
-                : " books"
-            }
-
-          </div>
-
+        <div
+          class="series-name"
+        >
+          ${escapeHTML(item.name)}
         </div>
 
 
-        <div class="series-bottom">
+        <div
+          class="series-book-count"
+        >
+          ${count}
+          ${
+            count === 1
+              ? "book"
+              : "books"
+          }
+        </div>
+
+
+        <button
+          class="series-more"
+          onclick="
+            event.stopPropagation();
+            toggleSeriesMenu(
+              '${item.id}'
+            );
+          "
+        >
+          ⋮
+        </button>
+
+
+        <div
+          class="more-menu"
+          id="series-menu-${item.id}"
+        >
 
           <button
-            class="open-series"
-            onclick="openSeries(
-              '${series.id}'
-            )">
-
-            Open Shelf →
-
+            onclick="
+              event.stopPropagation();
+              editSeries('${item.id}');
+            "
+          >
+            ✏️ Edit Name
           </button>
 
 
-          <div>
-
-            <button
-              class="icon-button"
-              onclick="renameSeries(
-                '${series.id}'
-              )">
-
-              ✎
-
-            </button>
-
-
-            <button
-              class="icon-button"
-              onclick="deleteSeries(
-                '${series.id}'
-              )">
-
-              ×
-
-            </button>
-
-          </div>
+          <button
+            class="danger"
+            onclick="
+              event.stopPropagation();
+              deleteSeries('${item.id}');
+            "
+          >
+            🗑 Delete Series
+          </button>
 
         </div>
 
       `;
 
 
-      grid.appendChild(
-        card
+      tile.addEventListener(
+        "click",
+        function() {
+
+          openSeries(
+            item.id
+          );
+
+        }
+      );
+
+
+      seriesList.appendChild(
+        tile
       );
 
     }
@@ -1993,215 +2247,24 @@ function renderSeries() {
 }
 
 
-/* =====================================================
-   RENDER STANDALONES
-===================================================== */
-
-function renderStandalone() {
-
-  const list =
-    document.getElementById(
-      "standaloneList"
-    );
-
-
-  list.innerHTML = "";
-
-
-  document
-    .getElementById(
-      "standaloneCount"
-    )
-    .textContent =
-      library.standalone.length +
-      (
-        library.standalone.length === 1
-          ? " book"
-          : " books"
-      );
-
-
-  if (
-    library.standalone.length === 0
-  ) {
-
-    list.innerHTML = `
-
-      <div class="empty">
-
-        <div class="empty-icon">
-          📖
-        </div>
-
-        <h2>
-          No standalone books
-        </h2>
-
-        <p>
-          Add a book without assigning
-          it to a series.
-        </p>
-
-        <button
-          class="primary"
-          onclick="openStandaloneModal()">
-
-          ＋ Add Standalone
-
-        </button>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  library.standalone.forEach(
-    book => {
-
-      list.appendChild(
-        createBookElement(
-          book,
-          null
-        )
-      );
-
-    }
-  );
-
-}
-
-
-function createBookElement(
-  book,
-  series
-) {
-
-  const row =
-    document.createElement(
-      "div"
-    );
-
-
-  row.className =
-    "book";
-
-
-  const seriesName =
-    series
-      ? series.name
-      : "Standalone book";
-
-
-  row.innerHTML = `
-
-    <div class="book-cover">
-      📖
-    </div>
-
-
-    <div class="book-info">
-
-      <div class="book-title">
-        ${escapeHTML(book.title)}
-      </div>
-
-      <div class="book-meta">
-        ${escapeHTML(seriesName)}
-      </div>
-
-    </div>
-
-
-    <!-- BIG CLICKABLE HEART -->
-
-    <button
-      class="favorite ${
-        book.favorite
-          ? "active"
-          : ""
-      }"
-      aria-label="${
-        book.favorite
-          ? "Remove from favorites"
-          : "Add to favorites"
-      }"
-      title="${
-        book.favorite
-          ? "Remove from favorites"
-          : "Add to favorites"
-      }"
-      onclick="toggleFavorite(
-        '${series ? series.id : ""}',
-        '${book.id}'
-      )">
-
-      ${
-        book.favorite
-          ? "♥"
-          : "♡"
-      }
-
-    </button>
-
-
-    ${
-      book.link
-        ? `
-
-          <button
-            class="open-book"
-            onclick="openBook(
-              '${series ? series.id : ""}',
-              '${book.id}'
-            )">
-
-            Open
-
-          </button>
-
-        `
-        : ""
-    }
-
-
-    <button
-      class="delete-book"
-      title="Delete book"
-      onclick="deleteBook(
-        '${series ? series.id : ""}',
-        '${book.id}'
-      )">
-
-      ×
-
-    </button>
-
-  `;
-
-
-  return row;
-
-}
-
-
-/* =====================================================
+/* =========================================================
    OPEN SERIES
-===================================================== */
+========================================================= */
 
 function openSeries(id) {
 
-  const series =
-    library.series.find(
-      s =>
-        s.id === id
+  const item =
+    series.find(
+      function(s) {
+
+        return s.id === id;
+
+      }
     );
 
 
-  if (!series) return;
+  if (!item)
+    return;
 
 
   currentSeriesId =
@@ -2224,41 +2287,41 @@ function openSeries(id) {
       "block";
 
 
-  renderSeriesPage();
-
-}
-
-
-/* =====================================================
-   SERIES PAGE
-===================================================== */
-
-function renderSeriesPage() {
-
-  const series =
-    library.series.find(
-      s =>
-        s.id === currentSeriesId
-    );
-
-
-  if (!series) return;
-
-
-  document
-    .getElementById(
-      "seriesPageIcon"
-    )
-    .textContent =
-      series.icon;
-
-
   document
     .getElementById(
       "seriesPageName"
     )
     .textContent =
-      series.name;
+      item.name;
+
+
+  renderSeriesBooks();
+
+}
+
+
+/* =========================================================
+   RENDER SERIES BOOKS
+========================================================= */
+
+function renderSeriesBooks() {
+
+  const item =
+    series.find(
+      function(s) {
+
+        return s.id === currentSeriesId;
+
+      }
+    );
+
+
+  if (!item)
+    return;
+
+
+  const books =
+    item.books || [];
 
 
   document
@@ -2266,9 +2329,9 @@ function renderSeriesPage() {
       "seriesPageCount"
     )
     .textContent =
-      series.books.length +
+      books.length +
       (
-        series.books.length === 1
+        books.length === 1
           ? " book"
           : " books"
       );
@@ -2280,12 +2343,11 @@ function renderSeriesPage() {
     );
 
 
-  list.innerHTML = "";
+  list.innerHTML =
+    "";
 
 
-  if (
-    series.books.length === 0
-  ) {
+  if (books.length === 0) {
 
     list.innerHTML = `
 
@@ -2296,20 +2358,22 @@ function renderSeriesPage() {
         </div>
 
         <h2>
-          This shelf is empty
+          This series is empty
         </h2>
 
         <p>
-          Add the books that belong
-          to this series.
+          Add books from Google Drive.
         </p>
 
         <button
           class="primary"
-          onclick="openBookModalForSeries()">
-
-          ＋ Add Book
-
+          onclick="
+            openDrivePicker(
+              'series'
+            )
+          "
+        >
+          ＋ Add Books from Google Drive
         </button>
 
       </div>
@@ -2321,13 +2385,14 @@ function renderSeriesPage() {
   }
 
 
-  series.books.forEach(
-    book => {
+  books.forEach(
+    function(book) {
 
       list.appendChild(
         createBookElement(
           book,
-          series
+          item.id,
+          item.name
         )
       );
 
@@ -2337,141 +2402,286 @@ function renderSeriesPage() {
 }
 
 
-/* =====================================================
-   HOME
-===================================================== */
+/* =========================================================
+   RENDER STANDALONE
+========================================================= */
 
-function goHome() {
+function renderStandalone() {
 
-  currentSeriesId =
-    null;
-
-
-  document
-    .getElementById(
-      "seriesPage"
-    )
-    .style.display =
-      "none";
+  standaloneList.innerHTML =
+    "";
 
 
-  document
-    .getElementById(
-      "homePage"
-    )
-    .style.display =
-      "block";
+  if (standalone.length === 0) {
+
+    standaloneList.innerHTML = `
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          📖
+        </div>
+
+        <h2>
+          No standalone books
+        </h2>
+
+        <p>
+          Add a book directly from Google Drive.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
 
 
-  showAll();
+  standalone.forEach(
+    function(book) {
 
-}
+      standaloneList.appendChild(
 
+        createBookElement(
+          book,
+          null,
+          "Standalone book"
+        )
 
-/* =====================================================
-   FAVORITES
-===================================================== */
-
-function showFavorites() {
-
-  document
-    .getElementById(
-      "allContent"
-    )
-    .style.display =
-      "none";
-
-
-  document
-    .getElementById(
-      "favoritesContent"
-    )
-    .style.display =
-      "block";
-
-
-  document
-    .getElementById(
-      "allTab"
-    )
-    .classList
-    .remove("active");
-
-
-  document
-    .getElementById(
-      "favoritesTab"
-    )
-    .classList
-    .add("active");
-
-
-  renderFavorites();
-
-}
-
-
-function renderFavorites() {
-
-  const list =
-    document.getElementById(
-      "favoritesList"
-    );
-
-
-  list.innerHTML = "";
-
-
-  let count = 0;
-
-
-  /* SERIES FAVORITES */
-
-  library.series.forEach(
-    series => {
-
-      series.books.forEach(
-        book => {
-
-          if (
-            book.favorite
-          ) {
-
-            count++;
-
-            list.appendChild(
-              createBookElement(
-                book,
-                series
-              )
-            );
-
-          }
-
-        }
       );
 
     }
   );
 
+}
 
-  /* STANDALONE FAVORITES */
 
-  library.standalone.forEach(
-    book => {
+/* =========================================================
+   BOOK ELEMENT
+========================================================= */
 
-      if (
+function createBookElement(
+  book,
+  seriesId,
+  seriesName
+) {
+
+  const row =
+    document.createElement(
+      "div"
+    );
+
+
+  row.className =
+    "book";
+
+
+  const cover =
+    book.thumbnail ||
+    "";
+
+
+  row.innerHTML = `
+
+    <div class="book-cover">
+
+      ${
+        cover
+
+        ?
+
+        `
+          <img
+            src="${escapeAttribute(cover)}"
+            alt=""
+            onerror="
+              this.style.display='none';
+              this.parentElement.innerHTML='📖';
+            "
+          >
+        `
+
+        :
+
+        "📖"
+      }
+
+    </div>
+
+
+    <div class="book-info">
+
+      <div class="book-title">
+        ${escapeHTML(
+          book.title ||
+          "Untitled book"
+        )}
+      </div>
+
+      <div class="book-meta">
+        ${escapeHTML(
+          seriesName
+        )}
+      </div>
+
+    </div>
+
+
+    <!-- BIG HEART -->
+
+    <button
+      class="
+        favorite
+        ${
+          book.favorite
+            ? "active"
+            : ""
+        }
+      "
+      title="${
         book.favorite
-      ) {
-
-        count++;
-
-        list.appendChild(
-          createBookElement(
-            book,
-            null
-          )
+          ? "Remove from favorites"
+          : "Add to favorites"
+      }"
+      onclick="
+        event.stopPropagation();
+        toggleFavorite(
+          '${seriesId || ""}',
+          '${book.id}'
         );
+      "
+    >
+
+      ${
+        book.favorite
+          ? "♥"
+          : "♡"
+      }
+
+    </button>
+
+
+    <!-- THREE DOT -->
+
+    <button
+      class="book-more"
+      onclick="
+        event.stopPropagation();
+        toggleBookMenu(
+          '${seriesId || ""}',
+          '${book.id}'
+        );
+      "
+    >
+      ⋮
+    </button>
+
+
+    <!-- BOOK MENU -->
+
+    <div
+      class="more-menu"
+      id="
+        book-menu-
+        ${seriesId || "standalone"}-
+        ${book.id}
+      "
+      style="
+        top:auto;
+        bottom:58px;
+      "
+    >
+
+      <button
+        onclick="
+          openBook(
+            '${seriesId || ""}',
+            '${book.id}'
+          );
+        "
+      >
+        📖 Open
+      </button>
+
+
+      <button
+        onclick="
+          editBook(
+            '${seriesId || ""}',
+            '${book.id}'
+          );
+        "
+      >
+        ✏️ Edit
+      </button>
+
+
+      <button
+        onclick="
+          moveBook(
+            '${seriesId || ""}',
+            '${book.id}'
+          );
+        "
+      >
+        📚 Move to Series
+      </button>
+
+
+      <button
+        class="danger"
+        onclick="
+          deleteBook(
+            '${seriesId || ""}',
+            '${book.id}'
+          );
+        "
+      >
+        🗑 Delete
+      </button>
+
+    </div>
+
+  `;
+
+
+  return row;
+
+}
+
+
+/* =========================================================
+   FAVORITES
+========================================================= */
+
+function renderFavorites() {
+
+  favoritesList.innerHTML =
+    "";
+
+
+  let favoriteBooks =
+    [];
+
+
+  standalone.forEach(
+    function(book) {
+
+      if (book.favorite) {
+
+        favoriteBooks.push({
+
+          book,
+
+          seriesId:
+            null,
+
+          seriesName:
+            "Standalone book"
+
+        });
 
       }
 
@@ -2479,22 +2689,41 @@ function renderFavorites() {
   );
 
 
-  document
-    .getElementById(
-      "favoritesCount"
-    )
-    .textContent =
-      count +
-      (
-        count === 1
-          ? " favorite"
-          : " favorites"
-      );
+  series.forEach(
+    function(item) {
+
+      (item.books || [])
+        .forEach(
+          function(book) {
+
+            if (book.favorite) {
+
+              favoriteBooks.push({
+
+                book,
+
+                seriesId:
+                  item.id,
+
+                seriesName:
+                  item.name
+
+              });
+
+            }
+
+          }
+        );
+
+    }
+  );
 
 
-  if (count === 0) {
+  if (
+    favoriteBooks.length === 0
+  ) {
 
-    list.innerHTML = `
+    favoritesList.innerHTML = `
 
       <div class="empty">
 
@@ -2507,185 +2736,171 @@ function renderFavorites() {
         </h2>
 
         <p>
-          Click the heart beside any
-          book to add it to favorites.
+          Click the heart beside a book
+          to add it here.
         </p>
 
       </div>
 
     `;
 
+    return;
+
   }
 
-}
 
+  favoriteBooks.forEach(
+    function(item) {
 
-/* =====================================================
-   ALL TAB
-===================================================== */
+      favoritesList.appendChild(
 
-function showAll() {
+        createBookElement(
+          item.book,
+          item.seriesId,
+          item.seriesName
+        )
 
-  document
-    .getElementById(
-      "allContent"
-    )
-    .style.display =
-      "block";
+      );
 
-
-  document
-    .getElementById(
-      "favoritesContent"
-    )
-    .style.display =
-      "none";
-
-
-  document
-    .getElementById(
-      "allTab"
-    )
-    .classList
-    .add("active");
-
-
-  document
-    .getElementById(
-      "favoritesTab"
-    )
-    .classList
-    .remove("active");
-
-
-  renderAll();
+    }
+  );
 
 }
 
 
-/* =====================================================
+/* =========================================================
    FAVORITE TOGGLE
-===================================================== */
+========================================================= */
 
-function toggleFavorite(
+window.toggleFavorite =
+async function(
   seriesId,
   bookId
 ) {
 
-  let book = null;
+  if (!currentUser)
+    return;
 
 
   if (seriesId) {
 
-    const series =
-      library.series.find(
-        s =>
-          s.id === seriesId
+    const item =
+      series.find(
+        function(s) {
+
+          return s.id === seriesId;
+
+        }
       );
 
 
-    if (series) {
+    if (!item)
+      return;
 
-      book =
-        series.books.find(
-          b =>
-            b.id === bookId
-        );
 
-    }
+    const books =
+      [...(item.books || [])];
+
+
+    const index =
+      books.findIndex(
+        function(book) {
+
+          return book.id === bookId;
+
+        }
+      );
+
+
+    if (index === -1)
+      return;
+
+
+    books[index] = {
+
+      ...books[index],
+
+      favorite:
+        !books[index].favorite
+
+    };
+
+
+    await updateDoc(
+
+      doc(
+        db,
+        "users",
+        currentUser.uid,
+        "series",
+        seriesId
+      ),
+
+      {
+
+        books
+
+      }
+
+    );
 
   }
 
   else {
 
-    book =
-      library.standalone.find(
-        b =>
-          b.id === bookId
+    const book =
+      standalone.find(
+        function(b) {
+
+          return b.id === bookId;
+
+        }
       );
 
-  }
+
+    if (!book)
+      return;
 
 
-  if (!book) return;
+    await updateDoc(
 
+      doc(
+        db,
+        "users",
+        currentUser.uid,
+        "standalone",
+        bookId
+      ),
 
-  book.favorite =
-    !book.favorite;
+      {
 
+        favorite:
+          !book.favorite
 
-  save();
+      }
 
-
-  renderAll();
-
-
-  if (
-    currentSeriesId
-  ) {
-
-    renderSeriesPage();
-
-  }
-
-
-  if (
-    document
-      .getElementById(
-        "favoritesContent"
-      )
-      .style.display !== "none"
-  ) {
-
-    renderFavorites();
+    );
 
   }
 
-}
+};
 
 
-/* =====================================================
+/* =========================================================
    OPEN BOOK
-===================================================== */
+========================================================= */
 
-function openBook(
+window.openBook =
+function(
   seriesId,
   bookId
 ) {
 
-  let book = null;
-
-
-  if (seriesId) {
-
-    const series =
-      library.series.find(
-        s =>
-          s.id === seriesId
-      );
-
-
-    if (series) {
-
-      book =
-        series.books.find(
-          b =>
-            b.id === bookId
-        );
-
-    }
-
-  }
-
-  else {
-
-    book =
-      library.standalone.find(
-        b =>
-          b.id === bookId
-      );
-
-  }
+  const book =
+    findBook(
+      seriesId,
+      bookId
+    );
 
 
   if (
@@ -2700,146 +2915,1299 @@ function openBook(
 
   }
 
+};
+
+
+/* =========================================================
+   FIND BOOK
+========================================================= */
+
+function findBook(
+  seriesId,
+  bookId
+) {
+
+  if (seriesId) {
+
+    const item =
+      series.find(
+        function(s) {
+
+          return s.id === seriesId;
+
+        }
+      );
+
+
+    if (!item)
+      return null;
+
+
+    return (
+      item.books || []
+    ).find(
+      function(book) {
+
+        return book.id === bookId;
+
+      }
+    );
+
+  }
+
+
+  return standalone.find(
+    function(book) {
+
+      return book.id === bookId;
+
+    }
+  );
+
 }
 
 
-/* =====================================================
+/* =========================================================
    DELETE BOOK
-===================================================== */
+========================================================= */
 
-function deleteBook(
+window.deleteBook =
+async function(
   seriesId,
   bookId
 ) {
 
   if (
     !confirm(
-      "Remove this book?"
+      "Delete this book?"
     )
-  ) {
-
+  )
     return;
-
-  }
 
 
   if (seriesId) {
 
-    const series =
-      library.series.find(
-        s =>
-          s.id === seriesId
+    const item =
+      series.find(
+        function(s) {
+
+          return s.id === seriesId;
+
+        }
       );
 
 
-    if (series) {
+    if (!item)
+      return;
 
-      series.books =
-        series.books.filter(
-          b =>
-            b.id !== bookId
+
+    const newBooks =
+      (item.books || [])
+        .filter(
+          function(book) {
+
+            return book.id !== bookId;
+
+          }
         );
 
-    }
+
+    await updateDoc(
+
+      doc(
+        db,
+        "users",
+        currentUser.uid,
+        "series",
+        seriesId
+      ),
+
+      {
+
+        books:
+          newBooks
+
+      }
+
+    );
+
 
   }
 
   else {
 
-    library.standalone =
-      library.standalone.filter(
-        b =>
-          b.id !== bookId
-      );
+    await deleteDoc(
+
+      doc(
+        db,
+        "users",
+        currentUser.uid,
+        "standalone",
+        bookId
+      )
+
+    );
 
   }
 
-
-  save();
-
-  renderAll();
+};
 
 
-  if (
-    currentSeriesId
-  ) {
+/* =========================================================
+   EDIT BOOK
+========================================================= */
 
-    renderSeriesPage();
+window.editBook =
+function(
+  seriesId,
+  bookId
+) {
 
-  }
-
-}
-
-
-/* =====================================================
-   RENAME SERIES
-===================================================== */
-
-function renameSeries(id) {
-
-  const series =
-    library.series.find(
-      s =>
-        s.id === id
+  const book =
+    findBook(
+      seriesId,
+      bookId
     );
 
 
-  if (!series) return;
+  if (!book)
+    return;
 
 
-  const name =
-    prompt(
-      "Enter the new series name:",
-      series.name
+  editingBookId =
+    bookId;
+
+  editingBookSeriesId =
+    seriesId || null;
+
+
+  document
+    .getElementById(
+      "editBookNameInput"
+    )
+    .value =
+      book.title || "";
+
+
+  closeAllMenus();
+
+
+  editBookModal
+    .classList.add(
+      "show"
     );
 
-
-  if (
-    name &&
-    name.trim()
-  ) {
-
-    series.name =
-      name.trim();
-
-    save();
-
-    renderAll();
+};
 
 
-    if (
-      currentSeriesId === id
-    ) {
+/* =========================================================
+   SAVE EDIT BOOK
+========================================================= */
 
-      renderSeriesPage();
+document
+  .getElementById(
+    "saveEditBook"
+  )
+  .addEventListener(
+    "click",
+    async function() {
+
+      const name =
+        document
+          .getElementById(
+            "editBookNameInput"
+          )
+          .value
+          .trim();
+
+
+      if (!name)
+        return;
+
+
+      const seriesId =
+        editingBookSeriesId;
+
+
+      const bookId =
+        editingBookId;
+
+
+      if (seriesId) {
+
+        const item =
+          series.find(
+            function(s) {
+
+              return s.id === seriesId;
+
+            }
+          );
+
+
+        if (!item)
+          return;
+
+
+        const books =
+          [...(item.books || [])];
+
+
+        const index =
+          books.findIndex(
+            function(book) {
+
+              return book.id === bookId;
+
+            }
+          );
+
+
+        if (index === -1)
+          return;
+
+
+        books[index] = {
+
+          ...books[index],
+
+          title:
+            name
+
+        };
+
+
+        await updateDoc(
+
+          doc(
+            db,
+            "users",
+            currentUser.uid,
+            "series",
+            seriesId
+          ),
+
+          {
+
+            books
+
+          }
+
+        );
+
+      }
+
+      else {
+
+        await updateDoc(
+
+          doc(
+            db,
+            "users",
+            currentUser.uid,
+            "standalone",
+            bookId
+          ),
+
+          {
+
+            title:
+              name
+
+          }
+
+        );
+
+      }
+
+
+      editBookModal
+        .classList.remove(
+          "show"
+        );
 
     }
+  );
+
+
+/* =========================================================
+   MOVE BOOK
+========================================================= */
+
+window.moveBook =
+function(
+  seriesId,
+  bookId
+) {
+
+  movingBookId =
+    bookId;
+
+  movingBookSeriesId =
+    seriesId || null;
+
+
+  const select =
+    document.getElementById(
+      "moveBookSelect"
+    );
+
+
+  select.innerHTML = `
+
+    <option value="">
+      Standalone Books
+    </option>
+
+  `;
+
+
+  series.forEach(
+    function(item) {
+
+      if (
+        item.id !== seriesId
+      ) {
+
+        select.innerHTML += `
+
+          <option
+            value="${item.id}"
+          >
+            ${escapeHTML(
+              item.name
+            )}
+          </option>
+
+        `;
+
+      }
+
+    }
+  );
+
+
+  closeAllMenus();
+
+
+  moveBookModal
+    .classList.add(
+      "show"
+    );
+
+};
+
+
+/* =========================================================
+   SAVE MOVE
+========================================================= */
+
+document
+  .getElementById(
+    "saveMoveBook"
+  )
+  .addEventListener(
+    "click",
+    async function() {
+
+      const destination =
+        document
+          .getElementById(
+            "moveBookSelect"
+          )
+          .value;
+
+
+      const book =
+        findBook(
+          movingBookSeriesId,
+          movingBookId
+        );
+
+
+      if (!book)
+        return;
+
+
+      /* REMOVE FROM CURRENT LOCATION */
+
+      if (movingBookSeriesId) {
+
+        const current =
+          series.find(
+            function(item) {
+
+              return (
+                item.id ===
+                movingBookSeriesId
+              );
+
+            }
+          );
+
+
+        if (current) {
+
+          const books =
+            (current.books || [])
+              .filter(
+                function(item) {
+
+                  return (
+                    item.id !==
+                    movingBookId
+                  );
+
+                }
+              );
+
+
+          await updateDoc(
+
+            doc(
+              db,
+              "users",
+              currentUser.uid,
+              "series",
+              movingBookSeriesId
+            ),
+
+            {
+
+              books
+
+            }
+
+          );
+
+        }
+
+      }
+
+      else {
+
+        await deleteDoc(
+
+          doc(
+            db,
+            "users",
+            currentUser.uid,
+            "standalone",
+            movingBookId
+          )
+
+        );
+
+      }
+
+
+      /* ADD TO NEW LOCATION */
+
+      if (destination) {
+
+        const destinationSeries =
+          series.find(
+            function(item) {
+
+              return (
+                item.id ===
+                destination
+              );
+
+            }
+          );
+
+
+        if (
+          destinationSeries
+        ) {
+
+          const newBook = {
+
+            ...book,
+
+            id:
+              "book_" +
+              Date.now() +
+              "_" +
+              Math.random()
+                .toString(36)
+                .slice(2),
+
+          };
+
+
+          await updateDoc(
+
+            doc(
+              db,
+              "users",
+              currentUser.uid,
+              "series",
+              destination
+            ),
+
+            {
+
+              books: [
+
+                ...(destinationSeries.books || []),
+
+                newBook
+
+              ]
+
+            }
+
+          );
+
+        }
+
+      }
+
+      else {
+
+        await addDoc(
+
+          collection(
+            db,
+            "users",
+            currentUser.uid,
+            "standalone"
+          ),
+
+          {
+
+            ...book,
+
+            createdAt:
+              serverTimestamp()
+
+          }
+
+        );
+
+      }
+
+
+      moveBookModal
+        .classList.remove(
+          "show"
+        );
+
+    }
+  );
+
+
+/* =========================================================
+   SERIES MENU
+========================================================= */
+
+window.toggleSeriesMenu =
+function(id) {
+
+  closeAllMenus();
+
+
+  const menu =
+    document.getElementById(
+      "series-menu-" + id
+    );
+
+
+  if (menu) {
+
+    menu.classList.add(
+      "show"
+    );
 
   }
+
+};
+
+
+/* =========================================================
+   BOOK MENU
+========================================================= */
+
+window.toggleBookMenu =
+function(
+  seriesId,
+  bookId
+) {
+
+  closeAllMenus();
+
+
+  const menu =
+    document.getElementById(
+
+      "book-menu-" +
+      (
+        seriesId ||
+        "standalone"
+      ) +
+      "-" +
+      bookId
+
+    );
+
+
+  if (menu) {
+
+    menu.classList.add(
+      "show"
+    );
+
+  }
+
+};
+
+
+/* =========================================================
+   CLOSE MENUS
+========================================================= */
+
+function closeAllMenus() {
+
+  document
+    .querySelectorAll(
+      ".more-menu"
+    )
+    .forEach(
+      function(menu) {
+
+        menu.classList.remove(
+          "show"
+        );
+
+      }
+    );
 
 }
 
 
-/* =====================================================
-   DELETE SERIES
-===================================================== */
+document.addEventListener(
+  "click",
+  function() {
 
-function deleteSeries(id) {
+    closeAllMenus();
 
-  const series =
-    library.series.find(
-      s =>
-        s.id === id
+  }
+);
+
+
+/* =========================================================
+   ADD SERIES
+========================================================= */
+
+function openSeriesModal() {
+
+  document
+    .getElementById(
+      "seriesNameInput"
+    )
+    .value = "";
+
+
+  seriesModal
+    .classList.add(
+      "show"
     );
 
 
-  if (!series) return;
+  setTimeout(
+    function() {
+
+      document
+        .getElementById(
+          "seriesNameInput"
+        )
+        .focus();
+
+    },
+    50
+  );
+
+}
+
+
+window.openSeriesModal =
+openSeriesModal;
+
+
+document
+  .getElementById(
+    "mainAddButton"
+  )
+  .addEventListener(
+    "click",
+    openSeriesModal
+  );
+
+
+document
+  .getElementById(
+    "cancelSeries"
+  )
+  .addEventListener(
+    "click",
+    function() {
+
+      seriesModal
+        .classList.remove(
+          "show"
+        );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "saveSeries"
+  )
+  .addEventListener(
+    "click",
+    async function() {
+
+      const name =
+        document
+          .getElementById(
+            "seriesNameInput"
+          )
+          .value
+          .trim();
+
+
+      if (!name) {
+
+        alert(
+          "Enter a series name."
+        );
+
+        return;
+
+      }
+
+
+      await addDoc(
+
+        collection(
+          db,
+          "users",
+          currentUser.uid,
+          "series"
+        ),
+
+        {
+
+          name,
+
+          books: [],
+
+          createdAt:
+            serverTimestamp()
+
+        }
+
+      );
+
+
+      seriesModal
+        .classList.remove(
+          "show"
+        );
+
+    }
+  );
+
+
+/* =========================================================
+   EDIT SERIES
+========================================================= */
+
+window.editSeries =
+function(id) {
+
+  const item =
+    series.find(
+      function(s) {
+
+        return s.id === id;
+
+      }
+    );
+
+
+  if (!item)
+    return;
+
+
+  editingSeriesId =
+    id;
+
+
+  document
+    .getElementById(
+      "editSeriesNameInput"
+    )
+    .value =
+      item.name;
+
+
+  closeAllMenus();
+
+
+  editSeriesModal
+    .classList.add(
+      "show"
+    );
+
+};
+
+
+/* =========================================================
+   SAVE SERIES NAME
+========================================================= */
+
+document
+  .getElementById(
+    "saveEditSeries"
+  )
+  .addEventListener(
+    "click",
+    async function() {
+
+      const name =
+        document
+          .getElementById(
+            "editSeriesNameInput"
+          )
+          .value
+          .trim();
+
+
+      if (!name)
+        return;
+
+
+      await updateDoc(
+
+        doc(
+          db,
+          "users",
+          currentUser.uid,
+          "series",
+          editingSeriesId
+        ),
+
+        {
+
+          name
+
+        }
+
+      );
+
+
+      editSeriesModal
+        .classList.remove(
+          "show"
+        );
+
+    }
+  );
+
+
+/* =========================================================
+   DELETE SERIES
+========================================================= */
+
+window.deleteSeries =
+async function(id) {
+
+  const item =
+    series.find(
+      function(s) {
+
+        return s.id === id;
+
+      }
+    );
+
+
+  if (!item)
+    return;
+
+
+  const confirmed =
+    confirm(
+
+      "Delete \"" +
+      item.name +
+      "\" and all books inside it?"
+
+    );
+
+
+  if (!confirmed)
+    return;
+
+
+  await deleteDoc(
+
+    doc(
+      db,
+      "users",
+      currentUser.uid,
+      "series",
+      id
+    )
+
+  );
+
+};
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function showSeriesView() {
+
+  currentView =
+    "series";
+
+
+  document
+    .getElementById(
+      "seriesContent"
+    )
+    .style.display =
+      "block";
+
+
+  document
+    .getElementById(
+      "standaloneContent"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "favoritesContent"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "homeTitle"
+    )
+    .textContent =
+      "Series";
+
+
+  document
+    .getElementById(
+      "mainAddButton"
+    )
+    .style.display =
+      "block";
+
+
+  document
+    .getElementById(
+      "mainAddButton"
+    )
+    .textContent =
+      "＋ Add Series";
+
+
+  setActiveNav(
+    "seriesNav"
+  );
+
+}
+
+
+function showStandaloneView() {
+
+  currentView =
+    "standalone";
+
+
+  document
+    .getElementById(
+      "seriesContent"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "standaloneContent"
+    )
+    .style.display =
+      "block";
+
+
+  document
+    .getElementById(
+      "favoritesContent"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "homeTitle"
+    )
+    .textContent =
+      "Standalone";
+
+
+  document
+    .getElementById(
+      "mainAddButton"
+    )
+    .style.display =
+      "none";
+
+
+  setActiveNav(
+    "standaloneNav"
+  );
+
+}
+
+
+function showFavoritesView() {
+
+  currentView =
+    "favorites";
+
+
+  document
+    .getElementById(
+      "seriesContent"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "standaloneContent"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "favoritesContent"
+    )
+    .style.display =
+      "block";
+
+
+  document
+    .getElementById(
+      "homeTitle"
+    )
+    .textContent =
+      "Favorites";
+
+
+  document
+    .getElementById(
+      "mainAddButton"
+    )
+    .style.display =
+      "none";
+
+
+  setActiveNav(
+    "favoritesNav"
+  );
+
+}
+
+
+function setActiveNav(id) {
+
+  document
+    .querySelectorAll(
+      ".nav-item"
+    )
+    .forEach(
+      function(item) {
+
+        item.classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+
+  document
+    .getElementById(id)
+    .classList.add(
+      "active"
+    );
+
+}
+
+
+document
+  .getElementById(
+    "seriesNav"
+  )
+  .addEventListener(
+    "click",
+    showSeriesView
+  );
+
+
+document
+  .getElementById(
+    "standaloneNav"
+  )
+  .addEventListener(
+    "click",
+    showStandaloneView
+  );
+
+
+document
+  .getElementById(
+    "favoritesNav"
+  )
+  .addEventListener(
+    "click",
+    showFavoritesView
+  );
+
+
+/* =========================================================
+   BACK FROM SERIES
+========================================================= */
+
+document
+  .getElementById(
+    "backButton"
+  )
+  .addEventListener(
+    "click",
+    function() {
+
+      currentSeriesId =
+        null;
+
+
+      document
+        .getElementById(
+          "seriesPage"
+        )
+        .style.display =
+          "none";
+
+
+      document
+        .getElementById(
+          "homePage"
+        )
+        .style.display =
+          "block";
+
+
+      showSeriesView();
+
+    }
+  );
+
+
+/* =========================================================
+   ADD STANDALONE
+========================================================= */
+
+document
+  .getElementById(
+    "addStandaloneButton"
+  )
+  .addEventListener(
+    "click",
+    function() {
+
+      openDrivePicker(
+        "standalone"
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   ADD BOOK TO SERIES
+========================================================= */
+
+document
+  .getElementById(
+    "seriesAddBookButton"
+  )
+  .addEventListener(
+    "click",
+    function() {
+
+      openDrivePicker(
+        "series"
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   DRIVE PICKER
+========================================================= */
+
+async function openDrivePicker(
+  destination
+) {
+
+  if (!currentUser) {
+
+    alert(
+      "Please sign in first."
+    );
+
+    return;
+
+  }
+
+
+  if (!pickerReady) {
+
+    alert(
+      "Google Drive Picker is still loading. Try again in a moment."
+    );
+
+    return;
+
+  }
 
 
   if (
-    !confirm(
-      "Delete this series and all books inside it?"
-    )
+    destination === "series" &&
+    !currentSeriesId
   ) {
 
     return;
@@ -2847,48 +4215,306 @@ function deleteSeries(id) {
   }
 
 
-  library.series =
-    library.series.filter(
-      s =>
-        s.id !== id
+  try {
+
+    const provider =
+      new GoogleAuthProvider();
+
+
+    provider.addScope(
+      DRIVE_SCOPE
     );
 
 
-  save();
+    const result =
+      await signInWithPopup(
+        auth,
+        provider
+      );
 
-  renderAll();
+
+    const credential =
+      GoogleAuthProvider
+        .credentialFromResult(
+          result
+        );
+
+
+    driveAccessToken =
+      credential &&
+      credential.accessToken;
+
+
+    if (!driveAccessToken) {
+
+      throw new Error(
+        "Google Drive permission was not granted."
+      );
+
+    }
+
+
+    const view =
+      new google.picker.DocsView(
+        google.picker.ViewId.DOCS
+      );
+
+
+    view.setIncludeFolders(
+      false
+    );
+
+
+    const picker =
+      new google.picker.PickerBuilder()
+
+        .setDeveloperKey(
+          GOOGLE_API_KEY
+        )
+
+        .setAppId(
+          GOOGLE_APP_ID
+        )
+
+        .setOAuthToken(
+          driveAccessToken
+        )
+
+        .setTitle(
+          "Choose a PDF from Google Drive"
+        )
+
+        .setSelectableMimeTypes(
+          "application/pdf"
+        )
+
+        .addView(view)
+
+        .setCallback(
+          function(data) {
+
+            drivePickerCallback(
+              data,
+              destination
+            );
+
+          }
+        )
+
+        .build();
+
+
+    picker.setVisible(
+      true
+    );
+
+  }
+
+  catch(error) {
+
+    console.error(error);
+
+    alert(
+      "Google Drive error:\n\n" +
+      error.message
+    );
+
+  }
 
 }
 
 
-/* =====================================================
-   STANDALONE QUICK BUTTON
-===================================================== */
+/* =========================================================
+   DRIVE CALLBACK
+========================================================= */
 
-function openStandaloneModal() {
+async function drivePickerCallback(
+  data,
+  destination
+) {
 
-  selectedBookType =
-    "standalone";
+  if (
+    data.action !==
+    google.picker.Action.PICKED
+  ) {
 
-  updateBookTypeUI();
+    return;
 
-  document
-    .getElementById(
-      "bookModal"
-    )
-    .classList
-    .add("show");
+  }
+
+
+  const file =
+    data.docs[0];
+
+
+  const book = {
+
+    id:
+      "book_" +
+      Date.now() +
+      "_" +
+      Math.random()
+        .toString(36)
+        .slice(2),
+
+    title:
+      file.name
+        .replace(
+          /\.pdf$/i,
+          ""
+        ),
+
+    favorite:
+      false,
+
+    link:
+      "https://drive.google.com/file/d/" +
+      file.id +
+      "/view",
+
+    driveFileId:
+      file.id,
+
+    thumbnail:
+      file.thumbnailUrl ||
+      ""
+
+  };
+
+
+  try {
+
+    /* =====================================================
+       ADD TO SERIES
+    ===================================================== */
+
+    if (
+      destination ===
+      "series"
+    ) {
+
+      const item =
+        series.find(
+          function(s) {
+
+            return (
+              s.id ===
+              currentSeriesId
+            );
+
+          }
+        );
+
+
+      if (!item)
+        return;
+
+
+      await updateDoc(
+
+        doc(
+          db,
+          "users",
+          currentUser.uid,
+          "series",
+          currentSeriesId
+        ),
+
+        {
+
+          books: [
+
+            ...(item.books || []),
+
+            book
+
+          ]
+
+        }
+
+      );
+
+
+      renderSeriesBooks();
+
+    }
+
+
+    /* =====================================================
+       ADD AS STANDALONE
+    ===================================================== */
+
+    else {
+
+      await addDoc(
+
+        collection(
+          db,
+          "users",
+          currentUser.uid,
+          "standalone"
+        ),
+
+        {
+
+          ...book,
+
+          createdAt:
+            serverTimestamp()
+
+        }
+
+      );
+
+    }
+
+  }
+
+  catch(error) {
+
+    console.error(error);
+
+    alert(
+      "Couldn't add the book:\n\n" +
+      error.message
+    );
+
+  }
 
 }
 
 
-/* =====================================================
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+document
+  .getElementById(
+    "logoutButton"
+  )
+  .addEventListener(
+    "click",
+    async function() {
+
+      await signOut(
+        auth
+      );
+
+    }
+  );
+
+
+/* =========================================================
    ESCAPE HTML
-===================================================== */
+========================================================= */
 
-function escapeHTML(text) {
+function escapeHTML(
+  text
+) {
 
-  return String(text)
+  return String(
+    text ?? ""
+  )
 
     .replace(
       /&/g,
@@ -2918,54 +4544,60 @@ function escapeHTML(text) {
 }
 
 
-/* =====================================================
-   CLOSE MODALS OUTSIDE
-===================================================== */
+function escapeAttribute(
+  text
+) {
 
-document
-  .getElementById(
-    "seriesModal"
-  )
-  .addEventListener(
-    "click",
-    function(event) {
-
-      if (
-        event.target === this
-      ) {
-
-        closeSeriesModal();
-
-      }
-
-    }
+  return escapeHTML(
+    text
   );
 
+}
 
-document
-  .getElementById(
-    "bookModal"
-  )
-  .addEventListener(
-    "click",
-    function(event) {
 
-      if (
-        event.target === this
-      ) {
+/* =========================================================
+   CLOSE MODALS BY CLICKING OUTSIDE
+========================================================= */
 
-        closeBookModal();
+[
+  seriesModal,
+  editSeriesModal,
+  editBookModal,
+  moveBookModal
+]
+.forEach(
+  function(modal) {
+
+    modal.addEventListener(
+      "click",
+      function(event) {
+
+        if (
+          event.target ===
+          modal
+        ) {
+
+          modal.classList.remove(
+            "show"
+          );
+
+        }
 
       }
+    );
 
-    }
-  );
+  }
+);
 
-renderAll();
+
+/* =========================================================
+   INITIAL VIEW
+========================================================= */
+
+showSeriesView();
 
 </script>
 
 </body>
 
 </html>
-
