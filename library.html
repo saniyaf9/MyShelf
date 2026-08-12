@@ -1,382 +1,685 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MyShelf</title>
+<title>MyShelf — My Library</title>
 
 <style>
+
 * {
   box-sizing: border-box;
 }
 
-html, body {
+html {
+  scroll-behavior: smooth;
+}
+
+body {
   margin: 0;
-  padding: 0;
-  min-height: 100%;
   background: #080f13;
   color: #f9f9f9;
   font-family: Arial, sans-serif;
 }
 
-body {
-  overflow-x: hidden;
-}
-
 button,
 input,
 select {
-  font: inherit;
+  font-family: Arial, sans-serif;
 }
 
-button {
-  cursor: pointer;
-}
-.library {
+header {
+  height: 78px;
+  padding: 0 6%;
+
   display: flex;
-  min-height: 100vh;
-}
+  align-items: center;
+  justify-content: space-between;
 
-.sidebar {
-  width: 270px;
-  min-height: 100vh;
-  padding: 30px 20px;
-  background: #080f13;
-  border-right: 1px solid #263238;
-  flex-shrink: 0;
-}
+  border-bottom: 1px solid #263238;
 
-.main {
-  flex: 1;
-  min-width: 0;
-  padding: 40px;
+  position: sticky;
+  top: 0;
+
+  z-index: 50;
+
+  background: rgba(8,15,19,.96);
+
+  backdrop-filter: blur(10px);
 }
 
 .logo {
   font-family: Georgia, serif;
-  font-size: 34px;
-  margin-left: 12px;
+  font-size: 28px;
 }
 
-.tagline {
-  margin: 8px 12px 35px;
-  color: #8e999e;
-  font-size: 10px;
-  letter-spacing: 3px;
-}
+.add-books {
+  background: #f9f9f9;
+  color: #080f13;
 
-.nav-item {
-  height: 48px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 0 13px;
-  margin-bottom: 6px;
-  border-radius: 12px;
-  color: #eee;
-  transition: .2s;
-}
+  border: none;
 
-.nav-item:hover {
-  background: #101a1f;
-}
+  padding: 12px 20px;
 
-.nav-item.active {
-  background: #162228;
-}
+  border-radius: 25px;
 
-.nav-icon {
-  width: 25px;
-}
-
-.nav-name {
-  flex: 1;
-}
-
-.nav-count {
-  color: #8e999e;
   font-size: 12px;
+
+  font-weight: 600;
+
+  text-decoration: none;
 }
 
-.shelves-title {
-  display: flex;
-  align-items: center;
-  margin: 45px 13px 15px;
-  color: #8e999e;
-  font-size: 10px;
-  letter-spacing: 2px;
+.add-books:hover {
+  opacity: .8;
 }
 
-.shelves-title span {
-  flex: 1;
+main {
+  width: min(1100px, 88%);
+  margin: auto;
+  padding: 70px 0 100px;
 }
 
-.add-shelf {
-  font-size: 24px;
-  color: white;
-  cursor: pointer;
-}
 
-#shelfList {
-  margin-top: 5px;
-}
-
-.shelf-nav {
-  display: flex;
-  align-items: center;
-  padding: 10px 13px;
-  border-radius: 10px;
-  cursor: pointer;
-  color: #d9dfe1;
-}
-
-.shelf-nav:hover {
-  background: #101a1f;
-}
-
-.shelf-nav.active {
-  background: #162228;
-}
-
-.shelf-nav span:first-child {
-  flex: 1;
-}
-
-.shelf-nav small {
-  color: #7d898e;
-}
-
-.quote {
-  margin: 70px 13px 0;
-  color: #778388;
-  font-family: Georgia, serif;
-  font-style: italic;
-  line-height: 1.6;
-  font-size: 13px;
-}
-
-.top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 20px;
-}
+/* =====================================================
+   INTRO
+===================================================== */
 
 .eyebrow {
-  color: #8e999e;
+  color: #7f8c91;
+
   font-size: 10px;
-  letter-spacing: 3px;
-  margin-bottom: 8px;
+
+  letter-spacing: 4px;
+
+  text-transform: uppercase;
+
+  margin-bottom: 12px;
 }
 
 h1 {
   margin: 0;
+
   font-family: Georgia, serif;
+
+  font-size: clamp(45px, 7vw, 75px);
+
   font-weight: 400;
-  font-size: 48px;
+
+  letter-spacing: -3px;
 }
+
+.description {
+  max-width: 560px;
+
+  margin-top: 18px;
+
+  color: #7f8c91;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+
+/* =====================================================
+   TOP BUTTONS
+===================================================== */
 
 .actions {
   display: flex;
-  align-items: center;
-  gap: 12px;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+  margin-top: 30px;
 }
 
-.total {
-  color: #8e999e;
+.primary {
+  border: none;
+
+  background: #f9f9f9;
+
+  color: #080f13;
+
+  padding: 12px 20px;
+
+  border-radius: 25px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.primary:hover {
+  opacity: .8;
+}
+
+.secondary {
+  border: 1px solid #35434a;
+
+  background: transparent;
+
+  color: white;
+
+  padding: 11px 19px;
+
+  border-radius: 25px;
+
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   TABS
+===================================================== */
+
+.tabs {
+  display: flex;
+
+  gap: 5px;
+
+  margin-top: 65px;
+
+  border-bottom: 1px solid #263238;
+}
+
+.tab {
+  border: none;
+
+  background: transparent;
+
+  color: #68767b;
+
+  padding: 14px 18px;
+
+  border-bottom: 2px solid transparent;
+
+  cursor: pointer;
+
   font-size: 12px;
 }
 
-.sort {
-  height: 42px;
-  padding: 0 12px;
-  border-radius: 10px;
-  border: 1px solid #303d43;
-  background: #10191e;
+.tab:hover {
   color: white;
 }
 
-.add-button {
-  height: 42px;
-  padding: 0 20px;
-  border: none;
-  border-radius: 22px;
-  background: white;
-  color: #080f13;
-  font-weight: bold;
+.tab.active {
+  color: white;
+
+  border-bottom-color: white;
 }
 
-.shelf-header {
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.section {
+  margin-top: 40px;
+}
+
+.section-header {
   display: flex;
+
   align-items: center;
-  gap: 15px;
-  margin-top: 50px;
+
+  justify-content: space-between;
+
   margin-bottom: 20px;
 }
 
-.shelf-header h2 {
-  margin: 0;
+.section-title {
   font-family: Georgia, serif;
-  font-size: 28px;
-  font-weight: 400;
+
+  font-size: 29px;
 }
 
-.shelf-header span {
-  color: #7f8b90;
-  font-size: 12px;
+.section-count {
+  color: #68767b;
+
+  font-size: 11px;
 }
 
-.book-grid {
+
+/* =====================================================
+   SERIES GRID
+===================================================== */
+
+.series-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 25px;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(260px, 1fr));
+
+  gap: 18px;
 }
 
-.book-card {
-  position: relative;
-  background: #10191e;
-  border: 1px solid #263238;
-  border-radius: 14px;
+
+/* =====================================================
+   SERIES CARD
+===================================================== */
+
+.series-card {
+  border: 1px solid #26343a;
+
+  background: #0d171c;
+
+  border-radius: 18px;
+
   overflow: hidden;
-  transition: transform .2s, border .2s;
+
+  transition: .2s;
 }
 
-.book-card:hover {
-  transform: translateY(-3px);
-  border-color: #46555c;
+.series-card:hover {
+  border-color: #536168;
+
+  transform: translateY(-2px);
 }
 
-.cover {
-  height: 250px;
-  background: #162228;
+.series-top {
+  padding: 25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #17242a,
+      #0d171c
+    );
+}
+
+.series-icon {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 13px;
+
+  background: #091115;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
-  overflow: hidden;
+
+  font-size: 24px;
+
+  margin-bottom: 20px;
 }
 
-.cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.series-name {
+  font-family: Georgia, serif;
+
+  font-size: 22px;
 }
 
-.cover-placeholder {
-  font-size: 55px;
+.series-count {
+  margin-top: 7px;
+
+  color: #718087;
+
+  font-size: 11px;
+}
+
+.series-bottom {
+  padding: 16px 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.open-series {
+  border: none;
+
+  background: transparent;
+
+  color: white;
+
+  padding: 0;
+
+  cursor: pointer;
+}
+
+.icon-button {
+  width: 31px;
+  height: 31px;
+
+  border: 1px solid #334148;
+
+  background: transparent;
+
+  color: #9aa5a9;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  background: #17242a;
+
+  color: white;
+}
+
+
+/* =====================================================
+   BOOK LIST
+===================================================== */
+
+.book-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.book {
+  min-height: 75px;
+
+  padding: 13px 17px;
+
+  border: 1px solid #26343a;
+
+  border-radius: 13px;
+
+  background: #0d171c;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+.book-cover {
+  width: 45px;
+  height: 55px;
+
+  border-radius: 7px;
+
+  background: #17242a;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 20px;
+
+  flex-shrink: 0;
 }
 
 .book-info {
-  padding: 15px;
+  flex: 1;
+
+  min-width: 0;
 }
 
 .book-title {
   font-family: Georgia, serif;
-  font-size: 18px;
-  line-height: 1.25;
+
+  font-size: 17px;
+
+  word-break: break-word;
 }
 
-.book-series {
-  margin-top: 6px;
-  color: #7f8b90;
-  font-size: 12px;
+.book-meta {
+  color: #68767b;
+
+  font-size: 10px;
+
+  margin-top: 5px;
 }
 
-.book-actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 13px;
-}
+
+/* =====================================================
+   BIG CLICKABLE FAVORITE HEART
+===================================================== */
 
 .favorite {
-  border: none;
-  background: none;
-  color: #707c81;
-  font-size: 27px;
-  padding: 0;
-  line-height: 1;
+  width: 44px;
+  height: 44px;
+
+  border: 1px solid #35434a;
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: #7b888d;
+
+  font-size: 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+
+  transition:
+    .2s ease;
+}
+
+.favorite:hover {
+  border-color: #f9f9f9;
+
+  color: #f9f9f9;
+
+  transform: scale(1.08);
 }
 
 .favorite.active {
+  color: #ffffff;
+
+  border-color: #ffffff;
+}
+
+.favorite.active:hover {
+  background: #17242a;
+
+  transform: scale(1.08);
+}
+
+
+/* =====================================================
+   BOOK BUTTONS
+===================================================== */
+
+.open-book {
+  border: 1px solid #35434a;
+
+  background: transparent;
+
+  color: white;
+
+  padding: 8px 12px;
+
+  border-radius: 8px;
+
+  font-size: 10px;
+
+  cursor: pointer;
+}
+
+.open-book:hover {
+  background: #17242a;
+}
+
+.delete-book {
+  border: none;
+
+  background: transparent;
+
+  color: #59666b;
+
+  font-size: 18px;
+
+  cursor: pointer;
+}
+
+.delete-book:hover {
   color: white;
 }
 
-.menu-button {
-  border: none;
-  background: transparent;
-  color: #9aa4a8;
-  font-size: 23px;
-  padding: 0 5px;
-}
 
-.menu {
-  position: absolute;
-  right: 10px;
-  bottom: 48px;
-  width: 125px;
-  background: #182328;
-  border: 1px solid #344249;
-  border-radius: 10px;
-  padding: 5px;
-  display: none;
-  z-index: 10;
-  box-shadow: 0 10px 30px rgba(0,0,0,.5);
-}
+/* =====================================================
+   EMPTY
+===================================================== */
 
-.menu.show {
-  display: block;
-}
+.empty {
+  border: 1px dashed #2b3940;
 
-.menu button {
-  width: 100%;
-  padding: 9px;
-  background: transparent;
-  border: none;
-  color: white;
-  text-align: left;
-  border-radius: 7px;
-}
+  border-radius: 18px;
 
-.menu button:hover {
-  background: #26343a;
-}
+  padding: 65px 25px;
 
-.menu .delete {
-  color: #ff8f8f;
-}
-
-.empty-state {
-  min-height: 55vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-align: center;
 }
 
 .empty-icon {
-  font-size: 60px;
+  font-size: 45px;
+
+  margin-bottom: 15px;
 }
 
-.empty-state h2 {
+.empty h2 {
+  margin: 0;
+
   font-family: Georgia, serif;
-  font-size: 32px;
+
+  font-size: 30px;
+
   font-weight: 400;
 }
 
-.empty-state p {
-  color: #8e999e;
+.empty p {
+  color: #718087;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+
+  margin: 12px auto 25px;
+
+  max-width: 400px;
 }
 
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.75);
+
+/* =====================================================
+   SERIES PAGE
+===================================================== */
+
+#seriesPage {
   display: none;
+}
+
+.back {
+  border: none;
+
+  background: transparent;
+
+  color: #718087;
+
+  padding: 0;
+
+  cursor: pointer;
+
+  margin-bottom: 25px;
+}
+
+.back:hover {
+  color: white;
+}
+
+.series-header {
+  display: flex;
+
   align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 35px;
+}
+
+.series-heading {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+.series-heading-icon {
+  width: 60px;
+  height: 60px;
+
+  border-radius: 15px;
+
+  background: #17242a;
+
+  display: flex;
+
+  align-items: center;
+
   justify-content: center;
-  z-index: 1000;
+
+  font-size: 27px;
+}
+
+.series-heading h2 {
+  margin: 0;
+
+  font-family: Georgia, serif;
+
+  font-size: 34px;
+
+  font-weight: 400;
+}
+
+.series-heading p {
+  margin: 5px 0 0;
+
+  color: #718087;
+
+  font-size: 11px;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal {
+  display: none;
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 200;
+
+  background: rgba(0,0,0,.82);
+
+  align-items: center;
+
+  justify-content: center;
+
   padding: 20px;
 }
 
@@ -386,749 +689,313 @@ h1 {
 
 .modal-box {
   width: 100%;
-  max-width: 450px;
-  background: #111b20;
+
+  max-width: 440px;
+
+  padding: 30px;
+
+  background: #0f191e;
+
   border: 1px solid #35434a;
-  border-radius: 16px;
-  padding: 25px;
+
+  border-radius: 18px;
 }
 
 .modal-box h2 {
-  margin-top: 0;
+  margin: 0 0 25px;
+
   font-family: Georgia, serif;
+
+  font-size: 28px;
+
   font-weight: 400;
 }
 
-.modal-box input,
-.modal-box select {
-  width: 100%;
-  padding: 13px;
-  margin-bottom: 12px;
-  background: #0b1317;
-  border: 1px solid #334148;
-  border-radius: 9px;
+
+/* =====================================================
+   BOOK TYPE CHOICE
+===================================================== */
+
+.choice-row {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+
+  margin-bottom: 22px;
+}
+
+.choice {
+  padding: 18px 12px;
+
+  border: 1px solid #35434a;
+
+  border-radius: 12px;
+
+  background: #091115;
+
+  color: #89969b;
+
+  cursor: pointer;
+
+  text-align: center;
+}
+
+.choice:hover {
+  border-color: #718087;
+
   color: white;
+}
+
+.choice.selected {
+  border-color: white;
+
+  color: white;
+
+  background: #17242a;
+}
+
+.choice-icon {
+  display: block;
+
+  font-size: 25px;
+
+  margin-bottom: 7px;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.field {
+  margin-bottom: 16px;
+}
+
+.field label {
+  display: block;
+
+  color: #718087;
+
+  font-size: 10px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+
+  margin-bottom: 7px;
+}
+
+.field input,
+.field select {
+  width: 100%;
+
+  height: 45px;
+
+  padding: 0 12px;
+
+  border: 1px solid #303e44;
+
+  border-radius: 8px;
+
+  background: #091115;
+
+  color: white;
+
   outline: none;
 }
 
-.modal-box label {
-  display: block;
-  color: #9ba5a9;
-  font-size: 12px;
-  margin-bottom: 6px;
+.field input:focus,
+.field select:focus {
+  border-color: #68767b;
 }
 
-.modal-buttons {
+
+/* =====================================================
+   MODAL BUTTONS
+===================================================== */
+
+.modal-actions {
   display: flex;
+
   gap: 10px;
-  margin-top: 10px;
+
+  margin-top: 22px;
 }
 
-.modal-buttons button {
+.modal-actions button {
   flex: 1;
-  padding: 12px;
+
+  height: 43px;
+
   border-radius: 9px;
-  border: none;
+
+  cursor: pointer;
 }
 
-.save-button {
-  background: white;
-  color: black;
-  font-weight: bold;
-}
+.cancel {
+  border: 1px solid #35434a;
 
-.cancel-button {
-  background: #26343a;
+  background: transparent;
+
   color: white;
 }
 
-@media(max-width:800px) {
+.create {
+  border: none;
 
-  .sidebar {
-    width: 220px;
-  }
+  background: white;
 
-  .main {
-    padding: 25px;
-  }
+  color: #080f13;
 
-  .top {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .actions {
-    flex-wrap: wrap;
-  }
+  font-weight: 600;
 }
 
-@media(max-width:600px) {
 
-  .library {
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+
+  header {
+    padding: 0 20px;
+  }
+
+  main {
+    width: 90%;
+
+    padding-top: 45px;
+  }
+
+  .series-header {
     display: block;
   }
 
-  .sidebar {
-    width: 100%;
-    min-height: auto;
-    border-right: none;
-    border-bottom: 1px solid #263238;
+  .series-header .primary {
+    margin-top: 20px;
   }
 
-  .quote {
+  .open-book {
     display: none;
   }
 
-  .main {
-    padding: 25px 18px;
+  .book {
+    gap: 9px;
   }
 
-  h1 {
-    font-size: 38px;
+  .book-cover {
+    width: 38px;
+
+    height: 48px;
   }
 
-  .book-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+  .choice-row {
+    grid-template-columns: 1fr;
   }
 
-  .cover {
-    height: 210px;
-  }
 }
+
 </style>
+
 </head>
+
 
 <body>
 
-<div class="library">
+<main>
 
-<aside class="sidebar">
 
-  <div class="logo">MyShelf</div>
+<div id="homePage">
 
-  <div class="tagline">
-    YOUR LITTLE LIBRARY
-  </div>
+  <h1>
+    My Library
+  </h1>
 
-  <div class="nav">
 
-    <div class="nav-item active" onclick="showAllBooks()">
-      <div class="nav-icon">📚</div>
-      <div class="nav-name">All Books</div>
-      <div class="nav-count" id="allCount">0</div>
-    </div>
+  <p class="description">
 
-    <div class="nav-item" onclick="showFavorites()">
-      <div class="nav-icon">♥</div>
-      <div class="nav-name">Favorites</div>
-      <div class="nav-count" id="favoriteCount">0</div>
-    </div>
+    Every series gets a shelf.
+    Every standalone gets its own place.
+    Keep your favorites close and build
+    your collection your way.
 
-  </div>
+  </p>
 
-  <div class="shelves-title">
-    <span>MY SHELVES</span>
-    <div class="add-shelf" onclick="openShelfModal()">+</div>
-  </div>
 
-  <div id="shelfList"></div>
+  <div class="actions">
 
-  <div class="quote">
-    "A room without books is like a body without a soul."
-  </div>
+    <button
+      class="primary"
+      onclick="openSeriesModal()">
 
-</aside>
+      ＋ Create Series
 
-<main class="main">
+    </button>
 
-  <div class="top">
 
-    <div>
-      <div class="eyebrow">
-        YOUR PERSONAL LIBRARY
-      </div>
+    <button
+      class="secondary"
+      onclick="openBookModal()">
 
-      <h1 id="pageTitle">
-        My Books
-      </h1>
-    </div>
+      ＋ Add Book
 
-    <div class="actions">
-
-      <span class="total" id="totalText">
-        0 books
-      </span>
-
-      <select class="sort" id="sortSelect">
-        <option value="recent">Recently Added</option>
-        <option value="title">Title A–Z</option>
-        <option value="favorite">Favorites First</option>
-      </select>
-
-      <a
-        href="https://saniyaf9.github.io/MyShelf1/drive.html"
-        target="_blank"
-        class="add-button"
-        style="text-decoration:none;display:flex;align-items:center;"
-      >
-        + Add Books 📚
-      </a>
-
-    </div>
+    </button>
 
   </div>
 
 
-  <div id="content"></div>
+  <!-- =================================================
+       TABS
+  ================================================== -->
 
-</main>
+  <div class="tabs">
 
-</div>
+    <button
+      id="allTab"
+      class="tab active"
+      onclick="showAll()">
 
-<div class="modal" id="bookModal">
+      ALL BOOKS
 
-  <div class="modal-box">
+    </button>
 
-    <h2 id="bookModalTitle">
-      Add Book
-    </h2>
 
-    <label>Book title</label>
+    <button
+      id="favoritesTab"
+      class="tab"
+      onclick="showFavorites()">
 
-    <input
-      id="bookTitle"
-      type="text"
-      placeholder="e.g. Twisted Love"
-    >
+      ♥ FAVORITES
 
-    <label>Cover image URL</label>
-
-    <input
-      id="bookCover"
-      type="url"
-      placeholder="Paste an image URL"
-    >
-
-    <label>Book / PDF link</label>
-
-    <input
-      id="bookLink"
-      type="url"
-      placeholder="Paste your PDF or book link"
-    >
-
-    <label>Shelf</label>
-
-    <select id="bookShelf">
-      <option value="">Standalone</option>
-    </select>
-
-    <div class="modal-buttons">
-
-      <button
-        class="cancel-button"
-        onclick="closeBookModal()"
-      >
-        Cancel
-      </button>
-
-      <button
-        class="save-button"
-        onclick="saveBook()"
-      >
-        Save Book
-      </button>
-
-    </div>
+    </button>
 
   </div>
 
-</div>
 
-<div class="modal" id="shelfModal">
+  <!-- =================================================
+       ALL CONTENT
+  ================================================== -->
 
-  <div class="modal-box">
+  <div id="allContent">
 
-    <h2>
-      Add Shelf
-    </h2>
 
-    <label>
-      Series / Shelf name
-    </label>
+    <!-- SERIES -->
 
-    <input
-      id="shelfName"
-      type="text"
-      placeholder="e.g. Twisted Series"
-    >
+    <section class="section">
 
-    <label>
-      Shelf cover image URL
-    </label>
+      <div class="section-header">
 
-    <input
-      id="shelfCover"
-      type="url"
-      placeholder="Paste a cover image URL"
-    >
-
-    <div class="modal-buttons">
-
-      <button
-        class="cancel-button"
-        onclick="closeShelfModal()"
-      >
-        Cancel
-      </button>
-
-      <button
-        class="save-button"
-        onclick="saveShelf()"
-      >
-        Create Shelf
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-<script type="module">
-
-import { initializeApp } from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  deleteDoc,
-  doc,
-  updateDoc,
-  onSnapshot,
-  serverTimestamp
-}
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
-import {
-  getAuth,
-  onAuthStateChanged
-}
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-const firebaseConfig = {
-
-  apiKey:
-  "AIzaSyBl-5cfDXHTX0gHubxH9MZx2YwLDbRRKFs",
-
-  authDomain:
-  "myshelf-e3440.firebaseapp.com",
-
-  projectId:
-  "myshelf-e3440",
-
-  storageBucket:
-  "myshelf-e3440.firebasestorage.app",
-
-  messagingSenderId:
-  "820092826756",
-
-  appId:
-  "1:820092826756:web:0cab1578f5dfc3c74ebed1",
-
-  measurementId:
-  "G-LB8602RM3L"
-};
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
-
-const auth = getAuth(app);
-
-let currentUser = null;
-
-let books = [];
-
-let shelves = [];
-
-let currentView = "all";
-
-let currentShelf = null;
-
-let editingBookId = null;
-
-const content =
-document.getElementById("content");
-
-const shelfList =
-document.getElementById("shelfList");
-
-const allCount =
-document.getElementById("allCount");
-
-const favoriteCount =
-document.getElementById("favoriteCount");
-
-const totalText =
-document.getElementById("totalText");
-
-const pageTitle =
-document.getElementById("pageTitle");
-
-const bookShelf =
-document.getElementById("bookShelf");
-
-onAuthStateChanged(auth, user => {
-
-  if (!user) {
-
-    content.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-icon">🔐</div>
-        <h2>Sign in required</h2>
-        <p>Please sign in to view your MyShelf library.</p>
-      </div>
-    `;
-
-    return;
-  }
-
-  currentUser = user;
-
-  startListeners();
-
-});
-
-function startListeners() {
-
-  const userRef =
-    doc(db, "users", currentUser.uid);
-
-  const booksRef =
-    collection(userRef, "books");
-
-  const shelvesRef =
-    collection(userRef, "shelves");
-
-
-  onSnapshot(
-    booksRef,
-    snapshot => {
-
-      books = [];
-
-      snapshot.forEach(item => {
-
-        books.push({
-          id: item.id,
-          ...item.data()
-        });
-
-      });
-
-      render();
-
-    },
-    error => {
-
-      console.error(error);
-
-      content.innerHTML = `
-        <div class="empty-state">
-          <div class="empty-icon">⚠️</div>
-          <h2>Couldn't load your books</h2>
-          <p>${error.message}</p>
-        </div>
-      `;
-
-    }
-  );
-
-
-  onSnapshot(
-    shelvesRef,
-    snapshot => {
-
-      shelves = [];
-
-      snapshot.forEach(item => {
-
-        shelves.push({
-          id: item.id,
-          ...item.data()
-        });
-
-      });
-
-      renderShelves();
-
-      updateShelfSelect();
-
-      render();
-
-    }
-  );
-
-}
-
-function renderShelves() {
-
-  shelfList.innerHTML = "";
-
-  shelves.forEach(shelf => {
-
-    const div =
-      document.createElement("div");
-
-    div.className =
-      "shelf-nav" +
-      (currentView === "shelf" &&
-       currentShelf === shelf.id
-        ? " active"
-        : "");
-
-    div.innerHTML = `
-      <span>${escapeHtml(shelf.name)}</span>
-      <small>
-        ${books.filter(
-          b => b.shelfId === shelf.id
-        ).length}
-      </small>
-    `;
-
-    div.onclick = () => {
-
-      currentView = "shelf";
-
-      currentShelf = shelf.id;
-
-      renderShelves();
-
-      render();
-
-    };
-
-    shelfList.appendChild(div);
-
-  });
-
-}
-
-function updateShelfSelect() {
-
-  bookShelf.innerHTML =
-    `<option value="">Standalone</option>`;
-
-  shelves.forEach(shelf => {
-
-    const option =
-      document.createElement("option");
-
-    option.value = shelf.id;
-
-    option.textContent = shelf.name;
-
-    bookShelf.appendChild(option);
-
-  });
-
-}
-
-function render() {
-
-  let visibleBooks = [...books];
-
-
-  if (currentView === "favorites") {
-
-    visibleBooks =
-      visibleBooks.filter(
-        book => book.favorite === true
-      );
-
-    pageTitle.textContent =
-      "Favorites";
-
-  }
-
-  else if (currentView === "shelf") {
-
-    const shelf =
-      shelves.find(
-        s => s.id === currentShelf
-      );
-
-    pageTitle.textContent =
-      shelf ? shelf.name : "My Books";
-
-    visibleBooks =
-      visibleBooks.filter(
-        book => book.shelfId === currentShelf
-      );
-
-  }
-
-  else {
-
-    pageTitle.textContent =
-      "My Books";
-
-  }
-
-
-  const sort =
-    document.getElementById("sortSelect").value;
-
-
-  if (sort === "title") {
-
-    visibleBooks.sort(
-      (a,b) =>
-        (a.title || "").localeCompare(
-          b.title || ""
-        )
-    );
-
-  }
-
-
-  if (sort === "favorite") {
-
-    visibleBooks.sort(
-      (a,b) =>
-        Number(b.favorite) -
-        Number(a.favorite)
-    );
-
-  }
-
-
-  allCount.textContent =
-    books.length;
-
-  favoriteCount.textContent =
-    books.filter(
-      b => b.favorite
-    ).length;
-
-  totalText.textContent =
-    visibleBooks.length +
-    (visibleBooks.length === 1
-      ? " book"
-      : " books");
-
-
-  if (!visibleBooks.length) {
-
-    content.innerHTML = `
-      <div class="empty-state">
-
-        <div class="empty-icon">
-          📚
+        <div class="section-title">
+          📚 Series
         </div>
 
-        <h2>
-          Your library is waiting
-        </h2>
+        <div
+          id="seriesCount"
+          class="section-count">
 
-        <p>
-          Add a book to start building your shelf.
-        </p>
-
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  content.innerHTML = `
-    <div class="book-grid">
-      ${visibleBooks.map(
-        bookCard
-      ).join("")}
-    </div>
-  `;
-
-}
-
-function bookCard(book) {
-
-  const shelf =
-    shelves.find(
-      s => s.id === book.shelfId
-    );
-
-
-  return `
-    <div class="book-card">
-
-      <div class="cover">
-
-        ${
-          book.cover
-          ?
-          `<img
-             src="${escapeAttribute(book.cover)}"
-             alt=""
-             onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
-           >
-           <div
-             class="cover-placeholder"
-             style="display:none"
-           >
-             📖
-           </div>`
-          :
-          `<div class="cover-placeholder">
-             📖
-           </div>`
-        }
-
-      </div>
-
-
-      <div class="book-info">
-
-        <div class="book-title">
-          ${escapeHtml(book.title || "Untitled")}
-        </div>
-
-        <div class="book-series">
-          ${
-            shelf
-              ? escapeHtml(shelf.name)
-              : "Standalone"
-          }
-        </div>
-
-
-        <div class="book-actions">
-
-          <button
-            class="favorite ${
-              book.favorite ? "active" : ""
-            }"
-            onclick="toggleFavorite('${book.id}')"
-            title="Favorite"
-          >
-            ${book.favorite ? "♥" : "♡"}
-          </button>
-
-
-          <button
-            class="menu-button"
-            onclick="toggleMenu(event,'${book.id}')"
-          >
-            ⋮
-          </button>
+          0 series
 
         </div>
 
@@ -1136,421 +1003,1969 @@ function bookCard(book) {
 
 
       <div
-        class="menu"
-        id="menu-${book.id}"
-      >
+        id="seriesGrid"
+        class="series-grid">
 
-        <button
-          onclick="editBook('${book.id}')"
-        >
-          ✏️ Edit
-        </button>
+      </div>
 
-        <button
-          class="delete"
-          onclick="deleteBook('${book.id}')"
-        >
-          🗑️ Delete
-        </button>
+    </section>
+
+
+    <!-- STANDALONE -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div class="section-title">
+          📖 Standalone Books
+        </div>
+
+        <div
+          id="standaloneCount"
+          class="section-count">
+
+          0 books
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="standaloneList"
+        class="book-list">
+
+      </div>
+
+    </section>
+
+
+  </div>
+
+
+  <!-- =================================================
+       FAVORITES
+  ================================================== -->
+
+  <div
+    id="favoritesContent"
+    style="display:none;">
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div class="section-title">
+          ♥ Favorite Books
+        </div>
+
+        <div
+          id="favoritesCount"
+          class="section-count">
+
+          0 favorites
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="favoritesList"
+        class="book-list">
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     SERIES PAGE
+===================================================== -->
+
+<div id="seriesPage">
+
+
+  <button
+    class="back"
+    onclick="goHome()">
+
+    ← Back to My Library
+
+  </button>
+
+
+  <div class="series-header">
+
+
+    <div class="series-heading">
+
+      <div
+        id="seriesPageIcon"
+        class="series-heading-icon">
+
+        📚
+
+      </div>
+
+
+      <div>
+
+        <h2 id="seriesPageName">
+          Series
+        </h2>
+
+        <p id="seriesPageCount">
+          0 books
+        </p>
 
       </div>
 
     </div>
-  `;
+
+
+    <button
+      class="primary"
+      onclick="openBookModalForSeries()">
+
+      ＋ Add Book
+
+    </button>
+
+
+  </div>
+
+
+  <div
+    id="seriesBookList"
+    class="book-list">
+
+  </div>
+
+
+</div>
+
+
+</main>
+
+
+<!-- =====================================================
+     CREATE SERIES MODAL
+===================================================== -->
+
+<div
+  id="seriesModal"
+  class="modal">
+
+
+  <div class="modal-box">
+
+
+    <h2>
+      Create a Series Shelf
+    </h2>
+
+
+    <div class="field">
+
+      <label>
+        Series name
+      </label>
+
+      <input
+        id="seriesName"
+        type="text"
+        placeholder="Example: Made Series">
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        Shelf icon
+      </label>
+
+      <select id="seriesIcon">
+
+        <option value="📚">
+          📚 Books
+        </option>
+
+        <option value="🌸">
+          🌸 Romance
+        </option>
+
+        <option value="🌙">
+          🌙 Night Reads
+        </option>
+
+        <option value="✨">
+          ✨ Stories
+        </option>
+
+        <option value="🔥">
+          🔥 Favorites
+        </option>
+
+        <option value="🖤">
+          🖤 Dark Reads
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="modal-actions">
+
+      <button
+        class="cancel"
+        onclick="closeSeriesModal()">
+
+        Cancel
+
+      </button>
+
+
+      <button
+        class="create"
+        onclick="createSeries()">
+
+        Create Shelf
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     ADD BOOK MODAL
+===================================================== -->
+
+<div
+  id="bookModal"
+  class="modal">
+
+
+  <div class="modal-box">
+
+
+    <h2>
+      Add a Book
+    </h2>
+
+
+    <div class="choice-row">
+
+
+      <button
+        id="seriesChoice"
+        class="choice selected"
+        onclick="selectBookType('series')">
+
+        <span class="choice-icon">
+          📚
+        </span>
+
+        Series Book
+
+      </button>
+
+
+      <button
+        id="standaloneChoice"
+        class="choice"
+        onclick="selectBookType('standalone')">
+
+        <span class="choice-icon">
+          📖
+        </span>
+
+        Standalone
+
+      </button>
+
+
+    </div>
+
+
+    <!-- SERIES SELECT -->
+
+    <div
+      id="seriesField"
+      class="field">
+
+      <label>
+        Choose series
+      </label>
+
+      <select id="bookSeries">
+
+      </select>
+
+    </div>
+
+
+    <!-- TITLE -->
+
+    <div class="field">
+
+      <label>
+        Book title
+      </label>
+
+      <input
+        id="bookTitle"
+        type="text"
+        placeholder="Example: The Sweetest Oblivion">
+
+    </div>
+
+
+    <!-- LINK -->
+
+    <div class="field">
+
+      <label>
+        PDF / Drive link — optional
+      </label>
+
+      <input
+        id="bookLink"
+        type="url"
+        placeholder="Paste your book link">
+
+    </div>
+
+
+    <div class="modal-actions">
+
+      <button
+        class="cancel"
+        onclick="closeBookModal()">
+
+        Cancel
+
+      </button>
+
+
+      <button
+        class="create"
+        onclick="addBook()">
+
+        Add Book
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   DATA
+===================================================== */
+
+const STORAGE_KEY =
+  "myshelf_library_v2";
+
+
+let library =
+  JSON.parse(
+    localStorage.getItem(STORAGE_KEY)
+  ) || {
+
+    series: [],
+
+    standalone: []
+
+  };
+
+
+let currentSeriesId = null;
+
+let selectedBookType = "series";
+
+
+/* =====================================================
+   SAVE
+===================================================== */
+
+function save() {
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(library)
+  );
 
 }
 
-window.toggleFavorite =
-async function(id) {
 
-  if (!currentUser) return;
+/* =====================================================
+   SERIES MODAL
+===================================================== */
 
-  const bookRef =
-    doc(
-      db,
-      "users",
-      currentUser.uid,
-      "books",
-      id
-    );
-
-  const book =
-    books.find(
-      b => b.id === id
-    );
-
-  if (!book) return;
-
-  await updateDoc(
-    bookRef,
-    {
-      favorite: !book.favorite
-    }
-  );
-
-};
-
-window.toggleMenu =
-function(event,id) {
-
-  event.stopPropagation();
+function openSeriesModal() {
 
   document
-    .querySelectorAll(".menu")
-    .forEach(menu => {
-
-      if (
-        menu.id !==
-        "menu-" + id
-      ) {
-
-        menu.classList.remove("show");
-
-      }
-
-    });
-
-
-  const menu =
-    document.getElementById(
-      "menu-" + id
-    );
-
-  menu.classList.toggle("show");
-
-};
-
-window.deleteBook =
-async function(id) {
-
-  const book =
-    books.find(
-      b => b.id === id
-    );
-
-  if (!book) return;
-
-  const confirmed =
-    confirm(
-      `Delete "${book.title}"?`
-    );
-
-  if (!confirmed) return;
-
-  await deleteDoc(
-    doc(
-      db,
-      "users",
-      currentUser.uid,
-      "books",
-      id
-    )
-  );
-
-};
-
-window.editBook =
-function(id) {
-
-  const book =
-    books.find(
-      b => b.id === id
-    );
-
-  if (!book) return;
-
-  editingBookId = id;
-
-  document.getElementById(
-    "bookModalTitle"
-  ).textContent =
-    "Edit Book";
-
-  document.getElementById(
-    "bookTitle"
-  ).value =
-    book.title || "";
-
-  document.getElementById(
-    "bookCover"
-  ).value =
-    book.cover || "";
-
-  document.getElementById(
-    "bookLink"
-  ).value =
-    book.link || "";
-
-  document.getElementById(
-    "bookShelf"
-  ).value =
-    book.shelfId || "";
-
-  document
-    .getElementById("bookModal")
+    .getElementById("seriesModal")
     .classList.add("show");
 
-};
+}
 
-window.openBookModal =
-function() {
 
-  editingBookId = null;
-
-  document.getElementById(
-    "bookModalTitle"
-  ).textContent =
-    "Add Book";
-
-  document.getElementById(
-    "bookTitle"
-  ).value = "";
-
-  document.getElementById(
-    "bookCover"
-  ).value = "";
-
-  document.getElementById(
-    "bookLink"
-  ).value = "";
-
-  document.getElementById(
-    "bookShelf"
-  ).value = "";
+function closeSeriesModal() {
 
   document
-    .getElementById("bookModal")
-    .classList.add("show");
-
-};
-
-
-window.closeBookModal =
-function() {
-
-  document
-    .getElementById("bookModal")
+    .getElementById("seriesModal")
     .classList.remove("show");
 
-};
+}
 
-window.saveBook =
-async function() {
 
-  if (!currentUser) return;
+/* =====================================================
+   CREATE SERIES
+===================================================== */
 
-  const title =
-    document.getElementById(
-      "bookTitle"
-    ).value.trim();
+function createSeries() {
 
-  if (!title) {
+  const name =
+    document
+      .getElementById("seriesName")
+      .value
+      .trim();
 
-    alert("Please enter a book title.");
+
+  if (!name) {
+
+    alert(
+      "Please enter a series name."
+    );
 
     return;
 
   }
 
-  const cover =
+
+  const icon =
+    document
+      .getElementById("seriesIcon")
+      .value;
+
+
+  library.series.push({
+
+    id:
+      Date.now().toString(),
+
+    name:
+      name,
+
+    icon:
+      icon,
+
+    books:
+      []
+
+  });
+
+
+  save();
+
+  document
+    .getElementById("seriesName")
+    .value = "";
+
+
+  closeSeriesModal();
+
+  renderAll();
+
+}
+
+
+/* =====================================================
+   BOOK MODAL
+===================================================== */
+
+function openBookModal() {
+
+  selectedBookType =
+    "series";
+
+  updateBookTypeUI();
+
+  populateSeriesSelect();
+
+  document
+    .getElementById("bookModal")
+    .classList.add("show");
+
+}
+
+
+function openBookModalForSeries() {
+
+  selectedBookType =
+    "series";
+
+  populateSeriesSelect();
+
+
+  const select =
     document.getElementById(
-      "bookCover"
-    ).value.trim();
-
-  const link =
-    document.getElementById(
-      "bookLink"
-    ).value.trim();
-
-  const shelfId =
-    document.getElementById(
-      "bookShelf"
-    ).value;
-
-
-  if (editingBookId) {
-
-    await updateDoc(
-      doc(
-        db,
-        "users",
-        currentUser.uid,
-        "books",
-        editingBookId
-      ),
-      {
-        title,
-        cover,
-        link,
-        shelfId
-      }
+      "bookSeries"
     );
+
+
+  if (currentSeriesId) {
+
+    select.value =
+      currentSeriesId;
+
+  }
+
+
+  updateBookTypeUI();
+
+
+  document
+    .getElementById("bookModal")
+    .classList.add("show");
+
+}
+
+
+function closeBookModal() {
+
+  document
+    .getElementById("bookModal")
+    .classList.remove("show");
+
+}
+
+
+/* =====================================================
+   BOOK TYPE
+===================================================== */
+
+function selectBookType(type) {
+
+  selectedBookType =
+    type;
+
+  updateBookTypeUI();
+
+}
+
+
+function updateBookTypeUI() {
+
+  const seriesChoice =
+    document.getElementById(
+      "seriesChoice"
+    );
+
+  const standaloneChoice =
+    document.getElementById(
+      "standaloneChoice"
+    );
+
+  const seriesField =
+    document.getElementById(
+      "seriesField"
+    );
+
+
+  if (
+    selectedBookType === "series"
+  ) {
+
+    seriesChoice
+      .classList
+      .add("selected");
+
+    standaloneChoice
+      .classList
+      .remove("selected");
+
+    seriesField.style.display =
+      "block";
 
   }
 
   else {
 
-    await addDoc(
-      collection(
-        db,
-        "users",
-        currentUser.uid,
-        "books"
-      ),
-      {
-        title,
-        cover,
-        link,
-        shelfId,
-        favorite: false,
-        createdAt:
-          serverTimestamp()
-      }
-    );
+    seriesChoice
+      .classList
+      .remove("selected");
+
+    standaloneChoice
+      .classList
+      .add("selected");
+
+    seriesField.style.display =
+      "none";
 
   }
 
-  closeBookModal();
-
-};
-
-window.openShelfModal =
-function() {
-
-  document.getElementById(
-    "shelfName"
-  ).value = "";
-
-  document.getElementById(
-    "shelfCover"
-  ).value = "";
-
-  document
-    .getElementById("shelfModal")
-    .classList.add("show");
-
-};
+}
 
 
-window.closeShelfModal =
-function() {
+/* =====================================================
+   SERIES DROPDOWN
+===================================================== */
 
-  document
-    .getElementById("shelfModal")
-    .classList.remove("show");
+function populateSeriesSelect() {
 
-};
-
-
-window.saveShelf =
-async function() {
-
-  if (!currentUser) return;
-
-  const name =
+  const select =
     document.getElementById(
-      "shelfName"
-    ).value.trim();
+      "bookSeries"
+    );
 
-  const cover =
-    document.getElementById(
-      "shelfCover"
-    ).value.trim();
 
-  if (!name) {
+  select.innerHTML = "";
 
-    alert("Please enter a shelf name.");
+
+  if (
+    library.series.length === 0
+  ) {
+
+    select.innerHTML = `
+
+      <option value="">
+        No series created yet
+      </option>
+
+    `;
 
     return;
 
   }
 
 
-  await addDoc(
-    collection(
-      db,
-      "users",
-      currentUser.uid,
-      "shelves"
-    ),
-    {
-      name,
-      cover,
-      createdAt:
-        serverTimestamp()
+  library.series.forEach(
+    series => {
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+
+      option.value =
+        series.id;
+
+
+      option.textContent =
+        series.icon +
+        " " +
+        series.name;
+
+
+      select.appendChild(
+        option
+      );
+
     }
   );
 
 
-  closeShelfModal();
+  if (currentSeriesId) {
 
-};
+    select.value =
+      currentSeriesId;
 
-window.showAllBooks =
-function() {
+  }
 
-  currentView = "all";
+}
 
-  currentShelf = null;
 
-  render();
+/* =====================================================
+   ADD BOOK
+===================================================== */
 
-  renderShelves();
+function addBook() {
 
-};
+  const title =
+    document
+      .getElementById("bookTitle")
+      .value
+      .trim();
 
-window.showFavorites =
-function() {
 
-  currentView = "favorites";
+  const link =
+    document
+      .getElementById("bookLink")
+      .value
+      .trim();
 
-  currentShelf = null;
 
-  render();
+  if (!title) {
 
-  renderShelves();
+    alert(
+      "Please enter the book title."
+    );
 
-};
+    return;
 
-document
-  .getElementById("sortSelect")
-  .addEventListener(
-    "change",
-    render
+  }
+
+
+  const book = {
+
+    id:
+      Date.now().toString(),
+
+    title:
+      title,
+
+    link:
+      link,
+
+    favorite:
+      false
+
+  };
+
+
+  /* SERIES BOOK */
+
+  if (
+    selectedBookType === "series"
+  ) {
+
+    const seriesId =
+      document
+        .getElementById("bookSeries")
+        .value;
+
+
+    const series =
+      library.series.find(
+        s =>
+          s.id === seriesId
+      );
+
+
+    if (!series) {
+
+      alert(
+        "Please create a series first."
+      );
+
+      return;
+
+    }
+
+
+    series.books.push(
+      book
+    );
+
+  }
+
+
+  /* STANDALONE BOOK */
+
+  else {
+
+    library.standalone.push(
+      book
+    );
+
+  }
+
+
+  save();
+
+
+  document
+    .getElementById("bookTitle")
+    .value = "";
+
+
+  document
+    .getElementById("bookLink")
+    .value = "";
+
+
+  closeBookModal();
+
+  renderAll();
+
+
+  if (
+    currentSeriesId &&
+    selectedBookType === "series"
+  ) {
+
+    renderSeriesPage();
+
+  }
+
+}
+
+
+/* =====================================================
+   RENDER EVERYTHING
+===================================================== */
+
+function renderAll() {
+
+  renderSeries();
+
+  renderStandalone();
+
+  renderFavorites();
+
+}
+
+
+/* =====================================================
+   RENDER SERIES
+===================================================== */
+
+function renderSeries() {
+
+  const grid =
+    document.getElementById(
+      "seriesGrid"
+    );
+
+
+  grid.innerHTML = "";
+
+
+  document
+    .getElementById("seriesCount")
+    .textContent =
+      library.series.length +
+      " series";
+
+
+  if (
+    library.series.length === 0
+  ) {
+
+    grid.innerHTML = `
+
+      <div
+        class="empty"
+        style="grid-column:1/-1;">
+
+        <div class="empty-icon">
+          📚
+        </div>
+
+        <h2>
+          No series yet
+        </h2>
+
+        <p>
+          Create a series to turn it
+          into a shelf for your books.
+        </p>
+
+        <button
+          class="primary"
+          onclick="openSeriesModal()">
+
+          ＋ Create Series
+
+        </button>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  library.series.forEach(
+    series => {
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+
+      card.className =
+        "series-card";
+
+
+      card.innerHTML = `
+
+        <div class="series-top">
+
+          <div class="series-icon">
+            ${escapeHTML(series.icon)}
+          </div>
+
+          <div class="series-name">
+            ${escapeHTML(series.name)}
+          </div>
+
+          <div class="series-count">
+
+            ${series.books.length}
+            ${
+              series.books.length === 1
+                ? " book"
+                : " books"
+            }
+
+          </div>
+
+        </div>
+
+
+        <div class="series-bottom">
+
+          <button
+            class="open-series"
+            onclick="openSeries(
+              '${series.id}'
+            )">
+
+            Open Shelf →
+
+          </button>
+
+
+          <div>
+
+            <button
+              class="icon-button"
+              onclick="renameSeries(
+                '${series.id}'
+              )">
+
+              ✎
+
+            </button>
+
+
+            <button
+              class="icon-button"
+              onclick="deleteSeries(
+                '${series.id}'
+              )">
+
+              ×
+
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+
+      grid.appendChild(
+        card
+      );
+
+    }
   );
 
-document.addEventListener(
-  "click",
-  () => {
+}
 
-    document
-      .querySelectorAll(".menu")
-      .forEach(menu =>
-        menu.classList.remove("show")
+
+/* =====================================================
+   RENDER STANDALONES
+===================================================== */
+
+function renderStandalone() {
+
+  const list =
+    document.getElementById(
+      "standaloneList"
+    );
+
+
+  list.innerHTML = "";
+
+
+  document
+    .getElementById(
+      "standaloneCount"
+    )
+    .textContent =
+      library.standalone.length +
+      (
+        library.standalone.length === 1
+          ? " book"
+          : " books"
+      );
+
+
+  if (
+    library.standalone.length === 0
+  ) {
+
+    list.innerHTML = `
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          📖
+        </div>
+
+        <h2>
+          No standalone books
+        </h2>
+
+        <p>
+          Add a book without assigning
+          it to a series.
+        </p>
+
+        <button
+          class="primary"
+          onclick="openStandaloneModal()">
+
+          ＋ Add Standalone
+
+        </button>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  library.standalone.forEach(
+    book => {
+
+      list.appendChild(
+        createBookElement(
+          book,
+          null
+        )
+      );
+
+    }
+  );
+
+}
+
+
+function createBookElement(
+  book,
+  series
+) {
+
+  const row =
+    document.createElement(
+      "div"
+    );
+
+
+  row.className =
+    "book";
+
+
+  const seriesName =
+    series
+      ? series.name
+      : "Standalone book";
+
+
+  row.innerHTML = `
+
+    <div class="book-cover">
+      📖
+    </div>
+
+
+    <div class="book-info">
+
+      <div class="book-title">
+        ${escapeHTML(book.title)}
+      </div>
+
+      <div class="book-meta">
+        ${escapeHTML(seriesName)}
+      </div>
+
+    </div>
+
+
+    <!-- BIG CLICKABLE HEART -->
+
+    <button
+      class="favorite ${
+        book.favorite
+          ? "active"
+          : ""
+      }"
+      aria-label="${
+        book.favorite
+          ? "Remove from favorites"
+          : "Add to favorites"
+      }"
+      title="${
+        book.favorite
+          ? "Remove from favorites"
+          : "Add to favorites"
+      }"
+      onclick="toggleFavorite(
+        '${series ? series.id : ""}',
+        '${book.id}'
+      )">
+
+      ${
+        book.favorite
+          ? "♥"
+          : "♡"
+      }
+
+    </button>
+
+
+    ${
+      book.link
+        ? `
+
+          <button
+            class="open-book"
+            onclick="openBook(
+              '${series ? series.id : ""}',
+              '${book.id}'
+            )">
+
+            Open
+
+          </button>
+
+        `
+        : ""
+    }
+
+
+    <button
+      class="delete-book"
+      title="Delete book"
+      onclick="deleteBook(
+        '${series ? series.id : ""}',
+        '${book.id}'
+      )">
+
+      ×
+
+    </button>
+
+  `;
+
+
+  return row;
+
+}
+
+
+/* =====================================================
+   OPEN SERIES
+===================================================== */
+
+function openSeries(id) {
+
+  const series =
+    library.series.find(
+      s =>
+        s.id === id
+    );
+
+
+  if (!series) return;
+
+
+  currentSeriesId =
+    id;
+
+
+  document
+    .getElementById(
+      "homePage"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "seriesPage"
+    )
+    .style.display =
+      "block";
+
+
+  renderSeriesPage();
+
+}
+
+
+/* =====================================================
+   SERIES PAGE
+===================================================== */
+
+function renderSeriesPage() {
+
+  const series =
+    library.series.find(
+      s =>
+        s.id === currentSeriesId
+    );
+
+
+  if (!series) return;
+
+
+  document
+    .getElementById(
+      "seriesPageIcon"
+    )
+    .textContent =
+      series.icon;
+
+
+  document
+    .getElementById(
+      "seriesPageName"
+    )
+    .textContent =
+      series.name;
+
+
+  document
+    .getElementById(
+      "seriesPageCount"
+    )
+    .textContent =
+      series.books.length +
+      (
+        series.books.length === 1
+          ? " book"
+          : " books"
+      );
+
+
+  const list =
+    document.getElementById(
+      "seriesBookList"
+    );
+
+
+  list.innerHTML = "";
+
+
+  if (
+    series.books.length === 0
+  ) {
+
+    list.innerHTML = `
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          📖
+        </div>
+
+        <h2>
+          This shelf is empty
+        </h2>
+
+        <p>
+          Add the books that belong
+          to this series.
+        </p>
+
+        <button
+          class="primary"
+          onclick="openBookModalForSeries()">
+
+          ＋ Add Book
+
+        </button>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  series.books.forEach(
+    book => {
+
+      list.appendChild(
+        createBookElement(
+          book,
+          series
+        )
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   HOME
+===================================================== */
+
+function goHome() {
+
+  currentSeriesId =
+    null;
+
+
+  document
+    .getElementById(
+      "seriesPage"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "homePage"
+    )
+    .style.display =
+      "block";
+
+
+  showAll();
+
+}
+
+
+/* =====================================================
+   FAVORITES
+===================================================== */
+
+function showFavorites() {
+
+  document
+    .getElementById(
+      "allContent"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "favoritesContent"
+    )
+    .style.display =
+      "block";
+
+
+  document
+    .getElementById(
+      "allTab"
+    )
+    .classList
+    .remove("active");
+
+
+  document
+    .getElementById(
+      "favoritesTab"
+    )
+    .classList
+    .add("active");
+
+
+  renderFavorites();
+
+}
+
+
+function renderFavorites() {
+
+  const list =
+    document.getElementById(
+      "favoritesList"
+    );
+
+
+  list.innerHTML = "";
+
+
+  let count = 0;
+
+
+  /* SERIES FAVORITES */
+
+  library.series.forEach(
+    series => {
+
+      series.books.forEach(
+        book => {
+
+          if (
+            book.favorite
+          ) {
+
+            count++;
+
+            list.appendChild(
+              createBookElement(
+                book,
+                series
+              )
+            );
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+  /* STANDALONE FAVORITES */
+
+  library.standalone.forEach(
+    book => {
+
+      if (
+        book.favorite
+      ) {
+
+        count++;
+
+        list.appendChild(
+          createBookElement(
+            book,
+            null
+          )
+        );
+
+      }
+
+    }
+  );
+
+
+  document
+    .getElementById(
+      "favoritesCount"
+    )
+    .textContent =
+      count +
+      (
+        count === 1
+          ? " favorite"
+          : " favorites"
+      );
+
+
+  if (count === 0) {
+
+    list.innerHTML = `
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          ♡
+        </div>
+
+        <h2>
+          No favorites yet
+        </h2>
+
+        <p>
+          Click the heart beside any
+          book to add it to favorites.
+        </p>
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* =====================================================
+   ALL TAB
+===================================================== */
+
+function showAll() {
+
+  document
+    .getElementById(
+      "allContent"
+    )
+    .style.display =
+      "block";
+
+
+  document
+    .getElementById(
+      "favoritesContent"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "allTab"
+    )
+    .classList
+    .add("active");
+
+
+  document
+    .getElementById(
+      "favoritesTab"
+    )
+    .classList
+    .remove("active");
+
+
+  renderAll();
+
+}
+
+
+/* =====================================================
+   FAVORITE TOGGLE
+===================================================== */
+
+function toggleFavorite(
+  seriesId,
+  bookId
+) {
+
+  let book = null;
+
+
+  if (seriesId) {
+
+    const series =
+      library.series.find(
+        s =>
+          s.id === seriesId
+      );
+
+
+    if (series) {
+
+      book =
+        series.books.find(
+          b =>
+            b.id === bookId
+        );
+
+    }
+
+  }
+
+  else {
+
+    book =
+      library.standalone.find(
+        b =>
+          b.id === bookId
       );
 
   }
-);
 
-function escapeHtml(value) {
 
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+  if (!book) return;
+
+
+  book.favorite =
+    !book.favorite;
+
+
+  save();
+
+
+  renderAll();
+
+
+  if (
+    currentSeriesId
+  ) {
+
+    renderSeriesPage();
+
+  }
+
+
+  if (
+    document
+      .getElementById(
+        "favoritesContent"
+      )
+      .style.display !== "none"
+  ) {
+
+    renderFavorites();
+
+  }
 
 }
 
 
-function escapeAttribute(value) {
+/* =====================================================
+   OPEN BOOK
+===================================================== */
 
-  return escapeHtml(value);
+function openBook(
+  seriesId,
+  bookId
+) {
+
+  let book = null;
+
+
+  if (seriesId) {
+
+    const series =
+      library.series.find(
+        s =>
+          s.id === seriesId
+      );
+
+
+    if (series) {
+
+      book =
+        series.books.find(
+          b =>
+            b.id === bookId
+        );
+
+    }
+
+  }
+
+  else {
+
+    book =
+      library.standalone.find(
+        b =>
+          b.id === bookId
+      );
+
+  }
+
+
+  if (
+    book &&
+    book.link
+  ) {
+
+    window.open(
+      book.link,
+      "_blank"
+    );
+
+  }
 
 }
+
+
+/* =====================================================
+   DELETE BOOK
+===================================================== */
+
+function deleteBook(
+  seriesId,
+  bookId
+) {
+
+  if (
+    !confirm(
+      "Remove this book?"
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  if (seriesId) {
+
+    const series =
+      library.series.find(
+        s =>
+          s.id === seriesId
+      );
+
+
+    if (series) {
+
+      series.books =
+        series.books.filter(
+          b =>
+            b.id !== bookId
+        );
+
+    }
+
+  }
+
+  else {
+
+    library.standalone =
+      library.standalone.filter(
+        b =>
+          b.id !== bookId
+      );
+
+  }
+
+
+  save();
+
+  renderAll();
+
+
+  if (
+    currentSeriesId
+  ) {
+
+    renderSeriesPage();
+
+  }
+
+}
+
+
+/* =====================================================
+   RENAME SERIES
+===================================================== */
+
+function renameSeries(id) {
+
+  const series =
+    library.series.find(
+      s =>
+        s.id === id
+    );
+
+
+  if (!series) return;
+
+
+  const name =
+    prompt(
+      "Enter the new series name:",
+      series.name
+    );
+
+
+  if (
+    name &&
+    name.trim()
+  ) {
+
+    series.name =
+      name.trim();
+
+    save();
+
+    renderAll();
+
+
+    if (
+      currentSeriesId === id
+    ) {
+
+      renderSeriesPage();
+
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+   DELETE SERIES
+===================================================== */
+
+function deleteSeries(id) {
+
+  const series =
+    library.series.find(
+      s =>
+        s.id === id
+    );
+
+
+  if (!series) return;
+
+
+  if (
+    !confirm(
+      "Delete this series and all books inside it?"
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  library.series =
+    library.series.filter(
+      s =>
+        s.id !== id
+    );
+
+
+  save();
+
+  renderAll();
+
+}
+
+
+/* =====================================================
+   STANDALONE QUICK BUTTON
+===================================================== */
+
+function openStandaloneModal() {
+
+  selectedBookType =
+    "standalone";
+
+  updateBookTypeUI();
+
+  document
+    .getElementById(
+      "bookModal"
+    )
+    .classList
+    .add("show");
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(text) {
+
+  return String(text)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   CLOSE MODALS OUTSIDE
+===================================================== */
+
+document
+  .getElementById(
+    "seriesModal"
+  )
+  .addEventListener(
+    "click",
+    function(event) {
+
+      if (
+        event.target === this
+      ) {
+
+        closeSeriesModal();
+
+      }
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "bookModal"
+  )
+  .addEventListener(
+    "click",
+    function(event) {
+
+      if (
+        event.target === this
+      ) {
+
+        closeBookModal();
+
+      }
+
+    }
+  );
+
+renderAll();
 
 </script>
 
 </body>
+
 </html>
+
