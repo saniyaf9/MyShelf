@@ -159,50 +159,39 @@ h1 {
 }
 
 .primary {
-
   border: none;
-
-  background: #f9f9f9;
-
-  color: #080f13;
-
+  background: #162329 ;
+  color:#ffffff ;
   padding: 12px 20px;
-
   border-radius: 25px;
-
   cursor: pointer;
-
   font-weight: 600;
-
+  transition: all .2s ease;
 }
 
 .primary:hover {
-
-  opacity: .82;
-
+  transform: translateY(-2px);
+  box-shadow: 0 7px 20px rgba(255,255,255,.16);
 }
 
 .secondary {
-
-  border: 1px solid #35434a;
-
-  background: transparent;
-
-  color: white;
-
+  border: 1px solid #7f8c91;
+  background:#ffffff;
+  color:#080f13 ;
   padding: 11px 19px;
-
   border-radius: 25px;
-
   cursor: pointer;
-
   font-weight: 600;
-
+  box-shadow: 0 0 0 rgba(255,255,255,0);
+  transition: all .2s ease;
 }
 
 .secondary:hover {
-
-  background: #101a1f;
+  background: #223139;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255,255,255,.08);
+} 
 
 }
 
@@ -326,8 +315,7 @@ h1 {
   display: grid;
 
   grid-template-columns:
-    repeat(auto-fill, minmax(270px, 1fr));
-
+  repeat(3, minmax(0, 1fr));
   gap: 16px;
 
 }
@@ -1173,7 +1161,31 @@ h1 {
   }
 
 }
+/* =====================================================
+   ADD BUTTON POP ANIMATION
+===================================================== */
 
+@keyframes addButtonPop {
+  0% {
+    transform: scale(1);
+  }
+
+  40% {
+    transform: scale(1.08);
+  }
+
+  70% {
+    transform: scale(0.97);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.add-button-pop {
+  animation: addButtonPop 0.45s ease;
+}
 </style>
 
 </head>
@@ -1792,6 +1804,12 @@ function createSeries() {
 
   renderAll();
 
+popAddButton(
+  document.querySelector(
+    'button[onclick="openSeriesModal()"]'
+  )
+);
+
 }
 
 
@@ -2195,8 +2213,13 @@ function addStandaloneBook() {
 
   closeStandaloneModal();
 
+renderAll();
 
-  renderAll();
+popAddButton(
+  document.querySelector(
+    'button[onclick="openStandaloneModal()"]'
+  )
+);
 
 }
 
@@ -2274,10 +2297,15 @@ function addBookToCurrentSeries() {
       save();
 
 
-      renderAll();
+     renderAll();
 
+renderSeriesPage();
 
-      renderSeriesPage();
+popAddButton(
+  document.querySelector(
+    '.series-page-header .primary'
+  )
+);
 
     }
 
@@ -3786,6 +3814,19 @@ document
 /* =====================================================
    INITIAL LOAD
 ===================================================== */
+function popAddButton(button) {
+  if (!button) return;
+
+  button.classList.remove("add-button-pop");
+
+  void button.offsetWidth;
+
+  button.classList.add("add-button-pop");
+
+  setTimeout(function() {
+    button.classList.remove("add-button-pop");
+  }, 500);
+} 
 
 renderAll();
 
