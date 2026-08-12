@@ -4,15 +4,20 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MyShelf</title>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+
+
+<!-- GOOGLE PICKER -->
+
+<script src="https://apis.google.com/js/api.js"></script>
+
+<script src="https://accounts.google.com/gsi/client"></script>
+
 
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
 
 * {
   box-sizing: border-box;
@@ -22,757 +27,247 @@ html,
 body {
   margin: 0;
   padding: 0;
+
   min-height: 100%;
+
   background: #080f13;
   color: #f9f9f9;
+
   font-family: Arial, sans-serif;
 }
 
+body {
+  min-height: 100vh;
+}
+
 button,
-input,
-select {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
+input {
+  font-family: Arial, sans-serif;
 }
 
 
-/* =========================================================
-   LOGIN
-========================================================= */
+/* =====================================================
+   HEADER
+===================================================== */
 
-#loginPage {
-  min-height: 100vh;
+header {
+
+  height: 78px;
+
+  padding: 0 6%;
 
   display: flex;
+
   align-items: center;
-  justify-content: center;
-
-  background: #080f13;
-}
-
-.login-box {
-  width: 90%;
-  max-width: 390px;
-
-  padding: 42px;
-
-  background: #10191e;
-
-  border: 1px solid #2d3b41;
-  border-radius: 16px;
-
-  text-align: center;
-
-  box-shadow:
-    0 25px 70px rgba(0,0,0,.55);
-}
-
-.login-logo {
-  margin-bottom: 8px;
-
-  font-family: Georgia, serif;
-  font-size: 38px;
-}
-
-.login-subtitle {
-  margin-bottom: 32px;
-
-  color: #89959a;
-
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-
-.google-login {
-  width: 100%;
-
-  padding: 14px;
-
-  border: none;
-  border-radius: 9px;
-
-  background: white;
-  color: #080f13;
-
-  font-weight: bold;
-}
-
-.google-login:hover {
-  opacity: .88;
-}
-
-.login-status {
-  min-height: 20px;
-
-  margin-top: 16px;
-
-  color: #89959a;
-
-  font-size: 12px;
-}
-
-
-/* =========================================================
-   LIBRARY
-========================================================= */
-
-#libraryPage {
-  display: none;
-
-  min-height: 100vh;
-}
-
-.library {
-  display: flex;
-
-  min-height: 100vh;
-
-  background: #080f13;
-}
-
-
-/* =========================================================
-   SIDEBAR
-========================================================= */
-
-.sidebar {
-  width: 270px;
-
-  min-height: 100vh;
-
-  padding: 30px 20px;
-
-  border-right: 1px solid #263238;
-
-  flex-shrink: 0;
-}
-
-.logo {
-  margin-left: 12px;
-
-  font-family: Georgia, serif;
-
-  font-size: 34px;
-
-  letter-spacing: -1px;
-}
-
-.tagline {
-  margin: 7px 12px 35px;
-
-  color: #89959a;
-
-  font-size: 10px;
-
-  letter-spacing: 3px;
-}
-
-
-/* =========================================================
-   SIDEBAR NAV
-========================================================= */
-
-.nav-item {
-  height: 48px;
-
-  display: flex;
-  align-items: center;
-
-  gap: 12px;
-
-  padding: 0 13px;
-
-  margin-bottom: 6px;
-
-  border-radius: 12px;
-
-  color: #f9f9f9;
-
-  cursor: pointer;
-}
-
-.nav-item:hover {
-  background: #101a1f;
-}
-
-.nav-item.active {
-  background: #162228;
-}
-
-.nav-icon {
-  width: 25px;
-
-  text-align: center;
-
-  font-size: 17px;
-}
-
-.nav-name {
-  flex: 1;
-
-  font-size: 14px;
-}
-
-.nav-count {
-  color: #879399;
-
-  font-size: 11px;
-}
-
-
-/* =========================================================
-   SIDEBAR DIVIDER
-========================================================= */
-
-.sidebar-divider {
-  height: 1px;
-
-  margin: 28px 12px;
-
-  background: #263238;
-}
-
-
-/* =========================================================
-   SIDEBAR SECTION TITLE
-========================================================= */
-
-.sidebar-section-title {
-  margin: 0 13px 12px;
-
-  color: #89959a;
-
-  font-size: 10px;
-
-  letter-spacing: 2px;
-
-  text-transform: uppercase;
-}
-
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-.main {
-  flex: 1;
-
-  min-width: 0;
-
-  padding: 40px;
-}
-
-
-/* =========================================================
-   TOP
-========================================================= */
-
-.top {
-  display: flex;
-
-  align-items: flex-end;
 
   justify-content: space-between;
 
-  gap: 25px;
+  border-bottom: 1px solid #263238;
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 50;
+
+  background: rgba(8,15,19,.97);
+
+  backdrop-filter: blur(10px);
+
+}
+
+.logo {
+
+  font-family: Georgia, serif;
+
+  font-size: 29px;
+
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+main {
+
+  width: min(1100px, 88%);
+
+  margin: auto;
+
+  padding: 60px 0 100px;
+
 }
 
 .eyebrow {
-  margin-bottom: 8px;
 
-  color: #89959a;
+  color: #7f8c91;
 
   font-size: 10px;
 
-  letter-spacing: 3px;
+  letter-spacing: 4px;
 
   text-transform: uppercase;
+
+  margin-bottom: 12px;
+
 }
 
 h1 {
+
   margin: 0;
 
   font-family: Georgia, serif;
 
-  font-size: 48px;
+  font-size: clamp(45px, 7vw, 75px);
 
   font-weight: 400;
 
-  letter-spacing: -1px;
+  letter-spacing: -3px;
+
 }
+
+.description {
+
+  max-width: 570px;
+
+  margin-top: 18px;
+
+  color: #7f8c91;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+}
+
+
+/* =====================================================
+   TOP BUTTONS
+===================================================== */
 
 .top-actions {
+
   display: flex;
 
-  align-items: center;
-
   gap: 10px;
+
+  flex-wrap: wrap;
+
+  margin-top: 30px;
+
 }
 
-.add-button {
-  height: 42px;
-
-  padding: 0 19px;
+.primary {
 
   border: none;
-
-  border-radius: 22px;
 
   background: #f9f9f9;
 
   color: #080f13;
 
-  font-weight: bold;
+  padding: 12px 20px;
+
+  border-radius: 25px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
 }
 
-.add-button:hover {
-  opacity: .88;
+.primary:hover {
+
+  opacity: .82;
+
+}
+
+.secondary {
+
+  border: 1px solid #35434a;
+
+  background: transparent;
+
+  color: white;
+
+  padding: 11px 19px;
+
+  border-radius: 25px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+}
+
+.secondary:hover {
+
+  background: #101a1f;
+
 }
 
 
-/* =========================================================
-   SERIES SECTION
-========================================================= */
+/* =====================================================
+   TABS
+===================================================== */
 
-.section-heading {
+.tabs {
+
   display: flex;
 
-  align-items: center;
+  gap: 5px;
 
-  justify-content: space-between;
+  margin-top: 60px;
+
+  border-bottom: 1px solid #263238;
+
+}
+
+.tab {
+
+  border: none;
+
+  background: transparent;
+
+  color: #68767b;
+
+  padding: 14px 18px;
+
+  border-bottom: 2px solid transparent;
+
+  cursor: pointer;
+
+  font-size: 12px;
+
+}
+
+.tab:hover {
+
+  color: white;
+
+}
+
+.tab.active {
+
+  color: white;
+
+  border-bottom-color: white;
+
+}
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.section {
 
   margin-top: 42px;
 
-  margin-bottom: 18px;
 }
 
-.section-heading h2 {
-  margin: 0;
+.section-header {
 
-  font-family: Georgia, serif;
-
-  font-size: 26px;
-
-  font-weight: 400;
-}
-
-.section-count {
-  color: #89959a;
-
-  font-size: 12px;
-}
-
-
-/* =========================================================
-   SERIES TILES
-========================================================= */
-
-.series-list {
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 9px;
-
-  max-width: 850px;
-}
-
-.series-tile {
-  position: relative;
-
-  width: 100%;
-
-  min-height: 54px;
-
-  display: flex;
-
-  align-items: center;
-
-  padding: 0 15px 0 18px;
-
-  background: #10191e;
-
-  border: 1px solid #29383e;
-
-  border-radius: 8px;
-
-  transition: .15s;
-}
-
-.series-tile:hover {
-  background: #162228;
-
-  border-color: #45545b;
-}
-
-.series-name {
-  flex: 1;
-
-  font-family: Georgia, serif;
-
-  font-size: 17px;
-}
-
-.series-book-count {
-  margin-right: 14px;
-
-  color: #7f8b90;
-
-  font-size: 11px;
-}
-
-
-/* =========================================================
-   SERIES THREE DOT
-========================================================= */
-
-.series-more {
-  width: 36px;
-
-  height: 36px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  border: none;
-
-  border-radius: 8px;
-
-  background: transparent;
-
-  color: #aeb8bc;
-
-  font-size: 23px;
-}
-
-.series-more:hover {
-  background: #26343a;
-
-  color: white;
-}
-
-
-/* =========================================================
-   THREE DOT MENU
-========================================================= */
-
-.more-menu {
-  position: absolute;
-
-  right: 12px;
-
-  top: 48px;
-
-  width: 170px;
-
-  display: none;
-
-  padding: 6px;
-
-  background: #182328;
-
-  border: 1px solid #3b4b52;
-
-  border-radius: 10px;
-
-  box-shadow:
-    0 15px 40px rgba(0,0,0,.6);
-
-  z-index: 100;
-}
-
-.more-menu.show {
-  display: block;
-}
-
-.more-menu button {
-  width: 100%;
-
-  padding: 11px 12px;
-
-  border: none;
-
-  border-radius: 7px;
-
-  background: transparent;
-
-  color: white;
-
-  text-align: left;
-
-  font-size: 13px;
-}
-
-.more-menu button:hover {
-  background: #293940;
-}
-
-.more-menu .danger {
-  color: #ff9999;
-}
-
-
-/* =========================================================
-   BOOK LIST
-========================================================= */
-
-.book-list {
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 9px;
-
-  max-width: 850px;
-
-  margin-top: 24px;
-}
-
-.book {
-  position: relative;
-
-  min-height: 78px;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 15px;
-
-  padding: 10px 12px;
-
-  background: #10191e;
-
-  border: 1px solid #29383e;
-
-  border-radius: 10px;
-}
-
-.book:hover {
-  border-color: #45545b;
-}
-
-
-/* =========================================================
-   BOOK COVER
-========================================================= */
-
-.book-cover {
-  width: 50px;
-
-  height: 58px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  flex-shrink: 0;
-
-  overflow: hidden;
-
-  background: #162228;
-
-  border-radius: 6px;
-
-  font-size: 24px;
-}
-
-.book-cover img {
-  width: 100%;
-
-  height: 100%;
-
-  object-fit: cover;
-}
-
-
-/* =========================================================
-   BOOK INFO
-========================================================= */
-
-.book-info {
-  flex: 1;
-
-  min-width: 0;
-}
-
-.book-title {
-  color: #f9f9f9;
-
-  font-family: Georgia, serif;
-
-  font-size: 16px;
-
-  line-height: 1.35;
-
-  word-break: break-word;
-}
-
-.book-meta {
-  margin-top: 5px;
-
-  color: #7f8b90;
-
-  font-size: 11px;
-}
-
-
-/* =========================================================
-   BIG HEART
-========================================================= */
-
-.favorite {
-  width: 46px;
-
-  height: 46px;
-
-  flex-shrink: 0;
-
-  border: none;
-
-  background: transparent;
-
-  color: #748087;
-
-  font-size: 30px;
-
-  line-height: 1;
-}
-
-.favorite:hover {
-  color: white;
-
-  transform: scale(1.08);
-}
-
-.favorite.active {
-  color: white;
-}
-
-
-/* =========================================================
-   BOOK THREE DOT
-========================================================= */
-
-.book-more {
-  width: 40px;
-
-  height: 40px;
-
-  flex-shrink: 0;
-
-  border: none;
-
-  border-radius: 8px;
-
-  background: transparent;
-
-  color: #aeb8bc;
-
-  font-size: 23px;
-}
-
-.book-more:hover {
-  background: #26343a;
-
-  color: white;
-}
-
-
-/* =========================================================
-   EMPTY
-========================================================= */
-
-.empty {
-  min-height: 40vh;
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  justify-content: center;
-
-  text-align: center;
-
-  color: #89959a;
-}
-
-.empty-icon {
-  margin-bottom: 12px;
-
-  font-size: 48px;
-}
-
-.empty h2 {
-  margin: 0 0 8px;
-
-  color: #f9f9f9;
-
-  font-family: Georgia, serif;
-
-  font-size: 28px;
-
-  font-weight: 400;
-}
-
-.empty p {
-  margin: 0 0 20px;
-
-  font-size: 13px;
-}
-
-.primary {
-  padding: 12px 18px;
-
-  border: none;
-
-  border-radius: 20px;
-
-  background: white;
-
-  color: #080f13;
-
-  font-weight: bold;
-}
-
-
-/* =========================================================
-   SERIES PAGE
-========================================================= */
-
-#seriesPage {
-  display: none;
-}
-
-.back-button {
-  margin-bottom: 20px;
-
-  padding: 9px 14px;
-
-  border: 1px solid #34434a;
-
-  border-radius: 9px;
-
-  background: transparent;
-
-  color: #b7c0c4;
-}
-
-.back-button:hover {
-  background: #162228;
-}
-
-.series-page-top {
   display: flex;
 
   align-items: center;
@@ -780,33 +275,647 @@ h1 {
   justify-content: space-between;
 
   gap: 20px;
+
+  margin-bottom: 20px;
+
 }
 
-.series-page-name {
+.section-heading {
+
+  min-width: 0;
+
+}
+
+.section-title {
+
   font-family: Georgia, serif;
 
-  font-size: 42px;
+  font-size: 29px;
+
 }
 
-.series-page-count {
-  margin-top: 6px;
+.section-count {
 
-  color: #89959a;
+  margin-top: 5px;
+
+  color: #68767b;
+
+  font-size: 11px;
+
+}
+
+.section-add {
+
+  flex-shrink: 0;
+
+  padding: 9px 16px;
 
   font-size: 12px;
+
+  white-space: nowrap;
+
 }
 
 
-/* =========================================================
-   MODALS
-========================================================= */
+/* =====================================================
+   SERIES GRID
+===================================================== */
+
+.series-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(270px, 1fr));
+
+  gap: 16px;
+
+}
+
+
+/* =====================================================
+   SERIES TILE
+===================================================== */
+
+.series-card {
+
+  position: relative;
+
+  min-height: 145px;
+
+  border: 1px solid #29373d;
+
+  border-radius: 14px;
+
+  background: #0d171c;
+
+  transition: .2s;
+
+  overflow: visible;
+
+}
+
+.series-card:hover {
+
+  border-color: #536168;
+
+  transform: translateY(-2px);
+
+}
+
+.series-card-content {
+
+  padding: 23px;
+
+  padding-right: 60px;
+
+}
+
+.series-icon {
+
+  width: 46px;
+
+  height: 46px;
+
+  border-radius: 11px;
+
+  background: #17242a;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 21px;
+
+  margin-bottom: 18px;
+
+}
+
+.series-name {
+
+  font-family: Georgia, serif;
+
+  font-size: 21px;
+
+  word-break: break-word;
+
+}
+
+.series-books {
+
+  margin-top: 6px;
+
+  color: #718087;
+
+  font-size: 11px;
+
+}
+
+.open-series {
+
+  margin: 0 23px 20px;
+
+  width: calc(100% - 46px);
+
+}
+
+
+/* =====================================================
+   THREE DOT MENU
+===================================================== */
+
+.menu-wrapper {
+
+  position: absolute;
+
+  top: 14px;
+
+  right: 14px;
+
+  z-index: 20;
+
+}
+
+.menu-button {
+
+  width: 35px;
+
+  height: 35px;
+
+  border: 1px solid #35434a;
+
+  border-radius: 9px;
+
+  background: #091115;
+
+  color: #aeb8bc;
+
+  font-size: 20px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+}
+
+.menu-button:hover {
+
+  color: white;
+
+  border-color: #68767b;
+
+}
+
+.menu {
+
+  display: none;
+
+  position: absolute;
+
+  top: 41px;
+
+  right: 0;
+
+  width: 150px;
+
+  padding: 6px;
+
+  background: #101a1f;
+
+  border: 1px solid #35434a;
+
+  border-radius: 10px;
+
+  box-shadow: 0 15px 40px rgba(0,0,0,.55);
+
+  z-index: 100;
+
+}
+
+.menu.show {
+
+  display: block;
+
+}
+
+.menu-item {
+
+  width: 100%;
+
+  border: none;
+
+  background: transparent;
+
+  color: #dce1e3;
+
+  padding: 10px;
+
+  text-align: left;
+
+  border-radius: 7px;
+
+  cursor: pointer;
+
+}
+
+.menu-item:hover {
+
+  background: #1b292f;
+
+}
+
+.menu-item.delete {
+
+  color: #ff8f8f;
+
+}
+
+
+/* =====================================================
+   BOOK LIST
+===================================================== */
+
+.book-list {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+}
+
+.book {
+
+  min-height: 76px;
+
+  padding: 12px 15px;
+
+  border: 1px solid #26343a;
+
+  border-radius: 13px;
+
+  background: #0d171c;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  position: relative;
+
+}
+
+.book-cover {
+
+  width: 46px;
+
+  height: 56px;
+
+  border-radius: 7px;
+
+  background: #17242a;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 21px;
+
+  flex-shrink: 0;
+
+}
+
+.book-info {
+
+  flex: 1;
+
+  min-width: 0;
+
+}
+
+.book-title {
+
+  font-family: Georgia, serif;
+
+  font-size: 17px;
+
+  word-break: break-word;
+
+}
+
+.book-meta {
+
+  color: #68767b;
+
+  font-size: 10px;
+
+  margin-top: 5px;
+
+}
+
+
+/* =====================================================
+   FAVORITE HEART
+===================================================== */
+
+.favorite-button {
+
+  width: 48px;
+
+  height: 48px;
+
+  border: 1px solid #35434a;
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: #7b888d;
+
+  font-size: 29px;
+
+  line-height: 1;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+
+  transition: .18s;
+
+}
+
+.favorite-button:hover {
+
+  border-color: white;
+
+  color: white;
+
+  transform: scale(1.08);
+
+}
+
+.favorite-button.active {
+
+  color: white;
+
+  border-color: white;
+
+}
+
+.favorite-button.active:hover {
+
+  background: #17242a;
+
+}
+
+
+/* =====================================================
+   BOOK THREE DOTS
+===================================================== */
+
+.book-menu-wrapper {
+
+  position: relative;
+
+  flex-shrink: 0;
+
+}
+
+.book-menu-button {
+
+  width: 39px;
+
+  height: 39px;
+
+  border: 1px solid #35434a;
+
+  border-radius: 9px;
+
+  background: transparent;
+
+  color: #9aa5a9;
+
+  font-size: 20px;
+
+  cursor: pointer;
+
+}
+
+.book-menu-button:hover {
+
+  color: white;
+
+  background: #17242a;
+
+}
+
+
+/* =====================================================
+   OPEN BOOK BUTTON
+===================================================== */
+
+.open-book {
+
+  border: 1px solid #35434a;
+
+  background: transparent;
+
+  color: white;
+
+  padding: 9px 13px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-size: 11px;
+
+}
+
+.open-book:hover {
+
+  background: #17242a;
+
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty {
+
+  border: 1px dashed #2b3940;
+
+  border-radius: 18px;
+
+  padding: 55px 25px;
+
+  text-align: center;
+
+}
+
+.empty-icon {
+
+  font-size: 43px;
+
+  margin-bottom: 13px;
+
+}
+
+.empty h2 {
+
+  margin: 0;
+
+  font-family: Georgia, serif;
+
+  font-size: 28px;
+
+  font-weight: 400;
+
+}
+
+.empty p {
+
+  color: #718087;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+
+  margin: 11px auto 22px;
+
+  max-width: 400px;
+
+}
+
+
+/* =====================================================
+   SERIES PAGE
+===================================================== */
+
+#seriesPage {
+
+  display: none;
+
+}
+
+.back {
+
+  border: none;
+
+  background: transparent;
+
+  color: #718087;
+
+  padding: 0;
+
+  cursor: pointer;
+
+  margin-bottom: 28px;
+
+}
+
+.back:hover {
+
+  color: white;
+
+}
+
+.series-page-header {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 35px;
+
+}
+
+.series-heading {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+}
+
+.series-heading-icon {
+
+  width: 60px;
+
+  height: 60px;
+
+  border-radius: 15px;
+
+  background: #17242a;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 27px;
+
+}
+
+.series-heading h2 {
+
+  margin: 0;
+
+  font-family: Georgia, serif;
+
+  font-size: 34px;
+
+  font-weight: 400;
+
+}
+
+.series-heading p {
+
+  margin: 5px 0 0;
+
+  color: #718087;
+
+  font-size: 11px;
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
 
 .modal {
+
+  display: none;
+
   position: fixed;
 
   inset: 0;
 
-  display: none;
+  z-index: 200;
+
+  background: rgba(0,0,0,.82);
 
   align-items: center;
 
@@ -814,154 +923,253 @@ h1 {
 
   padding: 20px;
 
-  background: rgba(0,0,0,.78);
-
-  z-index: 1000;
 }
 
 .modal.show {
+
   display: flex;
+
 }
 
 .modal-box {
+
   width: 100%;
 
-  max-width: 430px;
+  max-width: 440px;
 
   padding: 30px;
 
-  background: #111b20;
+  background: #0f191e;
 
-  border: 1px solid #36454c;
+  border: 1px solid #35434a;
 
-  border-radius: 16px;
+  border-radius: 18px;
 
-  box-shadow:
-    0 25px 70px rgba(0,0,0,.65);
 }
 
 .modal-box h2 {
-  margin: 0 0 20px;
+
+  margin: 0 0 25px;
 
   font-family: Georgia, serif;
 
   font-size: 28px;
 
   font-weight: 400;
+
 }
 
-.modal-input {
+.field {
+
+  margin-bottom: 17px;
+
+}
+
+.field label {
+
+  display: block;
+
+  color: #718087;
+
+  font-size: 10px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+
+  margin-bottom: 7px;
+
+}
+
+.field input {
+
   width: 100%;
 
-  padding: 13px;
+  height: 46px;
 
-  margin-bottom: 18px;
+  padding: 0 13px;
 
-  background: #080f13;
+  border: 1px solid #303e44;
+
+  border-radius: 8px;
+
+  background: #091115;
 
   color: white;
+
+  outline: none;
+
+}
+
+.field input:focus {
+
+  border-color: #68767b;
+
+}
+
+
+/* =====================================================
+   DRIVE PICKER BUTTON
+===================================================== */
+
+.drive-picker-button {
+
+  width: 100%;
+
+  height: 48px;
 
   border: 1px solid #35434a;
 
   border-radius: 9px;
 
-  outline: none;
+  background: #101a1f;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
 }
 
-.modal-input:focus {
-  border-color: #68777e;
+.drive-picker-button:hover {
+
+  background: #17242a;
+
+  border-color: #68767b;
+
 }
 
-.modal-buttons {
+.drive-selected {
+
+  margin-top: 10px;
+
+  color: #9da8ad;
+
+  font-size: 11px;
+
+  min-height: 16px;
+
+}
+
+
+/* =====================================================
+   MODAL BUTTONS
+===================================================== */
+
+.modal-actions {
+
   display: flex;
 
   gap: 10px;
+
+  margin-top: 22px;
+
 }
 
-.modal-buttons button {
+.modal-actions button {
+
   flex: 1;
 
-  padding: 13px;
+  height: 43px;
+
+  border-radius: 9px;
+
+  cursor: pointer;
+
+}
+
+.cancel {
+
+  border: 1px solid #35434a;
+
+  background: transparent;
+
+  color: white;
+
+}
+
+.create {
 
   border: none;
 
-  border-radius: 9px;
-}
-
-.cancel-button {
-  background: #26343a;
-
-  color: white;
-}
-
-.save-button {
   background: white;
 
   color: #080f13;
 
-  font-weight: bold;
+  font-weight: 600;
+
 }
 
 
-/* =========================================================
-   DRIVE PICKER STATUS
-========================================================= */
+/* =====================================================
+   MOBILE
+===================================================== */
 
-.drive-status {
-  min-height: 20px;
+@media (max-width: 650px) {
 
-  margin-top: 12px;
+  header {
 
-  color: #89959a;
+    padding: 0 20px;
 
-  text-align: center;
+  }
 
-  font-size: 12px;
-}
+  main {
 
+    width: 90%;
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+    padding-top: 45px;
 
-@media (max-width: 700px) {
+  }
 
-  .library {
+  .section-header {
+
+    align-items: flex-start;
+
+  }
+
+  .series-page-header {
+
     display: block;
+
   }
 
-  .sidebar {
-    width: 100%;
+  .series-page-header .primary {
 
-    min-height: auto;
+    margin-top: 20px;
 
-    border-right: none;
-
-    border-bottom: 1px solid #263238;
   }
 
-  .main {
-    padding: 25px 18px;
+  .book {
+
+    gap: 8px;
+
   }
 
-  .top {
-    align-items: flex-start;
+  .book-cover {
 
-    flex-direction: column;
+    width: 38px;
+
+    height: 48px;
+
   }
 
-  h1 {
-    font-size: 38px;
+  .favorite-button {
+
+    width: 43px;
+
+    height: 43px;
+
+    font-size: 25px;
+
   }
 
-  .series-page-top {
-    align-items: flex-start;
+  .open-book {
 
-    flex-direction: column;
-  }
+    display: none;
 
-  .series-page-name {
-    font-size: 34px;
   }
 
 }
@@ -973,309 +1181,213 @@ h1 {
 
 <body>
 
-
-<!-- =========================================================
-     LOGIN PAGE
-========================================================= -->
-
-<div id="loginPage">
-
-  <div class="login-box">
-
-    <div class="login-logo">
-      MyShelf
-    </div>
-
-    <div class="login-subtitle">
-      YOUR LITTLE LIBRARY
-    </div>
-
-    <button
-      class="google-login"
-      id="loginButton"
-    >
-      Continue with Google
-    </button>
-
-    <div
-      class="login-status"
-      id="loginStatus"
-    ></div>
-
-  </div>
-
-</div>
+<main>
 
 
-<!-- =========================================================
-     LIBRARY PAGE
-========================================================= -->
-
-<div id="libraryPage">
-
-<div class="library">
-
-
-<!-- =========================================================
-     SIDEBAR
-========================================================= -->
-
-<aside class="sidebar">
-
-  <div class="logo">
-    MyShelf
-  </div>
-
-  <div class="tagline">
-    YOUR LITTLE LIBRARY
-  </div>
-
-
-  <!-- SERIES -->
-
-  <div
-    class="nav-item active"
-    id="seriesNav"
-  >
-
-    <div class="nav-icon">
-      📚
-    </div>
-
-    <div class="nav-name">
-      Series
-    </div>
-
-    <div
-      class="nav-count"
-      id="seriesCount"
-    >
-      0
-    </div>
-
-  </div>
-
-
-  <!-- STANDALONE -->
-
-  <div
-    class="nav-item"
-    id="standaloneNav"
-  >
-
-    <div class="nav-icon">
-      📖
-    </div>
-
-    <div class="nav-name">
-      Standalone
-    </div>
-
-    <div
-      class="nav-count"
-      id="standaloneCount"
-    >
-      0
-    </div>
-
-  </div>
-
-
-  <!-- FAVORITES -->
-
-  <div
-    class="nav-item"
-    id="favoritesNav"
-  >
-
-    <div class="nav-icon">
-      ♥
-    </div>
-
-    <div class="nav-name">
-      Favorites
-    </div>
-
-    <div
-      class="nav-count"
-      id="favoritesCount"
-    >
-      0
-    </div>
-
-  </div>
-
-
-  <div class="sidebar-divider"></div>
-
-
-  <div class="sidebar-section-title">
-    MY LIBRARY
-  </div>
-
-
-  <div
-    class="nav-item"
-    id="logoutButton"
-  >
-
-    <div class="nav-icon">
-      ↪
-    </div>
-
-    <div class="nav-name">
-      Log Out
-    </div>
-
-  </div>
-
-
-</aside>
-
-
-<!-- =========================================================
-     MAIN CONTENT
-========================================================= -->
-
-<main class="main">
-
-
-<!-- =========================================================
-     HOME
-========================================================= -->
+<!-- =================================================
+     HOME PAGE
+================================================= -->
 
 <div id="homePage">
 
 
-  <div class="top">
-
-    <div>
-
-      <div class="eyebrow">
-        YOUR PERSONAL LIBRARY
-      </div>
-
-      <h1 id="homeTitle">
-        Series
-      </h1>
-
-    </div>
+  <h1>
+    My Library
+  </h1>
 
 
-    <div class="top-actions">
+  <p class="description">
 
-      <button
-        class="add-button"
-        id="mainAddButton"
-      >
-        ＋ Add Series
-      </button>
+    Every series gets a shelf.
+    Every standalone gets its own place.
+    Keep your favorites close and build
+    your collection your way.
 
-    </div>
+  </p>
 
-  </div>
+  <!-- =================================================
+       TABS
+  ================================================== -->
 
-
-  <!-- =====================================================
-       SERIES CONTENT
-  ===================================================== -->
-
-  <div id="seriesContent">
-
-    <div class="section-heading">
-
-      <h2>
-        My Series
-      </h2>
-
-      <span
-        class="section-count"
-        id="seriesHeadingCount"
-      >
-        0 series
-      </span>
-
-    </div>
-
-
-    <div
-      class="series-list"
-      id="seriesList"
-    ></div>
-
-  </div>
-
-
-  <!-- =====================================================
-       STANDALONE CONTENT
-  ===================================================== -->
-
-  <div
-    id="standaloneContent"
-    style="display:none;"
-  >
-
-    <div class="section-heading">
-
-      <h2>
-        Standalone Books
-      </h2>
-
-      <span
-        class="section-count"
-        id="standaloneHeadingCount"
-      >
-        0 books
-      </span>
-
-    </div>
-
+  <div class="tabs">
 
     <button
-      class="add-button"
-      id="addStandaloneButton"
-    >
-      ＋ Add Books from Google Drive
+      id="allTab"
+      class="tab active"
+      onclick="showAll()">
+
+      ALL BOOKS
+
     </button>
 
 
-    <div
-      class="book-list"
-      id="standaloneList"
-    ></div>
+    <button
+      id="favoritesTab"
+      class="tab"
+      onclick="showFavorites()">
+
+      ♥ FAVORITES
+
+    </button>
 
   </div>
 
 
-  <!-- =====================================================
-       FAVORITES CONTENT
-  ===================================================== -->
+  <!-- =================================================
+       ALL CONTENT
+  ================================================== -->
+
+  <div id="allContent">
+
+
+    <!-- =================================================
+         SERIES SECTION
+    ================================================== -->
+
+    <section class="section">
+
+
+      <div class="section-header">
+
+
+        <div class="section-heading">
+
+          <div class="section-title">
+            📚 Series
+          </div>
+
+          <div
+            id="seriesCount"
+            class="section-count">
+
+            0 series
+
+          </div>
+
+        </div>
+
+
+        <!-- ALWAYS PRESENT -->
+
+        <button
+          class="secondary section-add"
+          onclick="openSeriesModal()">
+
+          ＋ Add Series
+
+        </button>
+
+
+      </div>
+
+
+      <div
+        id="seriesGrid"
+        class="series-grid">
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         STANDALONE SECTION
+    ================================================== -->
+
+    <section class="section">
+
+
+      <div class="section-header">
+
+
+        <div class="section-heading">
+
+          <div class="section-title">
+            📖 Standalone Books
+          </div>
+
+          <div
+            id="standaloneCount"
+            class="section-count">
+
+            0 books
+
+          </div>
+
+        </div>
+
+
+        <!-- ALWAYS PRESENT -->
+
+        <button
+          class="secondary section-add"
+          onclick="openStandaloneModal()">
+
+          ＋ Add Standalone Book
+
+        </button>
+
+
+      </div>
+
+
+      <div
+        id="standaloneList"
+        class="book-list">
+
+      </div>
+
+
+    </section>
+
+
+  </div>
+
+
+  <!-- =================================================
+       FAVORITES SECTION
+  ================================================== -->
 
   <div
     id="favoritesContent"
-    style="display:none;"
-  >
-
-    <div class="section-heading">
-
-      <h2>
-        Favorites
-      </h2>
-
-      <span
-        class="section-count"
-        id="favoritesHeadingCount"
-      >
-        0 favorites
-      </span>
-
-    </div>
+    style="display:none;">
 
 
-    <div
-      class="book-list"
-      id="favoritesList"
-    ></div>
+    <section class="section">
+
+
+      <div class="section-header">
+
+        <div class="section-heading">
+
+          <div class="section-title">
+            ♥ Favorite Books
+          </div>
+
+          <div
+            id="favoritesCount"
+            class="section-count">
+
+            0 favorites
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="favoritesList"
+        class="book-list">
+
+      </div>
+
+
+    </section>
+
 
   </div>
 
@@ -1283,502 +1395,477 @@ h1 {
 </div>
 
 
-<!-- =========================================================
+
+<!-- =================================================
      SERIES PAGE
-========================================================= -->
+================================================= -->
 
 <div id="seriesPage">
 
+
   <button
-    class="back-button"
-    id="backButton"
-  >
-    ← Back
+    class="back"
+    onclick="goHome()">
+
+    ← Back to My Library
+
   </button>
 
 
-  <div class="series-page-top">
+  <div class="series-page-header">
 
-    <div>
 
-      <div
-        class="series-page-name"
-        id="seriesPageName"
-      >
-      </div>
+    <div class="series-heading">
+
 
       <div
-        class="series-page-count"
-        id="seriesPageCount"
-      >
-        0 books
+        class="series-heading-icon">
+
+        📚
+
       </div>
+
+
+      <div>
+
+        <h2 id="seriesPageName">
+          Series
+        </h2>
+
+
+        <p id="seriesPageCount">
+          0 books
+        </p>
+
+      </div>
+
 
     </div>
 
 
+    <!-- ALWAYS PRESENT INSIDE SERIES -->
+
     <button
-      class="add-button"
-      id="seriesAddBookButton"
-    >
-      ＋ Add Books from Google Drive
+      class="primary"
+      onclick="addBookToCurrentSeries()">
+
+      ＋ Add Book from Drive
+
     </button>
+
 
   </div>
 
 
   <div
-    class="book-list"
     id="seriesBookList"
-  ></div>
+    class="book-list">
+
+  </div>
+
 
 </div>
 
 
 </main>
 
-</div>
-
-</div>
 
 
-<!-- =========================================================
-     ADD SERIES MODAL
-========================================================= -->
+<!-- =================================================
+     CREATE SERIES MODAL
+================================================= -->
 
 <div
-  class="modal"
   id="seriesModal"
->
+  class="modal">
+
 
   <div class="modal-box">
 
+
     <h2>
-      Add Series
+      Create a Series Shelf
     </h2>
 
-    <input
-      class="modal-input"
-      id="seriesNameInput"
-      type="text"
-      placeholder="Series name"
-      autocomplete="off"
-    >
+
+    <div class="field">
 
 
-    <div class="modal-buttons">
+      <label>
+        Series name
+      </label>
 
-      <button
-        class="cancel-button"
-        id="cancelSeries"
-      >
-        Cancel
-      </button>
 
-      <button
-        class="save-button"
-        id="saveSeries"
-      >
-        Add Series
-      </button>
+      <input
+        id="seriesName"
+        type="text"
+        placeholder="Example: Made Series"
+        autocomplete="off">
+
 
     </div>
 
+
+    <div class="modal-actions">
+
+
+      <button
+        class="cancel"
+        onclick="closeSeriesModal()">
+
+        Cancel
+
+      </button>
+
+
+      <button
+        class="create"
+        onclick="createSeries()">
+
+        Create Series
+
+      </button>
+
+
+    </div>
+
+
   </div>
+
 
 </div>
 
 
-<!-- =========================================================
-     EDIT SERIES MODAL
-========================================================= -->
+
+<!-- =================================================
+     STANDALONE BOOK MODAL
+================================================= -->
 
 <div
-  class="modal"
-  id="editSeriesModal"
->
+  id="standaloneModal"
+  class="modal">
+
 
   <div class="modal-box">
 
+
     <h2>
-      Edit Series
+      Add Standalone Book
     </h2>
 
-    <input
-      class="modal-input"
-      id="editSeriesNameInput"
-      type="text"
-      placeholder="Series name"
-      autocomplete="off"
-    >
+
+    <!-- ONLY OPTION 1 -->
+
+    <div class="field">
 
 
-    <div class="modal-buttons">
+      <label>
+        Book title
+      </label>
 
-      <button
-        class="cancel-button"
-        id="cancelEditSeries"
-      >
-        Cancel
-      </button>
 
-      <button
-        class="save-button"
-        id="saveEditSeries"
-      >
-        Save
-      </button>
+      <input
+        id="standaloneTitle"
+        type="text"
+        placeholder="Enter book title"
+        autocomplete="off">
+
 
     </div>
 
-  </div>
 
-</div>
+    <!-- ONLY OPTION 2 -->
 
+    <button
+      type="button"
+      class="drive-picker-button"
+      onclick="pickStandaloneFromDrive()">
 
-<!-- =========================================================
-     EDIT BOOK MODAL
-========================================================= -->
+      📁 Pick from Google Drive
 
-<div
-  class="modal"
-  id="editBookModal"
->
+    </button>
 
-  <div class="modal-box">
-
-    <h2>
-      Edit Book
-    </h2>
-
-    <input
-      class="modal-input"
-      id="editBookNameInput"
-      type="text"
-      placeholder="Book name"
-      autocomplete="off"
-    >
-
-
-    <div class="modal-buttons">
-
-      <button
-        class="cancel-button"
-        id="cancelEditBook"
-      >
-        Cancel
-      </button>
-
-      <button
-        class="save-button"
-        id="saveEditBook"
-      >
-        Save
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- =========================================================
-     MOVE BOOK MODAL
-========================================================= -->
-
-<div
-  class="modal"
-  id="moveBookModal"
->
-
-  <div class="modal-box">
-
-    <h2>
-      Move Book
-    </h2>
-
-    <select
-      class="modal-input"
-      id="moveBookSelect"
-    ></select>
-
-
-    <div class="modal-buttons">
-
-      <button
-        class="cancel-button"
-        id="cancelMoveBook"
-      >
-        Cancel
-      </button>
-
-      <button
-        class="save-button"
-        id="saveMoveBook"
-      >
-        Move
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- =========================================================
-     DRIVE STATUS
-========================================================= -->
-
-<div
-  class="modal"
-  id="driveModal"
->
-
-  <div class="modal-box">
-
-    <h2>
-      Google Drive
-    </h2>
-
-    <p
-      style="
-        color:#89959a;
-        font-size:13px;
-        line-height:1.6;
-      "
-    >
-      Connecting to Google Drive...
-    </p>
 
     <div
-      class="drive-status"
-      id="driveStatus"
-    ></div>
+      id="standaloneDriveSelected"
+      class="drive-selected">
+
+    </div>
+
+
+    <div class="modal-actions">
+
+
+      <button
+        class="cancel"
+        onclick="closeStandaloneModal()">
+
+        Cancel
+
+      </button>
+
+
+      <button
+        class="create"
+        onclick="addStandaloneBook()">
+
+        Add Book
+
+      </button>
+
+
+    </div>
+
 
   </div>
+
 
 </div>
 
 
-<!-- =========================================================
-     GOOGLE APIS
-========================================================= -->
 
-<script src="https://apis.google.com/js/api.js"></script>
-
-<script src="https://accounts.google.com/gsi/client"></script>
+<script>
 
 
-<!-- =========================================================
-     FIREBASE
-========================================================= -->
+/* =====================================================
+   STORAGE
+===================================================== */
 
-<script type="module">
-
-import {
-  initializeApp
-}
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+const STORAGE_KEY =
+  "myshelf_final_library_v1";
 
 
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  deleteDoc,
-  doc,
-  updateDoc,
-  onSnapshot,
-  serverTimestamp
-}
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+let library =
+  JSON.parse(
+    localStorage.getItem(STORAGE_KEY)
+  ) || {
+
+    series: [],
+
+    standalone: []
+
+  };
 
 
-import {
-  getAuth,
-  onAuthStateChanged,
-  signInWithPopup,
-  signOut,
-  GoogleAuthProvider
-}
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+let currentSeriesId =
+  null;
 
 
-/* =========================================================
-   FIREBASE CONFIG
-========================================================= */
-
-const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyBl-5cfDXHTX0gHubxH9MZx2YwLDbRRKFs",
-
-  authDomain:
-    "myshelf-e3440.firebaseapp.com",
-
-  projectId:
-    "myshelf-e3440",
-
-  storageBucket:
-    "myshelf-e3440.firebasestorage.app",
-
-  messagingSenderId:
-    "820092826756",
-
-  appId:
-    "1:820092826756:web:0cab1578f5dfc3c74ebed1",
-
-  measurementId:
-    "G-LB8602RM3L"
-
-};
+let selectedDriveFile =
+  null;
 
 
-const app =
-  initializeApp(firebaseConfig);
+let drivePickerLoaded =
+  false;
 
-
-const db =
-  getFirestore(app);
-
-
-const auth =
-  getAuth(app);
-
-
-/* =========================================================
-   GOOGLE DRIVE
-========================================================= */
-
-const GOOGLE_API_KEY =
+const API_KEY =
   "AIzaSyC4pGowo0fDjk8TJe-x-O7lCUlIj6JNgpU";
 
 
-const GOOGLE_CLIENT_ID =
+const CLIENT_ID =
   "1074521299867-4s2f8vm53iru10r72il166l0h63lvt0c.apps.googleusercontent.com";
 
 
-const GOOGLE_APP_ID =
-  "1074521299867";
+const APP_ID =
+  "820092826756";
 
 
 const DRIVE_SCOPE =
   "https://www.googleapis.com/auth/drive.readonly";
 
 
-let pickerReady =
-  false;
+let tokenClient =
+  null;
 
-let driveAccessToken =
+let accessToken =
   null;
 
 
-/* =========================================================
-   STATE
-========================================================= */
+/* =====================================================
+   SAVE
+===================================================== */
 
-let currentUser =
-  null;
+function save() {
 
-let series =
-  [];
+  localStorage.setItem(
 
-let standalone =
-  [];
+    STORAGE_KEY,
 
-let currentSeriesId =
-  null;
+    JSON.stringify(library)
 
-let currentView =
-  "series";
-
-let editingSeriesId =
-  null;
-
-let editingBookId =
-  null;
-
-let editingBookSeriesId =
-  null;
-
-let movingBookId =
-  null;
-
-let movingBookSeriesId =
-  null;
-
-
-/* =========================================================
-   ELEMENTS
-========================================================= */
-
-const loginPage =
-  document.getElementById(
-    "loginPage"
   );
 
-const libraryPage =
-  document.getElementById(
-    "libraryPage"
+}
+
+
+/* =====================================================
+   SERIES MODAL
+===================================================== */
+
+function openSeriesModal() {
+
+  document
+    .getElementById("seriesName")
+    .value = "";
+
+
+  document
+    .getElementById("seriesModal")
+    .classList
+    .add("show");
+
+
+  setTimeout(
+    function() {
+
+      document
+        .getElementById("seriesName")
+        .focus();
+
+    },
+    50
   );
 
-const loginStatus =
-  document.getElementById(
-    "loginStatus"
+}
+
+
+function closeSeriesModal() {
+
+  document
+    .getElementById("seriesModal")
+    .classList
+    .remove("show");
+
+}
+
+
+/* =====================================================
+   CREATE SERIES
+===================================================== */
+
+function createSeries() {
+
+  const input =
+    document.getElementById("seriesName");
+
+
+  const name =
+    input.value.trim();
+
+
+  if (!name) {
+
+    alert(
+      "Please enter a series name."
+    );
+
+    input.focus();
+
+    return;
+
+  }
+
+
+  library.series.push({
+
+    id:
+      Date.now().toString(),
+
+    name:
+      name,
+
+    books:
+      []
+
+  });
+
+
+  save();
+
+
+  input.value =
+    "";
+
+
+  closeSeriesModal();
+
+
+  renderAll();
+
+}
+
+
+/* =====================================================
+   STANDALONE MODAL
+===================================================== */
+
+function openStandaloneModal() {
+
+  selectedDriveFile =
+    null;
+
+
+  document
+    .getElementById("standaloneTitle")
+    .value = "";
+
+
+  document
+    .getElementById("standaloneDriveSelected")
+    .textContent = "";
+
+
+  document
+    .getElementById("standaloneModal")
+    .classList
+    .add("show");
+
+
+  setTimeout(
+    function() {
+
+      document
+        .getElementById("standaloneTitle")
+        .focus();
+
+    },
+    50
   );
 
-const seriesList =
-  document.getElementById(
-    "seriesList"
-  );
-
-const standaloneList =
-  document.getElementById(
-    "standaloneList"
-  );
-
-const favoritesList =
-  document.getElementById(
-    "favoritesList"
-  );
-
-const seriesModal =
-  document.getElementById(
-    "seriesModal"
-  );
-
-const editSeriesModal =
-  document.getElementById(
-    "editSeriesModal"
-  );
-
-const editBookModal =
-  document.getElementById(
-    "editBookModal"
-  );
-
-const moveBookModal =
-  document.getElementById(
-    "moveBookModal"
-  );
+}
 
 
-/* =========================================================
-   LOAD GOOGLE PICKER
-========================================================= */
+function closeStandaloneModal() {
 
-function loadPicker() {
+  document
+    .getElementById("standaloneModal")
+    .classList
+    .remove("show");
+
+}
+
+
+/* =====================================================
+   DRIVE PICKER LOAD
+===================================================== */
+
+function loadDrivePicker() {
+
+  if (
+    typeof gapi ===
+    "undefined"
+  ) {
+
+    return;
+
+  }
+
 
   gapi.load(
     "picker",
     function() {
 
-      pickerReady =
+      drivePickerLoaded =
         true;
 
     }
@@ -1786,485 +1873,444 @@ function loadPicker() {
 
 }
 
-loadPicker();
+
+loadDrivePicker();
 
 
-/* =========================================================
-   LOGIN
-========================================================= */
+/* =====================================================
+   DRIVE AUTHORIZATION
+===================================================== */
 
-document
-  .getElementById(
-    "loginButton"
-  )
-  .addEventListener(
-    "click",
-    async function() {
+function startDriveAuthorization(
+  callback
+) {
 
-      loginStatus.textContent =
-        "Signing in...";
+  if (
+    API_KEY.includes(
+      "PASTE_YOUR"
+    ) ||
+    CLIENT_ID.includes(
+      "PASTE_YOUR"
+    )
+  ) {
 
-
-      try {
-
-        const provider =
-          new GoogleAuthProvider();
-
-
-        await signInWithPopup(
-          auth,
-          provider
-        );
-
-
-      }
-
-      catch(error) {
-
-        console.error(error);
-
-        loginStatus.textContent =
-          error.message;
-
-      }
-
-    }
-  );
-
-
-/* =========================================================
-   AUTH STATE
-========================================================= */
-
-onAuthStateChanged(
-  auth,
-  function(user) {
-
-    currentUser =
-      user;
-
-
-    if (user) {
-
-      loginPage.style.display =
-        "none";
-
-      libraryPage.style.display =
-        "block";
-
-
-      startListeners();
-
-    }
-
-    else {
-
-      loginPage.style.display =
-        "flex";
-
-      libraryPage.style.display =
-        "none";
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   FIRESTORE LISTENERS
-========================================================= */
-
-function startListeners() {
-
-  const userRef =
-    doc(
-      db,
-      "users",
-      currentUser.uid
+    alert(
+      "Add your existing Google API Key and OAuth Client ID at the top of the JavaScript first."
     );
-
-
-  const seriesRef =
-    collection(
-      userRef,
-      "series"
-    );
-
-
-  const standaloneRef =
-    collection(
-      userRef,
-      "standalone"
-    );
-
-
-  onSnapshot(
-    seriesRef,
-    function(snapshot) {
-
-      series = [];
-
-
-      snapshot.forEach(
-        function(item) {
-
-          series.push({
-
-            id:
-              item.id,
-
-            ...item.data(),
-
-            books:
-              item.data().books || []
-
-          });
-
-        }
-      );
-
-
-      renderSeries();
-
-      updateCounts();
-
-    },
-    function(error) {
-
-      console.error(
-        "Series error:",
-        error
-      );
-
-    }
-  );
-
-
-  onSnapshot(
-    standaloneRef,
-    function(snapshot) {
-
-      standalone = [];
-
-
-      snapshot.forEach(
-        function(item) {
-
-          standalone.push({
-
-            id:
-              item.id,
-
-            ...item.data()
-
-          });
-
-        }
-      );
-
-
-      renderStandalone();
-
-      renderFavorites();
-
-      updateCounts();
-
-    },
-    function(error) {
-
-      console.error(
-        "Standalone error:",
-        error
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   COUNTS
-========================================================= */
-
-function updateCounts() {
-
-  let allBooks =
-    standalone.length;
-
-
-  series.forEach(
-    function(item) {
-
-      allBooks +=
-        (item.books || []).length;
-
-    }
-  );
-
-
-  let favorites =
-    0;
-
-
-  standalone.forEach(
-    function(book) {
-
-      if (book.favorite)
-        favorites++;
-
-    }
-  );
-
-
-  series.forEach(
-    function(item) {
-
-      (item.books || [])
-        .forEach(
-          function(book) {
-
-            if (book.favorite)
-              favorites++;
-
-          }
-        );
-
-    }
-  );
-
-
-  document
-    .getElementById(
-      "seriesCount"
-    )
-    .textContent =
-      series.length;
-
-
-  document
-    .getElementById(
-      "standaloneCount"
-    )
-    .textContent =
-      standalone.length;
-
-
-  document
-    .getElementById(
-      "favoritesCount"
-    )
-    .textContent =
-      favorites;
-
-
-  document
-    .getElementById(
-      "seriesHeadingCount"
-    )
-    .textContent =
-      series.length +
-      (
-        series.length === 1
-          ? " series"
-          : " series"
-      );
-
-
-  document
-    .getElementById(
-      "standaloneHeadingCount"
-    )
-    .textContent =
-      standalone.length +
-      (
-        standalone.length === 1
-          ? " book"
-          : " books"
-      );
-
-
-  document
-    .getElementById(
-      "favoritesHeadingCount"
-    )
-    .textContent =
-      favorites +
-      (
-        favorites === 1
-          ? " favorite"
-          : " favorites"
-      );
-
-}
-
-
-/* =========================================================
-   RENDER SERIES
-========================================================= */
-
-function renderSeries() {
-
-  seriesList.innerHTML =
-    "";
-
-
-  if (series.length === 0) {
-
-    seriesList.innerHTML = `
-
-      <div class="empty">
-
-        <div class="empty-icon">
-          📚
-        </div>
-
-        <h2>
-          No series yet
-        </h2>
-
-        <p>
-          Create your first book series.
-        </p>
-
-        <button
-          class="primary"
-          onclick="openSeriesModal()"
-        >
-          ＋ Add Series
-        </button>
-
-      </div>
-
-    `;
 
     return;
 
   }
 
 
-  series.forEach(
-    function(item) {
+  if (
+    typeof google ===
+    "undefined"
+  ) {
 
-      const tile =
-        document.createElement(
-          "div"
+    alert(
+      "Google Identity Services has not loaded yet."
+    );
+
+    return;
+
+  }
+
+
+  tokenClient =
+    google.accounts.oauth2.initTokenClient({
+
+      client_id:
+        CLIENT_ID,
+
+      scope:
+        DRIVE_SCOPE,
+
+      callback:
+        function(response) {
+
+
+          if (
+            response.error
+          ) {
+
+            console.error(
+              response
+            );
+
+
+            alert(
+              "Google authorization failed."
+            );
+
+            return;
+
+          }
+
+
+          accessToken =
+            response.access_token;
+
+
+          callback();
+
+        }
+
+    });
+
+
+  tokenClient.requestAccessToken({
+
+    prompt:
+      "consent"
+
+  });
+
+}
+
+
+/* =====================================================
+   OPEN DRIVE PICKER
+===================================================== */
+
+function openDrivePicker(
+  callback
+) {
+
+  if (
+    !drivePickerLoaded
+  ) {
+
+    alert(
+      "Google Drive Picker is still loading. Please try again in a moment."
+    );
+
+    return;
+
+  }
+
+
+  if (
+    !accessToken
+  ) {
+
+    startDriveAuthorization(
+      function() {
+
+        openDrivePicker(
+          callback
         );
 
+      }
+    );
 
-      tile.className =
-        "series-tile";
+    return;
 
-
-      const count =
-        (item.books || []).length;
-
-
-      tile.innerHTML = `
-
-        <div
-          class="series-name"
-        >
-          ${escapeHTML(item.name)}
-        </div>
+  }
 
 
-        <div
-          class="series-book-count"
-        >
-          ${count}
-          ${
-            count === 1
-              ? "book"
-              : "books"
-          }
-        </div>
+  const view =
+    new google.picker.DocsView(
+      google.picker.ViewId.DOCS
+    );
 
 
-        <button
-          class="series-more"
-          onclick="
-            event.stopPropagation();
-            toggleSeriesMenu(
-              '${item.id}'
+  view.setIncludeFolders(
+    false
+  );
+
+
+  view.setMimeTypes(
+    "application/pdf"
+  );
+
+
+  const picker =
+    new google.picker.PickerBuilder()
+
+      .setDeveloperKey(
+        API_KEY
+      )
+
+      .setAppId(
+        APP_ID
+      )
+
+      .setOAuthToken(
+        accessToken
+      )
+
+      .addView(
+        view
+      )
+
+      .setCallback(
+        function(data) {
+
+          if (
+            data.action ===
+            google.picker.Action.PICKED
+          ) {
+
+            const file =
+              data.docs[0];
+
+
+            callback(
+              file
             );
-          "
-        >
-          ⋮
-        </button>
+
+          }
+
+        }
+      )
+
+      .build();
 
 
-        <div
-          class="more-menu"
-          id="series-menu-${item.id}"
-        >
+  picker.setVisible(
+    true
+  );
 
-          <button
-            onclick="
-              event.stopPropagation();
-              editSeries('${item.id}');
-            "
-          >
-            ✏️ Edit Name
-          </button>
+}
 
 
-          <button
-            class="danger"
-            onclick="
-              event.stopPropagation();
-              deleteSeries('${item.id}');
-            "
-          >
-            🗑 Delete Series
-          </button>
+/* =====================================================
+   PICK STANDALONE FROM DRIVE
+===================================================== */
 
-        </div>
+function pickStandaloneFromDrive() {
 
-      `;
+  openDrivePicker(
+
+    function(file) {
 
 
-      tile.addEventListener(
-        "click",
-        function() {
+      selectedDriveFile =
+        file;
 
-          openSeries(
-            item.id
+
+      document
+        .getElementById(
+          "standaloneDriveSelected"
+        )
+        .textContent =
+          "Selected: " +
+          file.name;
+
+
+      /*
+        If the title field is empty,
+        automatically use the Drive
+        file name as the title.
+      */
+
+      const titleInput =
+        document
+          .getElementById(
+            "standaloneTitle"
           );
 
-        }
-      );
 
+      if (
+        !titleInput.value.trim()
+      ) {
 
-      seriesList.appendChild(
-        tile
-      );
+        titleInput.value =
+          file.name
+            .replace(
+              /\.pdf$/i,
+              ""
+            );
+
+      }
 
     }
+
   );
 
 }
 
 
-/* =========================================================
+/* =====================================================
+   ADD STANDALONE BOOK
+===================================================== */
+
+function addStandaloneBook() {
+
+  const title =
+    document
+      .getElementById(
+        "standaloneTitle"
+      )
+      .value
+      .trim();
+
+
+  if (!title) {
+
+    alert(
+      "Please enter a book title."
+    );
+
+    return;
+
+  }
+
+
+  library.standalone.push({
+
+    id:
+      Date.now().toString(),
+
+    title:
+      title,
+
+    driveFileId:
+      selectedDriveFile
+        ? selectedDriveFile.id
+        : null,
+
+    driveUrl:
+      selectedDriveFile
+        ? (
+            selectedDriveFile.url ||
+            selectedDriveFile.embedUrl ||
+            ""
+          )
+        : "",
+
+    favorite:
+      false
+
+  });
+
+
+  save();
+
+
+  selectedDriveFile =
+    null;
+
+
+  closeStandaloneModal();
+
+
+  renderAll();
+
+}
+
+
+/* =====================================================
+   ADD BOOK TO SERIES
+===================================================== */
+
+function addBookToCurrentSeries() {
+
+  if (
+    !currentSeriesId
+  ) {
+
+    return;
+
+  }
+
+
+  openDrivePicker(
+
+    function(file) {
+
+
+      const series =
+        library.series.find(
+          function(s) {
+
+            return (
+              s.id ===
+              currentSeriesId
+            );
+
+          }
+        );
+
+
+      if (!series) {
+
+        return;
+
+      }
+
+
+      const title =
+        file.name
+          .replace(
+            /\.pdf$/i,
+            ""
+          );
+
+
+      series.books.push({
+
+        id:
+          Date.now().toString(),
+
+        title:
+          title,
+
+        driveFileId:
+          file.id,
+
+        driveUrl:
+          file.url ||
+          file.embedUrl ||
+          "",
+
+        favorite:
+          false
+
+      });
+
+
+      save();
+
+
+      renderAll();
+
+
+      renderSeriesPage();
+
+    }
+
+  );
+
+}
+
+
+/* =====================================================
    OPEN SERIES
-========================================================= */
+===================================================== */
 
-function openSeries(id) {
+function openSeries(
+  id
+) {
 
-  const item =
-    series.find(
+  const series =
+    library.series.find(
       function(s) {
 
-        return s.id === id;
+        return (
+          s.id === id
+        );
 
       }
     );
 
 
-  if (!item)
+  if (!series) {
+
     return;
+
+  }
 
 
   currentSeriesId =
@@ -2287,41 +2333,43 @@ function openSeries(id) {
       "block";
 
 
-  document
-    .getElementById(
-      "seriesPageName"
-    )
-    .textContent =
-      item.name;
-
-
-  renderSeriesBooks();
+  renderSeriesPage();
 
 }
 
 
-/* =========================================================
-   RENDER SERIES BOOKS
-========================================================= */
+/* =====================================================
+   SERIES PAGE
+===================================================== */
 
-function renderSeriesBooks() {
+function renderSeriesPage() {
 
-  const item =
-    series.find(
+  const series =
+    library.series.find(
       function(s) {
 
-        return s.id === currentSeriesId;
+        return (
+          s.id ===
+          currentSeriesId
+        );
 
       }
     );
 
 
-  if (!item)
+  if (!series) {
+
     return;
 
+  }
 
-  const books =
-    item.books || [];
+
+  document
+    .getElementById(
+      "seriesPageName"
+    )
+    .textContent =
+      series.name;
 
 
   document
@@ -2329,9 +2377,9 @@ function renderSeriesBooks() {
       "seriesPageCount"
     )
     .textContent =
-      books.length +
+      series.books.length +
       (
-        books.length === 1
+        series.books.length === 1
           ? " book"
           : " books"
       );
@@ -2347,7 +2395,9 @@ function renderSeriesBooks() {
     "";
 
 
-  if (books.length === 0) {
+  if (
+    series.books.length === 0
+  ) {
 
     list.innerHTML = `
 
@@ -2358,22 +2408,19 @@ function renderSeriesBooks() {
         </div>
 
         <h2>
-          This series is empty
+          This shelf is empty
         </h2>
 
         <p>
-          Add books from Google Drive.
+          Add a book from Google Drive.
         </p>
 
         <button
           class="primary"
-          onclick="
-            openDrivePicker(
-              'series'
-            )
-          "
-        >
-          ＋ Add Books from Google Drive
+          onclick="addBookToCurrentSeries()">
+
+          ＋ Add Book from Drive
+
         </button>
 
       </div>
@@ -2384,15 +2431,13 @@ function renderSeriesBooks() {
 
   }
 
-
-  books.forEach(
-    function(book) {
+[...library.series].reverse().forEach(
+    book => {
 
       list.appendChild(
         createBookElement(
           book,
-          item.id,
-          item.name
+          series
         )
       );
 
@@ -2402,19 +2447,250 @@ function renderSeriesBooks() {
 }
 
 
-/* =========================================================
-   RENDER STANDALONE
-========================================================= */
+/* =====================================================
+   GO HOME
+===================================================== */
 
-function renderStandalone() {
+function goHome() {
 
-  standaloneList.innerHTML =
+  currentSeriesId =
+    null;
+
+
+  document
+    .getElementById(
+      "seriesPage"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "homePage"
+    )
+    .style.display =
+      "block";
+
+
+  showAll();
+
+}
+
+
+/* =====================================================
+   RENDER ALL
+===================================================== */
+
+function renderAll() {
+
+  renderSeries();
+
+  renderStandalone();
+
+  renderFavorites();
+
+}
+
+
+/* =====================================================
+   RENDER SERIES
+===================================================== */
+
+function renderSeries() {
+
+  const grid =
+    document.getElementById(
+      "seriesGrid"
+    );
+
+
+  grid.innerHTML =
     "";
 
 
-  if (standalone.length === 0) {
+  document
+    .getElementById(
+      "seriesCount"
+    )
+    .textContent =
+      library.series.length +
+      (
+        library.series.length === 1
+          ? " series"
+          : " series"
+      );
 
-    standaloneList.innerHTML = `
+
+  if (
+    library.series.length === 0
+  ) {
+
+    grid.innerHTML = `
+
+      <div
+        class="empty"
+        style="grid-column:1/-1;">
+
+        <div class="empty-icon">
+          📚
+        </div>
+
+        <h2>
+          No series yet
+        </h2>
+
+        <p>
+          Create your first series shelf.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  library.series
+  .slice()
+  .reverse()
+  .forEach(
+    function(series) {
+
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+
+      card.className =
+        "series-card";
+
+
+      card.innerHTML = `
+
+        <div class="series-card-content">
+
+          <div class="series-icon">
+            📚
+          </div>
+
+          <div class="series-name">
+            ${escapeHTML(series.name)}
+          </div>
+
+          <div class="series-books">
+
+            ${series.books.length}
+
+            ${
+              series.books.length === 1
+                ? "book"
+                : "books"
+            }
+
+          </div>
+
+        </div>
+
+
+        <!-- THREE DOTS -->
+
+        <div class="menu-wrapper">
+
+          <button
+            class="menu-button"
+            onclick="toggleMenu(event, 'series-menu-${series.id}')">
+
+            ⋯
+
+          </button>
+
+
+          <div
+            id="series-menu-${series.id}"
+            class="menu">
+
+            <button
+              class="menu-item"
+              onclick="editSeries('${series.id}')">
+
+              Edit name
+
+            </button>
+
+
+            <button
+              class="menu-item delete"
+              onclick="deleteSeries('${series.id}')">
+
+              Delete series
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="primary open-series"
+          onclick="openSeries('${series.id}')">
+
+          Open Shelf →
+
+        </button>
+
+      `;
+
+
+      grid.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   RENDER STANDALONE
+===================================================== */
+
+function renderStandalone() {
+
+  const list =
+    document.getElementById(
+      "standaloneList"
+    );
+
+
+  list.innerHTML =
+    "";
+
+
+  document
+    .getElementById(
+      "standaloneCount"
+    )
+    .textContent =
+      library.standalone.length +
+      (
+        library.standalone.length === 1
+          ? " book"
+          : " books"
+      );
+
+
+  if (
+    library.standalone.length === 0
+  ) {
+
+    list.innerHTML = `
 
       <div class="empty">
 
@@ -2427,7 +2703,8 @@ function renderStandalone() {
         </h2>
 
         <p>
-          Add a book directly from Google Drive.
+          Add a standalone book from
+          Google Drive.
         </p>
 
       </div>
@@ -2438,34 +2715,28 @@ function renderStandalone() {
 
   }
 
+[...library.standalone].reverse().forEach(
+  function(book) {
 
-  standalone.forEach(
-    function(book) {
+    list.appendChild(
+      createBookElement(
+        book,
+        null
+      )
+    );
 
-      standaloneList.appendChild(
-
-        createBookElement(
-          book,
-          null,
-          "Standalone book"
-        )
-
-      );
-
-    }
-  );
-
+  }
+);
 }
 
 
-/* =========================================================
-   BOOK ELEMENT
-========================================================= */
+/* =====================================================
+   CREATE BOOK ELEMENT
+===================================================== */
 
 function createBookElement(
   book,
-  seriesId,
-  seriesName
+  series
 ) {
 
   const row =
@@ -2478,81 +2749,61 @@ function createBookElement(
     "book";
 
 
-  const cover =
-    book.thumbnail ||
-    "";
+  const seriesName =
+    series
+      ? series.name
+      : "Standalone book";
+
+
+  const driveButton =
+    book.driveUrl
+      ? `
+
+        <button
+          class="open-book"
+          onclick="openBook('${book.id}')">
+
+          Open
+
+        </button>
+
+      `
+      : "";
 
 
   row.innerHTML = `
 
     <div class="book-cover">
-
-      ${
-        cover
-
-        ?
-
-        `
-          <img
-            src="${escapeAttribute(cover)}"
-            alt=""
-            onerror="
-              this.style.display='none';
-              this.parentElement.innerHTML='📖';
-            "
-          >
-        `
-
-        :
-
-        "📖"
-      }
-
+      📖
     </div>
 
 
     <div class="book-info">
 
       <div class="book-title">
-        ${escapeHTML(
-          book.title ||
-          "Untitled book"
-        )}
+        ${escapeHTML(book.title)}
       </div>
 
       <div class="book-meta">
-        ${escapeHTML(
-          seriesName
-        )}
+        ${escapeHTML(seriesName)}
       </div>
 
     </div>
 
 
-    <!-- BIG HEART -->
+    <!-- HEART -->
 
     <button
-      class="
-        favorite
-        ${
-          book.favorite
-            ? "active"
-            : ""
-        }
-      "
-      title="${
+      class="favorite-button ${
         book.favorite
-          ? "Remove from favorites"
-          : "Add to favorites"
+          ? "active"
+          : ""
       }"
-      onclick="
-        event.stopPropagation();
-        toggleFavorite(
-          '${seriesId || ""}',
-          '${book.id}'
-        );
-      "
-    >
+      onclick="toggleFavorite(
+        '${series ? series.id : ""}',
+        '${book.id}'
+      )"
+      aria-label="Favorite">
 
       ${
         book.favorite
@@ -2563,84 +2814,50 @@ function createBookElement(
     </button>
 
 
-    <!-- THREE DOT -->
-
-    <button
-      class="book-more"
-      onclick="
-        event.stopPropagation();
-        toggleBookMenu(
-          '${seriesId || ""}',
-          '${book.id}'
-        );
-      "
-    >
-      ⋮
-    </button>
+    ${driveButton}
 
 
-    <!-- BOOK MENU -->
+    <!-- THREE DOTS -->
 
-    <div
-      class="more-menu"
-      id="
-        book-menu-
-        ${seriesId || "standalone"}-
-        ${book.id}
-      "
-      style="
-        top:auto;
-        bottom:58px;
-      "
-    >
+    <div class="book-menu-wrapper">
 
       <button
-        onclick="
-          openBook(
-            '${seriesId || ""}',
-            '${book.id}'
-          );
-        "
-      >
-        📖 Open
+        class="book-menu-button"
+        onclick="toggleMenu(event, 'book-menu-${book.id}')">
+
+        ⋯
+
       </button>
 
 
-      <button
-        onclick="
-          editBook(
-            '${seriesId || ""}',
+      <div
+        id="book-menu-${book.id}"
+        class="menu">
+
+        <button
+          class="menu-item"
+          onclick="editBook(
+            '${series ? series.id : ""}',
             '${book.id}'
-          );
-        "
-      >
-        ✏️ Edit
-      </button>
+          )">
+
+          Edit title
+
+        </button>
 
 
-      <button
-        onclick="
-          moveBook(
-            '${seriesId || ""}',
+        <button
+          class="menu-item delete"
+          onclick="deleteBook(
+            '${series ? series.id : ""}',
             '${book.id}'
-          );
-        "
-      >
-        📚 Move to Series
-      </button>
+          )">
 
+          Delete book
 
-      <button
-        class="danger"
-        onclick="
-          deleteBook(
-            '${seriesId || ""}',
-            '${book.id}'
-          );
-        "
-      >
-        🗑 Delete
-      </button>
+        </button>
+
+      </div>
 
     </div>
 
@@ -2652,36 +2869,243 @@ function createBookElement(
 }
 
 
-/* =========================================================
+/* =====================================================
+   FAVORITE
+===================================================== */
+
+function toggleFavorite(
+  seriesId,
+  bookId
+) {
+
+  let book =
+    null;
+
+
+  if (seriesId) {
+
+    const series =
+      library.series.find(
+        function(s) {
+
+          return (
+            s.id ===
+            seriesId
+          );
+
+        }
+      );
+
+
+    if (series) {
+
+      book =
+        series.books.find(
+          function(b) {
+
+            return (
+              b.id ===
+              bookId
+            );
+
+          }
+        );
+
+    }
+
+  }
+
+  else {
+
+    book =
+      library.standalone.find(
+        function(b) {
+
+          return (
+            b.id ===
+            bookId
+          );
+
+        }
+      );
+
+  }
+
+
+  if (!book) {
+
+    return;
+
+  }
+
+
+  book.favorite =
+    !Boolean(
+      book.favorite
+    );
+
+
+  save();
+
+
+  renderAll();
+
+
+  if (
+    currentSeriesId
+  ) {
+
+    renderSeriesPage();
+
+  }
+
+}
+
+
+/* =====================================================
    FAVORITES
-========================================================= */
+===================================================== */
+
+function showFavorites() {
+
+  document
+    .getElementById(
+      "allContent"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "favoritesContent"
+    )
+    .style.display =
+      "block";
+
+
+  document
+    .getElementById(
+      "allTab"
+    )
+    .classList
+    .remove("active");
+
+
+  document
+    .getElementById(
+      "favoritesTab"
+    )
+    .classList
+    .add("active");
+
+
+  renderFavorites();
+
+}
+
+
+function showAll() {
+
+  document
+    .getElementById(
+      "allContent"
+    )
+    .style.display =
+      "block";
+
+
+  document
+    .getElementById(
+      "favoritesContent"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "allTab"
+    )
+    .classList
+    .add("active");
+
+
+  document
+    .getElementById(
+      "favoritesTab"
+    )
+    .classList
+    .remove("active");
+
+}
+
 
 function renderFavorites() {
 
-  favoritesList.innerHTML =
+  const list =
+    document.getElementById(
+      "favoritesList"
+    );
+
+
+  list.innerHTML =
     "";
 
 
-  let favoriteBooks =
-    [];
+  let count =
+    0;
 
 
-  standalone.forEach(
+  library.series.forEach(
+    function(series) {
+
+      series.books.forEach(
+        function(book) {
+
+          if (
+            book.favorite
+          ) {
+
+            count++;
+
+
+            list.appendChild(
+
+              createBookElement(
+                book,
+                series
+              )
+
+            );
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+  library.standalone.forEach(
     function(book) {
 
-      if (book.favorite) {
+      if (
+        book.favorite
+      ) {
 
-        favoriteBooks.push({
+        count++;
 
-          book,
 
-          seriesId:
-            null,
+        list.appendChild(
 
-          seriesName:
-            "Standalone book"
+          createBookElement(
+            book,
+            null
+          )
 
-        });
+        );
 
       }
 
@@ -2689,41 +3113,24 @@ function renderFavorites() {
   );
 
 
-  series.forEach(
-    function(item) {
-
-      (item.books || [])
-        .forEach(
-          function(book) {
-
-            if (book.favorite) {
-
-              favoriteBooks.push({
-
-                book,
-
-                seriesId:
-                  item.id,
-
-                seriesName:
-                  item.name
-
-              });
-
-            }
-
-          }
-        );
-
-    }
-  );
+  document
+    .getElementById(
+      "favoritesCount"
+    )
+    .textContent =
+      count +
+      (
+        count === 1
+          ? " favorite"
+          : " favorites"
+      );
 
 
   if (
-    favoriteBooks.length === 0
+    count === 0
   ) {
 
-    favoritesList.innerHTML = `
+    list.innerHTML = `
 
       <div class="empty">
 
@@ -2744,235 +3151,253 @@ function renderFavorites() {
 
     `;
 
+  }
+
+}
+
+
+/* =====================================================
+   EDIT SERIES
+===================================================== */
+
+function editSeries(
+  id
+) {
+
+  const series =
+    library.series.find(
+      function(s) {
+
+        return (
+          s.id === id
+        );
+
+      }
+    );
+
+
+  if (!series) {
+
     return;
 
   }
 
 
-  favoriteBooks.forEach(
-    function(item) {
+  const newName =
+    prompt(
+      "Edit series name:",
+      series.name
+    );
 
-      favoritesList.appendChild(
 
-        createBookElement(
-          item.book,
-          item.seriesId,
-          item.seriesName
-        )
+  if (
+    newName !== null &&
+    newName.trim()
+  ) {
 
-      );
+    series.name =
+      newName.trim();
+
+
+    save();
+
+    renderAll();
+
+
+    if (
+      currentSeriesId === id
+    ) {
+
+      renderSeriesPage();
 
     }
-  );
+
+  }
 
 }
 
 
-/* =========================================================
-   FAVORITE TOGGLE
-========================================================= */
+/* =====================================================
+   DELETE SERIES
+===================================================== */
 
-window.toggleFavorite =
-async function(
+function deleteSeries(
+  id
+) {
+
+  const series =
+    library.series.find(
+      function(s) {
+
+        return (
+          s.id === id
+        );
+
+      }
+    );
+
+
+  if (!series) {
+
+    return;
+
+  }
+
+
+  const message =
+    series.books.length > 0
+
+      ? "Delete this series and all books inside it?"
+
+      : "Delete this series?";
+
+
+  if (
+    !confirm(message)
+  ) {
+
+    return;
+
+  }
+
+
+  library.series =
+    library.series.filter(
+      function(s) {
+
+        return (
+          s.id !== id
+        );
+
+      }
+    );
+
+
+  save();
+
+  renderAll();
+
+
+  if (
+    currentSeriesId === id
+  ) {
+
+    goHome();
+
+  }
+
+}
+
+
+/* =====================================================
+   EDIT BOOK
+===================================================== */
+
+function editBook(
   seriesId,
   bookId
 ) {
 
-  if (!currentUser)
-    return;
+  let book =
+    null;
 
 
   if (seriesId) {
 
-    const item =
-      series.find(
+    const series =
+      library.series.find(
         function(s) {
 
-          return s.id === seriesId;
+          return (
+            s.id ===
+            seriesId
+          );
 
         }
       );
 
 
-    if (!item)
-      return;
+    if (series) {
 
+      book =
+        series.books.find(
+          function(b) {
 
-    const books =
-      [...(item.books || [])];
+            return (
+              b.id ===
+              bookId
+            );
 
+          }
+        );
 
-    const index =
-      books.findIndex(
-        function(book) {
-
-          return book.id === bookId;
-
-        }
-      );
-
-
-    if (index === -1)
-      return;
-
-
-    books[index] = {
-
-      ...books[index],
-
-      favorite:
-        !books[index].favorite
-
-    };
-
-
-    await updateDoc(
-
-      doc(
-        db,
-        "users",
-        currentUser.uid,
-        "series",
-        seriesId
-      ),
-
-      {
-
-        books
-
-      }
-
-    );
+    }
 
   }
 
   else {
 
-    const book =
-      standalone.find(
+    book =
+      library.standalone.find(
         function(b) {
 
-          return b.id === bookId;
+          return (
+            b.id ===
+            bookId
+          );
 
         }
       );
 
-
-    if (!book)
-      return;
+  }
 
 
-    await updateDoc(
+  if (!book) {
 
-      doc(
-        db,
-        "users",
-        currentUser.uid,
-        "standalone",
-        bookId
-      ),
-
-      {
-
-        favorite:
-          !book.favorite
-
-      }
-
-    );
+    return;
 
   }
 
-};
 
-
-/* =========================================================
-   OPEN BOOK
-========================================================= */
-
-window.openBook =
-function(
-  seriesId,
-  bookId
-) {
-
-  const book =
-    findBook(
-      seriesId,
-      bookId
+  const newTitle =
+    prompt(
+      "Edit book title:",
+      book.title
     );
 
 
   if (
-    book &&
-    book.link
+    newTitle !== null &&
+    newTitle.trim()
   ) {
 
-    window.open(
-      book.link,
-      "_blank"
-    );
-
-  }
-
-};
+    book.title =
+      newTitle.trim();
 
 
-/* =========================================================
-   FIND BOOK
-========================================================= */
+    save();
 
-function findBook(
-  seriesId,
-  bookId
-) {
-
-  if (seriesId) {
-
-    const item =
-      series.find(
-        function(s) {
-
-          return s.id === seriesId;
-
-        }
-      );
+    renderAll();
 
 
-    if (!item)
-      return null;
+    if (
+      currentSeriesId
+    ) {
 
-
-    return (
-      item.books || []
-    ).find(
-      function(book) {
-
-        return book.id === bookId;
-
-      }
-    );
-
-  }
-
-
-  return standalone.find(
-    function(book) {
-
-      return book.id === bookId;
+      renderSeriesPage();
 
     }
-  );
+
+  }
 
 }
 
 
-/* =========================================================
+/* =====================================================
    DELETE BOOK
-========================================================= */
+===================================================== */
 
-window.deleteBook =
-async function(
+function deleteBook(
   seriesId,
   bookId
 ) {
@@ -2981,305 +3406,101 @@ async function(
     !confirm(
       "Delete this book?"
     )
-  )
+  ) {
+
     return;
+
+  }
 
 
   if (seriesId) {
 
-    const item =
-      series.find(
+    const series =
+      library.series.find(
         function(s) {
 
-          return s.id === seriesId;
+          return (
+            s.id ===
+            seriesId
+          );
 
         }
       );
 
 
-    if (!item)
-      return;
+    if (series) {
 
-
-    const newBooks =
-      (item.books || [])
-        .filter(
+      series.books =
+        series.books.filter(
           function(book) {
 
-            return book.id !== bookId;
+            return (
+              book.id !==
+              bookId
+            );
 
           }
         );
 
-
-    await updateDoc(
-
-      doc(
-        db,
-        "users",
-        currentUser.uid,
-        "series",
-        seriesId
-      ),
-
-      {
-
-        books:
-          newBooks
-
-      }
-
-    );
-
+    }
 
   }
 
   else {
 
-    await deleteDoc(
+    library.standalone =
+      library.standalone.filter(
+        function(book) {
 
-      doc(
-        db,
-        "users",
-        currentUser.uid,
-        "standalone",
-        bookId
-      )
+          return (
+            book.id !==
+            bookId
+          );
 
-    );
+        }
+      );
 
   }
 
-};
+
+  save();
+
+  renderAll();
 
 
-/* =========================================================
-   EDIT BOOK
-========================================================= */
+  if (
+    currentSeriesId
+  ) {
 
-window.editBook =
-function(
-  seriesId,
+    renderSeriesPage();
+
+  }
+
+}
+
+
+/* =====================================================
+   OPEN DRIVE BOOK
+===================================================== */
+
+function openBook(
   bookId
 ) {
 
-  const book =
-    findBook(
-      seriesId,
-      bookId
-    );
+  let book =
+    null;
 
 
-  if (!book)
-    return;
-
-
-  editingBookId =
-    bookId;
-
-  editingBookSeriesId =
-    seriesId || null;
-
-
-  document
-    .getElementById(
-      "editBookNameInput"
-    )
-    .value =
-      book.title || "";
-
-
-  closeAllMenus();
-
-
-  editBookModal
-    .classList.add(
-      "show"
-    );
-
-};
-
-
-/* =========================================================
-   SAVE EDIT BOOK
-========================================================= */
-
-document
-  .getElementById(
-    "saveEditBook"
-  )
-  .addEventListener(
-    "click",
-    async function() {
-
-      const name =
-        document
-          .getElementById(
-            "editBookNameInput"
-          )
-          .value
-          .trim();
-
-
-      if (!name)
-        return;
-
-
-      const seriesId =
-        editingBookSeriesId;
-
-
-      const bookId =
-        editingBookId;
-
-
-      if (seriesId) {
-
-        const item =
-          series.find(
-            function(s) {
-
-              return s.id === seriesId;
-
-            }
-          );
-
-
-        if (!item)
-          return;
-
-
-        const books =
-          [...(item.books || [])];
-
-
-        const index =
-          books.findIndex(
-            function(book) {
-
-              return book.id === bookId;
-
-            }
-          );
-
-
-        if (index === -1)
-          return;
-
-
-        books[index] = {
-
-          ...books[index],
-
-          title:
-            name
-
-        };
-
-
-        await updateDoc(
-
-          doc(
-            db,
-            "users",
-            currentUser.uid,
-            "series",
-            seriesId
-          ),
-
-          {
-
-            books
-
-          }
-
-        );
-
-      }
-
-      else {
-
-        await updateDoc(
-
-          doc(
-            db,
-            "users",
-            currentUser.uid,
-            "standalone",
-            bookId
-          ),
-
-          {
-
-            title:
-              name
-
-          }
-
-        );
-
-      }
-
-
-      editBookModal
-        .classList.remove(
-          "show"
-        );
-
-    }
-  );
-
-
-/* =========================================================
-   MOVE BOOK
-========================================================= */
-
-window.moveBook =
-function(
-  seriesId,
-  bookId
-) {
-
-  movingBookId =
-    bookId;
-
-  movingBookSeriesId =
-    seriesId || null;
-
-
-  const select =
-    document.getElementById(
-      "moveBookSelect"
-    );
-
-
-  select.innerHTML = `
-
-    <option value="">
-      Standalone Books
-    </option>
-
-  `;
-
-
-  series.forEach(
+  library.standalone.forEach(
     function(item) {
 
       if (
-        item.id !== seriesId
+        item.id ===
+        bookId
       ) {
 
-        select.innerHTML += `
-
-          <option
-            value="${item.id}"
-          >
-            ${escapeHTML(
-              item.name
-            )}
-          </option>
-
-        `;
+        book =
+          item;
 
       }
 
@@ -3287,302 +3508,92 @@ function(
   );
 
 
-  closeAllMenus();
-
-
-  moveBookModal
-    .classList.add(
-      "show"
-    );
-
-};
-
-
-/* =========================================================
-   SAVE MOVE
-========================================================= */
-
-document
-  .getElementById(
-    "saveMoveBook"
-  )
-  .addEventListener(
-    "click",
-    async function() {
-
-      const destination =
-        document
-          .getElementById(
-            "moveBookSelect"
-          )
-          .value;
-
-
-      const book =
-        findBook(
-          movingBookSeriesId,
-          movingBookId
-        );
-
-
-      if (!book)
-        return;
-
-
-      /* REMOVE FROM CURRENT LOCATION */
-
-      if (movingBookSeriesId) {
-
-        const current =
-          series.find(
-            function(item) {
-
-              return (
-                item.id ===
-                movingBookSeriesId
-              );
-
-            }
-          );
-
-
-        if (current) {
-
-          const books =
-            (current.books || [])
-              .filter(
-                function(item) {
-
-                  return (
-                    item.id !==
-                    movingBookId
-                  );
-
-                }
-              );
-
-
-          await updateDoc(
-
-            doc(
-              db,
-              "users",
-              currentUser.uid,
-              "series",
-              movingBookSeriesId
-            ),
-
-            {
-
-              books
-
-            }
-
-          );
-
-        }
-
-      }
-
-      else {
-
-        await deleteDoc(
-
-          doc(
-            db,
-            "users",
-            currentUser.uid,
-            "standalone",
-            movingBookId
-          )
-
-        );
-
-      }
-
-
-      /* ADD TO NEW LOCATION */
-
-      if (destination) {
-
-        const destinationSeries =
-          series.find(
-            function(item) {
-
-              return (
-                item.id ===
-                destination
-              );
-
-            }
-          );
-
-
-        if (
-          destinationSeries
-        ) {
-
-          const newBook = {
-
-            ...book,
-
-            id:
-              "book_" +
-              Date.now() +
-              "_" +
-              Math.random()
-                .toString(36)
-                .slice(2),
-
-          };
-
-
-          await updateDoc(
-
-            doc(
-              db,
-              "users",
-              currentUser.uid,
-              "series",
-              destination
-            ),
-
-            {
-
-              books: [
-
-                ...(destinationSeries.books || []),
-
-                newBook
-
-              ]
-
-            }
-
-          );
-
-        }
-
-      }
-
-      else {
-
-        await addDoc(
-
-          collection(
-            db,
-            "users",
-            currentUser.uid,
-            "standalone"
-          ),
-
-          {
-
-            ...book,
-
-            createdAt:
-              serverTimestamp()
+  library.series.forEach(
+    function(series) {
+
+      series.books.forEach(
+        function(item) {
+
+          if (
+            item.id ===
+            bookId
+          ) {
+
+            book =
+              item;
 
           }
 
-        );
-
-      }
-
-
-      moveBookModal
-        .classList.remove(
-          "show"
-        );
+        }
+      );
 
     }
   );
 
 
-/* =========================================================
-   SERIES MENU
-========================================================= */
+  if (
+    book &&
+    book.driveUrl
+  ) {
 
-window.toggleSeriesMenu =
-function(id) {
-
-  closeAllMenus();
-
-
-  const menu =
-    document.getElementById(
-      "series-menu-" + id
-    );
-
-
-  if (menu) {
-
-    menu.classList.add(
-      "show"
+    window.open(
+      book.driveUrl,
+      "_blank"
     );
 
   }
 
-};
+}
 
 
-/* =========================================================
-   BOOK MENU
-========================================================= */
+/* =====================================================
+   THREE DOT MENU
+===================================================== */
 
-window.toggleBookMenu =
-function(
-  seriesId,
-  bookId
+function toggleMenu(
+  event,
+  menuId
 ) {
 
-  closeAllMenus();
+  event.stopPropagation();
 
-
-  const menu =
-    document.getElementById(
-
-      "book-menu-" +
-      (
-        seriesId ||
-        "standalone"
-      ) +
-      "-" +
-      bookId
-
-    );
-
-
-  if (menu) {
-
-    menu.classList.add(
-      "show"
-    );
-
-  }
-
-};
-
-
-/* =========================================================
-   CLOSE MENUS
-========================================================= */
-
-function closeAllMenus() {
 
   document
     .querySelectorAll(
-      ".more-menu"
+      ".menu.show"
     )
     .forEach(
       function(menu) {
 
-        menu.classList.remove(
-          "show"
-        );
+        if (
+          menu.id !==
+          menuId
+        ) {
+
+          menu.classList
+            .remove(
+              "show"
+            );
+
+        }
 
       }
     );
+
+
+  const menu =
+    document.getElementById(
+      menuId
+    );
+
+
+  if (menu) {
+
+    menu.classList.toggle(
+      "show"
+    );
+
+  }
 
 }
 
@@ -3591,930 +3602,34 @@ document.addEventListener(
   "click",
   function() {
 
-    closeAllMenus();
+    document
+      .querySelectorAll(
+        ".menu.show"
+      )
+      .forEach(
+        function(menu) {
+
+          menu.classList
+            .remove(
+              "show"
+            );
+
+        }
+      );
 
   }
 );
 
 
-/* =========================================================
-   ADD SERIES
-========================================================= */
-
-function openSeriesModal() {
-
-  document
-    .getElementById(
-      "seriesNameInput"
-    )
-    .value = "";
-
-
-  seriesModal
-    .classList.add(
-      "show"
-    );
-
-
-  setTimeout(
-    function() {
-
-      document
-        .getElementById(
-          "seriesNameInput"
-        )
-        .focus();
-
-    },
-    50
-  );
-
-}
-
-
-window.openSeriesModal =
-openSeriesModal;
-
-
-document
-  .getElementById(
-    "mainAddButton"
-  )
-  .addEventListener(
-    "click",
-    openSeriesModal
-  );
-
-
-document
-  .getElementById(
-    "cancelSeries"
-  )
-  .addEventListener(
-    "click",
-    function() {
-
-      seriesModal
-        .classList.remove(
-          "show"
-        );
-
-    }
-  );
-
-
-document
-  .getElementById(
-    "saveSeries"
-  )
-  .addEventListener(
-    "click",
-    async function() {
-
-      const name =
-        document
-          .getElementById(
-            "seriesNameInput"
-          )
-          .value
-          .trim();
-
-
-      if (!name) {
-
-        alert(
-          "Enter a series name."
-        );
-
-        return;
-
-      }
-
-
-      await addDoc(
-
-        collection(
-          db,
-          "users",
-          currentUser.uid,
-          "series"
-        ),
-
-        {
-
-          name,
-
-          books: [],
-
-          createdAt:
-            serverTimestamp()
-
-        }
-
-      );
-
-
-      seriesModal
-        .classList.remove(
-          "show"
-        );
-
-    }
-  );
-
-
-/* =========================================================
-   EDIT SERIES
-========================================================= */
-
-window.editSeries =
-function(id) {
-
-  const item =
-    series.find(
-      function(s) {
-
-        return s.id === id;
-
-      }
-    );
-
-
-  if (!item)
-    return;
-
-
-  editingSeriesId =
-    id;
-
-
-  document
-    .getElementById(
-      "editSeriesNameInput"
-    )
-    .value =
-      item.name;
-
-
-  closeAllMenus();
-
-
-  editSeriesModal
-    .classList.add(
-      "show"
-    );
-
-};
-
-
-/* =========================================================
-   SAVE SERIES NAME
-========================================================= */
-
-document
-  .getElementById(
-    "saveEditSeries"
-  )
-  .addEventListener(
-    "click",
-    async function() {
-
-      const name =
-        document
-          .getElementById(
-            "editSeriesNameInput"
-          )
-          .value
-          .trim();
-
-
-      if (!name)
-        return;
-
-
-      await updateDoc(
-
-        doc(
-          db,
-          "users",
-          currentUser.uid,
-          "series",
-          editingSeriesId
-        ),
-
-        {
-
-          name
-
-        }
-
-      );
-
-
-      editSeriesModal
-        .classList.remove(
-          "show"
-        );
-
-    }
-  );
-
-
-/* =========================================================
-   DELETE SERIES
-========================================================= */
-
-window.deleteSeries =
-async function(id) {
-
-  const item =
-    series.find(
-      function(s) {
-
-        return s.id === id;
-
-      }
-    );
-
-
-  if (!item)
-    return;
-
-
-  const confirmed =
-    confirm(
-
-      "Delete \"" +
-      item.name +
-      "\" and all books inside it?"
-
-    );
-
-
-  if (!confirmed)
-    return;
-
-
-  await deleteDoc(
-
-    doc(
-      db,
-      "users",
-      currentUser.uid,
-      "series",
-      id
-    )
-
-  );
-
-};
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function showSeriesView() {
-
-  currentView =
-    "series";
-
-
-  document
-    .getElementById(
-      "seriesContent"
-    )
-    .style.display =
-      "block";
-
-
-  document
-    .getElementById(
-      "standaloneContent"
-    )
-    .style.display =
-      "none";
-
-
-  document
-    .getElementById(
-      "favoritesContent"
-    )
-    .style.display =
-      "none";
-
-
-  document
-    .getElementById(
-      "homeTitle"
-    )
-    .textContent =
-      "Series";
-
-
-  document
-    .getElementById(
-      "mainAddButton"
-    )
-    .style.display =
-      "block";
-
-
-  document
-    .getElementById(
-      "mainAddButton"
-    )
-    .textContent =
-      "＋ Add Series";
-
-
-  setActiveNav(
-    "seriesNav"
-  );
-
-}
-
-
-function showStandaloneView() {
-
-  currentView =
-    "standalone";
-
-
-  document
-    .getElementById(
-      "seriesContent"
-    )
-    .style.display =
-      "none";
-
-
-  document
-    .getElementById(
-      "standaloneContent"
-    )
-    .style.display =
-      "block";
-
-
-  document
-    .getElementById(
-      "favoritesContent"
-    )
-    .style.display =
-      "none";
-
-
-  document
-    .getElementById(
-      "homeTitle"
-    )
-    .textContent =
-      "Standalone";
-
-
-  document
-    .getElementById(
-      "mainAddButton"
-    )
-    .style.display =
-      "none";
-
-
-  setActiveNav(
-    "standaloneNav"
-  );
-
-}
-
-
-function showFavoritesView() {
-
-  currentView =
-    "favorites";
-
-
-  document
-    .getElementById(
-      "seriesContent"
-    )
-    .style.display =
-      "none";
-
-
-  document
-    .getElementById(
-      "standaloneContent"
-    )
-    .style.display =
-      "none";
-
-
-  document
-    .getElementById(
-      "favoritesContent"
-    )
-    .style.display =
-      "block";
-
-
-  document
-    .getElementById(
-      "homeTitle"
-    )
-    .textContent =
-      "Favorites";
-
-
-  document
-    .getElementById(
-      "mainAddButton"
-    )
-    .style.display =
-      "none";
-
-
-  setActiveNav(
-    "favoritesNav"
-  );
-
-}
-
-
-function setActiveNav(id) {
-
-  document
-    .querySelectorAll(
-      ".nav-item"
-    )
-    .forEach(
-      function(item) {
-
-        item.classList.remove(
-          "active"
-        );
-
-      }
-    );
-
-
-  document
-    .getElementById(id)
-    .classList.add(
-      "active"
-    );
-
-}
-
-
-document
-  .getElementById(
-    "seriesNav"
-  )
-  .addEventListener(
-    "click",
-    showSeriesView
-  );
-
-
-document
-  .getElementById(
-    "standaloneNav"
-  )
-  .addEventListener(
-    "click",
-    showStandaloneView
-  );
-
-
-document
-  .getElementById(
-    "favoritesNav"
-  )
-  .addEventListener(
-    "click",
-    showFavoritesView
-  );
-
-
-/* =========================================================
-   BACK FROM SERIES
-========================================================= */
-
-document
-  .getElementById(
-    "backButton"
-  )
-  .addEventListener(
-    "click",
-    function() {
-
-      currentSeriesId =
-        null;
-
-
-      document
-        .getElementById(
-          "seriesPage"
-        )
-        .style.display =
-          "none";
-
-
-      document
-        .getElementById(
-          "homePage"
-        )
-        .style.display =
-          "block";
-
-
-      showSeriesView();
-
-    }
-  );
-
-
-/* =========================================================
-   ADD STANDALONE
-========================================================= */
-
-document
-  .getElementById(
-    "addStandaloneButton"
-  )
-  .addEventListener(
-    "click",
-    function() {
-
-      openDrivePicker(
-        "standalone"
-      );
-
-    }
-  );
-
-
-/* =========================================================
-   ADD BOOK TO SERIES
-========================================================= */
-
-document
-  .getElementById(
-    "seriesAddBookButton"
-  )
-  .addEventListener(
-    "click",
-    function() {
-
-      openDrivePicker(
-        "series"
-      );
-
-    }
-  );
-
-
-/* =========================================================
-   DRIVE PICKER
-========================================================= */
-
-async function openDrivePicker(
-  destination
-) {
-
-  if (!currentUser) {
-
-    alert(
-      "Please sign in first."
-    );
-
-    return;
-
-  }
-
-
-  if (!pickerReady) {
-
-    alert(
-      "Google Drive Picker is still loading. Try again in a moment."
-    );
-
-    return;
-
-  }
-
-
-  if (
-    destination === "series" &&
-    !currentSeriesId
-  ) {
-
-    return;
-
-  }
-
-
-  try {
-
-    const provider =
-      new GoogleAuthProvider();
-
-
-    provider.addScope(
-      DRIVE_SCOPE
-    );
-
-
-    const result =
-      await signInWithPopup(
-        auth,
-        provider
-      );
-
-
-    const credential =
-      GoogleAuthProvider
-        .credentialFromResult(
-          result
-        );
-
-
-    driveAccessToken =
-      credential &&
-      credential.accessToken;
-
-
-    if (!driveAccessToken) {
-
-      throw new Error(
-        "Google Drive permission was not granted."
-      );
-
-    }
-
-
-    const view =
-      new google.picker.DocsView(
-        google.picker.ViewId.DOCS
-      );
-
-
-    view.setIncludeFolders(
-      false
-    );
-
-
-    const picker =
-      new google.picker.PickerBuilder()
-
-        .setDeveloperKey(
-          GOOGLE_API_KEY
-        )
-
-        .setAppId(
-          GOOGLE_APP_ID
-        )
-
-        .setOAuthToken(
-          driveAccessToken
-        )
-
-        .setTitle(
-          "Choose a PDF from Google Drive"
-        )
-
-        .setSelectableMimeTypes(
-          "application/pdf"
-        )
-
-        .addView(view)
-
-        .setCallback(
-          function(data) {
-
-            drivePickerCallback(
-              data,
-              destination
-            );
-
-          }
-        )
-
-        .build();
-
-
-    picker.setVisible(
-      true
-    );
-
-  }
-
-  catch(error) {
-
-    console.error(error);
-
-    alert(
-      "Google Drive error:\n\n" +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   DRIVE CALLBACK
-========================================================= */
-
-async function drivePickerCallback(
-  data,
-  destination
-) {
-
-  if (
-    data.action !==
-    google.picker.Action.PICKED
-  ) {
-
-    return;
-
-  }
-
-
-  const file =
-    data.docs[0];
-
-
-  const book = {
-
-    id:
-      "book_" +
-      Date.now() +
-      "_" +
-      Math.random()
-        .toString(36)
-        .slice(2),
-
-    title:
-      file.name
-        .replace(
-          /\.pdf$/i,
-          ""
-        ),
-
-    favorite:
-      false,
-
-    link:
-      "https://drive.google.com/file/d/" +
-      file.id +
-      "/view",
-
-    driveFileId:
-      file.id,
-
-    thumbnail:
-      file.thumbnailUrl ||
-      ""
-
-  };
-
-
-  try {
-
-    /* =====================================================
-       ADD TO SERIES
-    ===================================================== */
-
-    if (
-      destination ===
-      "series"
-    ) {
-
-      const item =
-        series.find(
-          function(s) {
-
-            return (
-              s.id ===
-              currentSeriesId
-            );
-
-          }
-        );
-
-
-      if (!item)
-        return;
-
-
-      await updateDoc(
-
-        doc(
-          db,
-          "users",
-          currentUser.uid,
-          "series",
-          currentSeriesId
-        ),
-
-        {
-
-          books: [
-
-            ...(item.books || []),
-
-            book
-
-          ]
-
-        }
-
-      );
-
-
-      renderSeriesBooks();
-
-    }
-
-
-    /* =====================================================
-       ADD AS STANDALONE
-    ===================================================== */
-
-    else {
-
-      await addDoc(
-
-        collection(
-          db,
-          "users",
-          currentUser.uid,
-          "standalone"
-        ),
-
-        {
-
-          ...book,
-
-          createdAt:
-            serverTimestamp()
-
-        }
-
-      );
-
-    }
-
-  }
-
-  catch(error) {
-
-    console.error(error);
-
-    alert(
-      "Couldn't add the book:\n\n" +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-document
-  .getElementById(
-    "logoutButton"
-  )
-  .addEventListener(
-    "click",
-    async function() {
-
-      await signOut(
-        auth
-      );
-
-    }
-  );
-
-
-/* =========================================================
+/* =====================================================
    ESCAPE HTML
-========================================================= */
+===================================================== */
 
 function escapeHTML(
   text
 ) {
 
-  return String(
-    text ?? ""
-  )
+  return String(text)
 
     .replace(
       /&/g,
@@ -4544,59 +3659,138 @@ function escapeHTML(
 }
 
 
-function escapeAttribute(
-  text
-) {
-
-  return escapeHTML(
-    text
-  );
-
-}
+/* =====================================================
+   ENTER KEY
+===================================================== */
 
 
-/* =========================================================
-   CLOSE MODALS BY CLICKING OUTSIDE
-========================================================= */
+/* CREATE SERIES WITH ENTER */
 
-[
-  seriesModal,
-  editSeriesModal,
-  editBookModal,
-  moveBookModal
-]
-.forEach(
-  function(modal) {
+document
+  .getElementById(
+    "seriesName"
+  )
+  .addEventListener(
+    "keydown",
+    function(event) {
 
-    modal.addEventListener(
-      "click",
-      function(event) {
+      if (
+        event.key ===
+        "Enter"
+      ) {
 
-        if (
-          event.target ===
-          modal
-        ) {
+        event.preventDefault();
 
-          modal.classList.remove(
-            "show"
-          );
-
-        }
+        createSeries();
 
       }
-    );
+
+    }
+  );
+
+
+/* ADD STANDALONE WITH ENTER */
+
+document
+  .getElementById(
+    "standaloneTitle"
+  )
+  .addEventListener(
+    "keydown",
+    function(event) {
+
+      if (
+        event.key ===
+        "Enter"
+      ) {
+
+        event.preventDefault();
+
+        addStandaloneBook();
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
+   ESCAPE CLOSES MODALS
+===================================================== */
+
+document.addEventListener(
+  "keydown",
+  function(event) {
+
+    if (
+      event.key ===
+      "Escape"
+    ) {
+
+      closeSeriesModal();
+
+      closeStandaloneModal();
+
+    }
 
   }
 );
 
 
-/* =========================================================
-   INITIAL VIEW
-========================================================= */
+/* =====================================================
+   CLICK OUTSIDE MODALS
+===================================================== */
 
-showSeriesView();
+document
+  .getElementById(
+    "seriesModal"
+  )
+  .addEventListener(
+    "click",
+    function(event) {
+
+      if (
+        event.target ===
+        this
+      ) {
+
+        closeSeriesModal();
+
+      }
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "standaloneModal"
+  )
+  .addEventListener(
+    "click",
+    function(event) {
+
+      if (
+        event.target ===
+        this
+      ) {
+
+        closeStandaloneModal();
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+renderAll();
 
 </script>
+
 
 </body>
 
