@@ -1,327 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyShelf — Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyShelf - Login</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: #080f13;
-      color: #f9f9f9;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #080f13;
+    color: #f9f9f9;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    .container {
-      width: 100%;
-      max-width: 430px;
-      padding: 25px;
-    }
+.auth-container {
+    width: 420px;
+    max-width: 90%;
+    background: #101a20;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
 
-    .logo {
-      text-align: center;
-      font-size: 38px;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
+.logo {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
 
-    .tagline {
-      text-align: center;
-      color: #aab3b8;
-      font-size: 12px;
-      letter-spacing: 3px;
-      margin-bottom: 30px;
-    }
+.tagline {
+    text-align: center;
+    color: #aeb8bd;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+}
 
-    .box {
-      background: #101a20;
-      border: 1px solid #26343b;
-      border-radius: 18px;
-      padding: 30px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.35);
-    }
+.tabs {
+    display: flex;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #26343b;
+}
 
-    h2 {
-      text-align: center;
-      margin-top: 0;
-      margin-bottom: 25px;
-    }
+.tab {
+    flex: 1;
+    padding: 13px;
+    background: none;
+    border: none;
+    color: #89969c;
+    font-size: 16px;
+    cursor: pointer;
+}
 
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
-      color: #d8dfe2;
-    }
+.tab.active {
+    color: #f9f9f9;
+    border-bottom: 2px solid #f9f9f9;
+}
 
-    input {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 18px;
-      border-radius: 10px;
-      border: 1px solid #33434b;
-      background: #080f13;
-      color: white;
-      font-size: 15px;
-      outline: none;
-    }
+.form {
+    display: none;
+}
 
-    input:focus {
-      border-color: #8faebc;
-    }
+.form.active {
+    display: block;
+}
 
-    button {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 5px;
-    }
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
 
-    .main-btn {
-      background: #f9f9f9;
-      color: #080f13;
-    }
+input {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 18px;
+    border: 1px solid #29373e;
+    border-radius: 9px;
+    background: #0b1318;
+    color: white;
+    outline: none;
+}
 
-    .google-btn {
-      background: #ffffff;
-      color: #222;
-      margin-top: 12px;
-    }
+input:focus {
+    border-color: #718089;
+}
 
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 22px 0;
-      color: #718089;
-      font-size: 13px;
-    }
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 9px;
+    background: #f9f9f9;
+    color: #080f13;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+}
 
-    .divider::before,
-    .divider::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: #29373e;
-    }
+.submit-btn:hover {
+    opacity: 0.9;
+}
 
-    .switch {
-      text-align: center;
-      margin-top: 22px;
-      color: #9ba8ae;
-      font-size: 14px;
-    }
-
-    .switch span {
-      color: #ffffff;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .message {
-      text-align: center;
-      margin-top: 15px;
-      font-size: 13px;
-      color: #b9c4c9;
-    }
-  </style>
+.message {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 13px;
+    min-height: 18px;
+}
+</style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="auth-container">
 
-  <div class="logo">MyShelf</div>
-  <div class="tagline">YOUR LITTLE LIBRARY</div>
+    <div class="logo">MyShelf</div>
+    <div class="tagline">YOUR LITTLE LIBRARY</div>
 
-  <div class="box">
+    <!-- SIGN UP FIRST -->
+    <div class="tabs">
+        <button class="tab active" onclick="showForm('signup', this)">
+            Sign Up
+        </button>
 
-    <!-- LOGIN -->
-    <div id="loginForm">
-
-      <h2>Welcome back</h2>
-
-      <label>Email</label>
-      <input type="email" id="loginEmail" placeholder="Enter your email">
-
-      <label>Password</label>
-      <input type="password" id="loginPassword" placeholder="Enter your password">
-
-      <button class="main-btn" onclick="login()">
-        Log In
-      </button>
-
-      <div class="divider">OR</div>
-
-      <button class="google-btn" onclick="googleLogin()">
-        Continue with Google
-      </button>
-
-      <div class="switch">
-        Don't have an account?
-        <span onclick="showSignup()">Sign Up</span>
-      </div>
-
-      <div id="loginMessage" class="message"></div>
-
+        <button class="tab" onclick="showForm('login', this)">
+            Log In
+        </button>
     </div>
-
 
     <!-- SIGN UP -->
-    <div id="signupForm" class="hidden">
+    <div id="signup" class="form active">
 
-      <h2>Create your account</h2>
+        <label for="signupName">Name</label>
+        <input
+            type="text"
+            id="signupName"
+            placeholder="Enter your name"
+        >
 
-      <!-- NAME FIELD -->
-      <label>Name</label>
-      <input
-        type="text"
-        id="signupName"
-        placeholder="Enter your name"
-      >
+        <label for="signupEmail">Email</label>
+        <input
+            type="email"
+            id="signupEmail"
+            placeholder="Enter your email"
+        >
 
-      <label>Email</label>
-      <input
-        type="email"
-        id="signupEmail"
-        placeholder="Enter your email"
-      >
+        <label for="signupPassword">Password</label>
+        <input
+            type="password"
+            id="signupPassword"
+            placeholder="Create a password"
+        >
 
-      <label>Password</label>
-      <input
-        type="password"
-        id="signupPassword"
-        placeholder="Create a password"
-      >
+        <button class="submit-btn" onclick="signup()">
+            Create Account
+        </button>
 
-      <label>Confirm Password</label>
-      <input
-        type="password"
-        id="confirmPassword"
-        placeholder="Confirm your password"
-      >
-
-      <button class="main-btn" onclick="signup()">
-        Create Account
-      </button>
-
-      <div class="divider">OR</div>
-
-      <button class="google-btn" onclick="googleLogin()">
-        Continue with Google
-      </button>
-
-      <div class="switch">
-        Already have an account?
-        <span onclick="showLogin()">Log In</span>
-      </div>
-
-      <div id="signupMessage" class="message"></div>
+        <div id="signupMessage" class="message"></div>
 
     </div>
 
-  </div>
+    <!-- LOGIN -->
+    <div id="login" class="form">
+
+        <label for="loginEmail">Email</label>
+        <input
+            type="email"
+            id="loginEmail"
+            placeholder="Enter your email"
+        >
+
+        <label for="loginPassword">Password</label>
+        <input
+            type="password"
+            id="loginPassword"
+            placeholder="Enter your password"
+        >
+
+        <button class="submit-btn" onclick="login()">
+            Log In
+        </button>
+
+        <div id="loginMessage" class="message"></div>
+
+    </div>
 
 </div>
 
-
 <script>
+function showForm(formName, button) {
 
-  function showSignup() {
-    document.getElementById("loginForm").classList.add("hidden");
-    document.getElementById("signupForm").classList.remove("hidden");
-  }
+    document.querySelectorAll(".form").forEach(form => {
+        form.classList.remove("active");
+    });
 
-  function showLogin() {
-    document.getElementById("signupForm").classList.add("hidden");
-    document.getElementById("loginForm").classList.remove("hidden");
-  }
+    document.querySelectorAll(".tab").forEach(tab => {
+        tab.classList.remove("active");
+    });
+
+    document.getElementById(formName).classList.add("active");
+    button.classList.add("active");
+}
 
 
-  function signup() {
+/*
+   TEMPORARY LOCAL LOGIN SYSTEM
+
+   This keeps the login page completely separate
+   from library.html.
+
+   When Firebase Authentication is connected,
+   only signup() and login() need to be replaced.
+*/
+
+function signup() {
 
     const name = document.getElementById("signupName").value.trim();
     const email = document.getElementById("signupEmail").value.trim();
     const password = document.getElementById("signupPassword").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
 
     const message = document.getElementById("signupMessage");
 
-    if (name === "") {
-      message.textContent = "Please enter your name.";
-      return;
+    if (!name || !email || !password) {
+        message.textContent = "Please fill in all fields.";
+        return;
     }
 
-    if (email === "") {
-      message.textContent = "Please enter your email.";
-      return;
-    }
+    localStorage.setItem("myshelf_user", JSON.stringify({
+        name: name,
+        email: email,
+        password: password
+    }));
 
-    if (password === "") {
-      message.textContent = "Please create a password.";
-      return;
-    }
+    message.textContent = "Account created!";
 
-    if (password !== confirmPassword) {
-      message.textContent = "Passwords do not match.";
-      return;
-    }
-
-    message.textContent = "Account details look good!";
-
-    /*
-      Firebase account creation will go here.
-    */
-  }
+    setTimeout(() => {
+        showForm(
+            "login",
+            document.querySelectorAll(".tab")[1]
+        );
+    }, 700);
+}
 
 
-  function login() {
+function login() {
 
     const email = document.getElementById("loginEmail").value.trim();
     const password = document.getElementById("loginPassword").value;
 
     const message = document.getElementById("loginMessage");
 
-    if (email === "" || password === "") {
-      message.textContent = "Please enter your email and password.";
-      return;
+    const savedUser = JSON.parse(
+        localStorage.getItem("myshelf_user")
+    );
+
+    if (!savedUser) {
+        message.textContent = "No account found. Please sign up first.";
+        return;
     }
 
+    if (
+        email !== savedUser.email ||
+        password !== savedUser.password
+    ) {
+        message.textContent = "Incorrect email or password.";
+        return;
+    }
+
+    localStorage.setItem("myshelf_logged_in", "true");
+
     /*
-      Firebase login will go here.
+       IMPORTANT:
+       Change this filename only if your library
+       file has a different name.
     */
-
-    message.textContent = "Login details entered.";
-  }
-
-
-  function googleLogin() {
-
-    /*
-      Your Google/Firebase sign-in code will go here.
-    */
-
-    alert("Google Sign-In will be connected here.");
-
-  }
-
+    window.location.href = "library.html";
+}
 </script>
 
 </body>
